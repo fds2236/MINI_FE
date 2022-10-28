@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
+// 도연 기능 구현 ing..
+
 
 const Container = styled.div`
     display: flex;
@@ -33,6 +35,8 @@ const Comments2 = styled.p`
 `;
   
 const ItemBox = styled.div`
+    width: 500px;
+    height: 600px;
     background-color: #EEEEEE;
     margin: 10px;
     padding: 20px 20px 20px 20px;
@@ -158,7 +162,7 @@ const Check = styled.fieldset`
     width: 270px;
     height: 30px;
     border: none;
-    padding: 5px 0 0 100px;
+    padding: 5px 0 0 130px;
 `;
   
 const JoinUsBtn = styled.button`
@@ -249,11 +253,22 @@ const SignUp = () => {
 
     }
 
+    /* // 팝업
+    const [modalOpen, setModalOpen] = useState(false);
+    const [modalText, setModelText] = useState("중복된 아이디 입니다.");
 
+    const closeModal = () => {
+        setModalOpen(false);
+    }; */
+
+    const clickBtn = () => {
+        document.location.href('/')
+    }
 
     return (
+        <>
+        <Link to='/'>🏠홈으로 이동🏠</Link>
         <Container>
-            <Link to='/'>🏠홈으로 이동🏠</Link>
             <ItemBox>
                 <JoinUs>JOIN US</JoinUs>
                 <Comments>👟Sa Shoe 회원가입 하고 예쁜 신발 Sa Shoe~👟 </Comments>
@@ -301,13 +316,13 @@ const SignUp = () => {
                         </AddrBox>
                         </GridBox>  
                     </Item>
-                <JoinUsBtn>회원가입</JoinUsBtn><br />
+                <JoinUsBtn onClick={clickBtn}><Link to='/SignCom'>회원가입</Link></JoinUsBtn><br />
                 <Check>
                     <IdCheck>이미 아이디가 있으신가요? </IdCheck><Link to='/Login'> ＞ 로그인</Link>
                 </Check>
             </ItemBox>
         </Container>
-    
+        </>
     ); 
 }    
 
