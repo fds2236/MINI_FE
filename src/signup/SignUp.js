@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import styled from "styled-components";
 
 // 도연 기능 구현 ing..
@@ -167,12 +167,13 @@ const Check = styled.fieldset`
   
 const JoinUsBtn = styled.button`
     background-color: black;
-    color: white;
     margin: 15px 0 10px 100px;
     width: 300px;
     height: 40px;
     border-radius: 10px;
 `;
+
+
 
 
 const SignUp = () => {
@@ -194,6 +195,7 @@ const SignUp = () => {
     const [emailMsg, setEmailMsg] = useState('');
     const [phoneMsg, setPhoneMsg] = useState('');
     const [addrMsg, setAddrMsg] = useState('');
+    const [autoMail, setAutoMail] = useState('');
 
     // input창 유효성 검사
     const [isId, setIsId] = useState('');
@@ -203,6 +205,7 @@ const SignUp = () => {
     const [isEmail, setIsEmail] = useState('');
     const [isPhone, setIsPhone] = useState('');
     const [isAddr, setIsAddr] = useState('');
+    
 
     // input창 제약조건
     const onChangId = (e) => {
@@ -214,6 +217,10 @@ const SignUp = () => {
             setIdMsg("아이디가 올바른 형식입니다.");
             setIsId(true);
         }
+    }
+
+    const onChangeAutoMail = (e) => {
+        setAutoMail(e.target.value);
     }
 
     const onChangePw = (e) => {
@@ -260,14 +267,15 @@ const SignUp = () => {
     const closeModal = () => {
         setModalOpen(false);
     }; */
-
+/* 
     const clickBtn = () => {
         document.location.href('/')
-    }
+    } */
 
     return (
         <>
-        <Link to='/'>🏠홈으로 이동🏠</Link>
+        <Link to='/'>🏠홈으로 이동🏠</Link><br />
+        <Link to='/Agree'>이용약관</Link>
         <Container>
             <ItemBox>
                 <JoinUs>JOIN US</JoinUs>
@@ -290,14 +298,14 @@ const SignUp = () => {
                         </Name>
                         <Email><Star>* </Star><ItemText>이메일</ItemText>
                             <InputE value={email} placeholder="이메일" onChange={onChangeEmail} /> @
-                            <InputList value={emailList} placeholder="(직접 입력)" onChange={onChangeEmailList} />
-                            <EmailList value={emailList}>
+                            <InputList value={autoMail} placeholder="(직접 입력)" onChange={onChangeEmailList} />
+                            <EmailList value={autoMail} onChange={onChangeAutoMail}>
                                 <option value="직접 입력">직접 입력</option>
-                                <option value="@naver.com">naver.com</option>
-                                <option value="@gmail.com">gmail.com</option>
-                                <option value="@daum.net">daum.net</option>
-                                <option value="@nate.com">nate.com</option>
-                                <option value="@kakao.com">kakao.com</option>
+                                <option value="naver.com">naver.com</option>
+                                <option value="gmail.com">gmail.com</option>
+                                <option value="daum.net">daum.net</option>
+                                <option value="nate.com">nate.com</option>
+                                <option value="kakao.com">kakao.com</option>
                             </EmailList><br/>
                         </Email>
                         </NotGrid>
@@ -316,7 +324,7 @@ const SignUp = () => {
                         </AddrBox>
                         </GridBox>  
                     </Item>
-                <JoinUsBtn onClick={clickBtn}><Link to='/SignCom'>회원가입</Link></JoinUsBtn><br />
+                <JoinUsBtn><NavLink to='/SignCom' style={({ isActive }) => ({ color: isActive ? 'black' : 'white' })}>회원가입</NavLink></JoinUsBtn><br />
                 <Check>
                     <IdCheck>이미 아이디가 있으신가요? </IdCheck><Link to='/Login'> ＞ 로그인</Link>
                 </Check>

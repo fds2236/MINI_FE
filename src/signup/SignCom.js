@@ -1,7 +1,8 @@
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import styled from "styled-components";
 
-// 도연 작업중
+// 도연 작업 완료
+// 홈으로 이동 => 헤더 만들어지면 삭제, 헤더 로고 눌러서 홈으로 이동
 
 const Container = styled.div`
     display: flex;
@@ -11,7 +12,7 @@ const Container = styled.div`
 
 const ItemBox = styled.div`
     width: 500px;
-    height: 600px;
+    height: 330px;
     background-color: #EEEEEE;
     margin: 10px;
     padding: 20px 20px 20px 20px;
@@ -33,7 +34,7 @@ const CheckMark = styled.div`
     text-align: center;
     line-height: 130px;
     border-radius: 180px;
-
+    margin-top: 10px;
 `;
 
 const Comp = styled.div`
@@ -53,10 +54,9 @@ const Strong = styled.span`
 
 const LoginBtn = styled.button`
     background-color: black;
-    color: white;
-    margin: 15px 0 10px 100px;
-    width: 300px;
-    height: 40px;
+    margin: 50px 0 10px 130px;
+    width: 250px;
+    height: 50px;
     border-radius: 10px;
 `;
 
@@ -65,18 +65,16 @@ const clickBtn = () => {
 }
 
 
-
 const SignCom = () => {
 
     return(
         <>
         <Link to='/'>🏠홈으로 이동🏠</Link><br />
-        <Link to="/SignUp">회원가입</Link>
         <Container>
             <ItemBox>
                 <Mark><CheckMark>√</CheckMark></Mark>
                 <Comp>Sa Shoe <Strong>회원가입이 완료</Strong> 되었습니다.</Comp>
-                <LoginBtn onClick={clickBtn}><Link to='/Login'>로그인</Link></LoginBtn><br />
+                <LoginBtn onClick={clickBtn}><NavLink to='/Login' style={({ isActive }) => ({ color: isActive ? 'black' : 'white' })}>로그인</NavLink></LoginBtn><br />
             </ItemBox>
         </Container>
         </>
