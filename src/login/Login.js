@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useState} from "react";
 import MiniApi from "../api/MiniApi";
-
+import Modal from "../util/Modal";
 
 const Login = () => {
     // 아이디, 비밀번호 입력
@@ -18,6 +18,9 @@ const Login = () => {
 
     // 로그인 실패시 팝업창 띄우기
     const [modalOpen, setModalOpen] = useState("");
+    const closeModal = () => {
+        setModalOpen(false);
+    };
 
     // 아이디 제한(힌트)
     const onChangeId = (e) => {
@@ -51,14 +54,19 @@ const Login = () => {
             const res = await MiniApi.userLogin(inputId, inputPwd);
             console.log(res.data.result);
 
+            if(res.data.result == "OK") {
+                window.localStorage.setItem("userId", inputId);
+                window.localStorage.setItem("userPwd", inputPwd);
+                window.location.replace("/");
+            } else {
+                setModalOpen(true);
+            }
 
         } catch (e) {
             setModalOpen(true);
             console.log("로그인 에러ㅠㅠ")
         }
     }
-
-
 
     return(
         <div className="container">
@@ -73,18 +81,30 @@ const Login = () => {
         {/* 패스워드 입력창 */}
         <div className="input">
         <label>비밀번호</label>
-        <input value={inputPwd}></input>
+        <input value={inputPwd} onChange={onChangePwd}></input>
         </div>
 
         {/* 아이디 입력 제한 메시지 */}
+        <div className="hint">
+        {inputId.length > 0 && <span className={`message ${isPwd ? 'success' : 'error'}`}>{idMessage}</span>}
+        </div>
 
         {/* 비밀번호 입력 제한 메시지 */}
+        <div className="hint">
+        {inputPwd.length > 0 && <span className={`message ${isPwd ? 'success' : 'error'}`}>{pwdMessage}</span>}
+        </div>
 
         {/* 로그인 버튼 활성화 */}
+        <div className="loginButton">
+        {(isId && isPwd) ?
+                <button className="enable_button"
+                onClick={onClickLogin}>SING IN</button>  :
+                <button className="disable_button"
+                onClick={onClickLogin}>SING IN</button>}
+                <Modal open={modalOpen} close={closeModal} header="오류">아이디 및 패스워드를 다시 확인해 주세요.
+                </Modal>
+        </div>
 
-
-
-        <br/>
         <br/>
         <br/>
 
