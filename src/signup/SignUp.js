@@ -36,7 +36,7 @@ const Comments2 = styled.p`
   
 const ItemBox = styled.div`
     width: 500px;
-    height: 600px;
+    height: 615px;
     background-color: #EEEEEE;
     margin: 10px;
     padding: 20px 20px 20px 20px;
