@@ -76,10 +76,6 @@ const Red = styled.span`
   color: red;
 `;
 
-
-
-
-
 const Agree = () => {
     
 // 약관동의 체크박스 기능 구현
@@ -91,6 +87,9 @@ const [marketingCheck, setMarketingCheck] = useState(false); // 마케팅 체크
 const [marketingEmailCheck, setMarketingEmailCheck] = useState(false); // 이메일
 const [marketingMsgCheck, setMarketingMsgCheck] = useState(false); // SMS
 const [ageCheck, setAgeCheck] = useState(false); // 나이 체크
+
+// const [NavLink, setNavLink] = useState(false); // 링크
+
 
 
 
@@ -130,11 +129,11 @@ const allBtnEvent = (e) => {
   };
 
   const marketingEmailBtnEvent = (e) => {
-    setMarketingCheck(e.target.checked);
+    setMarketingEmailCheck(e.target.checked);
   };
 
   const marketingMsgBtnEvent = (e) => {
-    setMarketingCheck(e.target.checked);
+    setMarketingMsgCheck(e.target.checked);
   };
 
 
@@ -152,14 +151,17 @@ const allBtnEvent = (e) => {
         }
       }, [useCheck, userCheck, marketingCheck, marketingEmailCheck, marketingMsgCheck, ageCheck]);
 
-  // // 이메일, SMS 둘 다 체크하면 마케팅 동의 체크    
-  //     useEffect(() => {
-  //       if(marketingEmailCheck === true && marketingMsgCheck === true) {
-  //         setMarketingCheck(true)
-  //       } else {
-  //         setMarketingCheck(false)
-  //       }
-  //     }, [marketingEmailCheck, marketingMsgCheck]);
+  // 이메일, SMS 둘 다 체크하면 마케팅 동의 체크    
+      useEffect(() => {
+        if(marketingEmailCheck === true && marketingMsgCheck === true) {
+          setMarketingCheck(true)
+        } else {
+          setMarketingCheck(false)
+        }
+      }, [marketingEmailCheck, marketingMsgCheck]);
+
+
+
 
 
     return(
