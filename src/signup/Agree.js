@@ -1,4 +1,4 @@
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import { useState, useEffect }  from "react";
 
@@ -14,10 +14,10 @@ const ItemBox = styled.div`
     width: 600px;
     height: 740px;
     background-color: #EEEEEE;
-    margin: 10px;
     padding: 20px 20px 20px 20px;
     text-align: left;
     border-style: groove;
+    margin-top: -50px;
 `;
 
 const JoinUs = styled.div`
@@ -48,10 +48,19 @@ const Item = styled.div`
     
 `;
 
+const CancelBtn = styled.button`
+  background-color: #BDBDBD;
+  margin: 15px 10px 10px 100px;
+  width: 200px;
+  height: 40px;
+  border-radius: 10px;
+  border: none;
+
+`;
+
 const JoinUsBtn = styled.button`
   background-color: black;
-  margin: 15px 0 10px 130px;
-  width: 300px;
+  width: 200px;
   height: 40px;
   border-radius: 10px;
 
@@ -87,9 +96,7 @@ const [marketingCheck, setMarketingCheck] = useState(false); // 마케팅 체크
 const [marketingEmailCheck, setMarketingEmailCheck] = useState(false); // 이메일
 const [marketingMsgCheck, setMarketingMsgCheck] = useState(false); // SMS
 const [ageCheck, setAgeCheck] = useState(false); // 나이 체크
-
-// const [NavLink, setNavLink] = useState(false); // 링크
-
+const [Link, setLink] = useState(false); // 링크
 
 
 
@@ -104,14 +111,6 @@ const allBtnEvent = (e) => {
     setMarketingMsgCheck(e.target.checked);
     setAgeCheck(e.target.checked);
   };
-
-// // 마케팅 동의 체크하면 이메일, SMS 체크됨
-// // 마케팅 동의 해제하면 이메일, SMS 체크 취소됨
-// const marketingBtnEvent = (e) => {
-//   setMarketingEmailCheck(e.target.checked);
-//   setMarketingMsgCheck(e.target.checked);
-// };
-
   
   // 서비스 이용약관 체크
   const useBtnEvent = (e) => {
@@ -142,6 +141,12 @@ const allBtnEvent = (e) => {
     setAgeCheck(e.target.checked);
   };
 
+  const LinkBtnEvent = (e) => {
+    setLink(e.target.value);
+  };
+
+  
+
   // 모든 세부 항목 체크되면 전체동의가 자동으로 체크됨
     useEffect(() => {
         if(useCheck === true && userCheck === true && marketingCheck === true && marketingEmailCheck === true && marketingMsgCheck === true && ageCheck === true) {
@@ -151,23 +156,43 @@ const allBtnEvent = (e) => {
         }
       }, [useCheck, userCheck, marketingCheck, marketingEmailCheck, marketingMsgCheck, ageCheck]);
 
-  // 이메일, SMS 둘 다 체크하면 마케팅 동의 체크    
+  // 이메일, SMS 둘 중 하나라도 체크이면 마케팅 동의 체크    
       useEffect(() => {
         if(marketingEmailCheck === true && marketingMsgCheck === true) {
+          setMarketingCheck(true)
+        } else if ((marketingEmailCheck === true && marketingMsgCheck === false) || (marketingEmailCheck === false && marketingMsgCheck === true)) {
           setMarketingCheck(true)
         } else {
           setMarketingCheck(false)
         }
       }, [marketingEmailCheck, marketingMsgCheck]);
 
+  // 마케팅 동의 해제하면 이메일, SMS 둘 다 취소됨
+      useEffect(() => {
+        if(marketingCheck === false) {
+          (setMarketingEmailCheck(false) && setMarketingMsgCheck(false))
+        } else  {
+          setMarketingMsgCheck(false) && (setMarketingEmailCheck(false))
+        } 
+      }, [marketingCheck]);
+
+  // 필수 입력 요소 중에 하나라도 클릭안하면 회원가입 못하게 하기
+      useEffect(() => {
+        if(useCheck === false || userCheck === false || ageCheck === false) {
+          setLink(false)
+        } else  {
+          setLink(true)
+        } 
+      }, [useCheck, userCheck, ageCheck]);
+
+
+      
 
 
 
 
     return(
         <>
-        <Link to='/'>🏠홈으로 이동🏠</Link><br />
-        <Link to='/SignUp'>회원가입</Link><br />
         <Container>
             <ItemBox>
                 <JoinUs>JOIN US</JoinUs>
@@ -628,8 +653,8 @@ const allBtnEvent = (e) => {
                             <Check>만 14세 이상입니다. <Red>(필수)</Red></Check>
                         </div><br/>
                       
-                      
-                    <JoinUsBtn><NavLink to='/SignUp' style={({ isActive }) => ({ color: isActive ? 'black' : 'white' })}>회원가입</NavLink></JoinUsBtn>        
+                    <CancelBtn><NavLink to='/Home' style={({ isActive }) => ({ color: isActive ? 'black' : 'white' })}>취소하기</NavLink></CancelBtn>
+                    <JoinUsBtn><NavLink to='/SignUp' style={({ isActive }) => ({ color: isActive ? 'black' : 'white' })} onClick={LinkBtnEvent}>다음단계</NavLink></JoinUsBtn>        
                 </Item>
             </ItemBox>
         </Container>

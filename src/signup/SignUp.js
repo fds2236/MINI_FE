@@ -19,7 +19,7 @@ font-weight: bold;
 width: 150px;
 height: 50px;
 border-radius: 10px;
-margin: 0 0 10px 180px;
+margin: 0 0 10px 230px;
 display: block;
 text-align: center;
 `;
@@ -27,7 +27,7 @@ text-align: center;
 const Comments = styled.p`
     color: red;
     font-size: 13px;
-    margin: 0 0 10px 110px;
+    margin: 0 0 10px 160px;
 `;
 const Comments2 = styled.p`
     font-size: small;
@@ -35,13 +35,14 @@ const Comments2 = styled.p`
 `;
   
 const ItemBox = styled.div`
-    width: 500px;
+    width: 600px;
     height: 615px;
     background-color: #EEEEEE;
     margin: 10px;
     padding: 20px 20px 20px 20px;
     text-align: left;
     border-style: groove;
+    margin-top: -50px;
 `;
 
 const ItemText = styled.span`
@@ -164,14 +165,25 @@ const Check = styled.fieldset`
     border: none;
     padding: 5px 0 0 130px;
 `;
+
+const CancelBtn = styled.button`
+  background-color: #BDBDBD;
+  margin: 15px 10px 10px 100px;
+  width: 200px;
+  height: 40px;
+  border-radius: 10px;
+  border: none;
+
+`;
   
 const JoinUsBtn = styled.button`
     background-color: black;
-    margin: 15px 0 10px 100px;
-    width: 300px;
+    width: 200px;
     height: 40px;
     border-radius: 10px;
 `;
+
+
 
 
 
@@ -183,9 +195,15 @@ const SignUp = () => {
     const [pwCheck, setPwCheck] = useState('');
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
-    const [emailList, setEmailList] = useState('');
-    const [phone, setPhone] = useState('');
-    const [addr, setAddr] = useState('');
+    const [emailInput, setEmailInput] = useState('');
+    const [autoMail, setAutoMail] = useState('');
+    const [phone1, setPhone1] = useState('');
+    const [phone2, setPhone2] = useState('');
+    const [phone3, setPhone3] = useState('');
+    const [phoneNum, setPhoneNum] = useState('');
+    const [addNum, setAddrNum] = useState('');
+    const [addr1, setAddr1] = useState('');
+    const [addr2, setAddr2] = useState('');
 
     // input창 오류 메시지
     const [idMsg, setIdMsg] = useState(''); 
@@ -195,7 +213,7 @@ const SignUp = () => {
     const [emailMsg, setEmailMsg] = useState('');
     const [phoneMsg, setPhoneMsg] = useState('');
     const [addrMsg, setAddrMsg] = useState('');
-    const [autoMail, setAutoMail] = useState('');
+    
 
     // input창 유효성 검사
     const [isId, setIsId] = useState('');
@@ -207,7 +225,7 @@ const SignUp = () => {
     const [isAddr, setIsAddr] = useState('');
     
 
-    // input창 제약조건
+    // 아이디 체크
     const onChangId = (e) => {
         setId(e.target.value)
         if (e.target.value.length < 4 || e.target.value.length > 20) {
@@ -219,10 +237,7 @@ const SignUp = () => {
         }
     }
 
-    const onChangeAutoMail = (e) => {
-        setAutoMail(e.target.value);
-    }
-
+    // 비밀번호 체크
     const onChangePw = (e) => {
         const passwordRegex = /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*?[#?!@$%^&*-]).{8,20}$/;
         const passwordCurrent = e.target.value ;
@@ -236,6 +251,7 @@ const SignUp = () => {
         }        
     }
 
+    // 비밀번호 확인 체크
     const onChangePwCheck = (e) => {
         const passwordCurrent = e.target.value ;
         setPwCheck(passwordCurrent)
@@ -250,32 +266,48 @@ const SignUp = () => {
 
     const onChangeName = (e) => setName(e.target.value);
     const onChangeEmail = (e) => setEmail(e.target.value);
+    const onChangePhone1 = (e) => setPhone1(e.target.value);
+    const onChangePhone2 = (e) => setPhone2(e.target.value);
+    const onChangePhone3 = (e) => setPhone3(e.target.value);
+    const onChangePhoneNum = (e) => setPhoneNum(e.target.value);
+    const onChangeAddrNum = (e) => setAddrNum(e.target.value);
+    const onChangeAddr1 = (e) => setAddr1(e.target.value);
+    const onChangeAddr2 = (e) => setAddr2(e.target.value);
 
-    const onChangeEmailList = (e) => {
-        setEmailList(e.target.value) 
-        if((e.target.value) !== emailList) {
-            onChangeEmailList.value = e.target.value
-        
-        } else onChangeEmailList.value = emailList
 
+    // 이메일 
+
+    const onChangeAutoMail = (e) => {
+        setAutoMail(e.target.value);
     }
 
-    /* // 팝업
-    const [modalOpen, setModalOpen] = useState(false);
-    const [modalText, setModelText] = useState("중복된 아이디 입니다.");
+    const onChangeEmailInput = (e) => {
+        setEmailInput(e.target.value);
+        if((e.target.value) !== autoMail) {
+            onChangeEmailInput.value = e.target.value
+        
+        } else {
+            onChangeEmailInput.value = autoMail
+        }
 
-    const closeModal = () => {
-        setModalOpen(false);
-    }; */
-/* 
-    const clickBtn = () => {
-        document.location.href('/')
-    } */
+    }
+// 주소~~~~~~~~~~~
+    // 팝업창 상태 관리
+    const [isPopupOpen, setIsPopupOpen] = useState(false)
+ 
+	// 팝업창 열기
+    const openPostCode = () => {
+        setIsPopupOpen(true)
+    }
+ 
+	// 팝업창 닫기
+    const closePostCode = () => {
+        setIsPopupOpen(false)
+    }
+ 
 
     return (
         <>
-        <Link to='/'>🏠홈으로 이동🏠</Link><br />
-        <Link to='/Agree'>이용약관</Link>
         <Container>
             <ItemBox>
                 <JoinUs>JOIN US</JoinUs>
@@ -298,7 +330,7 @@ const SignUp = () => {
                         </Name>
                         <Email><Star>* </Star><ItemText>이메일</ItemText>
                             <InputE value={email} placeholder="이메일" onChange={onChangeEmail} /> @
-                            <InputList value={autoMail} placeholder="(직접 입력)" onChange={onChangeEmailList} />
+                            <InputList value={autoMail} placeholder="(직접 입력)" onChange={onChangeEmailInput} />
                             <EmailList value={autoMail} onChange={onChangeAutoMail}>
                                 <option value="직접 입력">직접 입력</option>
                                 <option value="naver.com">naver.com</option>
@@ -312,19 +344,23 @@ const SignUp = () => {
                         <GridBox>  
                         <Star>* </Star>
                         <PhoneBox><ItemText1>전화번호</ItemText1>
-                            <InputS value={phone} placeholder="010" /> - <InputS value={phone} /> - <InputEnd value={phone} /> 
+                            <InputS value={phone1} placeholder="010" onChange={onChangePhone1}/> - <InputS value={phone2} onChange={onChangePhone2} /> - <InputEnd value={phone3} onChange={onChangePhone3} /> 
                             <button className='grayBtn'> 인증번호 전송</button><br /><ItemText2>인증번호</ItemText2>
-                            <Input value={phone} placeholder="인증번호 6자리" /> 
+                            <Input value={phoneNum} placeholder="인증번호 6자리" onChange={onChangePhoneNum} /> 
                             <button>확인</button>
                         </PhoneBox><br />
                         <AddrBox><ItemText3>주소</ItemText3>
-                            <Input value={addr} placeholder="우편번호" /><button>우편번호 검색</button><br /> 
-                            <ItemText3></ItemText3><Input value={addr} placeholder="주소" /><br /> 
-                            <ItemText3></ItemText3><Input value={addr} placeholder="상세 주소" /> 
+                            <Input value={addNum} placeholder="우편번호" onChange={onChangeAddrNum} />
+                            // 버튼 클릭 시 팝업 생성
+                            <button type='button' onClick={openPostCode}>우편번호 검색</button><br /> 
+                            <ItemText3></ItemText3><Input value={addr1} placeholder="주소" onChange={onChangeAddr1} /><br /> 
+                            <ItemText3></ItemText3><Input value={addr2} placeholder="상세 주소" onChange={onChangeAddr2} /> 
                         </AddrBox>
                         </GridBox>  
                     </Item>
-                <JoinUsBtn><NavLink to='/SignCom' style={({ isActive }) => ({ color: isActive ? 'black' : 'white' })}>회원가입</NavLink></JoinUsBtn><br />
+                    <Link to='/Popup'>팝업</Link>
+                    <CancelBtn><NavLink to='/Home' style={({ isActive }) => ({ color: isActive ? 'black' : 'white' })}>취소하기</NavLink></CancelBtn>
+                    <JoinUsBtn><NavLink to='/SignCom' style={({ isActive }) => ({ color: isActive ? 'black' : 'white' })}>회원가입</NavLink></JoinUsBtn><br />
                 <Check>
                     <IdCheck>이미 아이디가 있으신가요? </IdCheck><Link to='/Login'> ＞ 로그인</Link>
                 </Check>
