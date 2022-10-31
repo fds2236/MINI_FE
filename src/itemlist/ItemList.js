@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import styled from "styled-componen
+import styled from "styled-componenents"
 import ShoesItems from "./ShoesItem";
 
 const ShoesListBlock = styled.div`
