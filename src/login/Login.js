@@ -28,6 +28,7 @@ const Login = () => {
    
        // 로그인 실패시 팝업창 띄우기
        const [modalOpen, setModalOpen] = useState("");
+       
        const closeModal = () => {
            setModalOpen(false);
        };

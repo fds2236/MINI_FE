@@ -11,13 +11,16 @@ const MiniApi =  {
             pwd: pw
         }
         return await axios.post(MINI_DOMAIN + "LoginServlet", loginObj, HEADER);
+    },
+
+    // id 찾기 기능
+    researchId: async function(name, mail) {
+        const findIdObj = {
+        name: name,
+        mail: mail
+        }
+        return await axios.post(MINI_DOMAIN = "IdServlet", findIdObj, HEADER);
     }
-
-
-
-
-
-
 }
 
 export default MiniApi;

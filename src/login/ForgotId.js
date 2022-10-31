@@ -9,12 +9,29 @@ const ForgotId = () => {
     const [inputName, setInputName] = useState("");
     const [inputEmail, setInputEmail] = useState("");
 
-    // // Api 호출
-    // const onClickId = async() => {
-    //     try {
-    //         const res = await MiniApi.
-    //     }
+    // 아이디 찾기 버튼 클릭시 팝업창 띄윅
+    // const [modalOpen, setModalOpen] = useState("");
+
+    // const closeModal = () => {
+    //     setModalOpen(false);
     // }
+
+    // Api 호출
+    const onClickId = async() => {
+        try {
+            const res = await MiniApi.researchId(inputName, inputEmail);
+            console.log(res.data.result);
+
+            if(res.data.result === "OK") {
+                window.localStorage.setItem("userId", inputName);
+                window.localStorage.setItem("userPwd", inputEmail);
+                
+            }
+        } catch (e) {
+            // setModalOpen(true);
+        }
+    }
+
 
 
 
@@ -50,7 +67,7 @@ const onChangeEmail = (e) => {
         <br/>
 
            {/* 다른 페이지 연결 */}
-            <Link to="/SingUp">회원가입</Link>
+            <Link to="/SignUp">회원가입</Link>
             <br />
             <Link to="/Login">로그인</Link>
             <br />
