@@ -22,8 +22,6 @@ const JoinUs = styled.div`
   width: 200px;
   height: 50px;
   border-radius: 10px;
-  display: block;
-  text-align: center;
   padding-bottom: 10px;
   margin-left: 300px;
 `;
@@ -133,6 +131,8 @@ const allBtnEvent = (e) => {
     setMarketingMsgCheck(e.target.checked);
   };
 
+  
+
   // 만 14세 이상 체크
   const ageBtnEvent = (e) => {
     setAgeCheck(e.target.checked);
@@ -188,7 +188,7 @@ const allBtnEvent = (e) => {
                 <JoinUs>JOIN US</JoinUs>
                 <Comments>👟Sa Shoe 회원가입 하고 예쁜 신발 Sa Shoe~👟 </Comments>
                     <div>
-                        <input type="checkbox" value={allCheck} onClick={allBtnEvent} />
+                        <input type="checkbox" value={allCheck} checked={allCheck} onClick={allBtnEvent} />
                         <Check>전체 약관에 동의합니다.</Check>
                     </div>
                 <Item>
@@ -634,7 +634,7 @@ const allBtnEvent = (e) => {
                             <Check>마케팅 활용 약관에 동의합니다. <span>(선택)</span></Check>
                             <span>　(</span><input type="checkbox" value={marketingEmailCheck} checked={marketingEmailCheck}  onClick={marketingEmailBtnEvent}/>
                             <Check>이메일 </Check>
-                            <input type="checkbox" value={marketingMsgCheck} checked={marketingMsgCheck}  onClick={marketingMsgBtnEvent}/>
+                            <input type="checkbox" value={marketingMsgCheck} checked={marketingMsgCheck} onClick={marketingMsgBtnEvent}/>
                             <Check>SMS</Check><span>)</span>
                         </div><br/>
 
