@@ -15,6 +15,8 @@ const Home = () => {
         <Link to="/Login">사이트 소개</Link>
         <br />
         <Link to="/SiteInfo">고객센터</Link>
+        <br />
+        <Link to="/Boards">커뮤니티</Link>
         </>
     )
 }

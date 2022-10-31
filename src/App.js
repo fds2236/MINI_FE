@@ -12,6 +12,7 @@ import Agree from './signup/Agree';
 import SignCom from './signup/SignCom';
 import SignUp from './signup/SignUp';
 import SiteInfo from './siteinfo/SiteInfo';
+import Boards from './board/boards';
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
         <Route path='/SignCom' element={<SignCom />} />
         <Route path='/SignUp' element={<SignUp />} />
         <Route path='/SiteInfo' element={<SiteInfo />} />
+        <Route path='/Boards' element={<Boards />} />
       </Routes>
     </Router>
    
