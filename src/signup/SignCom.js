@@ -5,19 +5,16 @@ import styled from "styled-components";
 // 홈으로 이동 => 헤더 만들어지면 삭제, 헤더 로고 눌러서 홈으로 이동
 
 const Container = styled.div`
-    display: flex;
-    justify-content: center;
-    padding: 100px;
+    background-color: #EEEEEE;
 `;
 
 const ItemBox = styled.div`
     width: 500px;
-    height: 330px;
-    background-color: #EEEEEE;
-    margin: 10px;
+    height: 1000px;
+    margin: 0 0 0 500px;
     padding: 20px 20px 20px 20px;
     text-align: left;
-    border-style: groove;
+    
 `;
 
 const Mark = styled.div`
@@ -69,7 +66,6 @@ const SignCom = () => {
 
     return(
         <>
-        <Link to='/'>🏠홈으로 이동🏠</Link><br />
         <Container>
             <ItemBox>
                 <Mark><CheckMark>√</CheckMark></Mark>

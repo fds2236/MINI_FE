@@ -1,33 +1,32 @@
 import React, { useState } from 'react';
 import { Link, NavLink } from "react-router-dom";
 import styled from "styled-components";
+import DaumPostCode from 'react-daum-postcode';
+
 
 // 도연 기능 구현 ing..
 
 
 const Container = styled.div`
-    display: flex;
-    justify-content: center;
-    padding: 100px;
+    padding-right: 500px;
+    background-color: #EEEEEE;
 `;
 
 const JoinUs = styled.div`
-background-color: #00ADB5;
-color: aliceblue;
-font-size: xx-large;
-font-weight: bold;
-width: 150px;
-height: 50px;
-border-radius: 10px;
-margin: 0 0 10px 230px;
-display: block;
-text-align: center;
+    color: #00ADB5;
+    font-size: 50px;
+    font-weight: bold;
+    width: 200px;
+    height: 50px;
+    border-radius: 10px;
+    display: block;
+    text-align: center;
+    padding-bottom: 10px;
 `;
 
 const Comments = styled.p`
-    color: red;
+    color: black;
     font-size: 13px;
-    margin: 0 0 10px 160px;
 `;
 const Comments2 = styled.p`
     font-size: small;
@@ -35,14 +34,11 @@ const Comments2 = styled.p`
 `;
   
 const ItemBox = styled.div`
-    width: 600px;
+    width: 1000px;
     height: 615px;
-    background-color: #EEEEEE;
-    margin: 10px;
-    padding: 20px 20px 20px 20px;
+    margin-left: 450px;
+    padding: 0 20px 20px 20px;
     text-align: left;
-    border-style: groove;
-    margin-top: -50px;
 `;
 
 const ItemText = styled.span`
@@ -291,20 +287,7 @@ const SignUp = () => {
         }
 
     }
-// 주소~~~~~~~~~~~
-    // 팝업창 상태 관리
-    const [isPopupOpen, setIsPopupOpen] = useState(false)
- 
-	// 팝업창 열기
-    const openPostCode = () => {
-        setIsPopupOpen(true)
-    }
- 
-	// 팝업창 닫기
-    const closePostCode = () => {
-        setIsPopupOpen(false)
-    }
- 
+
 
     return (
         <>
@@ -350,9 +333,7 @@ const SignUp = () => {
                             <button>확인</button>
                         </PhoneBox><br />
                         <AddrBox><ItemText3>주소</ItemText3>
-                            <Input value={addNum} placeholder="우편번호" onChange={onChangeAddrNum} />
-                            // 버튼 클릭 시 팝업 생성
-                            <button type='button' onClick={openPostCode}>우편번호 검색</button><br /> 
+                            <Input value={addNum} placeholder="우편번호" onChange={onChangeAddrNum} /><button>우편번호 검색</button><br /> 
                             <ItemText3></ItemText3><Input value={addr1} placeholder="주소" onChange={onChangeAddr1} /><br /> 
                             <ItemText3></ItemText3><Input value={addr2} placeholder="상세 주소" onChange={onChangeAddr2} /> 
                         </AddrBox>

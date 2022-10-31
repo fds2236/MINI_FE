@@ -5,46 +5,43 @@ import { useState, useEffect }  from "react";
 // 도연 작업 중
 
 const Container = styled.div`
-    display: flex;
-    justify-content: center;
-    padding: 100px;
+  padding-right: 500px;
+  background-color: #EEEEEE;
 `;
 
 const ItemBox = styled.div`
-    width: 600px;
-    height: 740px;
-    background-color: #EEEEEE;
-    padding: 20px 20px 20px 20px;
-    text-align: left;
-    border-style: groove;
-    margin-top: -50px;
+  width: 600px;
+  height: 740px;
+  padding: 20px 20px 20px 20px;
 `;
 
 const JoinUs = styled.div`
-    background-color: #00ADB5;
-    color: aliceblue;
-    font-size: xx-large;
-    font-weight: bold;
-    width: 300px;
-    height: 50px;
-    border-radius: 10px;
-    margin: 0 0 10px 155px;
-    display: block;
-    text-align: center;
+  color: #00ADB5;
+  font-size: 50px;
+  font-weight: bold;
+  width: 200px;
+  height: 50px;
+  border-radius: 10px;
+  display: block;
+  text-align: center;
+  padding-bottom: 10px;
+  margin-left: 300px;
 `;
 
 
 const Comments = styled.p`
-    color: red;
-    font-size: 13px;
-    margin: 0 0 30px 160px;
+  color: black;
+  font-size: 13px;
+  margin-left: 300px;
 `;
 
 const Item = styled.div`
-    background-color: white;
-    padding: 5px 15px 30px 15px;
-    height: 565px;
-    margin-top: 10px;
+  background-color: white;
+  padding: 5px 15px 30px 15px;
+  width: 1000px;
+  margin-top: 10px;
+  margin-left: 300px;
+
     
 `;
 
@@ -78,6 +75,7 @@ const Text = styled.textarea`
 
 const Check = styled.label`
   font-weight: bold;
+  
 `;
 
 
@@ -135,7 +133,6 @@ const allBtnEvent = (e) => {
     setMarketingMsgCheck(e.target.checked);
   };
 
-
   // 만 14세 이상 체크
   const ageBtnEvent = (e) => {
     setAgeCheck(e.target.checked);
@@ -144,8 +141,6 @@ const allBtnEvent = (e) => {
   const LinkBtnEvent = (e) => {
     setLink(e.target.value);
   };
-
-  
 
   // 모든 세부 항목 체크되면 전체동의가 자동으로 체크됨
     useEffect(() => {
@@ -186,11 +181,6 @@ const allBtnEvent = (e) => {
       }, [useCheck, userCheck, ageCheck]);
 
 
-      
-
-
-
-
     return(
         <>
         <Container>
@@ -198,7 +188,7 @@ const allBtnEvent = (e) => {
                 <JoinUs>JOIN US</JoinUs>
                 <Comments>👟Sa Shoe 회원가입 하고 예쁜 신발 Sa Shoe~👟 </Comments>
                     <div>
-                        <input type="checkbox" value={allCheck} checked={allCheck} onClick={allBtnEvent} />
+                        <input type="checkbox" value={allCheck} onClick={allBtnEvent} />
                         <Check>전체 약관에 동의합니다.</Check>
                     </div>
                 <Item>

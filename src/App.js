@@ -40,7 +40,7 @@ function App() {
           <Route path='/Boards' element={<Boards />} />
           <Route path='/Board' element={<Board />} />
           <Route path='/WriteBoard' element={<WriteBoard />} />
-          <Route path='Privacy' element={<Privacy/>} />
+          <Route path='/Privacy' element={<Privacy/>} />
       </Routes>
       <Footer/>
       </div>

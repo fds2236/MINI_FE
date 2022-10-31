@@ -120,7 +120,7 @@ const Login = () => {
 
         {/* 다른 페이지 연결 */}
         <div className="link">
-        <Link to="/SignUp">회원가입</Link>
+        <Link to="/Agree">회원가입</Link>
         <br />
         <Link to="/ForgotId">아이디 찾기</Link>
         <br />
