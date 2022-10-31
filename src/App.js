@@ -17,6 +17,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import Board from './board/board';
 import WriteBoard from './board/writeBoard';
+import Privacy from './privacy/Privacy';
 
 function App() {
   return (
@@ -39,9 +40,10 @@ function App() {
           <Route path='/Boards' element={<Boards />} />
           <Route path='/Board' element={<Board />} />
           <Route path='/WriteBoard' element={<WriteBoard />} />
+          <Route path='Privacy' element={<Privacy/>} />
       </Routes>
+      <Footer/>
       </div>
-      <Footer />
     </Router>
     
    

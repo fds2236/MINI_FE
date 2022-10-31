@@ -2,16 +2,18 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 const StyledFooter = styled.footer`
-    bottom: 0;
-    margin-bottom: 0;
+    /* bottom: 0;
+    margin-bottom: 0; */
     background-color: #222831;
     position: absolute;
-    height: 20vh;
+    /* height: 20vh; */
     width: 100%;
     padding: 10px 12px 15px 12px;
     line-height: 25px;
     display:flex;
     flex-direction: column;
+    height: 100px;
+    margin-top: auto;
 `;
 
 
