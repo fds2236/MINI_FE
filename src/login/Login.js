@@ -2,6 +2,16 @@ import { Link } from "react-router-dom";
 import { useState} from "react";
 import MiniApi from "../api/MiniApi";
 import Modal from "../util/Modal";
+import styled from "styled-components";
+
+// const Form = styled.form`
+//     background-color:rgb(0,173,181);
+//     color: white;
+//     width: 300px;
+//     height: 200px
+//     ;`
+
+
 
 const Login = () => {
        // 아이디, 비밀번호 입력
@@ -70,8 +80,8 @@ const Login = () => {
    
        return(
            <div className="container">
+            {/* <Form> */}
            <h1>로그인</h1>
-   
            {/* 아이디 입력창 */}
            <div className="input">
             <label>아이디</label>
@@ -81,8 +91,9 @@ const Login = () => {
            {/* 패스워드 입력창 */}
            <div className="input">
            <label>비밀번호</label>
-           <input value={inputPwd} onChange={onChangePwd}></input>
+           <input value={inputPwd} type="password" onChange={onChangePwd}></input>
            </div>
+           {/* </Form> */}
    
            {/* 아이디 입력 제한 메시지 */}
            <div className="hint">
@@ -98,14 +109,12 @@ const Login = () => {
            <div className="loginButton">
            {(isId && isPwd) ?
                    <button className="enable_button"
-                   onClick={onClickLogin}>SING IN</button>  :
+                   onClick={onClickLogin}>SIGN IN</button>  :
                    <button className="disable_button"
-                   onClick={onClickLogin}>SING IN</button>}
+                   onClick={onClickLogin}>SIGN IN</button>}
                    <Modal open={modalOpen} close={closeModal} header="오류">아이디 및 패스워드를 다시 확인해 주세요.
                    </Modal>
            </div>
-
-        <br/>
         <br/>
 
         {/* 다른 페이지 연결 */}
