@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, {css} from "styled-components";
 
 const brandCategories = [
   {
@@ -24,18 +24,33 @@ const brandCategories = [
 ]
 
 const CategoriesBlock = styled.div`
+  font-size: 1.5rem;
+  cursor: pointer;
+  text-decoration: none;
+  background-color: #eeeeee;
+
+  &:hover {
+    background-color: #222831;
+  }
+
+  ${props => 
+    props.active && css`
+      font-weight: 600;
+      background-color: #222831;
+  `}
+
 `;
 
 const Category = styled.div`
 `;
 
-const brandCategory = ({onSelect, category}) => {
+const BrandCategory = ({onSelect, brandCategories}) => {
   return (
     <CategoriesBlock>
       {brandCategories.map(c => (
         <Category
           key={c.name}
-          active={category === c.name}
+          active={brandCategories === c.name}
           onClick={() => onSelect(c.name)}
         >{c.text}</Category>
       ))}
@@ -43,4 +58,4 @@ const brandCategory = ({onSelect, category}) => {
   )
 };
 
-export default brandCategory;
+export default BrandCategory;

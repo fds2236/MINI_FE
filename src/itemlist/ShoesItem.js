@@ -5,7 +5,7 @@ const ShoesItemsBlock = styled.div`
 `;
 
 const ShoesItems = ({shoes}) => {
-  const {pro_code, brand, pro_name} = shoes; // 서버랑 맞추기?
+  const {pro_code, brand, pro_name} = shoes; // 서버랑 맞추나? api동일하게니까?
   return (
     <ShoesItemsBlock>
 
