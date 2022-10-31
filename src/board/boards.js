@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import {BrowserRouter as Router, Routes, Route} from "react-router-dom";
+import Board from "./writeBoard";
+import { isLabelWithInternallyDisabledControl } from "@testing-library/user-event/dist/utils";
 
 /**
  * ------------------------------스타일드 컴포넌트 ---------------------------
@@ -16,7 +18,7 @@ const Container = styled.div`
 const ButtonContainer = styled.div`
     display: flex;
     justify-content: space-between;
-    width: 400px;
+    width: 480px;
     margin: 0 auto;
 `;
 
@@ -34,6 +36,7 @@ const Button = styled.button`
 const StyledLink = styled(Link)`
     color: rgb(238,238,238);
     text-decoration: none;
+
 `;
 
 
@@ -49,12 +52,7 @@ const StyledContent = styled.button`
     border-radius: 14px;
     border-style: none;
     width: 100%;
-
 `;
-
-
-
-
 
 
 // 사진 스타일드 컴포넌트
@@ -66,24 +64,32 @@ const StyledPicture = styled.img`
 `;
 
 
+// 온클릭 컨텐트 (상세페이지로 이동)
+const OnclickWriteBoard = () =>{
+    window.location.replace('/Board');
+}
 
+// 레드버튼 스타일드 컴포넌트
+const OrangeRedStyledButton = styled.button`
+    background-color: orangered;
+    border-style: none;
+    border-radius: 10px;
+    width: 100px;
+    height: 30px;
+    color: #EEEEEE;
+    cursor: pointer;
+`;
 
-
-
-
-
-
-
-
+const OnClickOrangeRed = () => {
+    window.location.replace('/WriteBoard')
+}
+   
 
 const MarginContent = styled.div`
     margin: 4px 16px;
 
     
 `;
-
-
-
 
 
 /**
@@ -101,13 +107,22 @@ const Picture = ({pic}) => {
     );
 }
 
+const OrangeRedButton = (props) => {
+    return (
+        <>
+            <OrangeRedStyledButton onClick={OnClickOrangeRed}>{props.text}</OrangeRedStyledButton>
+        </>
+    );
+}
+
+
 
 // 게시물 
 const Content = () => {
     return (
         <>  
             <MarginContent>
-            <StyledContent>
+            <StyledContent onClick={OnclickWriteBoard} >
                 <Picture>
                     
                 </Picture>
@@ -122,9 +137,11 @@ const Content = () => {
 const Title = (props) => {
     return (
         <>
+        
         </>
     );
 }
+
 
 
 
@@ -133,9 +150,10 @@ const Boards = () => {
 
         <Container>  
             <ButtonContainer>
-                <Button><StyledLink to ='/' >Back To Home</StyledLink></Button>
+                <Button><StyledLink to ='/' >돌아가기</StyledLink></Button>
                 <Button><StyledLink to ='/' >자유게시판</StyledLink></Button>
                 <Button><StyledLink to ='/' >후기게시판</StyledLink></Button>
+                <OrangeRedButton text="글쓰기"></OrangeRedButton>
             </ButtonContainer>
 
             {/* &nbsp;를 사용하여 의도적으로 공백을 넣음. 글이 아무것도 없을때 대비 */}

@@ -15,6 +15,8 @@ import SiteInfo from './siteinfo/SiteInfo';
 import Boards from './board/boards';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import Board from './board/board';
+import WriteBoard from './board/writeBoard';
 
 function App() {
   return (
@@ -35,6 +37,8 @@ function App() {
           <Route path='/SignUp' element={<SignUp />} />
           <Route path='/SiteInfo' element={<SiteInfo />} />
           <Route path='/Boards' element={<Boards />} />
+          <Route path='/Board' element={<Board />} />
+          <Route path='/WriteBoard' element={<WriteBoard />} />
       </Routes>
       </div>
       <Footer />
