@@ -14,6 +14,7 @@ import SignUp from './signup/SignUp';
 import SiteInfo from './siteinfo/SiteInfo';
 import Boards from './board/boards';
 import Header from './components/Header';
+import Footer from './components/Footer';
 
 function App() {
   return (
@@ -36,7 +37,9 @@ function App() {
           <Route path='/Boards' element={<Boards />} />
       </Routes>
       </div>
+      <Footer />
     </Router>
+    
    
   );
 }
