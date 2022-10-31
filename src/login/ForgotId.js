@@ -32,9 +32,6 @@ const ForgotId = () => {
         }
     }
 
-
-
-
 const onChangeName = (e) => {
     setInputName(e.target.value);
 }
