@@ -20,7 +20,10 @@ const MiniApi =  {
         mail: mail
         }
         return await axios.post(MINI_DOMAIN = "IdServlet", findIdObj, HEADER);
-    }
+    },
+
+    // pwd 찾기 기능
+    
 }
 
     
