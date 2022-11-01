@@ -191,13 +191,13 @@ const SignUp = () => {
     const [pwdCheck, setPwdCheck] = useState('');
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
-    const [emailInput, setEmailInput] = useState('');
+    const [emailName, setEmailName] = useState('');
     const [autoMail, setAutoMail] = useState('');
     const [phone1, setPhone1] = useState('');
     const [phone2, setPhone2] = useState('');
     const [phone3, setPhone3] = useState('');
     const [phoneNum, setPhoneNum] = useState('');
-    const [addNum, setAddrNum] = useState('');
+    const [addrNum, setAddrNum] = useState('');
     const [addr1, setAddr1] = useState('');
     const [addr2, setAddr2] = useState('');
 
@@ -277,13 +277,13 @@ const SignUp = () => {
         setAutoMail(e.target.value);
     }
 
-    const onChangeEmailInput = (e) => {
-        setEmailInput(e.target.value);
+    const onChangeEmailName = (e) => {
+        setEmailName(e.target.value);
         if((e.target.value) !== autoMail) {
-            onChangeEmailInput.value = e.target.value
+            onChangeEmailName.value = e.target.value
         
         } else {
-            onChangeEmailInput.value = autoMail
+            onChangeEmailName.value = autoMail
         }
 
     }
@@ -313,7 +313,7 @@ const SignUp = () => {
                         </Name>
                         <Email><Star>* </Star><ItemText>이메일</ItemText>
                             <InputE value={email} placeholder="이메일" onChange={onChangeEmail} /> @
-                            <InputList value={autoMail} placeholder="(직접 입력)" onChange={onChangeEmailInput} />
+                            <InputList value={autoMail} placeholder="(직접 입력)" onChange={onChangeEmailName} />
                             <EmailList value={autoMail} onChange={onChangeAutoMail}>
                                 <option value="직접 입력">직접 입력</option>
                                 <option value="naver.com">naver.com</option>
@@ -333,7 +333,7 @@ const SignUp = () => {
                             <button>확인</button>
                         </PhoneBox><br />
                         <AddrBox><ItemText3>주소</ItemText3>
-                            <Input value={addNum} placeholder="우편번호" onChange={onChangeAddrNum} /><button>우편번호 검색</button><br /> 
+                            <Input value={addrNum} placeholder="우편번호" onChange={onChangeAddrNum} /><button>우편번호 검색</button><br /> 
                             <ItemText3></ItemText3><Input value={addr1} placeholder="주소" onChange={onChangeAddr1} /><br /> 
                             <ItemText3></ItemText3><Input value={addr2} placeholder="상세 주소" onChange={onChangeAddr2} /> 
                         </AddrBox>
