@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 import { useState} from "react";
 import MiniApi from "../api/MiniApi";
-// 아이디를 찾으려면 이름과 전화번호 입력
+// 아이디를 찾으려면 이름과 이메일 입력 => 이메일값으로 아이디 찾기
+// 찾은 아이디 뒤에서 4자리는 ****처리해주고 싶음!
 
 
 const ForgotId = () => {
@@ -9,7 +10,7 @@ const ForgotId = () => {
     const [inputName, setInputName] = useState("");
     const [inputEmail, setInputEmail] = useState("");
 
-    // 아이디 찾기 버튼 클릭시 팝업창 띄윅
+    // 아이디 찾기 버튼 클릭시 팝업창 띄
     // const [modalOpen, setModalOpen] = useState("");
 
     // const closeModal = () => {
@@ -25,17 +26,16 @@ const ForgotId = () => {
             if(res.data.result === "OK") {
                 window.localStorage.setItem("userId", inputName);
                 window.localStorage.setItem("userPwd", inputEmail);
-                
             }
         } catch (e) {
             // setModalOpen(true);
+            console.log("아이디 찾기 실패!")
         }
     }
 
 const onChangeName = (e) => {
     setInputName(e.target.value);
 }
-
 
 const onChangeEmail = (e) => {
     setInputEmail(e.target.value);
@@ -59,7 +59,7 @@ const onChangeEmail = (e) => {
 
         {/* 아이디 찾기 버튼 활성화 */}
         <div className="findId">
-        <button>아이디 찾기</button>
+        <button onClick={onClickId}>FIND ID</button>
         </div>
         <br/>
 
