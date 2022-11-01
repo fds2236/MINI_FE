@@ -187,8 +187,8 @@ const JoinUsBtn = styled.button`
 const SignUp = () => {
     // 회원정보 입력받는 부분
     const [id, setId] = useState(''); 
-    const [pw, setPw] = useState('');
-    const [pwCheck, setPwCheck] = useState('');
+    const [pwd, setPwd] = useState('');
+    const [pwdCheck, setPwdCheck] = useState('');
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [emailInput, setEmailInput] = useState('');
@@ -203,8 +203,8 @@ const SignUp = () => {
 
     // input창 오류 메시지
     const [idMsg, setIdMsg] = useState(''); 
-    const [pwMsg, setPwMsg] = useState(''); 
-    const [pwCheckMsg, setPwCheckMsg] = useState(''); 
+    const [pwdMsg, setPwdMsg] = useState(''); 
+    const [pwdCheckMsg, setPwdCheckMsg] = useState(''); 
     const [nameMsg, setNameMsg] = useState('');
     const [emailMsg, setEmailMsg] = useState('');
     const [phoneMsg, setPhoneMsg] = useState('');
@@ -213,8 +213,8 @@ const SignUp = () => {
 
     // input창 유효성 검사
     const [isId, setIsId] = useState('');
-    const [isPw, setIsPw] = useState('');
-    const [isPwCheck, setIsPwCheck] = useState('');
+    const [isPwd, setIsPwd] = useState('');
+    const [isPwdCheck, setIsPwdCheck] = useState('');
     const [isName, setIsName] = useState('');
     const [isEmail, setIsEmail] = useState('');
     const [isPhone, setIsPhone] = useState('');
@@ -234,29 +234,29 @@ const SignUp = () => {
     }
 
     // 비밀번호 체크
-    const onChangePw = (e) => {
+    const onChangePwd = (e) => {
         const passwordRegex = /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*?[#?!@$%^&*-]).{8,20}$/;
         const passwordCurrent = e.target.value ;
-        setPw(passwordCurrent)
+        setPwd(passwordCurrent)
         if (!passwordRegex.test(passwordCurrent)) {
-            setPwMsg("비밀번호는 8자 이상이어야 하고 영문자, 숫자, 특수문자를 모두 포함해야 합니다.");
-            setIsPw(false)
+            setPwdMsg("비밀번호는 8자 이상이어야 하고 영문자, 숫자, 특수문자를 모두 포함해야 합니다.");
+            setIsPwd(false)
         } else {
-            setPwMsg("비밀번호가 올바른 형식입니다.")
-            setIsPw(true);
+            setPwdMsg("비밀번호가 올바른 형식입니다.")
+            setIsPwd(true);
         }        
     }
 
     // 비밀번호 확인 체크
-    const onChangePwCheck = (e) => {
+    const onChangePwdCheck = (e) => {
         const passwordCurrent = e.target.value ;
-        setPwCheck(passwordCurrent)
-        if (passwordCurrent !== pw) {
-            setPwCheckMsg("비밀번호가 일치하지 않습니다. 다시 확인해주세요.")
-            setIsPwCheck(false)
+        setPwdCheck(passwordCurrent)
+        if (passwordCurrent !== pwd) {
+            setPwdCheckMsg("비밀번호가 일치하지 않습니다. 다시 확인해주세요.")
+            setIsPwdCheck(false)
         } else {
-            setPwCheckMsg("비밀번호가 일치합니다.")
-            setIsPwCheck(true);
+            setPwdCheckMsg("비밀번호가 일치합니다.")
+            setIsPwdCheck(true);
         }      
     }
 
@@ -303,10 +303,10 @@ const SignUp = () => {
                             <button>중복 확인</button>
                         </Id>
                         <Pw><Star>* </Star><ItemText>비밀번호</ItemText>
-                            <Input value={pw} placeholder="비밀번호" onChange={onChangePw} />
+                            <Input value={pwd} placeholder="비밀번호" onChange={onChangePwd} />
                         </Pw>
                         <PwCheck><Star>* </Star><ItemText>비밀번호 확인</ItemText>
-                            <Input value={pwCheck} placeholder="비밀번호 확인" onChange={onChangePwCheck} />
+                            <Input value={pwdCheck} placeholder="비밀번호 확인" onChange={onChangePwdCheck} />
                         </PwCheck>
                         <Name><Star>* </Star><ItemText>이름</ItemText>
                             <Input value={name} placeholder="이름" onChange={onChangeName}  />

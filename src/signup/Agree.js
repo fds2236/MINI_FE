@@ -76,6 +76,11 @@ const Check = styled.label`
   
 `;
 
+const CheckBox = styled.div`
+
+
+`;
+
 
 const Red = styled.span`
   color: red;
@@ -92,7 +97,10 @@ const [marketingCheck, setMarketingCheck] = useState(false); // 마케팅 체크
 const [marketingEmailCheck, setMarketingEmailCheck] = useState(false); // 이메일
 const [marketingMsgCheck, setMarketingMsgCheck] = useState(false); // SMS
 const [ageCheck, setAgeCheck] = useState(false); // 나이 체크
-const [Link, setLink] = useState(false); // 링크
+
+
+
+const [Link, setLink] = useState(true); // 다음 페이지 넘어가는 링크
 
 
 
@@ -105,36 +113,49 @@ const allBtnEvent = (e) => {
     setMarketingCheck(e.target.checked);
     setMarketingEmailCheck(e.target.checked);
     setMarketingMsgCheck(e.target.checked);
-    setAgeCheck(e.target.checked);
+    setAgeCheck(e.target.checked); 
   };
   
   // 서비스 이용약관 체크
   const useBtnEvent = (e) => {
+    if(e.target.checked === false) setAllCheck(false);
+    else {
+    }
     setUseCheck(e.target.checked);
   };
 
   // 개인정보 처리방침 체크
   const userBtnEvent = (e) => {
+    if(e.target.checked === false) setAllCheck(false);
     setUserCheck(e.target.checked);
   };
   
   // 마케팅 동의 체크
   const marketingBtnEvent = (e) => {
+    if(e.target.checked === false) setAllCheck(false);
+    if(e.target.checked === false) {
+      setMarketingEmailCheck(false);
+      setMarketingMsgCheck(false);
+    }
     setMarketingCheck(e.target.checked);
   };
 
   const marketingEmailBtnEvent = (e) => {
+    if(e.target.checked === false) setAllCheck(false);
     setMarketingEmailCheck(e.target.checked);
+    setMarketingCheck(true);
   };
 
   const marketingMsgBtnEvent = (e) => {
+    if(e.target.checked === false) setAllCheck(false);
     setMarketingMsgCheck(e.target.checked);
+    setMarketingCheck(true);
   };
-
-  
 
   // 만 14세 이상 체크
   const ageBtnEvent = (e) => {
+    if(e.target.checked === false) setAllCheck(false);
+    if(e.target.checked === false) setLink(false);
     setAgeCheck(e.target.checked);
   };
 
@@ -142,7 +163,9 @@ const allBtnEvent = (e) => {
     setLink(e.target.value);
   };
 
-  // 모든 세부 항목 체크되면 전체동의가 자동으로 체크됨
+  
+
+ // 모든 세부 항목 체크되면 전체동의가 자동으로 체크됨
     useEffect(() => {
         if(useCheck === true && userCheck === true && marketingCheck === true && marketingEmailCheck === true && marketingMsgCheck === true && ageCheck === true) {
           setAllCheck(true)
@@ -151,34 +174,19 @@ const allBtnEvent = (e) => {
         }
       }, [useCheck, userCheck, marketingCheck, marketingEmailCheck, marketingMsgCheck, ageCheck]);
 
-  // 이메일, SMS 둘 중 하나라도 체크이면 마케팅 동의 체크    
-      useEffect(() => {
-        if(marketingEmailCheck === true && marketingMsgCheck === true) {
-          setMarketingCheck(true)
-        } else if ((marketingEmailCheck === true && marketingMsgCheck === false) || (marketingEmailCheck === false && marketingMsgCheck === true)) {
-          setMarketingCheck(true)
-        } else {
-          setMarketingCheck(false)
-        }
-      }, [marketingEmailCheck, marketingMsgCheck]);
+  
+      // 해야할 것!
+      // 1. 이메일, SMS 둘 다 체크 풀었을 때 마케팅도 풀리게 하기
+      // 2. 필수 입력 요소 중에 하나라도 클릭안하면 회원가입 못하게 하기
 
-  // 마케팅 동의 해제하면 이메일, SMS 둘 다 취소됨
-      useEffect(() => {
-        if(marketingCheck === false) {
-          (setMarketingEmailCheck(false) && setMarketingMsgCheck(false))
-        } else  {
-          setMarketingMsgCheck(false) && (setMarketingEmailCheck(false))
-        } 
-      }, [marketingCheck]);
-
-  // 필수 입력 요소 중에 하나라도 클릭안하면 회원가입 못하게 하기
-      useEffect(() => {
-        if(useCheck === false || userCheck === false || ageCheck === false) {
-          setLink(false)
-        } else  {
-          setLink(true)
-        } 
-      }, [useCheck, userCheck, ageCheck]);
+  // // 필수 입력 요소 중에 하나라도 클릭안하면 회원가입 못하게 하기
+  //     useEffect(() => {
+  //       if(useCheck === false || userCheck === false || ageCheck === false) {
+  //         setLink(false)
+  //       } else  {
+  //         setLink(true)
+  //       } 
+  //     }, [useCheck, userCheck, ageCheck]);
 
 
     return(
@@ -187,10 +195,10 @@ const allBtnEvent = (e) => {
             <ItemBox>
                 <JoinUs>JOIN US</JoinUs>
                 <Comments>👟Sa Shoe 회원가입 하고 예쁜 신발 Sa Shoe~👟 </Comments>
-                    <div>
+                    <CheckBox>
                         <input type="checkbox" value={allCheck} checked={allCheck} onClick={allBtnEvent} />
                         <Check>전체 약관에 동의합니다.</Check>
-                    </div>
+                    </CheckBox>
                 <Item>
                       <Box>
                         <div>
@@ -630,7 +638,7 @@ const allBtnEvent = (e) => {
 
                         
                         <div>
-                            <input type="checkbox" value={marketingCheck} checked={marketingCheck}  onClick={marketingBtnEvent}/>
+                            <input type="checkbox" value={marketingCheck} checked={marketingCheck}  onClick={marketingBtnEvent} />
                             <Check>마케팅 활용 약관에 동의합니다. <span>(선택)</span></Check>
                             <span>　(</span><input type="checkbox" value={marketingEmailCheck} checked={marketingEmailCheck}  onClick={marketingEmailBtnEvent}/>
                             <Check>이메일 </Check>
@@ -644,7 +652,7 @@ const allBtnEvent = (e) => {
                         </div><br/>
                       
                     <CancelBtn><NavLink to='/Home' style={({ isActive }) => ({ color: isActive ? 'black' : 'white' })}>취소하기</NavLink></CancelBtn>
-                    <JoinUsBtn><NavLink to='/SignUp' style={({ isActive }) => ({ color: isActive ? 'black' : 'white' })} onClick={LinkBtnEvent}>다음단계</NavLink></JoinUsBtn>        
+                    <JoinUsBtn><NavLink value={Link} to='/SignUp' style={({ isActive }) => ({ color: isActive ? 'black' : 'white' })} onClick={LinkBtnEvent}>다음단계</NavLink></JoinUsBtn>        
                 </Item>
             </ItemBox>
         </Container>
