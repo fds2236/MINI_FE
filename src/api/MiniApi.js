@@ -5,12 +5,23 @@ const MINI_DOMAIN = "http://localhost:8090/mini_prj/";
 const MiniApi =  {
 
     // 회원가입
-    signUp: async function(id, pw,) {
-        const loginObj = {
+    signUp: async function(id, pw, pwdCheck, name, email, emailName, phone1, phone2, phone3, phoneNum, addrNum, addr1, addr2) {
+        const signupObj = {
             id: id,
-            pwd: pw
+            pwd: pw,
+            pwdCheck: pwdCheck,
+            memName: name,
+            email: email,
+            emailName: emailName,
+            phone1: phone1,
+            phone2: phone2,
+            phone3: phone3,
+            phoneNum: phoneNum,
+            addrNum: addrNum,
+            addr1: addr1,
+            addr2: addr2
         }
-        return await axios.post(MINI_DOMAIN + "SignUpServlet", loginObj, HEADER);
+        return await axios.post(MINI_DOMAIN + "SignUpServlet", signupObj, HEADER);
     },
 
     // 로그인 기능
