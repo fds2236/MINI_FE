@@ -5,7 +5,7 @@ import './Modal.css';
 // 도연 작업중
 
 const Modal = (props) => {
-    const { open, confirm, close, header } = props;
+    const { open, confirm, close, header } = props; //
     return (
         <div className={open ? 'openModal modal' : 'modal'}>
             {open && 

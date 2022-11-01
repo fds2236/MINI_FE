@@ -11,8 +11,6 @@ import styled from "styled-components";
 //     height: 200px
 //     ;`
 
-
-
 const Login = () => {
        // 아이디, 비밀번호 입력
        const [inputId, setInputId] = useState("");
@@ -83,12 +81,18 @@ const Login = () => {
            <div className="container">
             {/* <Form> */}
            <h1>로그인</h1>
-           {/* 아이디 입력창 */}
+
+            {/* 아이디 입력창 */}
            <div className="input">
             <label>아이디</label>
             <input value={inputId} onChange={onChangeId}></input>   
            </div>
-   
+
+            {/* 아이디 입력 제한 메시지 */}
+            <div className="hint">
+           {inputId.length > 0 && <span className={`message ${isPwd ? 'success' : 'error'}`}>{idMessage}</span>}
+           </div>
+
            {/* 패스워드 입력창 */}
            <div className="input">
            <label>비밀번호</label>
@@ -96,16 +100,11 @@ const Login = () => {
            </div>
            {/* </Form> */}
    
-           {/* 아이디 입력 제한 메시지 */}
-           <div className="hint">
-           {inputId.length > 0 && <span className={`message ${isPwd ? 'success' : 'error'}`}>{idMessage}</span>}
-           </div>
-   
            {/* 비밀번호 입력 제한 메시지 */}
            <div className="hint">
            {inputPwd.length > 0 && <span className={`message ${isPwd ? 'success' : 'error'}`}>{pwdMessage}</span>}
            </div>
-   
+      
            {/* 로그인 버튼 활성화 */}
            <div className="loginButton">
            {(isId && isPwd) ?
