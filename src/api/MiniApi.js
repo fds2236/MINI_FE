@@ -48,12 +48,17 @@ const MiniApi =  {
             id: id
         }
         return await axios.post(MINI_DOMAIN + "PwdServlet", findPwdObj, HEADER);
+    },
+
+    // 상품 불러오기
+    itemInfo: async function(brand) {
+        const itemCmd = {
+            cmd : "ItemInfo",
+            brand : brand
+        }
+        return await axios.post(MINI_DOMAIN + "ItemServlet", itemCmd, HEADER);
     }
-    
-
-
-
-    
+        
 }
 
     

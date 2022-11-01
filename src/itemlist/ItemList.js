@@ -5,11 +5,12 @@ import BrandCategory from "./BrandCategory";
 import { useCallback } from "react";
 import axios from "axios";
 import CategoryFilter from "./BrandCategory";
+import MiniApi from '../api/MiniApi';
 
 const brandCategories = [
     {
-      name: 'all',
-      value: 'all'
+      name: 'ALL',
+      value: 'ALL'
     },
     {
       name: 'NIKE',
@@ -33,34 +34,41 @@ const brandCategories = [
     }
   ]
 
-const ItemList = () => {
-    const [category, setCategory] = useState("all");
-    // const onSelect = useCallback(category => setCategory(category), []);
+const ItemList = (props) => {
+    const [category, setCategory] = useState("ALL");
+    const [itemInfo, setItemInfo] = useState('');
 
-    // const [shoesItem, setShoesItem] = useState("");
+    useEffect(() => {
+      const itemData = async () => {
+        try {
+          const response = await MiniApi.itemInfo("ALL");
+          setItemInfo(response.data);
+        } catch (e) {
+          console.log(e);
+        }
+      };
+      itemData();
+    }, []);
 
-    // useEffect(() => {
-    //     const fetchData = async () => {
-    //         try {
-    //             // 여기수정해야됨
-    //             // const query = props.category === 'all' ? 'all' : `category=${props.category}`;
-    //             // const response = await axios.get(``);
-    //             // setShoes(response.data.shoesItem);
-    //         } catch (e) {
-    //             console.log(e);
-    //         }
-    //     };
-    //     fetchData();
-    // }, [props.category]);
-            
+
+    const onClickBrand = (val) => {
+      console.log("브랜드 : " + val);
+      window.localStorage.setItem("Detail", val);
+      window.location.replace("/ItemDetail");
+    }
 
     return(
         <div>
             <CategoryFilter brandCategories={brandCategories} category={category} setCategory={setCategory}/>
+            <div>
+              {itemInfo && itemInfo.map(item => (
+                    <div key={item.PRO_CODE} >
+                        <p>{item.PRO_CODE}</p><p>{item.BRAND}</p><p>{item.PRO_NAME}</p><p>{item.PRICE}</p>
+                        <p>{item.LAUN_DATE}</p>
+                    </div>
+                ))}
+            </div>
         </div>
-        // <ShoesListBlock>
-        //     {shoesItem.map(shoes => (<ShoesItems key={shoes.pro_code} shoes={shoes}/>))}
-        // </ShoesListBlock>
     )
 }
 
