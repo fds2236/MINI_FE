@@ -8,7 +8,6 @@ const StyledPrivacy = styled.div`
     .list{
     list-style: none;
     }
-    
 `;
 
 const Privacy = () => {
