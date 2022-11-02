@@ -75,10 +75,10 @@ const Header = () => {
           <Link to = {"/Login"} className="login">로그인</Link>
         </div>
         <div className="nav-top">
-          <Link to = {"/Modify"} className="mypage-link">마이페이지</Link>
+          <Link to = {"/Mypage"} className="mypage-link">마이페이지</Link>
         </div>
         <div className="nav-top">
-          <Link to = {"/Modify"} className="mypage-like">관심상품</Link>
+          <Link to = {"/Like"} className="mypage-like">관심상품</Link>
         </div>
         <div className="nav-top">
           <Link to = {"/Cs"} className="cs-link">고객센터</Link>

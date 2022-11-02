@@ -18,6 +18,8 @@ import Footer from './components/Footer';
 import Board from './board/board';
 import WriteBoard from './board/writeBoard';
 import Privacy from './privacy/Privacy';
+import Like from './mypage/Like';
+import Mypage from './mypage/Mypage';
 
 function App() {
   return (
@@ -41,6 +43,8 @@ function App() {
           <Route path='/Board' element={<Board />} />
           <Route path='/WriteBoard' element={<WriteBoard />} />
           <Route path='/Privacy' element={<Privacy/>} />
+          <Route path='/Like' element={<Like />} />
+          <Route path='/Mypage' element={<Mypage />} />
       </Routes>
       <Footer/>
       </div>

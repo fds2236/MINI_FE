@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const styledCs = styled.div`
+const StyledCs = styled.div`
     color: white;
     // 글자 센터
     text-align: center;
@@ -20,6 +20,7 @@ const styledCs = styled.div`
         position: relative;
         // 글자 높이용 top
         top: 10%;
+    }
 `;
 
 const StyledCscall = styled.div`
@@ -33,7 +34,7 @@ const StyledCscall = styled.div`
         color:#fff;
         font-size: 50px;
         font-weight: bold;
-        text: center;
+        text-align: center;
         
     }
 `;
@@ -49,14 +50,14 @@ const StyledCstime = styled.div`
         color:#fff;
         font-size: 50px;
         font-weight: bold;
-        text: center;
+        text-align: center;
         margin-bottom: 35.5px;
     }
 `;
 
 const Cs = () => {
     return(
-        <styledCs>
+        <StyledCs>
             <StyledCscall>
             <div>
                 <p className='call'><br/>☎️<br/>고객센터<br/></p>
@@ -70,7 +71,7 @@ const Cs = () => {
                 <p className='wktime'>평일 09:00 ~ 18:00</p><br/>
             </div>
             </StyledCstime>    
-        </styledCs>
+        </StyledCs>
     );
 }
 
