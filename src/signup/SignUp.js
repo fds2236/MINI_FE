@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link, NavLink } from "react-router-dom";
 import styled from "styled-components";
 import DaumPostCode from 'react-daum-postcode';
-import Post from './DaumPost';
+import Post from './Post';
 
 
 
@@ -48,7 +48,7 @@ const ItemBox = styled.div`
 const ItemText = styled.span`
     display: inline-block;
     width: 110px;
-    padding-left: 10px;
+    padding-left: 30px;
 `;
   
 const ItemText1 = styled.span`
@@ -67,52 +67,58 @@ const ItemText3 = styled.span`
 `;
   
 const Input = styled.input`
-    width: 150px;
-    margin: 0 10px 0 10px;
+    width: 200px;
+    margin: 0 10px 0 55px;
 `;
   
 const InputE = styled.input`
-    width: 65px;
-    margin-left: 10px;
+    width: 75px;
+    margin-left: 55px;
 `;
 
 const InputList = styled.input`
-    width: 80px;
+    width: 88px;
     margin-left: 10px;
 `;
   
 const EmailList = styled.select`
-    width: 80px;
+    width: 100px;
     margin: 0 10px 0 10px;
 `;
 
 const InputS = styled.input`
-    width: 40px;
+    width: 50px;
+    margin-left: 59px;
+`;
+
+const InputSS = styled.input`
+    width: 50px;
+
 `;
   
 const InputEnd = styled.input`
-    width: 40px;
+    width: 50px;
     margin-right: 10px;
 `;
 
 const Id = styled.div`
-    margin: 10px 10px 0 10px;
+    margin: 10px 10px 0 30px;
 `;
 
 const Pw = styled.div`
-    margin: 10px 10px 0 10px;
+    margin: 10px 10px 0 30px;
 `;
 
 const PwCheck = styled.div`
-    margin: 10px 10px 0 10px;
+    margin: 10px 10px 0 30px;
 `;
 
 const Name = styled.div`
-    margin: 10px 10px 0 10px;
+    margin: 10px 10px 0 30px;
 `;
 
 const Email = styled.div`
-    margin: 10px 10px 0 10px;
+    margin: 10px 10px 0 30px;
 `;
   
 const Item = styled.div`
@@ -128,17 +134,17 @@ const Star = styled.b`
 const PhoneBox = styled.div`
     border: solid 1px #d8d7d7;
     padding: 10px;
-    width: 385px;
+    width: 500px;
     display: inline-block;
-    margin: 0 10px 0 10px;
+    margin: 0 10px 0 30px;
 `;
   
   const AddrBox = styled.div`
     border: solid 1px #d8d7d7;
     padding: 10px;
-    width: 385px;
+    width: 700px;
     display: inline-block;
-    margin: 10px 10px 0 10px;
+    margin: 10px 10px 0 30px;
 `;
   
 const NotGrid = styled.div`
@@ -148,7 +154,7 @@ const NotGrid = styled.div`
 const GridBox = styled.div`
     display: grid;
     width: 300px;
-    margin-left: 10px;
+    margin-left: 30px;
     grid-template-columns: 2, 5px;
     grid-template-rows: 10x;
     grid-template-areas: 
@@ -185,8 +191,20 @@ const JoinUsBtn = styled.button`
 
 const Hint = styled.div`
     color: red;
-    padding-left: 150px;
+    padding-left: 235px;
     font-size: small;
+`;
+
+const InputAddr1 = styled.input`
+    width: 350px;
+    margin-left: 95px;
+
+`;
+
+const InputAddr2 = styled.input`
+    width: 350px;
+    margin-left: 150px;
+
 `;
 
 
@@ -394,9 +412,9 @@ const SignUp = () => {
                         {/* 이메일 입력창 */}
                         <Email><Star>* </Star><ItemText>이메일</ItemText>
                             <InputE value={email} placeholder="이메일" onChange={onChangeEmail} /> @
-                            <InputList value={emailName} placeholder="(직접 입력)" onChange={onChangeEmailName} />
+                            <InputList value={autoMail} placeholder="(직접 입력)" onChange={onChangeEmailName} />
                             <EmailList value={autoMail} onChange={onChangeAutoMail}>
-                                <option value="self">직접 입력</option>
+                                <option value="">직접 입력</option>
                                 <option value="naver.com">naver.com</option>
                                 <option value="gmail.com">gmail.com</option>
                                 <option value="daum.net">daum.net</option>
@@ -410,7 +428,7 @@ const SignUp = () => {
                         <GridBox>  
                         <Star>* </Star>
                         <PhoneBox><ItemText1>전화번호</ItemText1>
-                            <InputS value={phone1} placeholder="010" onChange={onChangePhone1}/> - <InputS value={phone2} onChange={onChangePhone2} /> - <InputEnd value={phone3} onChange={onChangePhone3} /> 
+                            <InputS value={phone1} placeholder="010" onChange={onChangePhone1}/> - <InputSS value={phone2} onChange={onChangePhone2} /> - <InputEnd value={phone3} onChange={onChangePhone3} /> 
                             <button className='grayBtn'> 인증번호 전송</button><br /><ItemText2>인증번호</ItemText2>
                             <Input value={phoneNum} placeholder="인증번호 6자리" onChange={onChangePhoneNum} /> 
                             <button>확인</button>
@@ -418,15 +436,14 @@ const SignUp = () => {
 
                         {/* 주소 입력창 */}
                         <AddrBox><ItemText3>주소</ItemText3>
-                            <Input value={addrNum} placeholder="우편번호" onChange={onChangeAddrNum} required={true} name="address" onChange={handleInput} value={enroll_company.address} /><button onClick={handleComplete}>우편번호 검색</button><br /> 
-                            {popup && <Post company={enroll_company} setcompany={setEnroll_company}></Post>}
+                        <InputAddr1 className="user_enroll_text" placeholder="주소"  type="text" required={true} name="address" onChange={handleInput} value={enroll_company.address}/>
+                        <button onClick={handleComplete}>주소 검색</button>
+                        {popup && <Post company={enroll_company} setcompany={setEnroll_company}></Post>} <br />
+                        <InputAddr2 placeholder="상세 주소" ></InputAddr2>
                             
-                            <ItemText3></ItemText3><Input value={addr1} placeholder="주소" onChange={onChangeAddr1} /><br /> 
-                            <ItemText3></ItemText3><Input value={addr2} placeholder="상세 주소" onChange={onChangeAddr2} /> 
                         </AddrBox>
                         </GridBox>  
                     </Item>
-                    <Link to='/Popup'>팝업</Link>
                     <CancelBtn><NavLink to='/Home' style={({ isActive }) => ({ color: isActive ? 'black' : 'white' })}>취소하기</NavLink></CancelBtn>
                     <JoinUsBtn><NavLink to='/SignCom' style={({ isActive }) => ({ color: isActive ? 'black' : 'white' })}>회원가입</NavLink></JoinUsBtn><br />
                 <Check>

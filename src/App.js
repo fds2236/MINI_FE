@@ -21,6 +21,7 @@ import Privacy from './privacy/Privacy';
 import Like from './mypage/Like';
 import Mypage from './mypage/Mypage';
 import RePwd from './login/RePwd';
+import Post from './signup/Post';
 
 function App() {
   return (
@@ -47,6 +48,7 @@ function App() {
           <Route path='/Like' element={<Like />} />
           <Route path='/Mypage' element={<Mypage />} />
           <Route path='/RePwd' element={<RePwd/>} />
+          <Route path='/signup' element={<Post />} />
       </Routes>
       <Footer/>
       </div>
