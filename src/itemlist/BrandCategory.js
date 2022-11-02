@@ -6,6 +6,7 @@ import { useState } from "react";
 const CategoriesBlock = styled.div`
     box-sizing: border-box;
     cursor: pointer;
+    
     .category-set {
     margin-top: 3px;
     }
@@ -41,7 +42,7 @@ const CategoriesBlock = styled.div`
     }
 `;
 
-// 
+
 const reqCategory = "reqCategory";
 
 const CategoryFilter = ({ brandCategories, category, setCategory }) => {

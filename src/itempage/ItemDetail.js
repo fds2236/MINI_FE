@@ -22,15 +22,12 @@ const ItemDetail = () => {
     // 리턴값 수정해야함
     return(
         <div>
-           {itemDetail && itemDetail.map(item => (
-            <div key={item.proCode}>
-                <p>{item.proCode}</p>
-                <p>{item.proName}</p>
-                <p>{item.brand}</p>
-                <p>{item.price}</p>
-                <p>{item.launDate}</p>
-            </div>
-        ))}
+            {itemDetail && itemDetail.map(item => (
+                <div key={item.PRO_CODE} >
+                    <p>{item.PRO_CODE}</p><p>{item.BRAND}</p><p>{item.PRO_NAME}</p><p>{item.PRICE}</p>
+                    <p>{item.LAUN_DATE}</p>
+                </div>
+            ))}
         </div>
     )
 }

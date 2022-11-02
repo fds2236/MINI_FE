@@ -38,7 +38,7 @@ const ShoesItems = () => {
 
   // const brands = ['nike', 'vans', 'converse', 'newbalance', 'adidas'];
 
-  // 브랜드 필터링..? 서버랑 연결방법 고민
+  // 브랜드 필터링..? 서버랑 연결방법 고민 검색에 응용?
   // const filterItems = (query) => {
   //   brands.filter((br) => 
   //     br.toString().toLowerCase().indexOf(query.toString().toLowerCase()) > -1
