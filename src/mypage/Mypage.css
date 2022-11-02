@@ -11,5 +11,12 @@
 .user {
     border: 1px solid black;
     width: 30%;
+    
 
+
+}
+.bt {
+    width: 80px;
+    height: 30px;
+    border-radius: 20%;
 }

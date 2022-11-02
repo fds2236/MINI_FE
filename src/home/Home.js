@@ -8,7 +8,7 @@ const Home = () => {
         <br/>
         <Link to="/Login">로그인</Link>
         <br/>
-        <Link to="/Modify">마이페이지</Link>
+        <Link to="/Mypage">마이페이지</Link>
         <br/>
         <Link to="/ItemList">상품목록</Link>
         <br/>

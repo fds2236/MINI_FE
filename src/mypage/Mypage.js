@@ -1,6 +1,7 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useState } from "react-router-dom";
 import './Mypage.css';
+
 
 const Box = styled.div`
     display: flex; 
@@ -18,6 +19,7 @@ const Container = styled.div`
 `;
 
 const Mypage = () => {
+
     return (
         <Box>
             <div>
@@ -32,10 +34,11 @@ const Mypage = () => {
                 <div className="user">
                     <p>이름</p>
                     <p>이메일</p>
-                    <button>프로필수정</button><button>작성한 글</button>
+                    <button className="bt">프로필수정</button>
+                    <button className="bt">작성한 글</button>
                 </div>
             </Container>
         </Box>
-    );
-}
+    )
+};
 export default Mypage;
