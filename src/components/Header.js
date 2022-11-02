@@ -29,18 +29,19 @@ const StyledHeader = styled.header`
   margin-bottom: 30px;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   border-bottom: 1px solid #eeeeee;
-  .nav-logo .logo-home {
-    margin-right: auto;
-    width: 200px;
-  }
-  .category {
-    .itemlist, .board {
-      text-decoration: none;
-      font-size: 20px;
-      color: #222831;
-    }
-  }
+`;
+
+const HeaderLogo = styled.div`
+  
+`;
+
+const HeaderMenu = styled.div`
+  text-decoration: none;
+  font-size: 20px;
+  color: #222831;
+  margin: 0 auto;
   .search {
     box-sizing: border-box;
     border: 1px solid #222831;
@@ -84,20 +85,24 @@ const Header = () => {
         </div>
       </StyledHeaderTop>
       <StyledHeader>
-        <div className="nav-logo">
-          <Link to = {"/"}>
-            <img src={logo} className="logo-home" alt="logo"/>
-          </Link>
-        </div>
-        <div className="category">
-          <Link to = {"/ItemList"} className="itemlist">SNEAKERS</Link>
-        </div>
-        <div className="category">
-          <Link to = {"/Boards"} className="board">커뮤니티</Link>
-        </div>
-        <div className="searchBar">
-          <input type="text" className="search" value={search} placeholder="검색어 입력" onChange={onChange}/>
-        </div>
+        <HeaderLogo>
+          <div className="nav-logo">
+            <Link to = {"/"}>
+              <img src={logo} className="logo-home" alt="logo"/>
+            </Link>
+          </div>
+        </HeaderLogo>
+        <HeaderMenu>
+          <div className="category">
+            <Link to = {"/ItemList"} className="itemlist">SNEAKERS</Link>
+          </div>
+          <div className="category">
+            <Link to = {"/Boards"} className="board">커뮤니티</Link>
+          </div>
+          <div className="searchBar">
+            <input type="text" className="search" value={search} placeholder="검색어 입력" onChange={onChange}/>
+          </div>
+        </HeaderMenu>
       </StyledHeader>
     </>
   );
