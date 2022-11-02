@@ -28,9 +28,10 @@ const JoinUs = styled.div`
 
 
 const Comments = styled.p`
-  color: black;
-  font-size: 13px;
+  color: red;
+  font-size: 14px;
   margin-left: 300px;
+  margin-top: 7px;
 `;
 
 const Item = styled.div`
@@ -78,7 +79,8 @@ const Check = styled.label`
 `;
 
 const CheckBox = styled.div`
-
+  padding-left: 190px;
+  padding-top: 30px;
 
 `;
 
@@ -195,7 +197,7 @@ const allBtnEvent = (e) => {
         <Container>
             <ItemBox>
                 <JoinUs>JOIN US</JoinUs>
-                <Comments>👟Sa Shoe 회원가입 하고 예쁜 신발 Sa Shoe~👟 </Comments>
+                <Comments>👟 슈즈의 기준, Sa shoe 회원가입하고 인싸되기 </Comments>
                     <CheckBox>
                         <input type="checkbox" value={allCheck} checked={allCheck} onClick={allBtnEvent} />
                         <Check>전체 약관에 동의합니다.</Check>
