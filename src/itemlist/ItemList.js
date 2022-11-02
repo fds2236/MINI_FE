@@ -3,6 +3,7 @@ import styled from "styled-components"
 import axios from "axios";
 import CategoryFilter from "./BrandCategory";
 import MiniApi from '../api/MiniApi';
+import SortItem from "./SortItem";
 
 // 스타일
 const ItemBlock = styled.div`
@@ -36,6 +37,7 @@ const ItemDescBlock = styled.div`
   }
 `;
 
+// 브랜드 카테고리 배열
 const brandCategories = [
   {
     name: 'ALL',
@@ -70,15 +72,14 @@ const ItemList = (props) => {
     useEffect(() => {
       const itemData = async () => {
         try {
-          const response = await MiniApi.itemInfo("ALL");
+          const response = await MiniApi.itemInfo(category);
           setItemInfo(response.data);
         } catch (e) {
           console.log(e);
         }
       };
       itemData();
-    }, []);
-
+    }, [category]);
 
     // const onClickItemDetail = (val) => {
     //   console.log("브랜드 : " + val);
@@ -88,26 +89,32 @@ const ItemList = (props) => {
 
     const onClickBrand = (val) => {
       console.log("브랜드 : " + val);
-      window.localStorage.setItem("Detail", val);
-      window.location.replace("/ItemDetail");
+      setCategory(val);
     }
 
     return(
+      <div>
+        <CategoryFilter 
+          brandCategories={brandCategories}
+          category={category}
+          setCategory={setCategory}
+        />
+        <SortItem>
+          <p>발매일순</p>
+        </SortItem>
         <div>
-            <CategoryFilter brandCategories={brandCategories} category={category} setCategory={setCategory}/>
-            <div>
-              {itemInfo && itemInfo.map(item => (
-                    <ItemBlock key={item.PRO_CODE} >
-                      <ItemDescBlock>
-                        <p className="brand-name" onClick={onClickBrand}>{item.BRAND}</p>
-                        <p className="item-name">{item.PRO_NAME}</p>
-                        <p className="price"><span>발매가 : </span>{item.PRICE}원</p>
-                        <p className="like">♡ 관심상품 </p>
-                      </ItemDescBlock>
-                    </ItemBlock>
-                ))}
-            </div>
+          {itemInfo && itemInfo.map(item => (
+            <ItemBlock key={item.PRO_CODE}>
+              <ItemDescBlock>
+                <p className="brand-name" onClick={()=>onClickBrand(item.BRAND)}>{item.BRAND}</p>
+                <p className="item-name">{item.PRO_NAME}</p>
+                <p className="price">발매가 : {item.PRICE}원</p>
+                <p className="like">♡ 관심상품 </p>
+              </ItemDescBlock>
+            </ItemBlock>
+          ))}
         </div>
+      </div>
     )
 }
 

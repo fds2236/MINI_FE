@@ -1,6 +1,5 @@
 import styled, {css} from "styled-components";
 import React, { useEffect } from "react";
-import { useState } from "react";
 
 // 카테고리 스타일
 const CategoriesBlock = styled.div`
@@ -43,33 +42,21 @@ const CategoriesBlock = styled.div`
 `;
 
 
-const reqCategory = "reqCategory";
-
 const CategoryFilter = ({ brandCategories, category, setCategory }) => {
-
+  
   const makeCategories = () => {
-    if (brandCategories.length === 0) return;
-    
     return brandCategories.map((item, idx) => (
       <div 
         key={idx}
         className={item.value === category ? "category-child selected" : "category-child"}
         onClick={() => {
           setCategory(item.value);
-          localStorage.setItem(reqCategory, item.value);
         }}
       >
         {item.name}
       </div>
     ));
   };
-
-  // const init = () => {
-  //   let data = localStorage.getItem(reqCategory);
-  //   if (data !== null) setCategory(data);
-  // };
-  
-  // useEffect(init, []);
 
   return (
     <CategoriesBlock>
