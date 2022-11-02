@@ -12,7 +12,7 @@ const Home = () => {
         <br/>
         <Link to="/ItemList">상품목록</Link>
         <br/>
-        <Link to="/Login">사이트 소개</Link>
+        <Link to="/SiteInfo">사이트 소개</Link>
         <br />
         <Link to="/Cs">고객센터</Link>
         <br />
