@@ -5,14 +5,28 @@ import banner from '../siteinfo/images/슈즈의기준.jpg';
 
 // 도연 작업중
 
+const Header = styled.div`
+    background-color: black;
+    color: #00ADB5;
+    height: 500px;
+    padding: 250px;
+    font-size: 100px;
+`;
+
+const Banner = styled.img`
+    width: 1530px;
+    
+`;
+
+
 const SiteInfo = () => {
 
     return(
         <>
          <div className="container">
-            <div className="bannerImg">
-            <img classNmae="Shoes" alt="Shoes" src={banner} />
-            </div>
+            <Header>왜 신발 정보는<br/>Sa Shoe?🤷‍♀️</Header>
+            <Banner classNmae="Shoes" alt="Shoes" src={banner} />
+            
         </div>
         </>
     )

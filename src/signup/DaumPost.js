@@ -1,10 +1,26 @@
-import REACT, { useState } from 'react';
-import DaumPostCode from 'react-daum-postcode';
+import React, { useEffect, useState } from "react";
+import DaumPostcode from "react-daum-postcode";
+import styled from "styled-components";
 
-const DaumPost = ({}) => {
-    const handleComplete = (data) => {
+// 도연 작업중..
+
+
+const Postmodal = styled.DaumPostcode `
+    background : rgba(0,0,0,0.25);
+    position : fixed;
+    left:0;
+    top:0;
+    height:100%;
+    width:100%;
+`;
+
+// api를 실행할 컴포넌트 
+const Post = (props) => {
+
+    const complete = (data) =>{
         let fullAddress = data.address;
         let extraAddress = '';
+
         if (data.addressType === 'R') {
             if (data.bname !== '') {
                 extraAddress += data.bname;
@@ -14,8 +30,23 @@ const DaumPost = ({}) => {
             }
             fullAddress += (extraAddress !== '' ? ` (${extraAddress})` : '');
         }
-        //fullAddress -> 전체 주소반환
+        console.log(data)
+        console.log(fullAddress)
+        console.log(data.zonecode)
+
+        props.setcompany({
+            ...props.company,
+            address:fullAddress,
+        })
     }
-    return (<DaumPostCode onComplete={handleComplete} className="post-code" />);
-}
-export default DaumPost;
+
+    return (
+        <div >
+            <Postmodal
+                autoClose
+                onComplete={complete} />
+        </div>
+    );
+};
+
+export default Post;

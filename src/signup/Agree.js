@@ -74,6 +74,7 @@ const Text = styled.textarea`
 const Check = styled.label`
   font-weight: bold;
   
+  
 `;
 
 const CheckBox = styled.div`

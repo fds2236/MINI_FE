@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import { Link, NavLink } from "react-router-dom";
 import styled from "styled-components";
 import DaumPostCode from 'react-daum-postcode';
+import Post from './DaumPost';
+
+
 
 
 // 도연 기능 구현 ing..
@@ -10,6 +13,7 @@ import DaumPostCode from 'react-daum-postcode';
 const Container = styled.div`
     padding-right: 500px;
     background-color: #EEEEEE;
+    width: 1800px;
 `;
 
 const JoinUs = styled.div`
@@ -36,7 +40,7 @@ const Comments2 = styled.p`
 const ItemBox = styled.div`
     width: 1000px;
     height: 615px;
-    margin-left: 450px;
+    margin-left: 300px;
     padding: 0 20px 20px 20px;
     text-align: left;
 `;
@@ -179,8 +183,11 @@ const JoinUsBtn = styled.button`
     border-radius: 10px;
 `;
 
-
-
+const Hint = styled.div`
+    color: red;
+    padding-left: 150px;
+    font-size: small;
+`;
 
 
 
@@ -207,8 +214,14 @@ const SignUp = () => {
     const [pwdCheckMsg, setPwdCheckMsg] = useState(''); 
     const [nameMsg, setNameMsg] = useState('');
     const [emailMsg, setEmailMsg] = useState('');
-    const [phoneMsg, setPhoneMsg] = useState('');
-    const [addrMsg, setAddrMsg] = useState('');
+    const [emailNameMsg, setEmailNameMsg] = useState('');
+    const [phone1Msg, setPhone1Msg] = useState('');
+    const [phone2Msg, setPhone2Msg] = useState('');
+    const [phone3Msg, setPhone3Msg] = useState('');
+    const [phoneNumMsg, setPhoneNumMsg] = useState('');
+    const [addrNumMsg, setAddrNumMsg] = useState('');
+    const [addr1Msg, setAddr1Msg] = useState('');
+    const [addr2Msg, setAddr2Msg] = useState('');
     
 
     // input창 유효성 검사
@@ -217,8 +230,21 @@ const SignUp = () => {
     const [isPwdCheck, setIsPwdCheck] = useState('');
     const [isName, setIsName] = useState('');
     const [isEmail, setIsEmail] = useState('');
-    const [isPhone, setIsPhone] = useState('');
-    const [isAddr, setIsAddr] = useState('');
+    const [isEmailName, setIsEmailName] = useState('');
+    const [isPhone1, setIsPhone1] = useState('');
+    const [isPhone2, setIsPhone2] = useState('');
+    const [isPhone3, setIsPhone3] = useState('');
+    const [isPhoneNum, setIsPhoneNum] = useState('');
+    const [isAddrNum, setIsAddrNum] = useState('');
+    const [isAddr1, setIsAddr1] = useState('');
+    const [isAddr2, setIsAddr2] = useState('');
+
+    // 회원가입 실패시 팝업창 띄우기
+    const [modalOpen, setModalOpen] = useState("");
+       
+    const closeModal = () => {
+        setModalOpen(false);
+    };
     
 
     // 아이디 체크
@@ -260,6 +286,19 @@ const SignUp = () => {
         }      
     }
 
+    // 인증번호 체크
+    /* const onChangePhoneNum = (e) => {
+        const passwordCurrent = e.target.value ;
+        setPwdCheck(passwordCurrent)
+        if (passwordCurrent !== pwd) {
+            setPwdCheckMsg("비밀번호가 일치하지 않습니다. 다시 확인해주세요.")
+            setIsPwdCheck(false)
+        } else {
+            setPwdCheckMsg("비밀번호가 일치합니다.")
+            setIsPwdCheck(true);
+        }      
+    } */
+
     const onChangeName = (e) => setName(e.target.value);
     const onChangeEmail = (e) => setEmail(e.target.value);
     const onChangePhone1 = (e) => setPhone1(e.target.value);
@@ -288,6 +327,23 @@ const SignUp = () => {
 
     }
 
+    const [enroll_company, setEnroll_company] = useState({
+        address:'',
+    });
+
+    const [popup, setPopup] = useState(false);
+
+    const handleInput = (e) => {
+        setEnroll_company({
+            ...enroll_company,
+            [e.target.name]:e.target.value,
+        })
+    }
+
+    const handleComplete = (data) => {
+        setPopup(!popup);
+    }
+
 
     return (
         <>
@@ -298,24 +354,49 @@ const SignUp = () => {
                     <Item>
                         <Comments2><Star>* </Star>표시 필수 입력</Comments2>
                         <NotGrid>
+
+                        {/* 아이디 입력창 */}
                         <Id><Star>* </Star><ItemText>아이디</ItemText>
                             <Input value={id} placeholder="아이디" onChange={onChangId}  />
                             <button>중복 확인</button>
                         </Id>
+
+                        {/* 아이디 오류 메세지 */}
+                        <Hint>
+                        {3 < Id.length < 21 && <span className={`message ${isPwd ? 'success' : 'error'}`}>{idMsg}</span>}
+                        </Hint>
+                        
+                        {/* 비밀번호 입력창 */}
                         <Pw><Star>* </Star><ItemText>비밀번호</ItemText>
                             <Input value={pwd} placeholder="비밀번호" onChange={onChangePwd} />
                         </Pw>
+
+                        {/* 비밀번호 오류 메세지 */}
+                        <Hint>
+                        {7 < Id.length < 21 && <span className={`message ${isPwdCheck ? 'success' : 'error'}`}>{pwdMsg}</span>}
+                        </Hint>
+
+                        {/* 비밀번호 확인 입력창 */}
                         <PwCheck><Star>* </Star><ItemText>비밀번호 확인</ItemText>
                             <Input value={pwdCheck} placeholder="비밀번호 확인" onChange={onChangePwdCheck} />
                         </PwCheck>
+
+                        {/* 비밀번호 확인 오류 메세지 */}
+                        <Hint>
+                        {pwd !== pwdCheck && <span className={`message ${isName ? 'success' : 'error'}`}>{pwdCheckMsg}</span>}
+                        </Hint>
+
+                        {/* 이름 입력창 */}
                         <Name><Star>* </Star><ItemText>이름</ItemText>
                             <Input value={name} placeholder="이름" onChange={onChangeName}  />
                         </Name>
+
+                        {/* 이메일 입력창 */}
                         <Email><Star>* </Star><ItemText>이메일</ItemText>
                             <InputE value={email} placeholder="이메일" onChange={onChangeEmail} /> @
-                            <InputList value={autoMail} placeholder="(직접 입력)" onChange={onChangeEmailName} />
+                            <InputList value={emailName} placeholder="(직접 입력)" onChange={onChangeEmailName} />
                             <EmailList value={autoMail} onChange={onChangeAutoMail}>
-                                <option value="직접 입력">직접 입력</option>
+                                <option value="self">직접 입력</option>
                                 <option value="naver.com">naver.com</option>
                                 <option value="gmail.com">gmail.com</option>
                                 <option value="daum.net">daum.net</option>
@@ -324,6 +405,8 @@ const SignUp = () => {
                             </EmailList><br/>
                         </Email>
                         </NotGrid>
+
+                        {/* 전화번호 입력창 */}
                         <GridBox>  
                         <Star>* </Star>
                         <PhoneBox><ItemText1>전화번호</ItemText1>
@@ -332,8 +415,12 @@ const SignUp = () => {
                             <Input value={phoneNum} placeholder="인증번호 6자리" onChange={onChangePhoneNum} /> 
                             <button>확인</button>
                         </PhoneBox><br />
+
+                        {/* 주소 입력창 */}
                         <AddrBox><ItemText3>주소</ItemText3>
-                            <Input value={addrNum} placeholder="우편번호" onChange={onChangeAddrNum} /><button>우편번호 검색</button><br /> 
+                            <Input value={addrNum} placeholder="우편번호" onChange={onChangeAddrNum} required={true} name="address" onChange={handleInput} value={enroll_company.address} /><button onClick={handleComplete}>우편번호 검색</button><br /> 
+                            {popup && <Post company={enroll_company} setcompany={setEnroll_company}></Post>}
+                            
                             <ItemText3></ItemText3><Input value={addr1} placeholder="주소" onChange={onChangeAddr1} /><br /> 
                             <ItemText3></ItemText3><Input value={addr2} placeholder="상세 주소" onChange={onChangeAddr2} /> 
                         </AddrBox>
