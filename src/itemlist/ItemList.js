@@ -12,7 +12,6 @@ const ItemBlock = styled.div`
   width: 250px;
   height: 200px;
   display: inline-flex;
-
 `;
 
 const ItemDescBlock = styled.div`
@@ -81,11 +80,11 @@ const ItemList = (props) => {
     }, []);
 
 
-    const onClickItemDetail = (val) => {
-      console.log("브랜드 : " + val);
-      window.localStorage.setItem("Detail", val);
-      window.location.replace("/ItemDetail");
-    }
+    // const onClickItemDetail = (val) => {
+    //   console.log("브랜드 : " + val);
+    //   window.localStorage.setItem("Detail", val);
+    //   window.location.replace("/ItemDetail");
+    // }
 
     const onClickBrand = (val) => {
       console.log("브랜드 : " + val);

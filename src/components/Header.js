@@ -25,11 +25,11 @@ const StyledHeaderTop = styled.header`
 const StyledHeader = styled.header`
   background-color: #ffffff;
   width: 100%;
-  padding: 40px 30px 40px 30px;
+  padding: 40px;
   margin-bottom: 30px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   border-bottom: 1px solid #eeeeee;
 `;
 
