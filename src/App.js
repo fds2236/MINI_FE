@@ -50,7 +50,7 @@ function App() {
           <Route path='/RePwd' element={<RePwd/>} />
           <Route path='/signup' element={<Post />} />
       </Routes>
-      <Footer/>
+      {/* <Footer/> */}
       </div>
     </Router>
     
