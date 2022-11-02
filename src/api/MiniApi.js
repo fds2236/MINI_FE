@@ -57,6 +57,15 @@ const MiniApi =  {
             brand : brand
         }
         return await axios.post(MINI_DOMAIN + "ItemServlet", itemCmd, HEADER);
+    },
+
+    // 게시글 불러오기
+    boardInfo: async function(docNum) {
+        const boardCmd = {
+            cmd: "boardInfo",
+            docNum: docNum
+        }
+        return await axios.post(MINI_DOMAIN + "ItemServlet", boardCmd, HEADER);
     }
         
 }

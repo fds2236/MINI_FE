@@ -27,15 +27,13 @@ const Contents = styled.div`
 
 // 제목 버튼 틀 스타일드 컴포넌트
 const TitleAndBtn = styled.div`
-    width: 600px;
     margin: 50px auto;
+    width: 600px;
     display: flex;
-    flex-direction: column;
-
-    width: 300px;
+    height: 90px;
     justify-content: space-between;
 
-   
+
 `;
 
 // 리턴 버튼 스타일드 컴포넌트
@@ -43,13 +41,10 @@ const ReturnStyledButton = styled.button`
     background-color: #EEEEEE;
     border-style: none;
     border-radius: 10px;
-    width: 130px;
-    height: 30px;
     color: gray;
     cursor: pointer;
-
-
-    
+    border: 1px solid black;
+    height: 30px;
 `;
 
 // 버튼 스타일드 컴포넌트
@@ -63,7 +58,9 @@ const Button = styled.button`
 
 // 타이틀 스타일드 컴포넌트
 const StyledTitle = styled.h1`
-    display:block;
+    width: fit-content;
+    display: block;
+
 `;
 
 
@@ -102,15 +99,10 @@ const Board = () => {
     return(
         <>
         <TitleAndBtn>
+            <Title text={"글 제목 입니다"}></Title>
             <ReturnButton text={"목록으로 돌아가기"}></ReturnButton>
-            <Title text={"글 제목"}></Title>
-            
         </TitleAndBtn>
-        <Container>
-            
-            
-            
-            
+        <Container>   
             <Contents>
                 &nbsp;
                     <h1>afasdfasdf</h1>
