@@ -4,6 +4,10 @@ import MiniApi from "../api/MiniApi";
 import Modal from "../util/Modal";
 import styled from "styled-components";
 
+
+//0d39a119fd1466f129952b4b7cd1837e (REST API키)
+
+
 // const Form = styled.form`
 //     background-color:rgb(0,173,181);
 //     color: white;
