@@ -29,8 +29,9 @@ const JoinUs = styled.div`
 `;
 
 const Comments = styled.p`
-    color: black;
-    font-size: 13px;
+  color: red;
+  font-size: 14px;
+  margin-top: 7px;
 `;
 const Comments2 = styled.p`
     font-size: small;
@@ -38,7 +39,7 @@ const Comments2 = styled.p`
 `;
   
 const ItemBox = styled.div`
-    width: 1000px;
+    width: 900px;
     height: 615px;
     margin-left: 300px;
     padding: 0 20px 20px 20px;
@@ -54,16 +55,19 @@ const ItemText = styled.span`
 const ItemText1 = styled.span`
     display: inline-block;
     width: 100px;
+    margin-left: 10px;
 `;
   
 const ItemText2 = styled.span`
     display: inline-block;
     width: 90px;
+    margin-left: 10px;
 `;
   
 const ItemText3 = styled.span`
     display: inline-block;
     width: 55px;
+    margin-left: 10px;
 `;
   
 const Input = styled.input`
@@ -88,7 +92,7 @@ const EmailList = styled.select`
 
 const InputS = styled.input`
     width: 50px;
-    margin-left: 59px;
+    margin-left: 49px;
 `;
 
 const InputSS = styled.input`
@@ -99,6 +103,10 @@ const InputSS = styled.input`
 const InputEnd = styled.input`
     width: 50px;
     margin-right: 10px;
+`;
+
+const InputNum = styled.input`
+    margin-left: 59px;
 `;
 
 const Id = styled.div`
@@ -134,7 +142,7 @@ const Star = styled.b`
 const PhoneBox = styled.div`
     border: solid 1px #d8d7d7;
     padding: 10px;
-    width: 500px;
+    width: 700px;
     display: inline-block;
     margin: 0 10px 0 30px;
 `;
@@ -163,18 +171,19 @@ const GridBox = styled.div`
   
 const IdCheck = styled.span`
     font-size: small;
+    
 `;
   
 const Check = styled.fieldset`
     width: 270px;
     height: 30px;
     border: none;
-    padding: 5px 0 0 130px;
+    padding: 5px 0 0 340px;
 `;
 
 const CancelBtn = styled.button`
   background-color: #BDBDBD;
-  margin: 15px 10px 10px 100px;
+  margin: 15px 10px 10px 250px;
   width: 200px;
   height: 40px;
   border-radius: 10px;
@@ -203,8 +212,12 @@ const InputAddr1 = styled.input`
 
 const InputAddr2 = styled.input`
     width: 350px;
-    margin-left: 150px;
+    margin-left: 160px;
 
+`;
+
+const Btn = styled.button`
+    margin-left: 10px;
 `;
 
 
@@ -368,7 +381,7 @@ const SignUp = () => {
         <Container>
             <ItemBox>
                 <JoinUs>JOIN US</JoinUs>
-                <Comments>👟Sa Shoe 회원가입 하고 예쁜 신발 Sa Shoe~👟 </Comments>
+                <Comments>👟 슈즈의 기준, Sa shoe 회원가입하고 인싸되기 </Comments>
                     <Item>
                         <Comments2><Star>* </Star>표시 필수 입력</Comments2>
                         <NotGrid>
@@ -428,16 +441,16 @@ const SignUp = () => {
                         <GridBox>  
                         <Star>* </Star>
                         <PhoneBox><ItemText1>전화번호</ItemText1>
-                            <InputS value={phone1} placeholder="010" onChange={onChangePhone1}/> - <InputSS value={phone2} onChange={onChangePhone2} /> - <InputEnd value={phone3} onChange={onChangePhone3} /> 
+                            <InputS value={phone1} placeholder="010" onChange={onChangePhone1}/> - <InputSS value={phone2} onChange={onChangePhone2} /> - <InputEnd value={phone3} onChange={onChangePhone3} />
                             <button className='grayBtn'> 인증번호 전송</button><br /><ItemText2>인증번호</ItemText2>
-                            <Input value={phoneNum} placeholder="인증번호 6자리" onChange={onChangePhoneNum} /> 
-                            <button>확인</button>
+                            <InputNum value={phoneNum} placeholder="인증번호 6자리" onChange={onChangePhoneNum} /> 
+                            <Btn>확인</Btn>
                         </PhoneBox><br />
 
                         {/* 주소 입력창 */}
                         <AddrBox><ItemText3>주소</ItemText3>
                         <InputAddr1 className="user_enroll_text" placeholder="주소"  type="text" required={true} name="address" onChange={handleInput} value={enroll_company.address}/>
-                        <button onClick={handleComplete}>주소 검색</button>
+                        <Btn onClick={handleComplete}>주소 검색</Btn>
                         {popup && <Post company={enroll_company} setcompany={setEnroll_company}></Post>} <br />
                         <InputAddr2 placeholder="상세 주소" ></InputAddr2>
                             
