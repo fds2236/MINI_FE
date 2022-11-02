@@ -56,6 +56,7 @@ const MiniApi =  {
             cmd : "ItemInfo",
             brand : brand
         }
+        
         return await axios.post(MINI_DOMAIN + "ItemServlet", itemCmd, HEADER);
     }
         
