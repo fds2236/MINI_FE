@@ -5,19 +5,43 @@ import Modal from "../util/Modal";
 
 
 const ForgotPwd = () => {
-    // 이메일, 아이디 입력
-    const [inputEmail, setInputEmail] = useState("");
+    // 이메일, 아이디 입력받기
     const [inputId, setInputId] = useState("");
+    const [inputEmail, setInputEmail] = useState("");
+
+    // 패스워드 찾기 버튼 클릭시 틀린 경우 팝업창 띄우기
+    const [modalOpen, setModalOpen] = useState(false);
+    const closeModal = () => {
+        setModalOpen(false);
+    }
+
+    const onChangeId = (e) => {
+        setInputId(e.target.value);
+    }
+
+    const onChangeEmail = (e) => {
+        setInputEmail(e.target.value);
+    }
+
+    // pwd찾기 API 호출 => pwd 재설정 버튼 눌렀을 때 활성화
+    const onClickPwd = async() => {
+        try{
+            const res = await MiniApi.researchPwd(inputId, inputEmail);
+            console.log(res.data.result);
+
+            if(res.data.result === "OK") {
+                // 비밀번호 재설정하는 RePwd로 이동
+                window.location.replace("/RePwd");
+               
 
 
-const onChangeEmail = (e) => {
-    setInputEmail(e.target.value);
-}
-
-const onChangeId = (e) => {
-    setInputId(e.target.value);
-}
-
+            } else {
+                // 모달창 팝업=> 가입하신 고객정보가 일치하지 않습니다
+            }
+        } catch (e) {
+        
+        }
+    } 
 
     return(
         <div className="container">
@@ -43,9 +67,7 @@ const onChangeId = (e) => {
             {/* 다른 페이지 연결 */}
             <Link to="/SignUp">회원가입</Link>
             <br />
-            <Link to="/Login">로그인</Link>
-            <br />
-           <Link to="/ForgotPwd">비밀번호 재발급</Link>           
+            <Link to="/Login">로그인</Link>     
         </div>
     )
 }

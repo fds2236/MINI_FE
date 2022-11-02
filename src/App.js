@@ -20,6 +20,7 @@ import WriteBoard from './board/writeBoard';
 import Privacy from './privacy/Privacy';
 import Like from './mypage/Like';
 import Mypage from './mypage/Mypage';
+import RePwd from './login/RePwd';
 
 function App() {
   return (
@@ -45,6 +46,7 @@ function App() {
           <Route path='/Privacy' element={<Privacy/>} />
           <Route path='/Like' element={<Like />} />
           <Route path='/Mypage' element={<Mypage />} />
+          <Route path='/RePwd' element={<RePwd/>} />
       </Routes>
       <Footer/>
       </div>

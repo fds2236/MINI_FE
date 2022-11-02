@@ -28,9 +28,11 @@ const Login = () => {
        const [isId, setIsId] = useState("");
        const [isPwd, setIsPwd] = useState("");
    
-       // 로그인 실패시 팝업창 띄우기
-       const [modalOpen, setModalOpen] = useState("");
-       
+       // 로그인 버튼 클릭시 로그인 오류 팝업창 띄우기
+       const [modalOpen, setModalOpen] = useState(false); //default : 아이디가 존재하지 않음 
+       // 모달이 뜰 때 출력 문구
+       const [modalText, setModelText] = useState("");
+
        const closeModal = () => {
            setModalOpen(false);
        };
@@ -61,28 +63,52 @@ const Login = () => {
            }
        }
    
-       // Api 호출
+    /// 수정 전 API 호출
+    //    const onClickLogin = async() => {
+    //        try {
+    //            const res = await MiniApi.userLogin(inputId, inputPwd);
+    //            console.log(res.data.result);
+   
+    //            if(res.data.result === "OK") {
+    //                window.localStorage.setItem("userId", inputId);
+    //                window.localStorage.setItem("userPwd", inputPwd);
+    //                window.location.replace("/");
+    //            } else {
+    //                setModalOpen(true);
+    //            }
+   
+    //        } catch (e) {
+    //            setModalOpen(true);
+    //            console.log("로그인 에러!")
+    //        }
+    //    }
+
+
+    // 수정 후 API호출
+    // 200은 정상로그인, 300은 id가 없음, 400은 pwd틀림
        const onClickLogin = async() => {
-           try {
-               const res = await MiniApi.userLogin(inputId, inputPwd);
-               console.log(res.data.result);
-   
-               if(res.data.result === "OK") {
-                   window.localStorage.setItem("userId", inputId);
-                   window.localStorage.setItem("userPwd", inputPwd);
-                   window.location.replace("/");
-               } else {
-                   setModalOpen(true);
-               }
-   
-           } catch (e) {
-               setModalOpen(true);
-               console.log("로그인 에러!")
-           }
+        try {
+            const res = await MiniApi.userLogin(inputId, inputPwd);
+            console.log(res.data.result);
+
+            if(res.data.result === 200) {
+                window.location.replace("/");
+            } else if(res.data.result === 300) {
+                setModelText("존재하지 않는 아이디입니다.");
+                setModalOpen(true);
+                // 아이디가 존재하지 않습니다. 모달창 팝업
+            } else {
+                setModelText("패스워드를 다시 확인하여주시기 바랍니다.");
+                setModalOpen(true);
+                // 패스워드가 틀립니다. 모달창 팝업(res.data.result === 400)
+            }
+         } catch (e) {
+         } 
        }
+
    
        return(
-           <div className="container">
+        <div className="container">
             {/* <Form> */}
            <h1>로그인</h1>
 
@@ -110,7 +136,9 @@ const Login = () => {
            </div>
       
            {/* 로그인 버튼 활성화 */}
-           <div className="loginButton">
+
+           {/* 수정 전 코드 */}
+           {/* <div className="loginButton">
            {(isId && isPwd) ?
                    <button className="enable_button"
                    onClick={onClickLogin}>SIGN IN</button>  :
@@ -118,17 +146,23 @@ const Login = () => {
                    onClick={onClickLogin}>SIGN IN</button>}
                    <Modal open={modalOpen} close={closeModal} header="오류">아이디 및 패스워드를 다시 확인해 주세요.
                    </Modal>
-           </div>
-        <br/>
+           </div> */}
 
-        {/* 다른 페이지 연결 */}
-        <div className="link">
-        <Link to="/Agree">회원가입</Link>
-        <br />
-        <Link to="/ForgotId">아이디 찾기</Link>
-        <br />
-        <Link to="/ForgotPwd">비밀번호 찾기</Link>
-        </div>
+           {/* 수정 후 코드 */}
+           <div className="loginButton">
+            <button onClick={onClickLogin}>LOGIN</button>
+           </div>
+            <br/>
+
+            {/* 다른 페이지 연결 */}
+            <div className="link">
+            <Link to="/Agree">회원가입</Link>
+            <br />
+            <Link to="/ForgotId">아이디 찾기</Link>
+            <br />
+            <Link to="/ForgotPwd">비밀번호 찾기</Link>
+            {modalOpen && <Modal open={modalOpen} close={closeModal} header="확인">{modalText}</Modal>}
+            </div>
         </div>
     )
 }
