@@ -30,6 +30,7 @@ const Login = () => {
    
        // 로그인 버튼 클릭시 로그인 오류 팝업창 띄우기
        const [modalOpen, setModalOpen] = useState(false); //default : 아이디가 존재하지 않음 
+       
        // 모달이 뜰 때 출력 문구
        const [modalText, setModelText] = useState("");
 

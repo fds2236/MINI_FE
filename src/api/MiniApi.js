@@ -43,9 +43,10 @@ const MiniApi =  {
     },
 
     // pwd 찾기 기능
-    researchPwd: async function(id) {
+    researchPwd: async function(id, mail) {
         const findPwdObj = {
-            id: id
+            id: id,
+            email: mail
         }
         return await axios.post(MINI_DOMAIN + "PwdServlet", findPwdObj, HEADER);
     },
