@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, NavLink } from "react-router-dom";
 import styled from "styled-components";
-import banner from '../siteinfo/images/슈즈의기준.PNG';
+import banner from '../siteinfo/images/슈즈의기준.png';
 import hasungwoon from '../siteinfo/images/하성운.jpg';
 import itzy from '../siteinfo/images/있지.png';
 
