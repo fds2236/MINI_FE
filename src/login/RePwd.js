@@ -3,6 +3,7 @@ import { useState} from "react";
 import MiniApi from "../api/MiniApi";
 import Modal from "../util/Modal";
 import styled from "styled-components";
+// 고고고고고고링!!!
 
 const RePwd = () => {
     const [inputPwd, setInputPwd] = useState("");
