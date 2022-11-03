@@ -9,7 +9,7 @@ const StyledFooter = styled.footer`
     position: absolute;
     /* height: 20vh; */
     width: 100%;
-    padding: 10px 12px 15px 12px;
+    padding: 10px 0px 15px 0px;
     line-height: 25px;
     display:flex;
     flex-direction: column;

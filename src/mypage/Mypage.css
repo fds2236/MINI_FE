@@ -10,9 +10,10 @@
 
 .user {
     border: 1px solid black;
-    width: 30%;
-    
-
+    width: 80%;
+    border-radius:10px;
+    text-align: left;
+    padding-left: 15px;
 
 }
 .bt {

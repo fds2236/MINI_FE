@@ -5,6 +5,13 @@
 // import styled from "styled-components";
 // import axios from "axios";
 // // API 옮기기
+// resetPwd: async function(pw, pwdCheck) {
+//     const rePwdObj = {
+//         pwd: pw,
+//         pwdCheck: pwdCheck
+//     }
+//     return await axios.post(MINI_DOMAIN + "RePwdServlet", rePwdObj, HEADER);
+// }
 
 
 // const RePwd = () => {

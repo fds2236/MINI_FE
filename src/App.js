@@ -45,8 +45,8 @@ function App() {
           <Route path='/Board' element={<Board />} />
           <Route path='/WriteBoard' element={<WriteBoard />} />
           <Route path='/Privacy' element={<Privacy/>} />
-          <Route path='/Like' element={<Like />} />
-          <Route path='/Mypage' element={<Mypage />} />
+          {/* <Route path='/Like' element={<Like />} /> */}
+          <Route path='/Mypage' element={<Mypage/>}/>
           <Route path='/RePwd' element={<RePwd/>} />
           <Route path='/signup' element={<Post />} />
       </Routes>
