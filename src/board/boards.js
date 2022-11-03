@@ -1,8 +1,11 @@
 import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 import {BrowserRouter as Router, Routes, Route} from "react-router-dom";
 import Board from "./writeBoard";
 import { isLabelWithInternallyDisabledControl } from "@testing-library/user-event/dist/utils";
+import MiniApi from "../api/MiniApi";
+import axios from "axios";
 
 /**
  * ------------------------------스타일드 컴포넌트 ---------------------------
@@ -118,7 +121,7 @@ const OrangeRedButton = (props) => {
 
 
 // 게시물 
-const Content = () => {
+const Content = (props) => {
     return (
         <>  
             <MarginContent>
@@ -126,6 +129,7 @@ const Content = () => {
                 <Picture>
                     
                 </Picture>
+                <h1>{props.title}</h1>
                 
             </StyledContent>
             </MarginContent>
@@ -146,8 +150,35 @@ const Title = (props) => {
 
 
 const Boards = () => {
-    return (
+    const [boardInfo, setBoardInfo] = useState('');
+    const [loading, setLoading] = useState(false);
+    // const isLogin = window.localStorage.getItem("isLogin");
+    // if(isLogin === "FALSE") window.location.replace("/");
 
+    useEffect(() => {
+        const BoardData = async () => {
+            setLoading(true);
+            try {
+                const response = await MiniApi.boardInfo();
+                setBoardInfo(response.data);
+                console.log(response.data);
+            } catch (e) {  
+                console.log(e + "실패 입니다");
+            }
+            setLoading(false);
+        };
+        BoardData(); // 첫 페이지 로딩시 글 목록을 다 끌어옴
+
+    }, []);
+
+    if(loading) {
+        return <Content>대기 중...</Content>
+    }
+
+  
+
+    return (
+        
         <Container>  
             <ButtonContainer>
                 <Button><StyledLink to ='/' >돌아가기</StyledLink></Button>
@@ -155,13 +186,22 @@ const Boards = () => {
                 <Button><StyledLink to ='/' >후기게시판</StyledLink></Button>
                 <OrangeRedButton text="글쓰기"></OrangeRedButton>
             </ButtonContainer>
+            <h1>테스트 문자열 
+                {/* {boardInfo && boardInfo.map(board => (
+                    <tr key={board.docNum}>
+                        <td>{board.docNum}</td><td>{board.title}</td><td>{board.boardContent}</td><td>{board.id}</td>
+                    </tr>
+                ))} */}
+         
+            </h1>
 
             {/* &nbsp;를 사용하여 의도적으로 공백을 넣음. 글이 아무것도 없을때 대비 */}
             <Contents>
                 &nbsp;
+                <Content title={boardInfo.title}></Content>
                 <Content></Content>
                 <Content></Content>
-                <Content></Content>
+                
                 &nbsp;
             </Contents> 
                 

@@ -63,7 +63,7 @@ const MiniApi =  {
     // 게시글 불러오기
     boardInfo: async function(docNum) {
         const boardCmd = {
-            cmd: "boardInfo",
+            cmd: "BoardInfo",
             docNum: docNum
         }
         return await axios.post(MINI_DOMAIN + "BoardListServlet", boardCmd, HEADER);
