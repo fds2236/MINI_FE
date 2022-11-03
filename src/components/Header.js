@@ -38,10 +38,17 @@ const HeaderLogo = styled.div`
 `;
 
 const HeaderMenu = styled.div`
-  text-decoration: none;
   font-size: 20px;
   color: #222831;
-  margin: 0 auto;
+  align-items: center;
+
+  .category, .searchBar {
+  float: left;
+  margin: 10px;
+  }
+  .itemlist, .board {
+    text-decoration: none;
+  }
   .search {
     box-sizing: border-box;
     border: 1px solid #222831;

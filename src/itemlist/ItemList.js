@@ -68,6 +68,7 @@ const brandCategories = [
 const ItemList = (props) => {
     const [category, setCategory] = useState("ALL");
     const [itemInfo, setItemInfo] = useState('');
+    const [sortData, setSortData] = useState("sortByNewDate");
 
     useEffect(() => {
       const itemData = async () => {
@@ -81,16 +82,24 @@ const ItemList = (props) => {
       itemData();
     }, [category]);
 
+    const onClickBrand = (val) => {
+      console.log("브랜드 : " + val);
+      setCategory(val);
+    }
+
+    const handleChange = (sortData) => {
+      sortData.sort((a, b) => a - b);
+      setSortData("sortByNewDate");
+      setSortData("sortByLowPrice");
+      setSortData("sortByHighPrice");
+      setSortData("sortByLike");
+    }
+
     // const onClickItemDetail = (val) => {
     //   console.log("브랜드 : " + val);
     //   window.localStorage.setItem("Detail", val);
     //   window.location.replace("/ItemDetail");
     // }
-
-    const onClickBrand = (val) => {
-      console.log("브랜드 : " + val);
-      setCategory(val);
-    }
 
     return(
       <div>
@@ -99,9 +108,12 @@ const ItemList = (props) => {
           category={category}
           setCategory={setCategory}
         />
-        <SortItem>
-          <p>발매일순</p>
-        </SortItem>
+        <select onChange={handleChange}>
+          <option value="sortByNewDate">최신 발매순</option>
+          <option value="sortByLowPrice">낮은 가격순</option>
+          <option value="sortByHighPrice">높은 가격순</option>
+          <option value="sortByLike">높은 관심순</option>
+        </select>
         <div>
           {itemInfo && itemInfo.map(item => (
             <ItemBlock key={item.PRO_CODE}>
