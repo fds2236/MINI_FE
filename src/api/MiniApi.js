@@ -66,7 +66,7 @@ const MiniApi =  {
             cmd: "boardInfo",
             docNum: docNum
         }
-        return await axios.post(MINI_DOMAIN + "ItemServlet", boardCmd, HEADER);
+        return await axios.post(MINI_DOMAIN + "BoardListServlet", boardCmd, HEADER);
     }
         
 }
