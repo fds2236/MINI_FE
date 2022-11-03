@@ -11,6 +11,8 @@ import styled from "styled-components";
 //     window
 // }
 
+// 전체를 감싸는 컨테이터 컴포넌트
+
 const Login = () => {
        // 아이디, 비밀번호 입력
        const [inputId, setInputId] = useState("");

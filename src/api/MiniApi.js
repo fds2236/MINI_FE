@@ -77,6 +77,15 @@ const MiniApi =  {
             pwdCheck: pwdCheck
         }
         return await axios.post(MINI_DOMAIN + "RePwdServlet", rePwdObj, HEADER);
+    },
+
+     // 아이디 중복확인
+     idCheck: async function(id) {
+        const idCheckObj = {
+            id: id
+
+        }
+        return await axios.post(MINI_DOMAIN + "IdCheckServlet", idCheckObj, HEADER);
     }
         
 }

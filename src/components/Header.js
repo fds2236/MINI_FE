@@ -8,7 +8,7 @@ import logo from "./kream-logo.PNG"
 const StyledHeaderTop = styled.header`
   background-color: #222831;
   width: 100%;
-  padding: 10px 12px 15px 12px;
+  padding: 10px 0px 15px 0px;
   display: flex;
   justify-content: right;
   .nav-top {
@@ -25,7 +25,7 @@ const StyledHeaderTop = styled.header`
 const StyledHeader = styled.header`
   background-color: #ffffff;
   width: 100%;
-  padding: 40px;
+  /* padding: 40px; */
   margin-bottom: 30px;
   display: flex;
   align-items: center;
@@ -38,10 +38,17 @@ const HeaderLogo = styled.div`
 `;
 
 const HeaderMenu = styled.div`
-  text-decoration: none;
   font-size: 20px;
   color: #222831;
-  margin: 0 auto;
+  align-items: center;
+
+  .category, .searchBar {
+  float: left;
+  margin: 10px;
+  }
+  .itemlist, .board {
+    text-decoration: none;
+  }
   .search {
     box-sizing: border-box;
     border: 1px solid #222831;
