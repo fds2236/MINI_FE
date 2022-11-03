@@ -4,16 +4,12 @@ import MiniApi from "../api/MiniApi";
 import Modal from "../util/Modal";
 import styled from "styled-components";
 
-
+// 카카오
 //0d39a119fd1466f129952b4b7cd1837e (REST API키)
-
-
-// const Form = styled.form`
-//     background-color:rgb(0,173,181);
-//     color: white;
-//     width: 300px;
-//     height: 200px
-//     ;`
+//<script src="https://t1.kakaocdn.net/kakao_js_sdk/2.0.0/kakao.min.js" integrity="sha384-PFHeU/4gvSH8kpvhrigAPfZGBDPs372JceJq3jAXce11bVA6rMvGWzvP4fMQuBGL" crossorigin="anonymous"></script>
+// function kakaoLogin() {
+//     window
+// }
 
 const Login = () => {
        // 아이디, 비밀번호 입력
