@@ -106,7 +106,9 @@ const InputEnd = styled.input`
 `;
 
 const InputNum = styled.input`
+    width: 197px;
     margin-left: 59px;
+    
 `;
 
 const Id = styled.div`
