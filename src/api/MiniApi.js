@@ -67,6 +67,16 @@ const MiniApi =  {
             docNum: docNum
         }
         return await axios.post(MINI_DOMAIN + "BoardListServlet", boardCmd, HEADER);
+    },
+
+    // pwd 재설정 기능
+    resetPwd: async function(id, pw, pwdCheck) {
+        const rePwdObj = {
+            id: id,
+            pwd: pw,
+            pwdCheck: pwdCheck
+        }
+        return await axios.post(MINI_DOMAIN + "RePwdServlet", rePwdObj, HEADER);
     }
         
 }
