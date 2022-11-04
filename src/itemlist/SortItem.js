@@ -1,74 +1,89 @@
-import { useEffect, useState } from "react";
 import styled from "styled-components";
-import MiniApi from "../api/MiniApi";
+
 
 const SortStyleBlock = styled.div`
-
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  select {
+    width: 120px;
+    padding: .8em .5em;
+    border: 1px solid #eee;
+  }
 `;
 
-const SortItem = () => {
+const SortItem = ({sort, setSort}) => {
+  // const getSortList = window.localStorage.getItem("sortByNewDate");
+   //const [sortCondition, setSortCondition] = useState();
   
-  const [sortData, setSortData] = useState("sortByNewDate");
-
-  useEffect(() => {
-    const itemData = async () => {
-      try {
-        const response = await MiniApi.itemInfo(sortData);
-        response.sort((a, b) => b - a);
-        setSortData(response.data);
-      } catch (e) {
-        console.log(e);
-      }
-    };
-    itemData();
-  }, [sortData]);
-
-  const handleChange = () => {
-    setSortData("sortByNewDate");
-    setSortData("sortByLowPrice");
-    setSortData("sortByHighPrice");
-    setSortData("sortByLike");
+  const onChangeNewDate = () => {
+    setSort("NEW_DATE");
   }
 
-  // const handleNewClick = () => {
-  //   setSortData("sortByNewDate");
-  // };
-  // const handLowPriceClick = () => {
-  //   setSortData("sortByLowPrice");
-  // }
-  // const handHighPriceClick = () => {
-  //   setSortData("sortByHighPrice");
-  // }
-  // const handLikeClick = () => {
-  //   setSortData("sortByLike");
-  // }
+  const onChangeLowPrice = () => {
+    setSort("LOW_PRICE");
+  }
   
+  const onChangeHighPrice = () => {
+    setSort("HIGH_PRICE");
+  }
+
   return (
     <SortStyleBlock>
-      <select onChange={handleChange}>
-        <option value="sortByNewDate">최신 발매순</option>
-        <option value="sortByLowPrice">낮은 가격순</option>
-        <option value="sortByHighPrice">높은 가격순</option>
-        <option value="sortByLike">높은 관심순</option>
+      <select>
+        <option value={sort} onChange={onChangeNewDate}>최신 발매순</option>
+        <option value={sort} onChange={onChangeLowPrice}>낮은 가격순</option>
+        <option value={sort} onChange={()=>onChangeHighPrice}>높은 가격순</option>
+        {/* <option value="sortByLike" onChange={onChangeLike}>관심 많은순</option> */}
       </select>
-      {/* <div className="sortList">
-        {sortData === "sortByNewDate" ? itemInfo.map(items => <SortItem items={items} key={items.id}/>):null}
-        {sortData === "sortByLowPrice" ? itemInfo.map(items => <SortItem items={items} key={items.id}/>):null}
-        {sortData === "sortByHighPrice" ? itemInfo.map(items => <SortItem items={items} key={items.id}/>):null}
-        {sortData === "sortByLike" ? itemInfo.map(items => <SortItem items={items} key={items.id}/>):null}
-      </div> */}
     </SortStyleBlock>
-  );
-  
-// const SortItem = async (array) => {
-//     const originArray = array;
-
-//     const sortArray = await Promise.all(
-//       originArray.map(async (x) => [
-//       await MiniApi.itemInfo(),
-//       x,
-//     ])
-//   );
-
+);
 }
 export default SortItem;
+
+
+
+    // <SortStyleBlock>
+    //   <select>
+    //     <option key={sortData} value={sortData} onChange={onChangeNewDate}>최신 발매순</option>
+    //     <option key={sortData} value={sortData} onChange={onChangeLowPrice}>낮은 가격순</option>
+    //     <option key={sortData} value={sortData} onChange={onChangeHighPrice}>높은 가격순</option>
+    //     {/* <option value="sortByLike" onChange={onChangeLike}>관심 많은순</option> */}
+    //   </select>
+    // </SortStyleBlock>
+
+    // <SortStyleBlock>
+    //   {sortData && sortData.map(() => (
+    //   <select>
+    //       <option value="sortByNewDate" onChange={onChangeNewDate}>최신 발매순</option>
+    //       <option value="sortByLowPrice" onChange={onChangeLowPrice}>낮은 가격순</option>
+    //       <option value="sortByHighPrice" onChange={onChangeHighPrice}>높은 가격순</option>
+    //       {/* <option value="sortByLike" onChange={onChangeLike}>관심 많은순</option> */}
+    //   </select>
+    // ))}
+    // </SortStyleBlock>
+
+
+// const SortItem = ({ launDate, sort, setSort }) => {
+  
+//   const sortItemList = () => {
+//     return launDate.map((item, idx) => (
+//       <div 
+//         key={idx}
+//         className={item.value}
+//         onClick={() => {
+//           setSort(item.value);
+//         }}
+//       >
+//         {item.value}
+//       </div>
+//     ));
+//   };
+
+//   return (
+//     <SortStyleBlock>
+//       <div className="sort-list">{sortItemList()}</div>
+//     </SortStyleBlock>
+//   );
+// };
+// export default SortItem;

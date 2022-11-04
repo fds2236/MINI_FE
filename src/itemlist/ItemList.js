@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components"
 import axios from "axios";
+import { useCallback } from "react";
 import CategoryFilter from "./BrandCategory";
 import MiniApi from '../api/MiniApi';
 import SortItem from "./SortItem";
@@ -37,6 +38,7 @@ const ItemDescBlock = styled.div`
   }
 `;
 
+
 // 브랜드 카테고리 배열
 const brandCategories = [
   {
@@ -66,68 +68,55 @@ const brandCategories = [
 ]
 
 const ItemList = (props) => {
-    const [category, setCategory] = useState("ALL");
-    const [itemInfo, setItemInfo] = useState('');
-    const [sortData, setSortData] = useState("sortByNewDate");
+  const [category, setCategory] = useState("ALL");
+  const [sortCondition, setSortCondition] = useState("NEW_DATE");
+  const [itemInfo, setItemInfo] = useState('');
+  
+  useEffect(() => {
+    console.log("상품 목록 보기 컴포넌트 useEffect Call !!!!!!!");
+    const itemData = async () => {
+      try {
+        const response = await MiniApi.itemInfo(category, sortCondition);
+        setItemInfo(response.data);
+      } catch (e) {
+        console.log(e);
+      }
+    };
+    itemData();
+  }, [category, sortCondition]);
 
-    useEffect(() => {
-      const itemData = async () => {
-        try {
-          const response = await MiniApi.itemInfo(category);
-          setItemInfo(response.data);
-        } catch (e) {
-          console.log(e);
-        }
-      };
-      itemData();
-    }, [category]);
+  // 브랜드명 클릭 시 해당 브랜드 상품만 보여줌
+  const onClickBrand = (val) => {
+    console.log("브랜드 : " + val);
+    setCategory(val);
+  }
 
-    const onClickBrand = (val) => {
-      console.log("브랜드 : " + val);
-      setCategory(val);
-    }
-
-    const handleChange = (sortData) => {
-      sortData.sort((a, b) => a - b);
-      setSortData("sortByNewDate");
-      setSortData("sortByLowPrice");
-      setSortData("sortByHighPrice");
-      setSortData("sortByLike");
-    }
-
-    // const onClickItemDetail = (val) => {
-    //   console.log("브랜드 : " + val);
-    //   window.localStorage.setItem("Detail", val);
-    //   window.location.replace("/ItemDetail");
-    // }
-
-    return(
+  return(
+    <div>
+      <CategoryFilter 
+        brandCategories={brandCategories}
+        category={category}
+        setCategory={setCategory}
+      />
+      <SortItem
+        sort={sortCondition}
+        setSort={setSortCondition}
+      />
       <div>
-        <CategoryFilter 
-          brandCategories={brandCategories}
-          category={category}
-          setCategory={setCategory}
-        />
-        <select onChange={handleChange}>
-          <option value="sortByNewDate">최신 발매순</option>
-          <option value="sortByLowPrice">낮은 가격순</option>
-          <option value="sortByHighPrice">높은 가격순</option>
-          <option value="sortByLike">높은 관심순</option>
-        </select>
-        <div>
-          {itemInfo && itemInfo.map(item => (
-            <ItemBlock key={item.PRO_CODE}>
-              <ItemDescBlock>
-                <p className="brand-name" onClick={()=>onClickBrand(item.BRAND)}>{item.BRAND}</p>
-                <p className="item-name">{item.PRO_NAME}</p>
-                <p className="price">발매가 : {item.PRICE}원</p>
-                <p className="like">♡ 관심상품 </p>
-              </ItemDescBlock>
-            </ItemBlock>
-          ))}
-        </div>
+        {itemInfo && itemInfo.map(item => (
+          <ItemBlock key={item.PRO_CODE}>
+            <ItemDescBlock>
+              <p className="brand-name" onClick={()=>onClickBrand(item.BRAND)}>{item.BRAND}</p>
+              <p className="item-name">{item.PRO_NAME}</p>
+              <p className="laun-date">{item.LAUN_DATE}</p>
+              <p className="price">발매가 : {item.PRICE}원</p>
+              <p className="like">♡ 관심상품 </p>
+            </ItemDescBlock>
+          </ItemBlock>
+        ))}
       </div>
-    )
+  </div>
+  )
 }
 
 export default ItemList; 
