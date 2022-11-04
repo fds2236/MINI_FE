@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import { Link } from "react-router-dom";
 import { useState} from "react";
 import MiniApi from "../api/MiniApi";
@@ -23,7 +22,7 @@ const RePwd = () => {
     const onChangeId = (e) => {
         setInputId(e.target.value)
     };
-=======
+
 // import { Link } from "react-router-dom";
 // import { useState} from "react";
 // import MiniApi from "../api/MiniApi";
@@ -38,7 +37,7 @@ const RePwd = () => {
 //     }
 //     return await axios.post(MINI_DOMAIN + "RePwdServlet", rePwdObj, HEADER);
 // }
->>>>>>> 08c951f14dd1f0a408f3c73a7c0a7493ec579a67
+
 
 
     // 패스워드 제한(힌트)
