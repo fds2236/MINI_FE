@@ -2,7 +2,7 @@ import React from 'react';
 import '../App';
 import './Modal.css';
 
-// 도연 작업중
+// 도연 작업 완료! (조원들 공동으로 사용하면 됨)
 
 const Modal = (props) => {
     const { open, confirm, close, header } = props; //

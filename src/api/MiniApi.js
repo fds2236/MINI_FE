@@ -5,21 +5,15 @@ const MINI_DOMAIN = "http://localhost:8111/";
 const MiniApi =  {
 
     // 회원가입
-    signUp: async function(id, pw, pwdCheck, name, email, emailName, phone1, phone2, phone3, phoneNum, addrNum, addr1, addr2) {
+    signUp: async function(id, pw, pwdCheck, name, email, phone, addr) {
         const signupObj = {
             id: id,
             pwd: pw,
             pwdCheck: pwdCheck,
             memName: name,
             email: email,
-            emailName: emailName,
-            phone1: phone1,
-            phone2: phone2,
-            phone3: phone3,
-            phoneNum: phoneNum,
-            addrNum: addrNum,
-            addr1: addr1,
-            addr2: addr2
+            phone: phone,
+            addr: addr
         }
         return await axios.post(MINI_DOMAIN + "SignUpServlet", signupObj, HEADER);
     },

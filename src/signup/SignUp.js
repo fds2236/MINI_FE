@@ -4,6 +4,7 @@ import styled from "styled-components";
 import DaumPostCode from 'react-daum-postcode';
 import Post from './Post';
 import MiniApi from '../api/MiniApi';
+import Modal from "../util/Modal";
 
 // 도연 기능 구현 ing..
 
@@ -11,9 +12,7 @@ const Container = styled.div`
     padding-right: 500px;
     background-color: #EEEEEE;
     width: 1800px;
-    .write{
-        display: none;
-    }
+    
 `;
 
 const JoinUs = styled.div`
@@ -142,7 +141,7 @@ const Star = styled.b`
 `;
   
 const PhoneBox = styled.div`
-    border: solid 1px #d8d7d7;
+    
     padding: 10px;
     width: 700px;
     display: inline-block;
@@ -234,10 +233,9 @@ const SignUp = () => {
     const [email, setEmail] = useState('');
     const [emailName, setEmailName] = useState('');
     const [autoMail, setAutoMail] = useState('');
-    const [phone1, setPhone1] = useState('');
-    const [phone2, setPhone2] = useState('');
-    const [phone3, setPhone3] = useState('');
-    const [phoneNum, setPhoneNum] = useState('');
+    const [phone, setPhone] = useState('');
+ 
+    
     const [addrNum, setAddrNum] = useState('');
     const [addr1, setAddr1] = useState('');
     const [addr2, setAddr2] = useState('');
@@ -275,15 +273,25 @@ const SignUp = () => {
     const [isAddr1, setIsAddr1] = useState('');
     const [isAddr2, setIsAddr2] = useState('');
 
+    // 팝업 창 띄우기
+
+    // 회원가입 안될 때
+    const [modalOpenSignUp, setModalOpenSignUp] = useState(false); //디폴트가 모달X
+
+    // 회원가입 모달 창 닫는 거
+    const closeModalSignUp = () => {
+        setModalOpenSignUp(false); // 모달 창 닫기
+    }
+
+
     // 아이디 중복일 때 팝업창 띄우기
-    const [modalText, setModalOpen] = useState("");
-       
-    const closeModal = () => {
-        setModalOpen(false);
-    };
+    const [modalOpenIdCheck, setModalOpenIdCheck] = useState(false); //디폴트가 모달X
 
-
-    
+    // 아이디 중복 모달 창 닫는 거
+    const closeModalIdCheck = () => {
+        setModalOpenIdCheck(false); // 모달 창 닫기
+    }
+   
 
     // 아이디 체크
     const onChangId = (e) => {
@@ -371,32 +379,50 @@ const SignUp = () => {
     const handleComplete = (data) => {
         setPopup(!popup);
     };
-/* 
+
     const Final = () =>{
         setFinEmail(email+"@"+autoMail);
         console.log(FinEmail);
-        
-    } */
+    
+    } 
+
+    
 
 
     // API 호출
 
-    /* // 아이디 중복확인
-    const onClickIdCheck = async() => {
+    // 회원가입
+    const onClickSignUp = async() => {
         try {
-            const res = await MiniApi.idCheck(Id);
+            const res = await MiniApi.SignUp(id, pwd, pwdCheck, name, email, phone, addr);
+
             console.log(res.data.result);
 
-            if(res.data.result === true) {
-                window.location.replace("/");
+            if(res.data.result === "NOK") {
             } else {
-                setModelText("이미 존재하는 아이디입니다.");
-                setModalOpen(true);
+                    console.log("회원가입에 실패했습니다. 다시 확인해주세요.");
+                    setModalOpenSignUp(true);
+                }
+            } catch (e) {
+        }
+    }
+    
+    // 아이디 중복확인
+    const onClickIdCheck = async() => {
+        try {
+            const res = await MiniApi.idCheck(id);
+
+            console.log(res.data.result);
+
+            if(res.data.result === "OK") {
+            } else {
+                console.log("이미 존재하는 아이디 입니다.");
+                setModalOpenIdCheck(true);
                 
             }
          } catch (e) {
          } 
-       } */
+       } 
  
     
     return (
@@ -412,7 +438,8 @@ const SignUp = () => {
                         {/* 아이디 입력창 */}
                         <Id><Star>* </Star><ItemText>아이디</ItemText>
                             <Input value={id} placeholder="아이디" onChange={onChangId}  />
-                            <button >중복 확인</button>
+                            <button onClick={onClickIdCheck} >중복 확인</button>
+                           
                         </Id>
 
                         {/* 아이디 오류 메세지 */}
@@ -451,7 +478,7 @@ const SignUp = () => {
                             <InputList className='write' value={emailName} placeholder="(직접 입력)"  />
                             <InputList value={autoMail} placeholder="(직접 입력)" onChange={onChangeEmailName} />
                             <EmailList onChange={onChangeAutoMail}>
-                                <option >직접 입력</option>
+                                <option value={'직접입력'}>직접 입력</option>
                                 <option value={"naver.com"}>naver.com</option>
                                 <option value={"gmail.com"}>gmail.com</option>
                                 <option value={"daum.net"}>daum.net</option>
@@ -465,10 +492,8 @@ const SignUp = () => {
                         <GridBox>  
                         <Star>* </Star>
                         <PhoneBox><ItemText1>전화번호</ItemText1>
-                            <InputS value={phone1} placeholder="010" onChange={onChangePhone1}/> - <InputSS value={phone2} onChange={onChangePhone2} /> - <InputEnd value={phone3} onChange={onChangePhone3} />
-                            <button className='grayBtn'> 인증번호 전송</button><br /><ItemText2>인증번호</ItemText2>
-                            <InputNum value={phoneNum} placeholder="인증번호 6자리" onChange={onChangePhoneNum} /> 
-                            <Btn>확인</Btn>
+                            <InputS value={phone} placeholder="전화번호" onChange={onChangePhone1}/>
+                           
                         </PhoneBox><br />
 
                         {/* 주소 입력창 */}
@@ -482,11 +507,13 @@ const SignUp = () => {
                         </GridBox>  
                     </Item>
                     <CancelBtn><NavLink to='/Home' >취소하기</NavLink></CancelBtn>
-                    <JoinUsBtn><NavLink to='/SignCom'  >회원가입</NavLink></JoinUsBtn><br />
+                    <JoinUsBtn><NavLink to='/SignCom' onClick={onClickSignUp} >회원가입</NavLink></JoinUsBtn><br />
                 <Check>
                     <IdCheck>이미 아이디가 있으신가요? </IdCheck><Link to='/Login'> ＞ 로그인</Link>
                 </Check>
             </ItemBox>
+            {modalOpenIdCheck && <Modal open={modalOpenIdCheck} close={closeModalIdCheck} header="확인">이미 가입된 아이디입니다.</Modal>}
+            {modalOpenSignUp && <Modal open={modalOpenSignUp} close={closeModalIdCheck} header="확인">회원가입에 실패했습니다. 다시 확인해주세요.</Modal>}
         </Container>
         </>
     ); 
