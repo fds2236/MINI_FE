@@ -2,10 +2,10 @@ import React from 'react';
 import '../App';
 import './Modal.css';
 
-// 도연 작업 완료! (조원들 공동으로 사용하면 됨)
+// 도연 작업 완료! (조원들 공동으로 사용하면 됩니다.)
 
 const Modal = (props) => {
-    const { open, confirm, close, header } = props; //
+    const { open, confirm, close, header } = props; 
     return (
         <div className={open ? 'openModal modal' : 'modal'}>
             {open && 
