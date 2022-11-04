@@ -12,28 +12,31 @@ const SortStyleBlock = styled.div`
   }
 `;
 
-const SortItem = ({sort, setSort}) => {
+const SortItem = ({sortCondition, setSortCondition}) => {
   // const getSortList = window.localStorage.getItem("sortByNewDate");
    //const [sortCondition, setSortCondition] = useState();
   
   const onChangeNewDate = () => {
-    setSort("NEW_DATE");
+    console.log("onChangeNewDate Call??????");
+    setSortCondition("NEW_DATE");
   }
 
   const onChangeLowPrice = () => {
-    setSort("LOW_PRICE");
+    console.log("onChangeLowPrice Call??????");
+    setSortCondition("LOW_PRICE");
   }
   
   const onChangeHighPrice = () => {
-    setSort("HIGH_PRICE");
+    console.log("onChangeHighPrice Call??????");
+    setSortCondition("HIGH_PRICE");
   }
 
   return (
     <SortStyleBlock>
       <select>
-        <option value={sort} onChange={onChangeNewDate}>최신 발매순</option>
-        <option value={sort} onChange={onChangeLowPrice}>낮은 가격순</option>
-        <option value={sort} onChange={()=>onChangeHighPrice}>높은 가격순</option>
+        <option value={sortCondition} onChange={onChangeNewDate}>최신 발매순</option>
+        <option value={sortCondition} onChange={onChangeLowPrice}>낮은 가격순</option>
+        <option value={sortCondition} onChange={onChangeHighPrice}>높은 가격순</option>
         {/* <option value="sortByLike" onChange={onChangeLike}>관심 많은순</option> */}
       </select>
     </SortStyleBlock>

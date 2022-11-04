@@ -72,6 +72,7 @@ const ItemList = (props) => {
   const [sortCondition, setSortCondition] = useState("NEW_DATE");
   const [itemInfo, setItemInfo] = useState('');
   
+  
   useEffect(() => {
     console.log("상품 목록 보기 컴포넌트 useEffect Call !!!!!!!");
     const itemData = async () => {
@@ -99,8 +100,8 @@ const ItemList = (props) => {
         setCategory={setCategory}
       />
       <SortItem
-        sort={sortCondition}
-        setSort={setSortCondition}
+        sortCondition={sortCondition}
+        setSortCondition={setSortCondition}
       />
       <div>
         {itemInfo && itemInfo.map(item => (
