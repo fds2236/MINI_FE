@@ -23,6 +23,14 @@ const MiniApi =  {
         }
         return await axios.post(MINI_DOMAIN + "SignUpServlet", signupObj, HEADER);
     },
+    
+    // 아이디 중복확인
+    idCheck: async function(id) {
+        const idCheckObj = {
+            id: id
+        }
+        return await axios.post(MINI_DOMAIN + "IdCheckServlet", idCheckObj, HEADER);
+    },
 
     // 로그인 기능
     userLogin: async function(id, pw) {
