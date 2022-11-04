@@ -3,12 +3,9 @@ import { Link, NavLink } from "react-router-dom";
 import styled from "styled-components";
 import DaumPostCode from 'react-daum-postcode';
 import Post from './Post';
-
-
-
+import MiniApi from '../api/MiniApi';
 
 // 도연 기능 구현 ing..
-
 
 const Container = styled.div`
     padding-right: 500px;
@@ -342,6 +339,7 @@ const SignUp = () => {
     // 이메일 
 
     const onChangeAutoMail = (e) => {
+       
         const a = e.target.value
         setAutoMail(a);
     }
@@ -373,20 +371,20 @@ const SignUp = () => {
     const handleComplete = (data) => {
         setPopup(!popup);
     };
-
+/* 
     const Final = () =>{
         setFinEmail(email+"@"+autoMail);
         console.log(FinEmail);
         
-    }
+    } */
 
 
     // API 호출
 
-    // 아이디 중복확인
+    /* // 아이디 중복확인
     const onClickIdCheck = async() => {
         try {
-            const res = await MiniApi.signUp(Id);
+            const res = await MiniApi.idCheck(Id);
             console.log(res.data.result);
 
             if(res.data.result === true) {
@@ -398,9 +396,8 @@ const SignUp = () => {
             }
          } catch (e) {
          } 
-       }
-
-
+       } */
+ 
     
     return (
         <>
@@ -415,7 +412,7 @@ const SignUp = () => {
                         {/* 아이디 입력창 */}
                         <Id><Star>* </Star><ItemText>아이디</ItemText>
                             <Input value={id} placeholder="아이디" onChange={onChangId}  />
-                            <button onClick={onClickIdCheck}>중복 확인</button>
+                            <button >중복 확인</button>
                         </Id>
 
                         {/* 아이디 오류 메세지 */}
@@ -453,13 +450,13 @@ const SignUp = () => {
                             <InputE value={email} placeholder="이메일" onChange={onChangeEmail} /> @
                             <InputList className='write' value={emailName} placeholder="(직접 입력)"  />
                             <InputList value={autoMail} placeholder="(직접 입력)" onChange={onChangeEmailName} />
-                            <EmailList value={autoMail} onChange={onChangeAutoMail}>
-                                <option value="write">직접 입력</option>
-                                <option value="naver.com">naver.com</option>
-                                <option value="gmail.com">gmail.com</option>
-                                <option value="daum.net">daum.net</option>
-                                <option value="nate.com">nate.com</option>
-                                <option value="kakao.com">kakao.com</option>
+                            <EmailList onChange={onChangeAutoMail}>
+                                <option >직접 입력</option>
+                                <option value={"naver.com"}>naver.com</option>
+                                <option value={"gmail.com"}>gmail.com</option>
+                                <option value={"daum.net"}>daum.net</option>
+                                <option value={"nate.com"}>nate.com</option>
+                                <option value={"kakao.com"}>kakao.com</option>
                             </EmailList><br/>
                         </Email>
                         </NotGrid>
@@ -484,8 +481,8 @@ const SignUp = () => {
                         </AddrBox>
                         </GridBox>  
                     </Item>
-                    <CancelBtn><NavLink to='/Home' style={({ isActive }) => ({ color: isActive ? 'black' : 'white' })}>취소하기</NavLink></CancelBtn>
-                    <JoinUsBtn><NavLink to='/SignCom' onClick={onClickSignUp} style={({ isActive }) => ({ color: isActive ? 'black' : 'white' })}>회원가입</NavLink></JoinUsBtn><br />
+                    <CancelBtn><NavLink to='/Home' >취소하기</NavLink></CancelBtn>
+                    <JoinUsBtn><NavLink to='/SignCom'  >회원가입</NavLink></JoinUsBtn><br />
                 <Check>
                     <IdCheck>이미 아이디가 있으신가요? </IdCheck><Link to='/Login'> ＞ 로그인</Link>
                 </Check>
