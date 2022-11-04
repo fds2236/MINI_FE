@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components"
-import axios from "axios";
-import { useCallback } from "react";
 import CategoryFilter from "./BrandCategory";
 import MiniApi from '../api/MiniApi';
 import SortItem from "./SortItem";
