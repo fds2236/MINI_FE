@@ -25,4 +25,5 @@ const Modal = (props) => {
         </div>
     );
 };
+// 구조분해 props.children으로 바꿔서 띄워주기!
 export default Modal;

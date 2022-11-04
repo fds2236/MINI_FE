@@ -15,21 +15,23 @@ const RePwd = () => {
     // 패스워드 유효성 검사
     const [isPwd, setIsPwd] = useState("");
 
+    // 패스워드 체크 유효성 검사
+    const [isPwdCk, setIsPwdCk] = useState("");
+
     // 패스워드, 패스워드 체크 제한 메시지
     const [pwdMessage, setPwdMessage] = useState("");
-    const [pwdCkMessage, setPwdCkMessage] = useState(""); // 패스워드가 일치하지 않습니다.
+    const [pwdCkMessage, setPwdCkMessage] = useState(""); 
 
     const closeModal = () => {
         setModalOpen(false);
     };
 
-    // 아이디 입력값
+    // 아이디 
     const onChangeId = (e) => {
         setInputId(e.target.value)
     };
 
-
-    // 패스워드 제한(힌트)
+    // 패스워드
     const onChangePwd = (e) => {
         const pwdRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,20}$/
         const pwdCurrent = e.target.value;
@@ -43,9 +45,16 @@ const RePwd = () => {
         }
     }
 
-    // 패스워드 체크 제한(힌트)
+    // 패스워드 체크
     const onChangePwdCk = (e) => {
-       
+        setInputPwdCk(e.target.value)
+        if(setInputPwdCk === setInputPwd) {
+            setPwdMessage("패스워드 일치")
+            setIsPwdCk(true);
+        } else {
+            setPwdCkMessage("패스워드 불일치");
+            setIsPwdCk(false);
+        }
     }
 
     // API호출
@@ -54,6 +63,7 @@ const RePwd = () => {
         try{
             const res = await MiniApi.resetPwd(inputId, inputPwd);
             console.log(res.data.result);
+            
             if(res.data.result === true) {
                 setModalOpen(true); // 비밀번호 변경시 모달창 팝업
             } else {
@@ -76,17 +86,25 @@ const RePwd = () => {
         </div>
 
         {/* 패스워드 입력창 */}
-        <div className="hint">
+        <div className="input">
         <input type="password" placeholder="비밀번호" value={inputPwd} onChange={onChangePwd}></input>
         <br/>
         </div>
 
         {/* 패스워드 입력 제한 메시지 */}
+        <div className="hint">
+        {inputPwd.length > 0 && <span className={`message ${isPwd ? 'success' : 'error'}`}>{pwdMessage}</span>}
+        </div>
         
         {/* 패스워드 체크 입력창  */}
         <div className="input">
         <input type="password" placeholder="비밀번호 확인" value={inputPwdCk} onChange={onChangePwdCk}></input>
         <br/>
+        </div>
+
+        {/* 패스워드 입력 제한 메시지 */}
+        <div className="hint">
+        {inputPwdCk.length > 0 && <span className={`message ${isPwdCk ? 'success' : 'error'}`}>{pwdCkMessage}</span>}
         </div>
 
         {/* 확인 버튼 클릭 */}
@@ -97,5 +115,4 @@ const RePwd = () => {
         </div>
     )
 }
-
 export default RePwd;
