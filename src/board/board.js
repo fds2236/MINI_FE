@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { isLabelWithInternallyDisabledControl } from "@testing-library/user-event/dist/utils";
 
 
 /**
@@ -72,6 +73,7 @@ const StyledTitle = styled.h1`
 // 리턴 버튼 컴포넌트
 const ReturnButton = (props) => {
 
+
     return (
         <>
             <ReturnStyledButton onClick={OnClickToList} >{props.text}</ReturnStyledButton>
@@ -96,6 +98,11 @@ const Title = ({text}) => {
 
 
 const Board = () => {
+
+
+
+
+
     return(
         <>
         <TitleAndBtn>
@@ -105,7 +112,7 @@ const Board = () => {
         <Container>   
             <Contents>
                 &nbsp;
-                    <h1>afasdfasdf</h1>
+                    <h1>글번호를 선택 하셨습니다</h1>
                 &nbsp;
             </Contents>
         </Container>

@@ -11,6 +11,8 @@ import axios from "axios";
  * ------------------------------스타일드 컴포넌트 ---------------------------
  */
 
+
+
 // 전체를 감싸는 컨테이너 스타일드 컴포넌트
 const Container = styled.div`
     width: 600px;
@@ -50,11 +52,13 @@ const Contents = styled.div`
     background-color: #EEEEEE;
 `;
 
-const StyledContent = styled.button`
+const StyledContent = styled.div`
     background-color: white;
     border-radius: 14px;
     border-style: none;
     width: 100%;
+    display: flex;
+    justify-content:flex-start;
 `;
 
 
@@ -67,11 +71,6 @@ const StyledPicture = styled.img`
 `;
 
 
-// 온클릭 컨텐트 (상세페이지로 이동)
-const OnclickWriteBoard = () =>{
-    window.location.replace('/Board');
-}
-
 // 레드버튼 스타일드 컴포넌트
 const OrangeRedStyledButton = styled.button`
     background-color: orangered;
@@ -83,16 +82,32 @@ const OrangeRedStyledButton = styled.button`
     cursor: pointer;
 `;
 
-const OnClickOrangeRed = () => {
-    window.location.replace('/WriteBoard')
-}
+
+
+
+
+
+
+
+
    
 
 const MarginContent = styled.div`
-    margin: 4px 16px;
-
-    
+    margin: 4px 16px;  
 `;
+
+// const StyledTitleContent = 
+
+
+
+
+
+
+
+
+
+
+
 
 
 /**
@@ -118,33 +133,19 @@ const OrangeRedButton = (props) => {
     );
 }
 
-
-
-// 게시물 
-const Content = (props) => {
-    return (
-        <>  
-            <MarginContent>
-            <StyledContent onClick={OnclickWriteBoard} >
-                <Picture>
-                    
-                </Picture>
-                <h1>{props.title}</h1>
-                
-            </StyledContent>
-            </MarginContent>
-        </>
-    );
+const OnClickOrangeRed = () => {
+    window.location.replace('/WriteBoard')
 }
 
-// 제목
-const Title = (props) => {
-    return (
-        <>
-        
-        </>
-    );
+
+// 온클릭 컨텐트 (상세페이지로 이동)
+const OnclickBoard = (props) =>{
+
+    window.location.replace('/Board');
 }
+
+
+
 
 
 
@@ -152,6 +153,7 @@ const Title = (props) => {
 const Boards = () => {
     const [boardInfo, setBoardInfo] = useState('');
     const [loading, setLoading] = useState(false);
+
     // const isLogin = window.localStorage.getItem("isLogin");
     // if(isLogin === "FALSE") window.location.replace("/");
 
@@ -171,10 +173,10 @@ const Boards = () => {
 
     }, []);
 
-    if(loading) {
-        return <Content>대기 중...</Content>
-    }
 
+    if(loading) {
+        return <Container><h1>Loading .... </h1></Container>
+    }
   
 
     return (
@@ -186,21 +188,29 @@ const Boards = () => {
                 <Button><StyledLink to ='/' >후기게시판</StyledLink></Button>
                 <OrangeRedButton text="글쓰기"></OrangeRedButton>
             </ButtonContainer>
-            <h1>테스트 문자열 
-                {/* {boardInfo && boardInfo.map(board => (
-                    <tr key={board.docNum}>
-                        <td>{board.docNum}</td><td>{board.title}</td><td>{board.boardContent}</td><td>{board.id}</td>
-                    </tr>
-                ))} */}
-         
-            </h1>
+            
 
             {/* &nbsp;를 사용하여 의도적으로 공백을 넣음. 글이 아무것도 없을때 대비 */}
             <Contents>
                 &nbsp;
-                <Content title={boardInfo.title}></Content>
-                <Content></Content>
-                <Content></Content>
+                
+                {boardInfo && boardInfo.map(board => (
+                    
+                    <MarginContent>
+                    <StyledContent onClick={OnclickBoard} >
+                        <p>{board.boardNum}</p>
+                        <StyledPicture src="https://media.bunjang.co.kr/product/198502427_1_1662395621_w856.jpg"></StyledPicture>
+                        <div >
+                            <h2>{board.title}</h2>
+                            {/* <p>{board.id}</p> */}
+                            <p>{board.boardContent}</p>
+                        </div>
+                        
+                        
+                    </StyledContent>
+                    </MarginContent>
+                ))}
+                
                 
                 &nbsp;
             </Contents> 
