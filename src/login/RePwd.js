@@ -3,6 +3,7 @@ import { useState} from "react";
 import MiniApi from "../api/MiniApi";
 import Modal from "../util/Modal";
 import styled from "styled-components";
+import axios from "axios";
 
 const RePwd = () => {
     // 아이디, 패스워드 및 패스워드 체크 입력
@@ -11,53 +12,50 @@ const RePwd = () => {
     const [inputPwdCk, setInputPwdCk] = useState("");
     const [modalOpen, setModalOpen] = useState(false); // 확인 버튼 누르면 모달창 팝업
 
+    // 패스워드 유효성 검사
+    const [isPwd, setIsPwd] = useState("");
+
     // 패스워드, 패스워드 체크 제한 메시지
     const [pwdMessage, setPwdMessage] = useState("");
-    const [pwdCkMessage, setPwdCkMessage] = useState("");
+    const [pwdCkMessage, setPwdCkMessage] = useState(""); // 패스워드가 일치하지 않습니다.
 
     const closeModal = () => {
         setModalOpen(false);
     };
 
+    // 아이디 입력값
     const onChangeId = (e) => {
         setInputId(e.target.value)
     };
 
-// import { Link } from "react-router-dom";
-// import { useState} from "react";
-// import MiniApi from "../api/MiniApi";
-// import Modal from "../util/Modal";
-// import styled from "styled-components";
-// import axios from "axios";
-// // API 옮기기
-// resetPwd: async function(pw, pwdCheck) {
-//     const rePwdObj = {
-//         pwd: pw,
-//         pwdCheck: pwdCheck
-//     }
-//     return await axios.post(MINI_DOMAIN + "RePwdServlet", rePwdObj, HEADER);
-// }
-
-
 
     // 패스워드 제한(힌트)
     const onChangePwd = (e) => {
-        setInputPwd(e.target.value);
+        const pwdRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,20}$/
+        const pwdCurrent = e.target.value;
+        setInputPwd(pwdCurrent)
+        if(!pwdRegex.test(pwdCurrent)) {
+            setPwdMessage("숫자+영문자+특수문자 조합으로 8자리 이상 입력하세요.");
+            setIsPwd(false);
+        } else {
+            setPwdMessage("올바른 형식입니다.");
+            setIsPwd(true);
+        }
     }
+
     // 패스워드 체크 제한(힌트)
     const onChangePwdCk = (e) => {
-        setInputPwdCk(e.target.value)
+       
     }
 
     // API호출
-    // 아이디, 패스워드와 패스워드체크 동일하면 비밀번호 변경
+    // 입력받은 ID에 대한 PWD변경
     const onClickRePwd = async() => {
         try{
-            const res = await MiniApi.RePwd(inputPwd, inputPwdCk);
+            const res = await MiniApi.resetPwd(inputId, inputPwd);
             console.log(res.data.result);
-
-            if(res.data.result === "OK") {
-                setModalOpen(true); // pwd와 pwd일치하면 비밀번호 변경 성공 모달창 팝업
+            if(res.data.result === true) {
+                setModalOpen(true); // 비밀번호 변경시 모달창 팝업
             } else {
             }
         } catch (e) {
@@ -70,20 +68,34 @@ const RePwd = () => {
         {/* 아이디는 자동으로 뿌려주고 싶음*/}
         {/* 비밀번호 변경 버튼 클릭시 모달창 팝업 => 비밀번호가 정상적으로 변경되었습니다 */}
         {/* 모달의 확인버튼 클릭시 로그인 창으로 연결 */}
+
+        {/* 아이디 입력창 */}
+        <div className="input">
         <input type="text" placeholder="아이디" value={inputId} onChange={onChangeId}></input>
         <br />
+        </div>
+
+        {/* 패스워드 입력창 */}
+        <div className="hint">
         <input type="password" placeholder="비밀번호" value={inputPwd} onChange={onChangePwd}></input>
         <br/>
+        </div>
+
+        {/* 패스워드 입력 제한 메시지 */}
+        
+        {/* 패스워드 체크 입력창  */}
+        <div className="input">
         <input type="password" placeholder="비밀번호 확인" value={inputPwdCk} onChange={onChangePwdCk}></input>
         <br/>
-        <br/>
+        </div>
+
+        {/* 확인 버튼 클릭 */}
+        <div className="button">
         <button onClick={onClickRePwd}>확인</button>
-        <br/>
-        <br/>
-        {modalOpen && <Modal open={modalOpen} closeModal={closeModal} header="확인">비밀번호가 변경되었습니다.</Modal>}
+        </div>
+        {modalOpen && <Modal open={modalOpen} close={closeModal} header="확인">비밀번호가 변경되었습니다.</Modal>}
         </div>
     )
-
 }
 
 export default RePwd;
