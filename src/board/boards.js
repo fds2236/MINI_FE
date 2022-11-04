@@ -65,9 +65,10 @@ const StyledContent = styled.div`
 // 사진 스타일드 컴포넌트
 const StyledPicture = styled.img`
     float: left;
-    width: 130px;
-    height: 100px;
+    width: 90px;
+    height: 90px;
     margin: 8px 8px;
+    border-radius: 5px;
 `;
 
 
@@ -139,23 +140,25 @@ const OnClickOrangeRed = () => {
 
 
 // 온클릭 컨텐트 (상세페이지로 이동)
-const OnclickBoard = (props) =>{
-
+const OnclickBoard = (boardNum) =>{
+    window.localStorage.setItem('boardNum',boardNum);
     window.location.replace('/Board');
 }
 
 
-
-
-
+/**
+ * --------------------------------- Boards 컴포넌트 시작 -------------------------------------------
+ */
 
 
 const Boards = () => {
+
     const [boardInfo, setBoardInfo] = useState('');
     const [loading, setLoading] = useState(false);
 
     // const isLogin = window.localStorage.getItem("isLogin");
     // if(isLogin === "FALSE") window.location.replace("/");
+    // 로그인 페이지로 접속하게 하기
 
     useEffect(() => {
         const BoardData = async () => {
@@ -195,9 +198,10 @@ const Boards = () => {
                 &nbsp;
                 
                 {boardInfo && boardInfo.map(board => (
+                   
                     
                     <MarginContent>
-                    <StyledContent onClick={OnclickBoard} >
+                    <StyledContent onClick={()=>OnclickBoard(board.boardNum)} >
                         <p>{board.boardNum}</p>
                         <StyledPicture src="https://media.bunjang.co.kr/product/198502427_1_1662395621_w856.jpg"></StyledPicture>
                         <div >

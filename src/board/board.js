@@ -1,8 +1,9 @@
 import React from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { isLabelWithInternallyDisabledControl } from "@testing-library/user-event/dist/utils";
-
+import MiniApi from "../api/MiniApi";
 
 /**
  * ------------------------------스타일드 컴포넌트 ---------------------------
@@ -99,8 +100,30 @@ const Title = ({text}) => {
 
 const Board = () => {
 
+    let nowBoardNum = window.localStorage.getItem('boardNum');
 
+    const [boardInfo, setBoardInfo] = useState('');
+    const [loading, setLoading] = useState(false);
 
+    // const isLogin = window.localStorage.getItem("isLogin");
+    // if(isLogin === "FALSE") window.location.replace("/");
+    // 로그인 페이지로 접속하게 하기
+
+    useEffect(() => {
+        const BoardData = async () => {
+            setLoading(true);
+            try {
+                const response = await MiniApi.boardInfo();
+                setBoardInfo(response.data);
+                console.log(response.data);
+            } catch (e) {  
+                console.log(e + "실패 입니다");
+            }
+            setLoading(false);
+        };
+        BoardData(); // 첫 페이지 로딩시 글 목록을 다 끌어옴
+
+    }, []);
 
 
     return(
@@ -112,7 +135,9 @@ const Board = () => {
         <Container>   
             <Contents>
                 &nbsp;
-                    <h1>글번호를 선택 하셨습니다</h1>
+                    <h1>
+                        {nowBoardNum} 입니다
+                    </h1>
                 &nbsp;
             </Contents>
         </Container>
