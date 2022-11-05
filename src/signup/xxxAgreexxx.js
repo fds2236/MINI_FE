@@ -1,52 +1,216 @@
-import React, { useState } from 'react';
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import styled from "styled-components";
-import Modal from "../util/Modal";
-import MiniApi from '../api/MiniApi';
+import { useState, useEffect }  from "react";
 
-// 도연 - 회원가입 페이지 작업중 
+// 도연 작업 중
+
+const Container = styled.div`
+  padding-right: 500px;
+  background-color: #EEEEEE;
+`;
+
+const ItemBox = styled.div`
+  width: 600px;
+  height: 740px;
+  padding: 20px 20px 20px 20px;
+`;
+
+const JoinUs = styled.div`
+  color: #00ADB5;
+  font-size: 50px;
+  font-weight: bold;
+  width: 200px;
+  height: 50px;
+  border-radius: 10px;
+  padding-bottom: 10px;
+  margin-left: 300px;
+`;
 
 
+const Comments = styled.p`
+  color: red;
+  font-size: 14px;
+  margin-left: 300px;
+  margin-top: 7px;
+`;
 
+const Item = styled.div`
+  background-color: white;
+  padding: 5px 15px 30px 15px;
+  width: 1000px;
+  margin-top: 10px;
+  margin-left: 300px;
+
+    
+`;
+
+const CancelBtn = styled.button`
+  background-color: #BDBDBD;
+  margin: 15px 10px 10px 100px;
+  width: 200px;
+  height: 40px;
+  border-radius: 10px;
+  border: none;
+
+`;
+
+const JoinUsBtn = styled.button`
+  background-color: black;
+  width: 200px;
+  height: 40px;
+  border-radius: 10px;
+
+`;
+
+const Box = styled.div`
+  margin: 15px 5px 10px 5px;
+`;
+
+const Text = styled.textarea`
+  width : 555px;
+  height: 150px;
+  
+`;
+
+const Check = styled.label`
+  font-weight: bold;
+  
+  
+`;
+
+const CheckBox = styled.div`
+  padding-left: 190px;
+  padding-top: 30px;
+
+`;
+
+
+const Red = styled.span`
+  color: red;
+`;
 
 const Agree = () => {
-
-    // 약관동의 체크박스 기능 구현
-    const [allCheck, setAllCheck] = useState(false); // 모두 체크, 기본값은 체크안된상태
-    const [useCheck, setUseCheck] = useState(false); // 서비스 이용약관 체크
-    const [userCheck, setUserCheck] = useState(false); // 개인정보 처리방침 체크
-    const [marketingCheck, setMarketingCheck] = useState(false); // 마케팅 체크
-    const [marketingEmailCheck, setMarketingEmailCheck] = useState(false); // 이메일
-    const [marketingSMSCheck, setMarketingSMSCheck] = useState(false); // SMS
-    const [ageCheck, setAgeCheck] = useState(false); // 나이 체크
-
-
-
-    // 전체동의 체크하면 모든 항목 체크됨
-    // 전체동의 체크 해제하면 모든 항목 체크 취소됨
-    const allBtnEvent = (e) => {
-        setAllCheck(e.target.checked);
-        setUseCheck(e.target.checked);
-        setUserCheck(e.target.checked);
-        setMarketingCheck(e.target.checked);
-        setMarketingEmailCheck(e.target.checked);
-        setMarketingSMSCheck(e.target.checked);
-        setAgeCheck(e.target.checked); 
-      };
     
+// 약관동의 체크박스 기능 구현
+
+const [allCheck, setAllCheck] = useState(false); // 모두 체크, 기본값은 체크안된상태
+const [useCheck, setUseCheck] = useState(false); // 서비스 이용약관 체크
+const [userCheck, setUserCheck] = useState(false); // 개인정보 처리방침 체크
+const [marketingCheck, setMarketingCheck] = useState(false); // 마케팅 체크
+const [marketingEmailCheck, setMarketingEmailCheck] = useState(false); // 이메일
+const [marketingMsgCheck, setMarketingMsgCheck] = useState(false); // SMS
+const [ageCheck, setAgeCheck] = useState(false); // 나이 체크
+
+
+
+const [Link, setLink] = useState(true); // 다음 페이지 넘어가는 링크
+
+
+
+// 전체동의 체크하면 모든 항목 체크됨
+// 전체동의 체크 해제하면 모든 항목 체크 취소됨
+const allBtnEvent = (e) => {
+    setAllCheck(e.target.checked);
+    setUseCheck(e.target.checked);
+    setUserCheck(e.target.checked);
+    setMarketingCheck(e.target.checked);
+    setMarketingEmailCheck(e.target.checked);
+    setMarketingMsgCheck(e.target.checked);
+    setAgeCheck(e.target.checked); 
+  };
+  
+  // 서비스 이용약관 체크
+  const useBtnEvent = (e) => {
+    if(e.target.checked === false) setAllCheck(false);
+    else {
+    }
+    setUseCheck(e.target.checked);
+  };
+
+  // 개인정보 처리방침 체크
+  const userBtnEvent = (e) => {
+    if(e.target.checked === false) setAllCheck(false);
+    setUserCheck(e.target.checked);
+  };
+  
+  // 마케팅 동의 체크
+  const marketingBtnEvent = (e) => {
+    if(e.target.checked === false) setAllCheck(false);
+    if(e.target.checked === false) {
+      setMarketingEmailCheck(false);
+      setMarketingMsgCheck(false);
+    }
+    setMarketingCheck(e.target.checked);
+  };
+
+  const marketingEmailBtnEvent = (e) => {
+    if(e.target.checked === false) setAllCheck(false);
+    setMarketingEmailCheck(e.target.checked);
+    setMarketingCheck(true);
+  };
+
+  const marketingMsgBtnEvent = (e) => {
+    if(e.target.checked === false) setAllCheck(false);
+    setMarketingMsgCheck(e.target.checked);
+    setMarketingCheck(true);
+  };
+
+  // 만 14세 이상 체크
+  const ageBtnEvent = (e) => {
+    if(e.target.checked === false) setAllCheck(false);
+    if(e.target.checked === false) setLink(false);
+    setAgeCheck(e.target.checked);
+  };
+
+  const LinkBtnEvent = (e) => {
+    setLink(e.target.value);
+  };
+
+  
+
+ // 모든 세부 항목 체크되면 전체동의가 자동으로 체크됨
+    useEffect(() => {
+        if(useCheck === true && userCheck === true && marketingCheck === true && marketingEmailCheck === true && marketingMsgCheck === true && ageCheck === true) {
+          setAllCheck(true)
+        } else {
+          setAllCheck(false)
+        }
+      }, [useCheck, userCheck, marketingCheck, marketingEmailCheck, marketingMsgCheck, ageCheck]);
+
+  
+      // 해야할 것!
+      // 1. 이메일, SMS 둘 다 체크 풀었을 때 마케팅도 풀리게 하기
+      // 2. 필수 입력 요소 중에 하나라도 클릭안하면 회원가입 못하게 하기
+
+  // // 필수 입력 요소 중에 하나라도 클릭안하면 회원가입 못하게 하기
+  //     useEffect(() => {
+  //       if(useCheck === false || userCheck === false || ageCheck === false) {
+  //         setLink(false)
+  //       } else  {
+  //         setLink(true)
+  //       } 
+  //     }, [useCheck, userCheck, ageCheck]);
 
 
     return(
-        <div className="container">
-            {/* 회원가입 */}
-            <h1>JOIN US</h1>
-            <p>👟 슈즈의 기준, Sa shoe 회원가입하고 인싸되기</p>
-
-            <fieldset>
-                <legend><input type="checkbox"/>전체 약관에 동의합니다.</legend>
-                <fieldset>
-                    <legend><input type="checkbox" onClick={allBtnEvent}/>서비스 이용 약관에 동의합니다.(필수)</legend>
-                    <textarea>Sa shoe 서비스 이용 약관동의 
+        <>
+        <Container>
+            <ItemBox>
+                <JoinUs>JOIN US</JoinUs>
+                <Comments>👟 슈즈의 기준, Sa shoe 회원가입하고 인싸되기 </Comments>
+                    <CheckBox>
+                        <input type="checkbox" value={allCheck} checked={allCheck} onClick={allBtnEvent} />
+                        <Check>전체 약관에 동의합니다.</Check>
+                    </CheckBox>
+                <Item>
+                      <Box>
+                        <div>
+                          <input type="checkbox" value={useCheck} checked={useCheck}  onClick={useBtnEvent}/>
+                          <Check>서비스 이용 약관에 동의합니다. <Red>(필수)</Red></Check>
+                        </div>
+                      
+                        <Text>
+                        Sa shoe 서비스 이용 약관동의 
 
                         제 1조 (목적)
 
@@ -137,11 +301,20 @@ const Agree = () => {
                         1. 본 약관에 대해서는 대한민국법을 준거법으로 하고, 대한민국 법원이 관할권을 갖는 것으로 합니다. 2. “회사”와 “회원” 간 발생한 분쟁에 관한 소송은 제소 당시의 “회원”의 주소에 의하고, 주소가 없는 경우 거소를 관할하는 지방법원의 전속관할로 합니다. 단, 제소 당시 “회원”의 주소 또는 거소가 명확하지 아니한 경우의 관할법원은 민사소송법에 따라 정합니다. 해외에 주소나 거소가 있는 고객의 경우 “회사”와 “회원”간 발생한 분쟁에 관한 소송은 대한민국 서울중앙지방법원을 관할 법원으로 합니다.
 
                         공고일자: 2020년 6월 10일
-                        시행일자: 2020년 6월 10일</textarea>
-                </fieldset>
-                <fieldset>
-                    <legend><input type="checkbox"/>서비스 이용 약관에 동의합니다.(필수)</legend>
-                    <textarea>(주)Sa Shoe('https://www.sashoe.com/'이하 '회사') 는 고객의 개인정보보호를 소중하게 생각하고, 고객의 개인정보를 보호하기 위하여 항상 최선을 다해 노력하고 있습니다. 회사 는 「개인정보보호법」, 「정보통신망 이용촉진 및 정보보호 등에 관한 법률」을 비롯한 모든 개인정보보호 관련 법률규정을 준수하고 있습니다.
+                        시행일자: 2020년 6월 10일</Text><br/>
+                        </Box>
+
+                        <Box>
+                        <div>
+                          <input type="checkbox" value={userCheck} checked={userCheck}  onClick={userBtnEvent}/>
+                          <Check>개인정보 처리방침에 동의합니다. <Red>(필수)</Red></Check>
+                        </div>
+
+                        <Text>
+                        (주)Sa Shoe('https://www.sashoe.com/'이하 '회사') 는 고객의 개인정보보호를 소중하게 생각하고, 고객의 개인정보를 보호하기 위하여 항상 최선을 다해 노력하고 있습니다. 회사 는 「개인정보보호법」, 「정보통신망 이용촉진 및 정보보호 등에 관한 법률」을 비롯한 모든 개인정보보호 관련 법률규정을 준수하고 있습니다.
+
+
+
                         1. 수집하는 개인정보의 항목 및 수집방법
 
                         개인정보 수집에 대한 동의
@@ -163,10 +336,10 @@ const Agree = () => {
                         연락처
 
                         [선택입력사항]
-
+                        
                         주소
 
-
+                    
 
                         서비스 이용 또는 사업처리 과정에서 아래와 같은 정보들이 생성되어 수집될 수 있습니다.
 
@@ -450,7 +623,7 @@ const Agree = () => {
 
                         E-Mail : support@sashoe.com
 
-
+                      
 
                         15. 개인정보처리방침변경
 
@@ -462,18 +635,30 @@ const Agree = () => {
 
                         개인정보처리방침 변경공고일자 : 2022-06-14
 
-                        변경 개인정보처리방침 시행일자 : 2022-06-21</textarea>
-                </fieldset>
-                <fieldset>
-                    <legend><input type="checkbox"/>마케팅 활용 약관에 동의합니다.(선택)</legend>
-                    <input type="checkbox"/><label>이메일</label>
-                    <input type="checkbox"/><label>SMS</label>
-                </fieldset>
-                <label><input type="checkbox"/>만 14세 이상입니다.(필수)</label>
-            </fieldset>
-        </div>
-        
-    )
+                        변경 개인정보처리방침 시행일자 : 2022-06-21 </Text>
+                        </Box><br/>
 
+                        
+                        <div>
+                            <input type="checkbox" value={marketingCheck} checked={marketingCheck}  onClick={marketingBtnEvent} />
+                            <Check>마케팅 활용 약관에 동의합니다. <span>(선택)</span></Check>
+                            <span>　(</span><input type="checkbox" value={marketingEmailCheck} checked={marketingEmailCheck}  onClick={marketingEmailBtnEvent}/>
+                            <Check>이메일 </Check>
+                            <input type="checkbox" value={marketingMsgCheck} checked={marketingMsgCheck} onClick={marketingMsgBtnEvent}/>
+                            <Check>SMS</Check><span>)</span>
+                        </div><br/>
+
+                        <div>
+                            <input type="checkbox" value={ageCheck} checked={ageCheck} onClick={ageBtnEvent}/>
+                            <Check>만 14세 이상입니다. <Red>(필수)</Red></Check>
+                        </div><br/>
+                      
+                    <CancelBtn><NavLink to='/Home' style={({ isActive }) => ({ color: isActive ? 'black' : 'white' })}>취소하기</NavLink></CancelBtn>
+                    <JoinUsBtn><NavLink value={Link} to='/SignUp' style={({ isActive }) => ({ color: isActive ? 'black' : 'white' })} onClick={LinkBtnEvent}>다음단계</NavLink></JoinUsBtn>        
+                </Item>
+            </ItemBox>
+        </Container>
+        </>
+    );
 }
 export default Agree;

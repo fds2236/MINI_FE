@@ -4,7 +4,7 @@ import styled from "styled-components";
 import Modal from "../util/Modal";
 import MiniApi from '../api/MiniApi';
 
-
+// 도연 - 회원가입 페이지 작업중 
 
 
 const SignUp = () => {
@@ -138,6 +138,7 @@ const SignUp = () => {
             console.log(res.data.result);
 
             if(res.data.result === "OK") {
+                window.location.replace("/SignCom");
             } else {
                     console.log("회원가입에 실패했습니다. 다시 확인해주세요.");
                     setModalOpenSignUp(true);
@@ -168,7 +169,6 @@ const SignUp = () => {
             {/* 회원가입 */}
             <h1>JOIN US</h1>
             <p>👟 슈즈의 기준, Sa shoe 회원가입하고 인싸되기</p>
-            <p><b>* </b>표시 필수 입력</p>
 
             {/* 아이디 입력창 */}
             <div className="input">
@@ -186,7 +186,7 @@ const SignUp = () => {
             {/* 비밀번호 입력창 */}
             <div className="input">
                 <label>비밀번호</label>
-                <input className="pwd" value={inputPwd} type="password" onChange={onChangePwd}></input>
+                <input className="pwd" value={inputPwd} type="password" onChange={onChangePwd} required></input>
             </div>
 
             {/* 비밀번호 입력 제한 메시지 */}
@@ -197,7 +197,7 @@ const SignUp = () => {
             {/* 비밀번호 확인 입력창 */}
             <div className="input">
                 <label>비밀번호 확인</label>
-                <input className="pwdCheck" value={inputPwdCheck} type="password" onChange={onChangePwdCheck}></input>
+                <input className="pwdCheck" value={inputPwdCheck} type="password" onChange={onChangePwdCheck} required></input>
             </div>
 
             {/* 비밀번호 확인 입력 제한 메시지 */}
@@ -208,7 +208,7 @@ const SignUp = () => {
             {/* 이름 입력창 */}
             <div className="input">
                 <label>이름</label>
-                <input className="name" value={inputName} onChange={onChangeName}></input>
+                <input className="name" value={inputName} onChange={onChangeName} required></input>
             </div>
 
             {/* 이름 입력 제한 메시지 */}
@@ -219,7 +219,7 @@ const SignUp = () => {
             {/* 이메일 입력창 */}
             <div className="input">
                 <label>이메일</label>
-                <input className="email" value={inputEmail} onChange={onChangeEmail}></input>
+                <input className="email" value={inputEmail} onChange={onChangeEmail} required></input>
             </div>
 
             {/* 이메일 입력 제한 메시지 */}
@@ -230,7 +230,7 @@ const SignUp = () => {
             {/* 전화번호 입력창 */}
             <div className="input">
                 <label>전화번호</label>
-                <input className="phone" value={inputPhone} onChange={onChangePhone}></input>
+                <input className="phone" value={inputPhone} onChange={onChangePhone} required></input>
             </div>
 
             {/* 전화번호 입력 제한 메시지 */}
@@ -246,6 +246,7 @@ const SignUp = () => {
 
             <button><Link to="/">취소하기</Link></button>
             <button onClick={onClickSignUp}>회원가입</button>
+   
 
             <div>이미 아이디가 있으신가요?</div><button><Link to="/Login"> ＞ 로그인</Link></button>
 
