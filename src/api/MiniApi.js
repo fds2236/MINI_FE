@@ -83,6 +83,20 @@ const MiniApi =  {
         return await axios.post(MINI_DOMAIN + "BoardFindServlet", boardCmd, HEADER);
     },
 
+    // 게시물 등록하기
+    regBoard: async function(boardNum, category, title, content, id) {
+
+        const boardCmd = {
+            cmd: "regBoard",
+            boardNum: boardNum,
+            category: category,
+            title: title,
+            content: content,
+            id: id
+        }
+        return await axios.post(MINI_DOMAIN + "BoardRegServlet", boardCmd, HEADER);
+    },
+
     // pwd 재설정 기능
     resetPwd: async function(id, pw, pwdCheck) {
         const rePwdObj = {

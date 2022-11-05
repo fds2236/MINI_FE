@@ -24,6 +24,7 @@ const Contents = styled.div`
     height: fit-content;
     margin: 30px auto;
     background-color: white;
+    
 
 `;
 
@@ -123,22 +124,19 @@ const Board = () => {
             {/* <Title text={"글 제목"}></Title> */}
             <ReturnButton text={"목록으로 돌아가기"}></ReturnButton>
             </TitleAndBtn>
-         
-        
-        
-    
+
         {boardDetail && boardDetail.map(board => (
-            
-       
-            
+
             <Container>   
             <Contents>
                 &nbsp;
-                    <h1>
-                        글 고유번호 : {board.boardNum} <br></br>
-                        타이틀 : {board.title} <br></br>
-                        글 내용 : {board.boardContent}
-                    </h1>
+                    
+                    <h1>{board.title}</h1>
+                         
+                    <h3>{board.boardContent}</h3>
+                    <p>작성일 : {board.boardDate} <br></br> 작성자 : {board.id}</p>
+                    
+                    
                 &nbsp;
             </Contents>
             </Container>
