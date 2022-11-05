@@ -21,6 +21,7 @@ const SignUp = () => {
     const [idMsg, setIdMsg] = useState(''); 
     const [pwdMsg, setPwdMsg] = useState(''); 
     const [pwdCheckMsg, setPwdCheckMsg] = useState('');
+    const [nameMsg, setNameMsg] = useState('');
     const [emailMsg, setEmailMsg] = useState('');
     const [phoneMsg, setPhoneMsg] = useState('');
 
@@ -31,7 +32,6 @@ const SignUp = () => {
     const [isName, setIsName] = useState('');
     const [isEmail, setIsEmail] = useState('');
     const [isPhone, setIsPhone] = useState('');
-    const [isAddr, setIsAddr] = useState('');
 
     // 아이디 힌트
     const onChangeId = (e) => {
@@ -42,7 +42,6 @@ const SignUp = () => {
             setIdMsg("아이디는 영문자로 시작해야하며 4자 이상 영문자, 숫자 조합입니다.");
             setIsId(false);    
         } else {
-            setIdMsg("아이디가 올바른 형식입니다.");
             setIsId(true);
         }
     }
@@ -56,7 +55,6 @@ const SignUp = () => {
             setPwdMsg("비밀번호는 8자 이상, 영문자, 숫자, 특수문자를 모두 포함해야 합니다.");
             setIsPwd(false)
         } else {
-            setPwdMsg("비밀번호가 올바른 형식입니다.")
             setIsPwd(true);
         }        
     }
@@ -75,38 +73,45 @@ const SignUp = () => {
     }  
 
     // 이름 힌트
-    const onChangeName = (e) => setName(e.target.value);
+    const onChangeName = (e) => {
+        const nameRegex = /^[가-힣a-zA-Z]+$/;
+        const nameCurrent = e.target.value;
+        setName(nameCurrent);
+        if (!nameRegex.test(nameCurrent)) {
+            setNameMsg("이름을 확인해주세요.")
+            setIsName(false)
+        } else {
+            setIsName(true)
+        }
+    }
 
     // 이메일 힌트
     const onChangeEmail = (e) => { 
-        const email = inputEmail.includes('@') && inputEmail.includes('.');
+        const emailRegex = /^([a-z]+\d*)+(\.?\w+)+@\w+(\.\w{2,3})+$/;
         const emailCurrent = e.target.value;
         setEmail(emailCurrent);
-        if (!email.test(emailCurrent)) {
-            setEmailMsg("이메일을 다시 입력해주세요. '@'를 포함해야 합니다.)")
+        if (!emailRegex.test(emailCurrent)) {
+            setEmailMsg("이메일을 다시 입력해주세요. '@'를 포함해야 합니다.")
             setIsEmail(false)
         } else {
-            setEmailMsg("이메일이 올바른 형식입니다.")
             setIsEmail(true);
         }
     }
 
     // 전화번호 힌트
     const onChangePhone = (e) => { 
-        const emailRegex =  /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+        const phoneRegex =  /\d{3}-\d{4}-\d{4}/;
         const phoneCurrent = e.target.value;
         setPhone(phoneCurrent);
-        if (!emailRegex.test(phoneCurrent)) {
-            setPhoneMsg("전화번호를 다시 입력해주세요. '-'을 포함해야 합니다.)")
+        if (!phoneRegex.test(phoneCurrent)) {
+            setPhoneMsg("전화번호를 다시 입력해주세요. '-'을 포함해야 합니다.")
             setIsPhone(false)
         } else {
-            setPhoneMsg("전화번호가 올바른 형식입니다.")
             setIsPhone(true);
         }
     }
 
-
-    
+    // 주소
     const onChangeAddr = (e) => setAddr(e.target.value);
 
     // 모달
@@ -202,6 +207,11 @@ const SignUp = () => {
                 <input className="name" value={inputName} onChange={onChangeName}></input>
             </div>
 
+            {/* 이름 입력 제한 메시지 */}
+            <div className="hint">
+            <span className={`message ${isName ? 'success' : 'error'}`}>{nameMsg}</span>
+            </div>
+
             {/* 이메일 입력창 */}
             <div className="input">
                 <label>이메일</label>
@@ -209,9 +219,9 @@ const SignUp = () => {
             </div>
 
             {/* 이메일 입력 제한 메시지 */}
-           {/* <div className="hint">
-           <span className={`message ${isEmail ? 'success' : 'error'}`}>{emailMsg}</span>
-           </div> */}
+            <div className="hint">
+            <span className={`message ${isEmail ? 'success' : 'error'}`}>{emailMsg}</span>
+            </div>
 
             {/* 전화번호 입력창 */}
             <div className="input">
@@ -230,10 +240,10 @@ const SignUp = () => {
                 <input className="addr" value={inputAddr} onChange={onChangeAddr}></input>
             </div>
 
-            <button Link to='/'>취소하기</button>
-            <button onClick={onClickSignUp} >회원가입</button>
+            <button><Link to="/">취소하기</Link></button>
+            <button onClick={onClickSignUp}>회원가입</button>
 
-            <div>이미 아이디가 있으신가요?</div><button Link to='/Login'> ＞ 로그인</button>
+            <div>이미 아이디가 있으신가요?</div><button><Link to="/Login"> ＞ 로그인</Link></button>
 
             {/* 모달 */}
             {modalOpenIdCheck && <Modal open={modalOpenIdCheck} close={closeModalIdCheck} header="확인">이미 가입된 아이디입니다.</Modal>}

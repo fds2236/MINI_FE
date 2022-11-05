@@ -6,7 +6,7 @@ const MiniApi =  {
 
     // 회원가입
     signUp: async function(id, pwd, name, email, phone, addr) {
-        const signupObj = {
+        const signUpObj = {
             id: id,
             pwd: pwd,
             memName: name,
@@ -15,7 +15,7 @@ const MiniApi =  {
             addr: addr
             
         }
-        return await axios.post(MINI_DOMAIN + "SignUpServlet", signupObj, HEADER);
+        return await axios.post(MINI_DOMAIN + "SignUpServlet", signUpObj, HEADER);
     },
     
     // 아이디 중복확인
