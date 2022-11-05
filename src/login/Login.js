@@ -11,25 +11,7 @@ import styled from "styled-components";
 //     window
 // }
 
-
 const LoginBlock = styled.div`
-    .loginButton {
-        width : 280px;
-        height : 40px;
-        background-color : white;
-        border-radius : 5px;
-        border: solid #eeeeee;
-        margin : 5px;
-    }
-
-    .loginButton:hover {
-        border-radius : 5px;
-        border : none;
-        font-weight: 600;
-        background-color: rgb(0,173,181);
-        color: white;
-    }  
-
     .input {
         width : 270px;
         height : 35px;
@@ -37,23 +19,50 @@ const LoginBlock = styled.div`
         border-radius : 5px;
         border: solid #eeeeee;
         margin : 5px;
+        &:hover {
+            border : solid rgb(0,173,181) 1px;
+            font-weight: 600;
+            color: rgb(0,173,181);
+        } 
+        &:focus {
+            outline : solid rgb(0,173,181) 1px;
+            font-weight: 600;
+        }
     }
 
-    .input:hover {
-        border-radius : 5px;
-        border : solid rgb(0,173,181) 1px;
-        font-weight: 600;
-        color: rgb(0,173,181);
-    } 
+    .hint {
+        font-size : 14px;
+        color:green;
+    }
 
-    .input:focus {
-        outline : solid rgb(0,173,181) 1px;
-        font-weight: 600;
+    .loginButton {
+        width: 280px;
+        height: 40px;
+        margin: 10px;
+        background-color: white;
+        border-radius: 5px;
+        border: solid #eeeeee;
+        &:hover {
+            color: white;
+            border: none;
+            font-weight: 600;
+            background-color: rgb(0,173,181);      
+        }  
     }
 `;
 
-
-
+const PageLink = styled.div`
+    .link_item {
+        margin: 10px;
+        color: rgb(57,62,70);
+        font-size : 14px;
+        text-decoration-line: none;
+        &:hover {
+            color: rgb(0,173,181);
+            font-weight: 600;
+        }
+    }
+`;
 
 const Login = () => {
        // 아이디, 비밀번호 입력
@@ -127,9 +136,9 @@ const Login = () => {
         }
    
        return(
-        <div>
+        <div className="container">
             <LoginBlock>
-                <h1>로그인</h1>
+                <h3>로그인</h3>
                 {/* 아이디 입력창 */}
                 <input className="input" value={inputId} placeholder="아이디" onChange={onChangeId}></input>   
 
@@ -151,13 +160,11 @@ const Login = () => {
                 <br/>
             </LoginBlock>
            
-            <Link>
-                <Link to="/Agree">회원가입</Link>
-                <br />
-                <Link to="/ForgotId">아이디 찾기</Link>
-                <br />
-                <Link to="/ForgotPwd">비밀번호 찾기</Link>
-            </Link>
+            <PageLink>
+                <Link to="/Agree" className="link_item">회원가입</Link>
+                <Link to="/ForgotId" className="link_item">아이디 찾기</Link>
+                <Link to="/ForgotPwd" className="link_item">비밀번호 찾기</Link>
+            </PageLink>
 
             {modalOpen && <Modal open={modalOpen} close={closeModal} header="확인">{modalText}</Modal>}
         </div>

@@ -5,6 +5,41 @@ import Modal from "../util/Modal";
 import styled from "styled-components";
 import axios from "axios";
 
+const RePwdBlock = styled.div`
+    .input {
+        width : 270px;
+        height : 35px;
+        background-color : white;
+        border-radius : 5px;
+        border: solid #eeeeee;
+        margin : 5px;
+        &:hover {
+            border : solid rgb(0,173,181) 1px;
+            color: rgb(0,173,181);
+            font-weight: 600;
+        } 
+        &:focus {
+            outline : solid rgb(0,173,181) 1px;
+            font-weight: 600;
+        }
+    }
+
+    .rePwdButton {
+        width : 280px;
+        height : 40px;
+        background-color : white;
+        border-radius : 5px;
+        border: solid #eeeeee;
+        margin : 5px;
+        &:hover {
+            border : none;
+            font-weight: 600;
+            background-color: rgb(0,173,181);
+            color: white;
+        }
+    }
+`;
+
 const RePwd = () => {
     // 아이디, 패스워드 및 패스워드 체크 입력
     const [inputId, setInputId] = useState("");
@@ -76,18 +111,15 @@ const RePwd = () => {
     
     return(
         <div className="container">
-        <h1>비밀번호 재설정</h1>
+        <RePwdBlock>
+        <h3>비밀번호 재설정</h3>
         {/* 아이디 입력창 */}
-        <div className="input">
-        <input type="text" placeholder="아이디" value={inputId} onChange={onChangeId}></input>
+        <input className="input" type="text" placeholder="아이디" value={inputId} onChange={onChangeId}></input>
         <br />
-        </div>
 
         {/* 패스워드 입력창 */}
-        <div className="input">
-        <input type="password" placeholder="비밀번호" value={inputPwd} onChange={onChangePwd}></input>
+        <input className="input" type="password" placeholder="비밀번호" value={inputPwd} onChange={onChangePwd}></input>
         <br/>
-        </div>
 
         {/* 패스워드 입력 제한 메시지 */}
         <div className="hint">
@@ -95,10 +127,8 @@ const RePwd = () => {
         </div>
         
         {/* 패스워드 체크 입력창  */}
-        <div className="input">
-        <input type="password" placeholder="비밀번호 확인" value={inputPwdCk} onChange={onChangePwdCk}></input>
+        <input className="input" type="password" placeholder="비밀번호 확인" value={inputPwdCk} onChange={onChangePwdCk}></input>
         <br/>
-        </div>
 
         {/* 패스워드 입력 제한 메시지 */}
         <div className="hint">
@@ -106,9 +136,8 @@ const RePwd = () => {
         </div>
 
         {/* 확인 버튼 클릭 */}
-        <div className="button">
-        <button onClick={onClickRePwd}>확인</button>
-        </div>
+        <button className="rePwdButton" onClick={onClickRePwd}>확인</button>
+        </RePwdBlock>
         {modalOpen && <Modal open={modalOpen} close={closeModal} header="확인">비밀번호가 변경되었습니다.</Modal>}
         </div>
     )

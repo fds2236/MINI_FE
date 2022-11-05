@@ -5,8 +5,38 @@ import Modal from "../util/Modal";
 import styled from "styled-components";
 
 const ForgotPwdBlock = styled.div`
+    .input {
+        width : 270px;
+        height : 35px;
+        background-color : white;
+        border-radius : 5px;
+        border: solid #eeeeee;
+        margin : 5px;
+        &:hover {
+            border : solid rgb(0,173,181) 1px;
+            color: rgb(0,173,181);
+            font-weight: 600;
+        } 
+        &:focus {
+            outline : solid rgb(0,173,181) 1px;
+            font-weight: 600;
+        }
+    }
 
-
+    .pwdButton {
+        width : 280px;
+        height : 40px;
+        background-color : white;
+        border-radius : 5px;
+        border: solid #eeeeee;
+        margin : 5px;
+        &:hover {
+            border : none;
+            font-weight: 600;
+            background-color: rgb(0,173,181);
+            color: white;
+        }
+    }
 `;
 
 
@@ -52,19 +82,21 @@ const ForgotPwd = () => {
     return(
         <div className="container">
             <ForgotPwdBlock>
-                <h1>비밀번호 찾기</h1>
+                <h3>비밀번호 찾기</h3>
                 {/* 아이디 입력창 */}
                 <input className="input" placeholder="아이디" value={inputId} onChange={onChangeId}></input>
+                <br/>
 
                 {/* 이메일 입력창 */}
                 <input className="input" placeholder="비밀번호" value={inputEmail} onChange={onChangeEmail}></input>
+                <br/>
 
                 {/* 비밀번호 찾기 버튼 활성화 */}
-                <div className="wd">
-                <button onClick={onClickPwd}>비밀번호 찾기</button>
-                </div>
+                <button className="pwdButton" onClick={onClickPwd}>비밀번호 찾기</button>
                 <br/>
             </ForgotPwdBlock>
+
+
             <Link>
                 {/* 다른 페이지 연결 */}
                 <Link to="/SignUp">회원가입</Link>

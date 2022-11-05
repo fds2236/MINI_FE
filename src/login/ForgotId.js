@@ -12,18 +12,15 @@ const ForgotIdBlock = styled.div`
         border-radius : 5px;
         border: solid #eeeeee;
         margin : 5px;
-    }
-
-    .input:hover {
-        border-radius : 5px;
-        border : solid rgb(0,173,181) 1px;
-        font-weight: 600;
-        color: rgb(0,173,181);
-    } 
-
-    .input:focus {
-        outline : solid rgb(0,173,181) 1px;
-        font-weight: 600;
+        &:hover {
+            border : solid rgb(0,173,181) 1px;
+            color: rgb(0,173,181);
+            font-weight: 600;
+        } 
+        &:focus {
+            outline : solid rgb(0,173,181) 1px;
+            font-weight: 600;
+        }
     }
 
     .idButton {
@@ -33,16 +30,26 @@ const ForgotIdBlock = styled.div`
         border-radius : 5px;
         border: solid #eeeeee;
         margin : 5px;
+        &:hover {
+            border : none;
+            font-weight: 600;
+            background-color: rgb(0,173,181);
+            color: white;
+        }
     }
+`;
 
-    .idButton:hover {
-        border-radius : 5px;
-        border : none;
-        font-weight: 600;
-        background-color: rgb(0,173,181);
-        color: white;
+const PageLink = styled.div`
+    .link_item {
+        margin: 10px;
+        color: rgb(57,62,70);
+        font-size : 14px;
+        text-decoration-line: none;
+        &:hover {
+            color: rgb(0,173,181);
+            font-weight: 600;
+        }
     }
-
 `;
 
 
@@ -95,7 +102,7 @@ const ForgotId = () => {
     return(
         <div className="container">
             <ForgotIdBlock>
-                <h1>아이디 찾기</h1>
+                <h3>아이디 찾기</h3>
                 {/* 이름 입력창 */}
                 <input className="input" placeholder="이름" value={inputName} onChange={onChangeName}></input>
                 <br/>
@@ -109,14 +116,14 @@ const ForgotId = () => {
             </ForgotIdBlock>
 
                 
-            <Link>
+            <PageLink>
                 {/* 다른 페이지 연결 */}
-                <Link to="/SignUp">회원가입</Link>
+                <Link to="/SignUp" className="link_item">회원가입</Link>
                 <br />
-                <Link to="/Login">로그인</Link>
+                <Link to="/Login" className="link_item">로그인</Link>
                 <br />
-                <Link to="/ForgotPwd">비밀번호 찾기</Link>
-            </Link>
+                <Link to="/ForgotPwd" className="link_item">비밀번호 찾기</Link>
+            </PageLink>
             {modalOpen && <Modal open={modalOpen} close={closeModal} header="확인">{findId}</Modal>}
         </div>
     )
