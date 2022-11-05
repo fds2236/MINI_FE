@@ -11,7 +11,17 @@ import styled from "styled-components";
 //     window
 // }
 
-// 전체를 감싸는 컨테이터 컴포넌트
+
+// const LoginBlock = styled.div`
+//     .input{
+//        border-style: solid 2px rbg(0, 173, 181);
+//        border-radius: 5px;
+//        background-color : black;
+//     }
+// `;
+
+
+
 
 const Login = () => {
        // 아이디, 비밀번호 입력
@@ -107,9 +117,9 @@ const Login = () => {
 
    
        return(
-        <div className="container">
+        <div>
             {/* <Form> */}
-           <h1>로그인</h1>
+           <h1>LOGIN</h1>
 
             {/* 아이디 입력창 */}
            <div className="input">

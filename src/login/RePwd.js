@@ -24,6 +24,7 @@ const RePwd = () => {
 
     const closeModal = () => {
         setModalOpen(false);
+        window.location.replace("/Login");
     };
 
     // 아이디 
