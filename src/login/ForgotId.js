@@ -2,11 +2,48 @@ import { Link } from "react-router-dom";
 import { useState} from "react";
 import MiniApi from "../api/MiniApi";
 import Modal from '../util/Modal'
-// 아이디를 찾으려면 이름과 이메일 입력 => 이메일값으로 아이디 찾기
-// 찾은 아이디 뒤에서 4자리는 ****처리해주고 싶음!
-// 아아디찾기 버튼 누르기
-// => 아이디 존재하면 모달창에 아이디 뿌려주기
-// => 아이디 없으면 모달창에 아이디가 존재하지 않습니다
+import styled from "styled-components";
+
+const ForgotIdBlock = styled.div`
+    .input {
+        width : 270px;
+        height : 35px;
+        background-color : white;
+        border-radius : 5px;
+        border: solid #eeeeee;
+        margin : 5px;
+    }
+
+    .input:hover {
+        border-radius : 5px;
+        border : solid rgb(0,173,181) 1px;
+        font-weight: 600;
+        color: rgb(0,173,181);
+    } 
+
+    .input:focus {
+        outline : solid rgb(0,173,181) 1px;
+        font-weight: 600;
+    }
+
+    .idButton {
+        width : 280px;
+        height : 40px;
+        background-color : white;
+        border-radius : 5px;
+        border: solid #eeeeee;
+        margin : 5px;
+    }
+
+    .idButton:hover {
+        border-radius : 5px;
+        border : none;
+        font-weight: 600;
+        background-color: rgb(0,173,181);
+        color: white;
+    }
+
+`;
 
 
 const ForgotId = () => {
@@ -57,31 +94,29 @@ const ForgotId = () => {
 
     return(
         <div className="container">
-            <h1>아이디 찾기</h1>
-            {/* 이름 입력창 */}
-            <div className="input">
-            <label>이름</label>
-            <input value={inputName} onChange={onChangeName} ></input>
-            </div>
+            <ForgotIdBlock>
+                <h1>아이디 찾기</h1>
+                {/* 이름 입력창 */}
+                <input className="input" placeholder="이름" value={inputName} onChange={onChangeName}></input>
+                <br/>
 
-            {/* 이메일 입력창 */}
-            <div className="input"> 
-            <label>이메일</label>
-            <input value={inputEmail} onChange={onChangeEmail}></input>
-            </div>
+                {/* 이메일 입력창 */}
+                <input className="input" placeholder="이메일"  value={inputEmail} onChange={onChangeEmail}></input>
+                <br/>
 
-            {/* 아이디 찾기 버튼 활성화 */}
-            <div className="findId">
-            <button onClick={onClickId}>FIND ID</button>
-            </div>
-            <br/>
+                {/* 아이디 찾기 버튼 활성화 */}
+                <button className="idButton" onClick={onClickId}>FIND ID</button>
+            </ForgotIdBlock>
 
-            {/* 다른 페이지 연결 */}
-            <Link to="/SignUp">회원가입</Link>
-            <br />
-            <Link to="/Login">로그인</Link>
-            <br />
-            <Link to="/ForgotPwd">비밀번호 찾기</Link>
+                
+            <Link>
+                {/* 다른 페이지 연결 */}
+                <Link to="/SignUp">회원가입</Link>
+                <br />
+                <Link to="/Login">로그인</Link>
+                <br />
+                <Link to="/ForgotPwd">비밀번호 찾기</Link>
+            </Link>
             {modalOpen && <Modal open={modalOpen} close={closeModal} header="확인">{findId}</Modal>}
         </div>
     )

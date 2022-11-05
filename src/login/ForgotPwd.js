@@ -2,6 +2,13 @@ import { Link } from "react-router-dom";
 import { useState} from "react";
 import MiniApi from "../api/MiniApi";
 import Modal from "../util/Modal";
+import styled from "styled-components";
+
+const ForgotPwdBlock = styled.div`
+
+
+`;
+
 
 const ForgotPwd = () => {
     // 이메일, 아이디 입력받기
@@ -44,30 +51,27 @@ const ForgotPwd = () => {
 
     return(
         <div className="container">
-        <h1>비밀번호 찾기</h1>
-        {/* 아이디 입력창 */}
-        <div className="input">
-        <label>아이디</label>
-        <input value={inputId} onChange={onChangeId}></input>
-        </div>
+            <ForgotPwdBlock>
+                <h1>비밀번호 찾기</h1>
+                {/* 아이디 입력창 */}
+                <input className="input" placeholder="아이디" value={inputId} onChange={onChangeId}></input>
 
-        {/* 이메일 입력창 */}
-        <div className="input">
-        <label>이메일</label>
-        <input value={inputEmail} onChange={onChangeEmail}></input>
-        </div>
+                {/* 이메일 입력창 */}
+                <input className="input" placeholder="비밀번호" value={inputEmail} onChange={onChangeEmail}></input>
 
-        {/* 비밀번호 찾기 버튼 활성화 */}
-        <div className="findPwd">
-        <button onClick={onClickPwd}>비밀번호 찾기</button>
-        </div>
-        <br/>
-
-        {/* 다른 페이지 연결 */}
-        <Link to="/SignUp">회원가입</Link>
-        <br />
-        <Link to="/Login">로그인</Link>
-        {modalOpen && <Modal open={modalOpen} close={closeModal} header="확인">고객정보가 일치하지 않습니다.</Modal>}    
+                {/* 비밀번호 찾기 버튼 활성화 */}
+                <div className="wd">
+                <button onClick={onClickPwd}>비밀번호 찾기</button>
+                </div>
+                <br/>
+            </ForgotPwdBlock>
+            <Link>
+                {/* 다른 페이지 연결 */}
+                <Link to="/SignUp">회원가입</Link>
+                <br />
+                <Link to="/Login">로그인</Link>
+            </Link>
+            {modalOpen && <Modal open={modalOpen} close={closeModal} header="확인">고객정보가 일치하지 않습니다.</Modal>}    
         </div>
     )
 }

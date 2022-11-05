@@ -13,21 +13,43 @@ import styled from "styled-components";
 
 
 const LoginBlock = styled.div`
-    .loginButton > button {
-        width : 200px;
-        height : 30px;
+    .loginButton {
+        width : 280px;
+        height : 40px;
         background-color : white;
         border-radius : 5px;
-        border: solid grey 2px;
-        margin : 10px;}
-
-    .loginButton > button:hover {
-        border-radius : 5px;
-        border-style : solid red 2px;
+        border: solid #eeeeee;
+        margin : 5px;
     }
-    
 
-  
+    .loginButton:hover {
+        border-radius : 5px;
+        border : none;
+        font-weight: 600;
+        background-color: rgb(0,173,181);
+        color: white;
+    }  
+
+    .input {
+        width : 270px;
+        height : 35px;
+        background-color : white;
+        border-radius : 5px;
+        border: solid #eeeeee;
+        margin : 5px;
+    }
+
+    .input:hover {
+        border-radius : 5px;
+        border : solid rgb(0,173,181) 1px;
+        font-weight: 600;
+        color: rgb(0,173,181);
+    } 
+
+    .input:focus {
+        outline : solid rgb(0,173,181) 1px;
+        font-weight: 600;
+    }
 `;
 
 
@@ -81,30 +103,9 @@ const Login = () => {
                setIsPwd(true);
            }
        }
-   
-    /// 수정 전 API 호출
-    //    const onClickLogin = async() => {
-    //        try {
-    //            const res = await MiniApi.userLogin(inputId, inputPwd);
-    //            console.log(res.data.result);
-   
-    //            if(res.data.result === "OK") {
-    //                window.localStorage.setItem("userId", inputId);
-    //                window.localStorage.setItem("userPwd", inputPwd);
-    //                window.location.replace("/");
-    //            } else {
-    //                setModalOpen(true);
-    //            }
-   
-    //        } catch (e) {
-    //            setModalOpen(true);
-    //            console.log("로그인 에러!")
-    //        }
-    //    }
 
-
-    // 수정 후 API호출
-    // 200은 정상로그인, 300은 id가 없음, 400은 pwd틀림
+        // API호출
+        // 200은 정상로그인, 300은 id가 없음, 400은 pwd틀림
        const onClickLogin = async() => {
         try {
             const res = await MiniApi.userLogin(inputId, inputPwd);
@@ -121,21 +122,16 @@ const Login = () => {
                 setModalOpen(true);
                 // 패스워드가 틀립니다. 모달창 팝업(res.data.result === 400)
             }
-         } catch (e) {
-         } 
-       }
+        } catch (e) {
+        } 
+        }
    
        return(
         <div>
             <LoginBlock>
-                 {/* <Form> */}
-                <h1>LOGIN</h1>
-
+                <h1>로그인</h1>
                 {/* 아이디 입력창 */}
-                <div className="input">
-                <label>아이디</label>
-                <input value={inputId} onChange={onChangeId}></input>   
-                </div>
+                <input className="input" value={inputId} placeholder="아이디" onChange={onChangeId}></input>   
 
                 {/* 아이디 입력 제한 메시지 */}
                 <div className="hint">
@@ -143,48 +139,29 @@ const Login = () => {
                 </div>
 
                 {/* 패스워드 입력창 */}
-                <div className="input">
-                <label>비밀번호</label>
-                <input value={inputPwd} type="password" onChange={onChangePwd}></input>
-                </div>
-                {/* </Form> */}
+                <input className="input" value={inputPwd} type="password" placeholder="비밀번호" onChange={onChangePwd}></input>
 
                 {/* 비밀번호 입력 제한 메시지 */}
                 <div className="hint">
                 {inputPwd.length > 0 && <span className={`message ${isPwd ? 'success' : 'error'}`}>{pwdMessage}</span>}
                 </div>
 
-                {/* 로그인 버튼 활성화 */}
-
-                {/* 수정 전 코드 */}
-                {/* <div className="loginButton">
-                {(isId && isPwd) ?
-                    <button className="enable_button"
-                    onClick={onClickLogin}>SIGN IN</button>  :
-                    <button className="disable_button"
-                    onClick={onClickLogin}>SIGN IN</button>}
-                    <Modal open={modalOpen} close={closeModal} header="오류">아이디 및 패스워드를 다시 확인해 주세요.
-                    </Modal>
-                </div> */}
-
-                {/* 수정 후 코드 */}
-                <div className="loginButton">
-                <button onClick={onClickLogin}>LOGIN</button>
-                </div>
+                {/* 로그인 버튼 */}
+                <button className="loginButton" onClick={onClickLogin}>LOGIN</button>
                 <br/>
             </LoginBlock>
            
             <Link>
-            <Link to="/Agree">회원가입</Link>
-            <br />
-            <Link to="/ForgotId">아이디 찾기</Link>
-            <br />
-            <Link to="/ForgotPwd">비밀번호 찾기</Link>
+                <Link to="/Agree">회원가입</Link>
+                <br />
+                <Link to="/ForgotId">아이디 찾기</Link>
+                <br />
+                <Link to="/ForgotPwd">비밀번호 찾기</Link>
             </Link>
 
             {modalOpen && <Modal open={modalOpen} close={closeModal} header="확인">{modalText}</Modal>}
         </div>
-    )
+        )
 }
 
-export default Login;
+export default Login;   
