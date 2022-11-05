@@ -12,13 +12,23 @@ import styled from "styled-components";
 // }
 
 
-// const LoginBlock = styled.div`
-//     .input{
-//        border-style: solid 2px rbg(0, 173, 181);
-//        border-radius: 5px;
-//        background-color : black;
-//     }
-// `;
+const LoginBlock = styled.div`
+    .loginButton > button {
+        width : 200px;
+        height : 30px;
+        background-color : white;
+        border-radius : 5px;
+        border: solid grey 2px;
+        margin : 10px;}
+
+    .loginButton > button:hover {
+        border-radius : 5px;
+        border-style : solid red 2px;
+    }
+    
+
+  
+`;
 
 
 
@@ -114,64 +124,65 @@ const Login = () => {
          } catch (e) {
          } 
        }
-
    
        return(
         <div>
-            {/* <Form> */}
-           <h1>LOGIN</h1>
+            <LoginBlock>
+                 {/* <Form> */}
+                <h1>LOGIN</h1>
 
-            {/* 아이디 입력창 */}
-           <div className="input">
-            <label>아이디</label>
-            <input value={inputId} onChange={onChangeId}></input>   
-           </div>
+                {/* 아이디 입력창 */}
+                <div className="input">
+                <label>아이디</label>
+                <input value={inputId} onChange={onChangeId}></input>   
+                </div>
 
-            {/* 아이디 입력 제한 메시지 */}
-            <div className="hint">
-           {inputId.length > 0 && <span className={`message ${isPwd ? 'success' : 'error'}`}>{idMessage}</span>}
-           </div>
+                {/* 아이디 입력 제한 메시지 */}
+                <div className="hint">
+                {inputId.length > 0 && <span className={`message ${isPwd ? 'success' : 'error'}`}>{idMessage}</span>}
+                </div>
 
-           {/* 패스워드 입력창 */}
-           <div className="input">
-           <label>비밀번호</label>
-           <input value={inputPwd} type="password" onChange={onChangePwd}></input>
-           </div>
-           {/* </Form> */}
-   
-           {/* 비밀번호 입력 제한 메시지 */}
-           <div className="hint">
-           {inputPwd.length > 0 && <span className={`message ${isPwd ? 'success' : 'error'}`}>{pwdMessage}</span>}
-           </div>
-      
-           {/* 로그인 버튼 활성화 */}
+                {/* 패스워드 입력창 */}
+                <div className="input">
+                <label>비밀번호</label>
+                <input value={inputPwd} type="password" onChange={onChangePwd}></input>
+                </div>
+                {/* </Form> */}
 
-           {/* 수정 전 코드 */}
-           {/* <div className="loginButton">
-           {(isId && isPwd) ?
-                   <button className="enable_button"
-                   onClick={onClickLogin}>SIGN IN</button>  :
-                   <button className="disable_button"
-                   onClick={onClickLogin}>SIGN IN</button>}
-                   <Modal open={modalOpen} close={closeModal} header="오류">아이디 및 패스워드를 다시 확인해 주세요.
-                   </Modal>
-           </div> */}
+                {/* 비밀번호 입력 제한 메시지 */}
+                <div className="hint">
+                {inputPwd.length > 0 && <span className={`message ${isPwd ? 'success' : 'error'}`}>{pwdMessage}</span>}
+                </div>
 
-           {/* 수정 후 코드 */}
-           <div className="loginButton">
-            <button onClick={onClickLogin}>LOGIN</button>
-           </div>
-            <br/>
+                {/* 로그인 버튼 활성화 */}
 
-            {/* 다른 페이지 연결 */}
-            <div className="link">
+                {/* 수정 전 코드 */}
+                {/* <div className="loginButton">
+                {(isId && isPwd) ?
+                    <button className="enable_button"
+                    onClick={onClickLogin}>SIGN IN</button>  :
+                    <button className="disable_button"
+                    onClick={onClickLogin}>SIGN IN</button>}
+                    <Modal open={modalOpen} close={closeModal} header="오류">아이디 및 패스워드를 다시 확인해 주세요.
+                    </Modal>
+                </div> */}
+
+                {/* 수정 후 코드 */}
+                <div className="loginButton">
+                <button onClick={onClickLogin}>LOGIN</button>
+                </div>
+                <br/>
+            </LoginBlock>
+           
+            <Link>
             <Link to="/Agree">회원가입</Link>
             <br />
             <Link to="/ForgotId">아이디 찾기</Link>
             <br />
             <Link to="/ForgotPwd">비밀번호 찾기</Link>
+            </Link>
+
             {modalOpen && <Modal open={modalOpen} close={closeModal} header="확인">{modalText}</Modal>}
-            </div>
         </div>
     )
 }
