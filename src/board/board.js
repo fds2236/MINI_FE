@@ -35,7 +35,6 @@ const TitleAndBtn = styled.div`
     height: 90px;
     justify-content: space-between;
 
-
 `;
 
 // 리턴 버튼 스타일드 컴포넌트
@@ -71,10 +70,8 @@ const StyledTitle = styled.h1`
  */
 
 
-// 리턴 버튼 컴포넌트
+//리턴 버튼 컴포넌트
 const ReturnButton = (props) => {
-
-
     return (
         <>
             <ReturnStyledButton onClick={OnClickToList} >{props.text}</ReturnStyledButton>
@@ -82,7 +79,7 @@ const ReturnButton = (props) => {
     );
 }
 
-// 목록으로 돌아가는 onClick 컴포넌트
+//목록으로 돌아가는 onClick 컴포넌트
 const OnClickToList = () => {   
     window.location.replace('/Boards');
 }
@@ -100,47 +97,54 @@ const Title = ({text}) => {
 
 const Board = () => {
 
-    let nowBoardNum = window.localStorage.getItem('boardNum');
 
-    const [boardInfo, setBoardInfo] = useState('');
-    const [loading, setLoading] = useState(false);
-
-    // const isLogin = window.localStorage.getItem("isLogin");
-    // if(isLogin === "FALSE") window.location.replace("/");
-    // 로그인 페이지로 접속하게 하기
+    const nowBoardNum = window.localStorage.getItem("boardNum");
+    const [boardDetail, setBoardDetail] = useState("");
 
     useEffect(() => {
-        const BoardData = async () => {
-            setLoading(true);
-            try {
-                const response = await MiniApi.boardInfo();
-                setBoardInfo(response.data);
-                console.log(response.data);
-            } catch (e) {  
-                console.log(e + "실패 입니다");
-            }
-            setLoading(false);
-        };
-        BoardData(); // 첫 페이지 로딩시 글 목록을 다 끌어옴
+        const boardData = async () => {
 
+            try {
+                console.log(nowBoardNum);
+                const response = await MiniApi.boardInfo(nowBoardNum);
+                setBoardDetail(response.data);
+                console.log(response.data)
+            } catch (e) {
+                console.log(e);
+            }
+        };
+        boardData();
     }, []);
 
-
     return(
+
         <>
-        <TitleAndBtn>
-            <Title text={"글 제목 입니다"}></Title>
+            <TitleAndBtn>
+            {/* <Title text={"글 제목"}></Title> */}
             <ReturnButton text={"목록으로 돌아가기"}></ReturnButton>
-        </TitleAndBtn>
-        <Container>   
+            </TitleAndBtn>
+         
+        
+        
+    
+        {boardDetail && boardDetail.map(board => (
+            
+       
+            
+            <Container>   
             <Contents>
                 &nbsp;
                     <h1>
-                        {nowBoardNum} 입니다
+                        글 고유번호 : {board.boardNum} <br></br>
+                        타이틀 : {board.title} <br></br>
+                        글 내용 : {board.boardContent}
                     </h1>
                 &nbsp;
             </Contents>
-        </Container>
+            </Container>
+            
+        ))}    
+
         </>
     );
 }

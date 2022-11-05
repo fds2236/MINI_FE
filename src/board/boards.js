@@ -164,7 +164,7 @@ const Boards = () => {
         const BoardData = async () => {
             setLoading(true);
             try {
-                const response = await MiniApi.boardInfo();
+                const response = await MiniApi.boardInfo('ALL'); // 전부다 조회할때는 인자값으로 ALL
                 setBoardInfo(response.data);
                 console.log(response.data);
             } catch (e) {  
@@ -201,7 +201,7 @@ const Boards = () => {
                    
                     
                     <MarginContent>
-                    <StyledContent onClick={()=>OnclickBoard(board.boardNum)} >
+                    <StyledContent onClick={() => OnclickBoard(board.boardNum)} >
                         <p>{board.boardNum}</p>
                         <StyledPicture src="https://media.bunjang.co.kr/product/198502427_1_1662395621_w856.jpg"></StyledPicture>
                         <div >
