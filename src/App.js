@@ -22,6 +22,7 @@ import Like from './mypage/Like';
 import Mypage from './mypage/Mypage';
 import RePwd from './login/RePwd';
 import Post from './signup/Post';
+import Mypost from './mypage/Mypost';
 
 function App() {
   return (
@@ -45,10 +46,11 @@ function App() {
           <Route path='/Board' element={<Board />} />
           <Route path='/WriteBoard' element={<WriteBoard />} />
           <Route path='/Privacy' element={<Privacy/>} />
-          {/* <Route path='/Like' element={<Like />} /> */}
+          <Route path='/Like' element={<Like />} />
           <Route path='/Mypage' element={<Mypage/>}/>
           <Route path='/RePwd' element={<RePwd/>} />
           <Route path='/signup' element={<Post />} />
+          <Route path='/Mypost' element={<Mypost />} />
       </Routes>
       <Footer/>
       </div>

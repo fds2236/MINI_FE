@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
-// import { useState } from "react";
 import styled from "styled-components";
+import Profile from "./Profile";
 
 const ModiContain = styled.div`
 
@@ -31,6 +31,8 @@ const Modify = () => {
     }
 
     return(
+        <>
+        <Profile/>
         <div>
         <h2>로그인 정보</h2>
         <hr/>
@@ -88,8 +90,8 @@ const Modify = () => {
         <input type="text" placeholder="주소"></input>
         </div>
         }
-        
         </div>
+        </>
     )
 }
 

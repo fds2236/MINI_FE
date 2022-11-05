@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
 import './Mypage.css';
 import { useState } from "react";
 import Profile from "./Profile";
@@ -38,10 +37,11 @@ const Like = () => {
     const [like, setLike] = useState(0);
     return (
         <>
-            <hr></hr>                    
+        <Profile/>
+        <hr></hr>                    
         <Container>
             <br/>
-            {/* <h2>관심 상품</h2> */}
+            <h2>관심 상품</h2>
             <div className="grid">
                 <div className="grid-item">
                     <img class = "dataimg" src ="/img/NB_574.png" alt="이미지"/>
