@@ -48,13 +48,14 @@ const RePwd = () => {
 
     // 패스워드 체크
     const onChangePwdCk = (e) => {
-        setInputPwdCk(e.target.value)
-        if(setInputPwdCk === setInputPwd) {
-            setPwdMessage("패스워드 일치")
-            setIsPwdCk(true);
-        } else {
-            setPwdCkMessage("패스워드 불일치");
+        const pwdCurrent = e.target.value;
+        setInputPwdCk(pwdCurrent)
+        if(pwdCurrent !== inputPwd) {
+            setPwdCkMessage("비밀번호가 일치하지 않습니다.")
             setIsPwdCk(false);
+        } else {
+            setPwdCkMessage("비밀번호가 일치합니다.")
+            setIsPwdCk(true);
         }
     }
 
