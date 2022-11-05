@@ -24,6 +24,7 @@ const SignUp = () => {
     const [nameMsg, setNameMsg] = useState('');
     const [emailMsg, setEmailMsg] = useState('');
     const [phoneMsg, setPhoneMsg] = useState('');
+    
 
     // 유효성 검사
     const [isId, setIsId] = useState('');
@@ -32,7 +33,7 @@ const SignUp = () => {
     const [isName, setIsName] = useState('');
     const [isEmail, setIsEmail] = useState('');
     const [isPhone, setIsPhone] = useState('');
-
+ 
     // 아이디 힌트
     const onChangeId = (e) => {
         const idRegex = /^[a-z]+[a-z0-9]{3,19}$/g;
@@ -114,6 +115,9 @@ const SignUp = () => {
     // 주소
     const onChangeAddr = (e) => setAddr(e.target.value);
 
+
+         
+
     // 모달
     const [modalOpenSignUp, setModalOpenSignUp] = useState(false); // 회원가입 버튼 눌렀을 때
     const closeModalSignUp = () => { // 모달 창 닫기
@@ -129,11 +133,11 @@ const SignUp = () => {
     // API 호출
     const onClickSignUp = async() => {  // 회원가입 
         try {
-            const res = await MiniApi.SignUp(inputId, inputPwd, inputPwdCheck, inputName, inputEmail, inputPhone, inputAddr);
+            const res = await MiniApi.signUp(inputId, inputPwd, inputName, inputEmail, inputPhone, inputAddr);
 
             console.log(res.data.result);
 
-            if(res.data.result === "NOK") {
+            if(res.data.result === "OK") {
             } else {
                     console.log("회원가입에 실패했습니다. 다시 확인해주세요.");
                     setModalOpenSignUp(true);
@@ -170,7 +174,7 @@ const SignUp = () => {
             <div className="input">
                 <label>아이디</label>
                 <input className="id" value={inputId} onChange={onChangeId}></input>
-                <button onClick={onClickIdCheck} >중복 확인</button>
+                <button onClick={onClickIdCheck}>중복 확인</button>
             </div>
 
             {/* 아이디 입력 제한 메시지 */}
