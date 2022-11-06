@@ -5,7 +5,7 @@ import './Modal.css';
 // 도연 작업 완료! (조원들 공동으로 사용하면 됩니다.)
 
 const Modal = (props) => {
-    const { open, confirm, close, header } = props; 
+    const { open, close, header } = props; // 필요 시 confirm 넣어서 쓰세요!
     return (
         <div className={open ? 'openModal modal' : 'modal'}>
             {open && 
@@ -25,5 +25,4 @@ const Modal = (props) => {
         </div>
     );
 };
-// 구조분해 props.children으로 바꿔서 띄워주기!
 export default Modal;

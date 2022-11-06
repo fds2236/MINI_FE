@@ -1,10 +1,74 @@
 import React, { useState } from 'react';
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Modal from "../util/Modal";
 import MiniApi from '../api/MiniApi';
 
 // 도연 - 회원가입 페이지 작업중 
+
+const SignUpBlock = styled.div`
+    width: 500px;
+    margin-left: 500px;
+    background-color : white;
+    border-radius : 5px;
+    border: solid #eeeeee;
+    &:hover {
+        border : solid rgb(0,173,181) 1px;
+        font-weight: 600;
+        color: rgb(0,173,181);
+    } 
+    
+    .input {
+        width : 300px;
+        height : 35px;
+        margin : 10px;
+        padding-left: 50px;
+        &:hover {
+            border : solid rgb(0,173,181) 0.5px;
+            font-weight: 600;
+            color: rgb(0,173,181);
+        } 
+        &:focus {
+            outline : solid rgb(0,173,181) 1px;
+            font-weight: 600;
+        }
+    }
+
+    .hint {
+        font-size : 14px;
+        color:green;
+    }
+
+`;
+
+const PageLink = styled.div`
+    .link_item {
+        margin: 10px;
+        color: rgb(57,62,70);
+        font-size : 14px;
+        text-decoration-line: none;
+        &:hover {
+            color: rgb(0,173,181);
+            font-weight: 600;
+        }
+    }
+
+    .SignUpButton {
+        width: 280px;
+        height: 40px;
+        margin: 10px;
+        background-color: white;
+        border-radius: 5px;
+        border: solid #eeeeee;
+        &:hover {
+            color: white;
+            border: none;
+            font-weight: 600;
+            background-color: rgb(0,173,181);      
+        }  
+    }
+`;
+
 
 
 const SignUp = () => {
@@ -166,10 +230,12 @@ const SignUp = () => {
     
     return(
         <div className="container">
+            
             {/* 회원가입 */}
             <h1>JOIN US</h1>
             <p>👟 슈즈의 기준, Sa shoe 회원가입하고 인싸되기</p>
 
+            <SignUpBlock>
             {/* 아이디 입력창 */}
             <div className="input">
                 <label>아이디</label>
@@ -243,12 +309,14 @@ const SignUp = () => {
                 <label>주소</label>
                 <input className="addr" value={inputAddr} onChange={onChangeAddr}></input>
             </div>
+            </SignUpBlock>
+            
+            <PageLink>
+            {/* <button><Link to="/" className="link_item">취소하기</Link></button> */}
+            <button onClick={onClickSignUp} className="SignUpButton">회원가입</button></PageLink>
+            
 
-            <button><Link to="/">취소하기</Link></button>
-            <button onClick={onClickSignUp}>회원가입</button>
-   
-
-            <div>이미 아이디가 있으신가요?</div><button><Link to="/Login"> ＞ 로그인</Link></button>
+            <div>이미 아이디가 있으신가요?</div><PageLink><button><Link to="/Login" className="link_item"> ＞ 로그인</Link></button></PageLink>
 
             {/* 모달 */}
             {modalOpenIdCheck && <Modal open={modalOpenIdCheck} close={closeModalIdCheck} header="확인">이미 가입된 아이디입니다.</Modal>}

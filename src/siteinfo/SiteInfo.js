@@ -1,5 +1,3 @@
-import React, { useState } from 'react';
-import { Link, NavLink } from "react-router-dom";
 import styled from "styled-components";
 import hasungwoon from '../siteinfo/images/하성운.png';
 import itzy from '../siteinfo/images/있지.png';
@@ -23,7 +21,6 @@ const Header = styled.div`
     font-weight: bold;
 
 `;
-
 
 const Banner = styled.div`
     background-color: black;
@@ -99,8 +96,6 @@ const Map = styled.img`
 `;
 
 
-
-
 const SiteInfo = () => {
 
     return(
@@ -109,7 +104,7 @@ const SiteInfo = () => {
             <Header><Shoes className="shoes" alt="shoes" src={shoes} />슈즈의 기준, Sa Shoe</Header>
             <Banner>Sa Shoe Show Room<br/> 12월 24일 OPEN<br/><Artist>초대 손님: 가수 하성운 님, 가수 있지 님<Comment>하성운 - Sneakers MV / ITZY - Sneakers MV 中 (Sa Shoe 협찬 상품)</Comment></Artist><br/>
             <Hasungwoon className="hasungwoon" alt="hasungwoon" src={hasungwoon} /><Itzy className="itzy" alt="itzy" src={itzy} /><br/></Banner>
-            <Footer><B>오시는 길</B><Map className="map" alt="map" src={map} /><br/>장소: 서울시 강남구 테헤란로 14길 6 남도빌딩 3층<br/>전화: 02-123-4567</Footer>
+            <Footer><B>오시는 길</B><Map className="map" alt="map" src={map} /><br/>장소: 서울시 강남구 테헤란로 14길 6 남도빌딩 3층<br/>담당자: 김도연 / 전화: 02-123-4567</Footer>
         
         </div>
         </>

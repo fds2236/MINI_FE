@@ -1,38 +1,95 @@
-import React, { useState } from 'react';
-import { Link, NavLink } from "react-router-dom";
-import styled from "styled-components";
-import Modal from "../util/Modal";
-import MiniApi from '../api/MiniApi';
+import React, { useState, useEffect } from 'react';
+import { Link } from "react-router-dom";
+// import styled from "styled-components";
+// import Modal from "../util/Modal";
 
 // 도연 - 회원가입 페이지 작업중 
-
-
 
 
 const Agree = () => {
 
     // 약관동의 체크박스 기능 구현
     const [allCheck, setAllCheck] = useState(false); // 모두 체크, 기본값은 체크안된상태
-    const [useCheck, setUseCheck] = useState(false); // 서비스 이용약관 체크
+    const [serviceCheck, setServiceCheck] = useState(false); // 서비스 이용약관 체크
     const [userCheck, setUserCheck] = useState(false); // 개인정보 처리방침 체크
     const [marketingCheck, setMarketingCheck] = useState(false); // 마케팅 체크
     const [marketingEmailCheck, setMarketingEmailCheck] = useState(false); // 이메일
     const [marketingSMSCheck, setMarketingSMSCheck] = useState(false); // SMS
     const [ageCheck, setAgeCheck] = useState(false); // 나이 체크
 
-
+    // const [Link, setLink] = useState(false); // 다음 페이지 넘어가는 링크
 
     // 전체동의 체크하면 모든 항목 체크됨
     // 전체동의 체크 해제하면 모든 항목 체크 취소됨
     const allBtnEvent = (e) => {
         setAllCheck(e.target.checked);
-        setUseCheck(e.target.checked);
+        setServiceCheck(e.target.checked);
         setUserCheck(e.target.checked);
         setMarketingCheck(e.target.checked);
         setMarketingEmailCheck(e.target.checked);
         setMarketingSMSCheck(e.target.checked);
         setAgeCheck(e.target.checked); 
-      };
+    };
+
+    // 서비스 이용약관 체크
+    const serviceBtnEvent = (e) => {
+        if(e.target.checked === false) setAllCheck(false);
+        else {
+        }
+        setServiceCheck(e.target.checked);
+    };
+
+    // 개인정보 처리방침 체크
+    const userBtnEvent = (e) => {
+        if(e.target.checked === false) setAllCheck(false);
+        setUserCheck(e.target.checked);
+    };
+    
+    // 마케팅 동의 체크
+    const marketingBtnEvent = (e) => {
+        if(e.target.checked === false) setAllCheck(false);
+        if(e.target.checked === false) {
+        setMarketingEmailCheck(false);
+        setMarketingSMSCheck(false);
+        }
+        setMarketingCheck(e.target.checked);
+    };
+
+    const marketingEmailBtnEvent = (e) => {
+        if(e.target.checked === false) setAllCheck(false);
+        setMarketingEmailCheck(e.target.checked);
+        setMarketingCheck(true);
+    };
+
+    const marketingSMSBtnEvent = (e) => {
+        if(e.target.checked === false) setAllCheck(false);
+        setMarketingSMSCheck(e.target.checked);
+        setMarketingCheck(true);
+    };
+
+    // 만 14세 이상 체크
+    const ageBtnEvent = (e) => {
+        if(e.target.checked === false) setAllCheck(false);
+        setAgeCheck(e.target.checked);
+    };
+
+
+    // 모든 세부 항목 체크되면 전체동의가 자동으로 체크됨
+    useEffect(() => {
+        if(serviceCheck === true && userCheck === true && marketingCheck === true && marketingEmailCheck === true && marketingSMSCheck === true && ageCheck === true) {
+        setAllCheck(true)
+        } else {
+        setAllCheck(false)
+        }
+    }, [serviceCheck, userCheck, marketingCheck, marketingEmailCheck, marketingSMSCheck, ageCheck]);
+
+    // // 필수 항목 모두 체크했을 때만 회원가입 버튼 눌리게
+    // // 필수 항목 중 하나라도 체크 안하면 모달창 띄우기
+    // const [modalOpenSignUp, setModalOpenSignUp] = useState(false); // 회원가입 버튼 눌렀을 때
+    // const closeModalSignUp = () => { // 모달 창 닫기
+    //     setModalOpenSignUp(false); 
+    // }
+
     
 
 
@@ -43,9 +100,9 @@ const Agree = () => {
             <p>👟 슈즈의 기준, Sa shoe 회원가입하고 인싸되기</p>
 
             <fieldset>
-                <legend><input type="checkbox"/>전체 약관에 동의합니다.</legend>
+                <legend><input type="checkbox" checked={allCheck} onClick={allBtnEvent}/>전체 약관에 동의합니다.</legend>
                 <fieldset>
-                    <legend><input type="checkbox" onClick={allBtnEvent}/>서비스 이용 약관에 동의합니다.(필수)</legend>
+                    <legend><input type="checkbox" checked={serviceCheck} onClick={serviceBtnEvent}/>서비스 이용 약관에 동의합니다.(필수)</legend>
                     <textarea>Sa shoe 서비스 이용 약관동의 
 
                         제 1조 (목적)
@@ -140,7 +197,7 @@ const Agree = () => {
                         시행일자: 2020년 6월 10일</textarea>
                 </fieldset>
                 <fieldset>
-                    <legend><input type="checkbox"/>서비스 이용 약관에 동의합니다.(필수)</legend>
+                    <legend><input type="checkbox" checked={userCheck} onClick={userBtnEvent}/>개인정보 이용 약관에 동의합니다.(필수)</legend>
                     <textarea>(주)Sa Shoe('https://www.sashoe.com/'이하 '회사') 는 고객의 개인정보보호를 소중하게 생각하고, 고객의 개인정보를 보호하기 위하여 항상 최선을 다해 노력하고 있습니다. 회사 는 「개인정보보호법」, 「정보통신망 이용촉진 및 정보보호 등에 관한 법률」을 비롯한 모든 개인정보보호 관련 법률규정을 준수하고 있습니다.
                         1. 수집하는 개인정보의 항목 및 수집방법
 
@@ -465,12 +522,17 @@ const Agree = () => {
                         변경 개인정보처리방침 시행일자 : 2022-06-21</textarea>
                 </fieldset>
                 <fieldset>
-                    <legend><input type="checkbox"/>마케팅 활용 약관에 동의합니다.(선택)</legend>
-                    <input type="checkbox"/><label>이메일</label>
-                    <input type="checkbox"/><label>SMS</label>
+                    <legend><input type="checkbox" checked={marketingCheck} onClick={marketingBtnEvent}/>마케팅 활용 약관에 동의합니다.(선택)</legend>
+                    <input type="checkbox" checked={marketingEmailCheck} onClick={marketingEmailBtnEvent}/><label>이메일</label>
+                    <input type="checkbox" checked={marketingSMSCheck} onClick={marketingSMSBtnEvent}/><label>SMS</label>
                 </fieldset>
-                <label><input type="checkbox"/>만 14세 이상입니다.(필수)</label>
+                <label><input type="checkbox" checked={ageCheck} onClick={ageBtnEvent}/>만 14세 이상입니다.(필수)</label>
             </fieldset>
+            <button><Link to="/">취소하기</Link></button>
+            <button><Link to="/SignUp" >다음단계</Link></button>
+
+            {/* 모달 */}
+            {/* {modalOpenSignUp && <Modal open={modalOpenSignUp} close={closeModalSignUp} header="확인">필수 항목을 모두 체크해주세요.</Modal>} */}
         </div>
         
     )
