@@ -26,7 +26,11 @@ const ItemDescBlock = styled.div`
     color: rgb(0,173,181);
   }
   .item-name {
-    line-height: 1em;
+    line-height: 1.1em;
+  }
+  .item-name:hover {
+    cursor: pointer;
+    text-decoration: underline;
   }
   .price {
     font-size: 0.8em;
@@ -65,11 +69,17 @@ const brandCategories = [
   }
 ]
 
-const ItemList = (props) => {
+const ItemList = () => {
   const [category, setCategory] = useState("ALL");
   const [sortCondition, setSortCondition] = useState("NEW_DATE");
   const [itemInfo, setItemInfo] = useState('');
   
+  // 상품명 클릭 시 해당 상품 상세페이지로 이동
+  const onClickDetail = (val) => {
+    console.log("상세페이지로 이동 : " + val);
+    window.localStorage.setItem("Detail", val);
+    window.location.replace("/ItemDetail");
+  }
   
   useEffect(() => {
     console.log("상품 목록 보기 컴포넌트 useEffect Call !!!!!!!");
@@ -86,9 +96,10 @@ const ItemList = (props) => {
 
   // 브랜드명 클릭 시 해당 브랜드 상품만 보여줌
   const onClickBrand = (val) => {
-    console.log("브랜드 : " + val);
+    console.log("브랜드 카테고리로 이동 : " + val);
     setCategory(val);
   }
+
 
   return(
     <div>
@@ -106,7 +117,7 @@ const ItemList = (props) => {
           <ItemBlock key={item.PRO_CODE}>
             <ItemDescBlock>
               <p className="brand-name" onClick={()=>onClickBrand(item.BRAND)}>{item.BRAND}</p>
-              <p className="item-name">{item.PRO_NAME}</p>
+              <p className="item-name" key={item.PRO_NAME} onClick={()=>onClickDetail(item.PRO_BRAND)}>{item.PRO_NAME}</p>
               <p className="laun-date">{item.LAUN_DATE}</p>
               <p className="price">발매가 : {item.PRICE}원</p>
               <p className="like">♡ 관심상품 </p>
