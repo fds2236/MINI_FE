@@ -29,12 +29,25 @@ const ForgotPwdBlock = styled.div`
         background-color : white;
         border-radius : 5px;
         border: solid #eeeeee;
-        margin : 5px;
+        margin : 10px;
         &:hover {
             border : none;
             font-weight: 600;
             background-color: rgb(0,173,181);
             color: white;
+        }
+    }
+`;
+
+const PageLink = styled.div`
+    .link_item {
+        margin: 20px;
+        color: rgb(57,62,70);
+        font-size : 14px;
+        text-decoration-line: none;
+        &:hover {
+            color: rgb(0,173,181);
+            font-weight: 600;
         }
     }
 `;
@@ -92,17 +105,15 @@ const ForgotPwd = () => {
                 <br/>
 
                 {/* 비밀번호 찾기 버튼 활성화 */}
-                <button className="pwdButton" onClick={onClickPwd}>비밀번호 찾기</button>
+                <button className="pwdButton" onClick={onClickPwd}>FIND PASSWORD</button>
                 <br/>
             </ForgotPwdBlock>
 
-
-            <Link>
+            <PageLink>
                 {/* 다른 페이지 연결 */}
-                <Link to="/SignUp">회원가입</Link>
-                <br />
-                <Link to="/Login">로그인</Link>
-            </Link>
+                <Link to="/SignUp" className="link_item">회원가입</Link>
+                <Link to="/Login" className="link_item">로그인</Link>
+            </PageLink>
             {modalOpen && <Modal open={modalOpen} close={closeModal} header="확인">고객정보가 일치하지 않습니다.</Modal>}    
         </div>
     )

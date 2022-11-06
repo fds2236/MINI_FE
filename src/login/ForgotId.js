@@ -29,7 +29,7 @@ const ForgotIdBlock = styled.div`
         background-color : white;
         border-radius : 5px;
         border: solid #eeeeee;
-        margin : 5px;
+        margin : 10px;
         &:hover {
             border : none;
             font-weight: 600;
@@ -41,7 +41,7 @@ const ForgotIdBlock = styled.div`
 
 const PageLink = styled.div`
     .link_item {
-        margin: 10px;
+        margin: 20px;
         color: rgb(57,62,70);
         font-size : 14px;
         text-decoration-line: none;
@@ -119,9 +119,7 @@ const ForgotId = () => {
             <PageLink>
                 {/* 다른 페이지 연결 */}
                 <Link to="/SignUp" className="link_item">회원가입</Link>
-                <br />
                 <Link to="/Login" className="link_item">로그인</Link>
-                <br />
                 <Link to="/ForgotPwd" className="link_item">비밀번호 찾기</Link>
             </PageLink>
             {modalOpen && <Modal open={modalOpen} close={closeModal} header="확인">{findId}</Modal>}
