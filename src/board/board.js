@@ -58,12 +58,17 @@ const Button = styled.button`
     height: 30px;
 `;
 
-// 타이틀 스타일드 컴포넌트
-const StyledTitle = styled.h1`
-    width: fit-content;
-    display: block;
-
+// 오렌지 버튼 스타일드 컴포넌트
+const OrangeRedStyledButton = styled.button`
+    background-color: orangered;
+    border-style: none;
+    border-radius: 10px;
+    width: 100px;
+    height: 30px;
+    color: #EEEEEE;
+    margin-bottom: 100px;
 `;
+
 
 
 /**
@@ -85,14 +90,19 @@ const OnClickToList = () => {
     window.location.replace('/Boards');
 }
 
-// 타이틀 컴포넌트
-const Title = ({text}) => {
-    return(
-        <StyledTitle>
-            {text}
-        </StyledTitle>
-    );
-}
+// 삭제하기 onClick 컴포넌트
+// const OnClickDelete = async() => {
+//     try {
+//         console.log(nowBoardNum);
+//         const response = await MiniApi.boardInfo(nowBoardNum);
+//         setBoardDetail(response.data);
+//         console.log(response.data)
+//     } catch (e) {
+//         console.log(e);
+//     }
+// }
+
+
 
 
 
@@ -126,7 +136,7 @@ const Board = () => {
             </TitleAndBtn>
 
         {boardDetail && boardDetail.map(board => (
-
+            <>
             <Container>   
             <Contents>
                 &nbsp;
@@ -140,8 +150,12 @@ const Board = () => {
                 &nbsp;
             </Contents>
             </Container>
+            <OrangeRedStyledButton >삭제하기</OrangeRedStyledButton>
+            </>
             
         ))}    
+
+        
 
         </>
     );

@@ -109,10 +109,11 @@ const MiniApi =  {
     },
 
     // 게시물 삭제하기
-    boardDelete : async function(boardNum) {
+    boardDelete : async function(boardNum,id) {
         const boardCmd = {
             cmd: "BoardDelete",
-            boardNum : boardNum
+            boardNum : boardNum,
+            id : id
         }
         return await axios.post(MINI_DOMAIN + "BoardDeleteServlet", boardCmd, HEADER);
     },
