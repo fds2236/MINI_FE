@@ -33,8 +33,6 @@ const MarginContent = styled.div`
 
 
 
-
-
 // ---- [버튼관련] ----
 
 
@@ -126,17 +124,11 @@ const Button = (props) => {
     );
 }
 
-// 레드버튼 컴포넌트
-const OrangeRedButton = (props) => {
-    return (
-        <>
-            <OrangeRedStyledButton>{props.text}</OrangeRedStyledButton>
-        </>
-    );
-}
+
 
 // 리턴 버튼 컴포넌트
 const ReturnButton = (props) => {
+    
 
     return (
         <>
@@ -145,47 +137,8 @@ const ReturnButton = (props) => {
     );
 }
 
-// 제목쓰기 컴포넌트
-// const TitleArea = () => {
-
-//     const [TitleValue, setTitleValue] = useState("");
-//     const onChange= (event) => {
-// 		const v = event.target.value
-		
-// 	}
-
-//     return (
-//         <>
-//             <StyledTitleArea 
-//                 placeholder="제목을 입력 하세요 ....."
-//                 value={TitleValue}
-//                 onChange={onChange}
-//             ></StyledTitleArea>
-//         </>
-//     );
-// } 
 
 
-
-// 글쓰기 컴포넌트
-// const TextArea = () => {
-
-//     const [textValue, setTextValue] = useState("");
-//     const onChange= (event) => {
-// 		const v = event.target.value
-// 		setTextValue(v)
-// 	}
-
-//     return (
-//         <>
-//             <StyledTextArea 
-//                 placeholder="본문 내용을 입력 하세요 ....."
-//                 value={textValue}
-//                 onChange={onChange}
-//             ></StyledTextArea>
-//         </>
-//     );
-// }
 
 // 목록으로 돌아가는 onClick
 const OnClickToList = () => {   
@@ -193,23 +146,6 @@ const OnClickToList = () => {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-const boardObj = {
-    id: "",
-    boardNum: "",
-    category: "",
-    title: "",
-    boardContent: ""
-};
 
 const WriteBoard = () => {
     const [id, setId] = useState('');
@@ -227,34 +163,47 @@ const WriteBoard = () => {
     const onChangeTitle = (e) => {
         console.log("title : " + e.target.value);
         setTitle(e.target.value);
+        isSubmit();
     }
-    const onChangeBoardContent = (e) => setBoardContent(e.target.value);
+    const onChangeBoardContent = (e) => {
+        console.log("boardContent : " + e.target.value);
+        setBoardContent(e.target.value);
+        isSubmit();
+    }
+    
+    // 레드버튼 컴포넌트
+    const SubmitButton = (props) => {
+        setId(window.localStorage.getItem("whoLoginNow"));
+        console.log("now ID : "+id);
+        return (
+            <>
+                <OrangeRedStyledButton onClick={onSubmit} >{props.text}</OrangeRedStyledButton>
+            </>
+        );
+    }
     
     
-    // const onChangeMail = (e) => {
-    //     setMail(e.target.value);
-    //     //isSubmit();
-    // }
 
-    // 서버에게 회원 가입 정보를 전송할지에 대한 여부 판단
-    // const isSubmit = () => {
-    //     if(id && pwd && name && mail) setSubmit(true);
-    // }
+    // 서버에게 회원 가입 정보를 전송할지에 대한 여부 판단 ( 다 있으면 submit이 true);
+    const isSubmit = () => {
+        if(boardContent && title) setSubmit(true);
+    }
 
     // 전송 버튼이 눌려지면 동작하는 함수, 함수가 비동기 통신을 해야 하므로 async 키워드 추가
     const onSubmit = async () => {
-
+        console.log("onSubmit 동작");
         try {
-            // 서버에 대한 요청을 비동기로 처리 함
-            const res =  await MiniApi.regBoard(boardNum, category, title, boardContent,id);
-            //const res = KhApi.userLogin(111, 11);
+            const res =  await MiniApi.boardReg(category, title, boardContent,id);
+            
             setResData(res.data);
+            window.location.replace("/Boards");
 
         } catch (e) {
             console.log(e);
         }
     }
 
+    // 카테고리 값을 바꾸어 주는 컴포넌트 
     const handleCategorySelect = (e) => {
         console.log(e.target.value); // 카테고리 값이 잘 바뀌었는지 확인
         setCategory(e.target.value);
@@ -289,10 +238,8 @@ const WriteBoard = () => {
                 </label>
                 </div>
                 
-               
             </ButtonContainer>
 
-            
             <Contents>
                     {/* 제목 입력 칸 */}
                     <StyledTitleArea 
@@ -307,56 +254,11 @@ const WriteBoard = () => {
                         value={boardContent}
                         onChange={onChangeBoardContent}
                     ></StyledTextArea>
-           
-            </Contents> 
-
-            <OrangeRedButton text={"글쓰기"}></OrangeRedButton>
-                
+            </Contents>            
+            {submit && <SubmitButton text={"글쓰기"}></SubmitButton>}
         </Container>
-
-
-
-
-
-        // <div>
-        //     <h1>회원 정보 설정</h1>
-        //     <br/>
-        //     <input type="text" placeholder='아이디 입력' value={id} onChange={onChangeId} />
-        //     <br />
-        //     <input type="password" placeholder='패스워드 입력' value={pwd} onChange={onChangePwd} />
-        //     <br />
-        //     <input type="text" placeholder='이름 입력' value={name} onChange={onChangeName} />
-        //     <br />
-        //     <input type="email" placeholder='메일 입력' value={mail} onChange={onChangeMail} />
-        //     <br />
-        //     {submit && <button onClick={onSubmit}>전송</button>} 
-        // </div>
     );
 };
 
-
-  
-// const WriteBoard = () => {
-//     return(
-//         <Container>  
-//             <ButtonContainer>
-//                 <ReturnButton text={"목록으로 돌아가기"}></ReturnButton>
-//                 <Button text={"자유게시판"}></Button>
-//                 <Button text={"후기게시판"}></Button>
-//             </ButtonContainer>
-
-//             {/* &nbsp;를 사용하여 의도적으로 공백을 넣음. 글이 아무것도 없을때 대비 */}
-//             <Contents>
-//                 &nbsp;
-//                     <TitleArea></TitleArea>
-//                     <TextArea></TextArea>
-//                 &nbsp;  
-//             </Contents> 
-
-//             <OrangeRedButton text={"글쓰기"}></OrangeRedButton>
-                
-//         </Container>
-//     );
-// }
 
 export default WriteBoard;

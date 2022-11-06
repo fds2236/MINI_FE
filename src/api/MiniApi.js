@@ -86,11 +86,10 @@ const MiniApi =  {
     },
 
     // 게시물 등록하기
-    regBoard: async function(boardNum, category, title, content, id) {
+    boardReg: async function(category, title, content, id) {
 
         const boardCmd = {
-            cmd: "regBoard",
-            boardNum: boardNum,
+            cmd: "boardReg",
             category: category,
             title: title,
             content: content,
