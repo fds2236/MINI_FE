@@ -182,8 +182,6 @@ const WriteBoard = () => {
         );
     }
     
-    
-
     // 서버에게 회원 가입 정보를 전송할지에 대한 여부 판단 ( 다 있으면 submit이 true);
     const isSubmit = () => {
         if(boardContent && title) setSubmit(true);
@@ -191,15 +189,13 @@ const WriteBoard = () => {
 
     // 전송 버튼이 눌려지면 동작하는 함수, 함수가 비동기 통신을 해야 하므로 async 키워드 추가
     const onSubmit = async () => {
-        console.log("onSubmit 동작");
         try {
             const res =  await MiniApi.boardReg(category, title, boardContent,id);
-            
             setResData(res.data);
             window.location.replace("/Boards");
 
         } catch (e) {
-            console.log(e);
+            alert("오류 : " + e);
         }
     }
 
