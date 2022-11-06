@@ -13,11 +13,12 @@ const ItemDetailBlock = styled.div`
 const ItemDetail = () => {
     //const [category, setCategory] = useState("ALL");
 
-    const getDetail = window.localStorage.getItem("ALL");
-    const [itemDetail, setItemDetail] = useState("");
+    const getDetail = window.localStorage.getItem("Detail");
+    const [itemDetail, setItemDetail] = useState('');
 
     useEffect(() => {
-        const itemData = async () => {
+        console.log("상품 상세보기 컴포넌트 useEffect Call !!!");
+        const itemDetailData = async () => {
             try {
                 const response = await MiniApi.itemInfo(getDetail);
                 setItemDetail(response.data);
@@ -26,8 +27,8 @@ const ItemDetail = () => {
                 console.log(e);
             }
         };
-        itemData();
-    }, []);
+        itemDetailData();
+    }, [getDetail]);
 
 //     // 브랜드명 클릭 시 해당 브랜드 상품만 보여줌
 //   const onClickBrand = (val) => {
@@ -44,7 +45,6 @@ return(
             <p>{item.PRO_CODE}</p>
             <p>{item.LAUN_DATE}</p>
             <p>발매가 : {item.PRICE}원</p>
-            <p>♡ 관심상품 </p>
         </div>
         ))}
     </div>
