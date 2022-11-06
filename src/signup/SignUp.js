@@ -6,6 +6,21 @@ import MiniApi from '../api/MiniApi';
 
 // 도연 - 회원가입 페이지 작업중 
 
+const Header = styled.div`
+    .title {
+        color: rgb(0,173,181);
+        font-weight: bold;
+    }
+    .comment {
+        color: rgb(0,155,171);
+        font-style: italic;
+    }
+
+    .star {
+        color: red;
+    }
+`;
+
 const SignUpBlock = styled.div`
     width: 500px;
     margin-left: 500px;
@@ -34,13 +49,10 @@ const SignUpBlock = styled.div`
             font-weight: 600;
         }
     }
-
     .star {
             color: red;
 
     }
-
-
     .hint {
         font-size : 14px;
         color:green;
@@ -240,11 +252,12 @@ const SignUp = () => {
         <div className="container">
             
             {/* 회원가입 */}
-            <h1>JOIN US</h1>
-            <p>👟 슈즈의 기준, Sa shoe 회원가입하고 인싸되기</p>
-            <p><b className='star'>*</b>필수 입력</p>
+            <Header><h1 className='title'>JOIN US</h1>
+            <p className='comment'>👟 슈즈의 기준, Sa shoe 회원가입하고 인싸되기</p></Header>
 
             <SignUpBlock>
+            <p><b className='star'>* </b> 필수 입력</p>
+
             {/* 아이디 입력창 */}
             <div className="input">
                 <label className='label'><b className='star'>*</b>아이디</label>
