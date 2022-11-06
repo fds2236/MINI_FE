@@ -113,6 +113,7 @@ const ForgotPwd = () => {
                 {/* 다른 페이지 연결 */}
                 <Link to="/SignUp" className="link_item">회원가입</Link>
                 <Link to="/Login" className="link_item">로그인</Link>
+                <Link to="/ForgotId" className="link_item">아이디 찾기</Link>
             </PageLink>
             {modalOpen && <Modal open={modalOpen} close={closeModal} header="확인">고객정보가 일치하지 않습니다.</Modal>}    
         </div>
