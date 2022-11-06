@@ -5,6 +5,17 @@ import styled from "styled-components";
 
 // 도연 - 회원가입 페이지 작업중 
 
+const Header = styled.div`
+    .title {
+        color: rgb(0,173,181);
+        font-weight: bold;
+    }
+    .comment {
+        color: rgb(0,155,171);
+        font-style: italic;
+    }
+`;
+
 const AgreeBox = styled.div`
     width: 970px;
     height: 555px;
@@ -12,8 +23,6 @@ const AgreeBox = styled.div`
     background-color : white;
     border-radius : 5px;
     border: solid #eeeeee;
-    
-    
     .check {
         width : 850px;
         height : 200px;
@@ -34,9 +43,6 @@ const AgreeBox = styled.div`
             height: 180px;
         }
     }
-
-
-
 `;
 
 
@@ -130,8 +136,8 @@ const Agree = () => {
     return(
         <div className="container">
             {/* 회원가입 */}
-            <h1>JOIN US</h1>
-            <p>👟 슈즈의 기준, Sa shoe 회원가입하고 인싸되기</p>
+            <Header><h1 className='title'>JOIN US</h1>
+            <p className='comment'>👟 슈즈의 기준, Sa shoe 회원가입하고 인싸되기</p></Header>
 
             <AgreeBox>
             <fieldset>
@@ -557,8 +563,8 @@ const Agree = () => {
                         변경 개인정보처리방침 시행일자 : 2022-06-21</textarea>
                 </fieldset>
                
-                <label><input type="checkbox" checked={marketingCheck} onClick={marketingBtnEvent}/>마케팅 활용 약관에 동의합니다.(선택)</label>
-                <input type="checkbox" checked={marketingEmailCheck} onClick={marketingEmailBtnEvent}/><label>( 이메일</label>
+                <label><input type="checkbox" checked={marketingCheck} onClick={marketingBtnEvent}/>마케팅 활용 약관에 동의합니다.(선택) (</label>
+                <input type="checkbox" checked={marketingEmailCheck} onClick={marketingEmailBtnEvent}/><label>이메일</label>
                 <input type="checkbox" checked={marketingSMSCheck} onClick={marketingSMSBtnEvent}/><label>SMS )</label><br/>
                 
                 <label><input type="checkbox" checked={ageCheck} onClick={ageBtnEvent}/>만 14세 이상입니다.(필수)</label>
