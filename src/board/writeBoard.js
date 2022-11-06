@@ -103,7 +103,7 @@ const StyledTitleArea = styled.textarea`
     width: 550px;
     height: 50px;
     margin: 0 auto;
-    margin-top: 10px;
+    margin-top: 20px;
     border-style: none;
     font-size: 20px;
 `;
@@ -146,51 +146,54 @@ const ReturnButton = (props) => {
 }
 
 // 제목쓰기 컴포넌트
-const TitleArea = () => {
+// const TitleArea = () => {
 
-    const [TitleValue, setTitleValue] = useState("");
-    const onChange= (event) => {
-		const v = event.target.value
-		setTitleValue(v)
-	}
+//     const [TitleValue, setTitleValue] = useState("");
+//     const onChange= (event) => {
+// 		const v = event.target.value
+		
+// 	}
 
-    return (
-        <>
-            <StyledTitleArea 
-                placeholder="제목을 입력 하세요 ....."
-                value={TitleValue}
-                onChange={onChange}
-            ></StyledTitleArea>
-        </>
-    );
-} 
+//     return (
+//         <>
+//             <StyledTitleArea 
+//                 placeholder="제목을 입력 하세요 ....."
+//                 value={TitleValue}
+//                 onChange={onChange}
+//             ></StyledTitleArea>
+//         </>
+//     );
+// } 
 
 
 
 // 글쓰기 컴포넌트
-const TextArea = () => {
+// const TextArea = () => {
 
-    const [textValue, setTextValue] = useState("");
-    const onChange= (event) => {
-		const v = event.target.value
-		setTextValue(v)
-	}
+//     const [textValue, setTextValue] = useState("");
+//     const onChange= (event) => {
+// 		const v = event.target.value
+// 		setTextValue(v)
+// 	}
 
-    return (
-        <>
-            <StyledTextArea 
-                placeholder="본문 내용을 입력 하세요 ....."
-                value={textValue}
-                onChange={onChange}
-            ></StyledTextArea>
-        </>
-    );
-}
+//     return (
+//         <>
+//             <StyledTextArea 
+//                 placeholder="본문 내용을 입력 하세요 ....."
+//                 value={textValue}
+//                 onChange={onChange}
+//             ></StyledTextArea>
+//         </>
+//     );
+// }
 
 // 목록으로 돌아가는 onClick
 const OnClickToList = () => {   
     window.location.replace('/Boards');
 }
+
+
+
 
 
 
@@ -221,7 +224,10 @@ const WriteBoard = () => {
     const onChangeId = (e) => setId(e.target.value); // 현재 이벤트가 발생한 입력창의 값을 useState에 세팅
     const onChangeBoardNum = (e) => setBoardNum(e.target.value);
     const onChangeCategory = (e) => setCategory(e.target.value);
-    const onChangeTitle = (e) => setTitle(e.target.value);
+    const onChangeTitle = (e) => {
+        console.log("title : " + e.target.value);
+        setTitle(e.target.value);
+    }
     const onChangeBoardContent = (e) => setBoardContent(e.target.value);
     
     
@@ -249,26 +255,59 @@ const WriteBoard = () => {
         }
     }
 
+    const handleCategorySelect = (e) => {
+        console.log(e.target.value); // 카테고리 값이 잘 바뀌었는지 확인
+        setCategory(e.target.value);
+      };
+
     return (
         <Container>  
             <ButtonContainer>
                 <ReturnButton text={"목록으로 돌아가기"}></ReturnButton>
-                <input value={category} placeholder="(게시판을 선택하세요)"  />
-                    <select value={category}>
-                        
-                        <option value={"자유게시판"}>자유게시판</option>
-                        <option value={"후기게시판"}>후기게시판</option>
-                        
-                    </select>
 
+                {/* 카테고리 선택 화면 */}
+                <div>
+                <input
+                    type="radio"
+                    value="0"
+                    checked = {category === "0"}
+                    onChange = {handleCategorySelect}
+                />
+                <label>
+                    자유게시판
+                </label>
+                </div>
+                <div>
+                <input
+                    type="radio"
+                    value="1"
+                    checked = {category === "1"}
+                    onChange = {handleCategorySelect}
+                />
+                <label>
+                    후기게시판
+                </label>
+                </div>
+                
+               
             </ButtonContainer>
 
-            {/* &nbsp;를 사용하여 의도적으로 공백을 넣음. 글이 아무것도 없을때 대비 */}
+            
             <Contents>
-                &nbsp;
-                    <TitleArea></TitleArea>
-                    <TextArea></TextArea>
-                &nbsp;  
+                    {/* 제목 입력 칸 */}
+                    <StyledTitleArea 
+                        placeholder="제목을 입력 하세요 ....."
+                        value={title}
+                        onChange={onChangeTitle}
+                    >
+                    </StyledTitleArea>
+                    {/* 본문 입력 칸 */}
+                    <StyledTextArea 
+                        placeholder="본문 내용을 입력 하세요 ....."
+                        value={boardContent}
+                        onChange={onChangeBoardContent}
+                    ></StyledTextArea>
+           
             </Contents> 
 
             <OrangeRedButton text={"글쓰기"}></OrangeRedButton>
