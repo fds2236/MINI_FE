@@ -55,15 +55,14 @@ const MiniApi =  {
 
     // 상품 불러오기
     itemInfo: async function(brand, sort, code) {
-        console.log("상품코드 : " + code);
         console.log("브랜드 : " + brand);
         console.log("정렬조건 : " + sort);
+        console.log("상품코드 : " + code);
         const itemCmd = {
             cmd : "ItemInfo",
-            code : code,
             brand : brand,
-            sort : sort
-            
+            sort : sort,
+            code : code
         }
         return await axios.post(MINI_DOMAIN + "ItemServlet", itemCmd, HEADER);
     },

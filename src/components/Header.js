@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import React, { useState } from "react";
 import logo from "../images/SASHOE_LOGO-00ADB5.png";
-//import searchIcon from "../images/Search-00AD85.png"
+import searchIcon from "../images/Search-00AD85.png"
 
 // 헤더 TOP 스타일
 const StyledHeaderTop = styled.header`
@@ -49,7 +49,7 @@ const HeaderMenu = styled.div`
   display: flex;
 
   .category, .searchBar {
-  margin: 30px;
+    padding-right: 30px;
   }
   .itemlist, .board {
     text-decoration: none;
@@ -59,10 +59,23 @@ const HeaderMenu = styled.div`
     text-decoration: none;
     color: rgb(0,173,181);
   }
-  .search {
+  .searchBar {
+    display: flex;
     box-sizing: border-box;
-    border: 1px solid #222831;
-    padding: 8px;
+    .search {
+      border: 1px solid rgb(0,173,181);
+      padding: 8px;
+    }
+    button {
+      cursor: pointer;
+      border: none;
+      background-color: rgba(0,0,0,0);
+    }
+    img {
+      display: flex;
+      width: 25px;
+      height: 25px;
+    }
   }
 `;
 
@@ -72,17 +85,19 @@ const HeaderMenu = styled.div`
 const Header = () => {
 
   // 검색창(구현중💬)
-  const [search, setSearch] = useState("");
+  const [word, setWord] = useState("");
   
-  const onChange = (e) => {
-    setSearch(e.target.value)
-  }  
-  const onClick = () => {
-    axios.get()
-    .then(response => {
-      setSearch(response.data);
-    })
+  const onSubmit = async () => {
+    //setSearch(e.target.value)
+    window.location.href = "itemlist/" + word;
   }
+
+  // const onClick = () => {
+  //   axios.get()
+  //   .then(response => {
+  //     setSearch(response.data);
+  //   })
+  // }
 
 
   return (
@@ -117,8 +132,8 @@ const Header = () => {
             <Link to = {"/Boards"} className="board">COMMUNITY</Link>
           </div>
           <div className="searchBar">
-            
-            <input type="text" className="search" value={search} placeholder="검색어 입력" onChange={onChange}/>
+            <input className="search" onChange={(e) => {setWord(e.target.value); console.log(word);}} placeholder="검색어 입력"/>
+            <button type="button" onClick={() => {onSubmit()}}><img src={searchIcon}/></button>
           </div>
         </HeaderMenu>
       </StyledHeader>

@@ -117,7 +117,7 @@ const ItemList = () => {
           <ItemBlock key={item.PRO_CODE}>
             <ItemDescBlock>
               <p className="brand-name" onClick={()=>onClickBrand(item.BRAND)}>{item.BRAND}</p>
-              <p className="item-name" key={item.PRO_CODE} value={item.PRO_CODE} onClick={()=>onClickDetail(item.PRO_CODE)}>{item.PRO_NAME}</p>
+              <p className="item-name" key={item.PRO_CODE} onClick={()=>onClickDetail(item.PRO_CODE)}>{item.PRO_NAME}</p>
               <p className="laun-date">{item.LAUN_DATE}</p>
               <p className="price">발매가 : {item.PRICE}원</p>
               <p className="like">♡ 관심상품 </p>
