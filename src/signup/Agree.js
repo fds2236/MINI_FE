@@ -1,9 +1,43 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
-// import styled from "styled-components";
+import styled from "styled-components";
 // import Modal from "../util/Modal";
 
 // 도연 - 회원가입 페이지 작업중 
+
+const AgreeBox = styled.div`
+    width: 970px;
+    height: 555px;
+    margin-left: 300px;
+    background-color : white;
+    border-radius : 5px;
+    border: solid #eeeeee;
+    
+    
+    .check {
+        width : 850px;
+        height : 200px;
+        margin : 10px;
+        padding-left: 50px;
+        border-radius : 5px;
+        &:hover {
+            border : solid rgb(0,173,181) 0.5px;
+            font-weight: 600;
+            color: rgb(0,173,181);
+        } 
+        &:focus {
+            outline : solid rgb(0,173,181) 1px;
+            font-weight: 600;
+        }
+        .text_box {
+            width: 800px;
+            height: 180px;
+        }
+    }
+
+
+
+`;
 
 
 const Agree = () => {
@@ -99,11 +133,12 @@ const Agree = () => {
             <h1>JOIN US</h1>
             <p>👟 슈즈의 기준, Sa shoe 회원가입하고 인싸되기</p>
 
+            <AgreeBox>
             <fieldset>
                 <legend><input type="checkbox" checked={allCheck} onClick={allBtnEvent}/>전체 약관에 동의합니다.</legend>
-                <fieldset>
+                <fieldset className='check'>
                     <legend><input type="checkbox" checked={serviceCheck} onClick={serviceBtnEvent}/>서비스 이용 약관에 동의합니다.(필수)</legend>
-                    <textarea>Sa shoe 서비스 이용 약관동의 
+                    <textarea className='text_box'>Sa shoe 서비스 이용 약관동의 
 
                         제 1조 (목적)
 
@@ -196,9 +231,9 @@ const Agree = () => {
                         공고일자: 2020년 6월 10일
                         시행일자: 2020년 6월 10일</textarea>
                 </fieldset>
-                <fieldset>
+                <fieldset className='check'>
                     <legend><input type="checkbox" checked={userCheck} onClick={userBtnEvent}/>개인정보 이용 약관에 동의합니다.(필수)</legend>
-                    <textarea>(주)Sa Shoe('https://www.sashoe.com/'이하 '회사') 는 고객의 개인정보보호를 소중하게 생각하고, 고객의 개인정보를 보호하기 위하여 항상 최선을 다해 노력하고 있습니다. 회사 는 「개인정보보호법」, 「정보통신망 이용촉진 및 정보보호 등에 관한 법률」을 비롯한 모든 개인정보보호 관련 법률규정을 준수하고 있습니다.
+                    <textarea className='text_box'>(주)Sa Shoe('https://www.sashoe.com/'이하 '회사') 는 고객의 개인정보보호를 소중하게 생각하고, 고객의 개인정보를 보호하기 위하여 항상 최선을 다해 노력하고 있습니다. 회사 는 「개인정보보호법」, 「정보통신망 이용촉진 및 정보보호 등에 관한 법률」을 비롯한 모든 개인정보보호 관련 법률규정을 준수하고 있습니다.
                         1. 수집하는 개인정보의 항목 및 수집방법
 
                         개인정보 수집에 대한 동의
@@ -521,13 +556,13 @@ const Agree = () => {
 
                         변경 개인정보처리방침 시행일자 : 2022-06-21</textarea>
                 </fieldset>
-                <fieldset>
-                    <legend><input type="checkbox" checked={marketingCheck} onClick={marketingBtnEvent}/>마케팅 활용 약관에 동의합니다.(선택)</legend>
-                    <input type="checkbox" checked={marketingEmailCheck} onClick={marketingEmailBtnEvent}/><label>이메일</label>
-                    <input type="checkbox" checked={marketingSMSCheck} onClick={marketingSMSBtnEvent}/><label>SMS</label>
-                </fieldset>
+               
+                <label><input type="checkbox" checked={marketingCheck} onClick={marketingBtnEvent}/>마케팅 활용 약관에 동의합니다.(선택)</label>
+                <input type="checkbox" checked={marketingEmailCheck} onClick={marketingEmailBtnEvent}/><label>( 이메일</label>
+                <input type="checkbox" checked={marketingSMSCheck} onClick={marketingSMSBtnEvent}/><label>SMS )</label><br/>
+                
                 <label><input type="checkbox" checked={ageCheck} onClick={ageBtnEvent}/>만 14세 이상입니다.(필수)</label>
-            </fieldset>
+            </fieldset> </AgreeBox>
             <button><Link to="/">취소하기</Link></button>
             <button><Link to="/SignUp" >다음단계</Link></button>
 

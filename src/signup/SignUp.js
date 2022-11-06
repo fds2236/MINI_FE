@@ -23,6 +23,7 @@ const SignUpBlock = styled.div`
         height : 35px;
         margin : 10px;
         padding-left: 50px;
+        border-radius : 5px;
         &:hover {
             border : solid rgb(0,173,181) 0.5px;
             font-weight: 600;
@@ -33,6 +34,12 @@ const SignUpBlock = styled.div`
             font-weight: 600;
         }
     }
+
+    .star {
+            color: red;
+
+    }
+
 
     .hint {
         font-size : 14px;
@@ -66,6 +73,7 @@ const PageLink = styled.div`
             font-weight: 600;
             background-color: rgb(0,173,181);      
         }  
+    
     }
 `;
 
@@ -234,11 +242,12 @@ const SignUp = () => {
             {/* 회원가입 */}
             <h1>JOIN US</h1>
             <p>👟 슈즈의 기준, Sa shoe 회원가입하고 인싸되기</p>
+            <p><b className='star'>*</b>필수 입력</p>
 
             <SignUpBlock>
             {/* 아이디 입력창 */}
             <div className="input">
-                <label>아이디</label>
+                <label><b className='star'>*</b>아이디</label>
                 <input className="id" value={inputId} onChange={onChangeId}></input>
                 <button onClick={onClickIdCheck}>중복 확인</button>
             </div>
@@ -251,7 +260,7 @@ const SignUp = () => {
 
             {/* 비밀번호 입력창 */}
             <div className="input">
-                <label>비밀번호</label>
+                <label><b className='star'>*</b>비밀번호</label>
                 <input className="pwd" value={inputPwd} type="password" onChange={onChangePwd} required></input>
             </div>
 
@@ -262,7 +271,7 @@ const SignUp = () => {
                             
             {/* 비밀번호 확인 입력창 */}
             <div className="input">
-                <label>비밀번호 확인</label>
+                <label><b className='star'>*</b>비밀번호 확인</label>
                 <input className="pwdCheck" value={inputPwdCheck} type="password" onChange={onChangePwdCheck} required></input>
             </div>
 
@@ -273,7 +282,7 @@ const SignUp = () => {
 
             {/* 이름 입력창 */}
             <div className="input">
-                <label>이름</label>
+                <label><b className='star'>*</b>이름</label>
                 <input className="name" value={inputName} onChange={onChangeName} required></input>
             </div>
 
@@ -284,7 +293,7 @@ const SignUp = () => {
 
             {/* 이메일 입력창 */}
             <div className="input">
-                <label>이메일</label>
+                <label><b className='star'>*</b>이메일</label>
                 <input className="email" value={inputEmail} onChange={onChangeEmail} required></input>
             </div>
 
@@ -295,7 +304,7 @@ const SignUp = () => {
 
             {/* 전화번호 입력창 */}
             <div className="input">
-                <label>전화번호</label>
+                <label><b className='star'>*</b>전화번호</label>
                 <input className="phone" value={inputPhone} onChange={onChangePhone} required></input>
             </div>
 

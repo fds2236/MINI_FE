@@ -144,10 +144,10 @@
 //     display: grid;
 //     width: 300px;
 //     margin-left: 30px;
-//     grid-template-columns: 2, 5px;
-//     grid-template-rows: 10x;
-//     grid-template-areas: 
-//       "star phone-box"
+    // grid-template-columns: 2, 5px;
+    // grid-template-rows: 10x;
+    // grid-template-areas: 
+    //   "star phone-box"
 // `;
   
 // const IdCheck = styled.span`
