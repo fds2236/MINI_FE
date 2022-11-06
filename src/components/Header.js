@@ -2,7 +2,8 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import React, { useState } from "react";
-import logo from "./kream-logo.PNG"
+import logo from "../images/SASHOE_LOGO-00ADB5.png";
+//import searchIcon from "../images/Search-00AD85.png"
 
 // 헤더 TOP 스타일
 const StyledHeaderTop = styled.header`
@@ -29,25 +30,34 @@ const StyledHeader = styled.header`
   margin-bottom: 30px;
   display: flex;
   align-items: center;
-  /* justify-content: space-between; */
+  justify-content: space-between;
   border-bottom: 1px solid #eeeeee;
 `;
 
 const HeaderLogo = styled.div`
-  
+  margin: 30px;
+  .logo-home {
+    width: 12em;
+  }
 `;
 
 const HeaderMenu = styled.div`
-  font-size: 20px;
+  font-size: 1.45em;
   color: #222831;
   align-items: center;
+  cursor: pointer;
+  display: flex;
 
   .category, .searchBar {
-  float: left;
-  margin: 10px;
+  margin: 30px;
   }
   .itemlist, .board {
     text-decoration: none;
+    font-weight: 600;
+  }
+  .itemlist:hover, .board:hover {
+    text-decoration: none;
+    color: rgb(0,173,181);
   }
   .search {
     box-sizing: border-box;
@@ -104,9 +114,10 @@ const Header = () => {
             <Link to = {"/ItemList"} className="itemlist">SNEAKERS</Link>
           </div>
           <div className="category">
-            <Link to = {"/Boards"} className="board">커뮤니티</Link>
+            <Link to = {"/Boards"} className="board">COMMUNITY</Link>
           </div>
           <div className="searchBar">
+            
             <input type="text" className="search" value={search} placeholder="검색어 입력" onChange={onChange}/>
           </div>
         </HeaderMenu>

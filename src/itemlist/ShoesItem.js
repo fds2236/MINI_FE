@@ -16,25 +16,25 @@ const ShoesItemsBlock = styled.div`
 `;
 
 const ShoesItems = () => {
-  const [itemInfo, setItemInfo] = useState('');
+//   const [itemInfo, setItemInfo] = useState('');
 
-  const onClickItemDetail = (val) => {
-    console.log("아이템 상세 페이지로 이동 : " + val);
-    window.localStorage.setItem("Detail", val);
-    window.location.replace("/ItemDetail");
-  }
+//   const onClickItemDetail = (val) => {
+//     console.log("아이템 상세 페이지로 이동 : " + val);
+//     window.localStorage.setItem("Detail", val);
+//     window.location.replace("/ItemDetail");
+//   }
 
-  useEffect(() => {
-    const itemData = async () => {
-      try {
-        const response = await MiniApi.itemInfo("ALL");
-        setItemInfo(response.data);
-      } catch (e) {
-        console.log(e);
-      }
-    };
-    itemData();
-  }, []);
+//   useEffect(() => {
+//     const itemData = async () => {
+//       try {
+//         const response = await MiniApi.itemInfo("ALL");
+//         setItemInfo(response.data);
+//       } catch (e) {
+//         console.log(e);
+//       }
+//     };
+//     itemData();
+//   }, []);
 
   // const brands = ['nike', 'vans', 'converse', 'newbalance', 'adidas'];
 

@@ -7,14 +7,17 @@ const ImageBlock = styled.div`
 `;
 
 const ItemDetailBlock = styled.div`
+    .brand-name {
+        cursor: pointer;
+    }
 `;
 
 
 const ItemDetail = () => {
-    //const [category, setCategory] = useState("ALL");
-
-    const getDetail = window.localStorage.getItem("Detail");
+    //const [category, setCategory] = useState("");
     const [itemDetail, setItemDetail] = useState('');
+    const getDetail = window.localStorage.getItem("Detail");
+    
 
     useEffect(() => {
         console.log("상품 상세보기 컴포넌트 useEffect Call !!!");
@@ -30,24 +33,38 @@ const ItemDetail = () => {
         itemDetailData();
     }, [getDetail]);
 
-//     // 브랜드명 클릭 시 해당 브랜드 상품만 보여줌
-//   const onClickBrand = (val) => {
-//     console.log("브랜드 카테고리로 이동 : " + val);
-//     setCategory(val);
-//   }
+    // useEffect(() => {
+    //     console.log("브랜드로 이동");
+    //     const itemData = async () => {
+    //         try {
+    //             const rsp = await MiniApi.itemInfo(category);
+    //             setCategory(rsp.data);
+    //         } catch (e) {
+    //             console.log(e)
+    //         }
+    //     };
+    //     itemData();
+    // }, [category]);
+
+    // // 브랜드명 클릭 시 해당 브랜드 상품만 보여줌
+    // const onClickBrand = (val) => {
+    //     console.log("브랜드카테고리로 이동 : " + val);
+    //     window.localStorage.setItem("brand", val);
+    //     window.location.replace("/ItemList");
+    // }
 
 return(
-    <div>
+    <ItemDetailBlock>
         {itemDetail && itemDetail.map(item => (
         <div key={item.PRO_CODE}>
-            <p>{item.BRAND}</p>
+            <p className="brand-name">{item.BRAND}</p>
             <p>{item.PRO_NAME}</p>
             <p>{item.PRO_CODE}</p>
             <p>{item.LAUN_DATE}</p>
             <p>발매가 : {item.PRICE}원</p>
         </div>
         ))}
-    </div>
+    </ItemDetailBlock>
 )
 }
 
