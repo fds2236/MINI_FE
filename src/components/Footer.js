@@ -13,7 +13,7 @@ const StyledFooter = styled.footer`
     line-height: 25px;
     display:flex;
     flex-direction: column;
-    height: 100px;
+    height: 120px;
     margin-top: auto;
     .nav-bottom {
     margin-right: 30px;
@@ -32,15 +32,15 @@ const Footer = () => {
     return (
         <>
             <StyledFooter>
-                <div>
+                <div className='nav-bottom'>
                     <Link to={"/SiteInfo"} className="about">회사소개</Link>
                 </div>
-                <div>
+                <div className='nav-bottom'>
                     <Link to={"/Agree"} className="agree">이용약관</Link>
                 </div>
-                <div>
+                <div  className='nav-bottom'>
                     <Link to={"/Privacy"} className="privacy">개인정보처리방침</Link></div>
-                <div>
+                <div  className='nav-bottom'>
                     <Link to={"/Home"} className="home">SaShoe</Link>
                 </div> <br/>
             <div className="sashoe">

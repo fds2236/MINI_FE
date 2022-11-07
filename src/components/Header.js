@@ -15,7 +15,7 @@ const StyledHeaderTop = styled.header`
   justify-content: right;
   .nav-top {
     margin-right: 30px;
-    .mypage-link, .mypage-like, .cs-link, .login, .loginout, .login-info {
+    .mypage-link, .mypage-like, .signup-link, .cs-link, .login, .loginout, .login-info {
       text-decoration: none;
       font-size: 13px;  
       color: #ffffff;
@@ -62,6 +62,7 @@ const HeaderMenu = styled.div`
   .itemlist, .board {
     text-decoration: none;
     font-weight: 600;
+    color : #222831;
   }
   .itemlist:hover, .board:hover {
     text-decoration: none;
@@ -131,9 +132,16 @@ const Header = () => {
           <button className="loginout" onClick={onClickLogout}>로그아웃</button>
         </div>)}
 
-        <div className="nav-top">
+        {whoLoginNow ?
+        (<div className="nav-top">
           <Link to = {"/Mypage"} className="mypage-link">마이페이지</Link>
-        </div>
+        </div>) :
+        (<div className="nav-top">
+        <Link to = {"/SignUp"} className="signup-link">회원가입</Link>
+         </div>)}
+
+
+
         <div className="nav-top">
           <Link to = {"/Like"} className="mypage-like">관심상품</Link>
         </div>
