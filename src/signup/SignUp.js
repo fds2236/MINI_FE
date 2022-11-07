@@ -3,8 +3,12 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Modal from "../util/Modal";
 import MiniApi from '../api/MiniApi';
+import Post from './Post';
+
+
 
 // 도연 - 회원가입 페이지 작업중 
+
 
 const Header = styled.div`
     .title {
@@ -22,22 +26,52 @@ const Header = styled.div`
 `;
 
 const SignUpBlock = styled.div`
-    width: 500px;
-    margin-left: 500px;
+    width: 780px;
+    height: 500px;
+    position: relative;
+    margin: 0 auto;
     background-color : white;
     border-radius : 5px;
     border: solid #eeeeee;
+    display: flex;
+    flex-direction: column;
+
+
     &:hover {
         border : solid rgb(0,173,181) 1px;
         font-weight: 600;
         color: rgb(0,173,181);
     } 
-    
-    .input {
-        width : 430px;
-        height : 35px;
+    p{
+        text-align: right;
+        margin-right: 30px;
+    }
+    b{
+        display: flex;
+        display: inline;
+    }
+    label{
+        margin-top: 10px;
+        display: flex;
+        display: inline;
+        float: left;
+        text-align: left;
+        width: 150px;
+        margin-left: 30px;
+        /* margin : 10px */
+    }
+    button{
+        position: relative;
+        float: left;
+        margin: 8px;
+    }
+    input , .inputemail  {
+        float: left;
+        /* display: flex; */
+        width : 200px;
+        /* height : 35px; */
         margin : 10px;
-        padding-left: 50px;
+        /* padding-left: 50px; */
         border-radius : 5px;
         &:hover {
             border : solid rgb(0,173,181) 0.5px;
@@ -49,6 +83,12 @@ const SignUpBlock = styled.div`
             font-weight: 600;
         }
     }
+    .inputemail{
+        width: 150px;  
+    }
+    .user_enroll_text{
+        margin-left: 3px;
+    }
     .star {
             color: red;
 
@@ -56,6 +96,9 @@ const SignUpBlock = styled.div`
     .hint {
         font-size : 14px;
         color:green;
+    }
+    .address_search {
+        padding-left: 7px;
     }
 
 `;
@@ -91,6 +134,7 @@ const PageLink = styled.div`
 
 
 
+
 const SignUp = () => {
     // 회원정보 입력받는 부분
     const [inputId, setId] = useState(''); 
@@ -100,6 +144,13 @@ const SignUp = () => {
     const [inputEmail, setEmail] = useState('');
     const [inputPhone, setPhone] = useState('');
     const [inputAddr, setAddr] = useState('');
+
+    // 이메일
+    const [write, setWrite] = useState('');
+    const [wrtieDomain, setWriteDomain] = useState('');
+    const [select, setSelect] = useState('');
+    const [final, setFinal] = useState('');
+    const[isSelect,setIsSelect] = useState(false);
 
     // 오류 메세지
     const [idMsg, setIdMsg] = useState(''); 
@@ -197,9 +248,60 @@ const SignUp = () => {
     }
 
     // 주소
-    const onChangeAddr = (e) => setAddr(e.target.value);
+    const [enroll_company, setEnroll_company] = useState({
+        address:'',
+    });
 
+    const [popup, setPopup] = useState(false);
 
+    const handleInput = (e) => {
+        setEnroll_company({
+            ...enroll_company,
+            [e.target.name]:e.target.value,
+        })
+    }
+
+    const handleComplete = (data) => {
+        setPopup(!popup);
+    }
+
+        // 이메일 아이디 작성
+    const writeName = (e) =>{
+        setWrite(e.target.value);
+    }
+    // 선택한 도메인 
+    const  selectDomain = (e) =>{
+        //선택한 도메인을 sel 변수에 담음
+        const sel = e.target.value
+        // sel 변수가 "aa"(직접인경우)
+        if(sel == "@"){
+            setSelect(sel);
+            // IsSelect 는 숨겨져있는 창을 보여주기 위한 용도입니다.
+            // IsSelect 의 기본값은 false 이고, true 가되면 입력창이 화면에 출력됩니다.
+            // 화면출력로직은 아래 있습니다
+            setIsSelect(true);
+        }else{
+            // 선택한 도메인이 직접입력이 아닌경우 , (isselect = false)입력창을 보여주지않고
+            // setSelect 를 이용하여 선택한 이메일을 select 에 담아줍니다.
+            setIsSelect(false);
+            setSelect(sel);
+        }
+    }
+    // 작성한 도메인
+    const domainWrite = (e) =>{
+        // 직접입력되는 값을 받아주는 input 창 입니다.
+        // isSelect 가 false 일경우 화면에 보이지 않습니다.
+        setWriteDomain(e.target.value);
+    }
+    // 최종 확인
+    const sumit = () =>{
+        if(isSelect==false){
+            setFinal(write + select);
+        }else{
+            setFinal(write + "@" + wrtieDomain);
+        }
+    }
+    console.log(final);
          
 
     // 모달
@@ -247,21 +349,25 @@ const SignUp = () => {
          } catch (e) {
          } 
        } 
+
+       
+
+
     
     return(
-        <div className="container">
-            
-            {/* 회원가입 */}
+        <div className='container'>
+    
             <Header><h1 className='title'>JOIN US</h1>
             <p className='comment'>👟 슈즈의 기준, Sa shoe 회원가입하고 인싸되기</p></Header>
+            {/* 회원가입 */}
 
             <SignUpBlock>
             <p><b className='star'>* </b> 필수 입력</p>
 
             {/* 아이디 입력창 */}
-            <div className="input">
+            <div className='divv'>
                 <label className='label'><b className='star'>*</b>아이디</label>
-                <input className="id" value={inputId} onChange={onChangeId}></input>
+                <input className="input" value={inputId} onChange={onChangeId}></input>
                 <button onClick={onClickIdCheck}>중복 확인</button>
             </div>
 
@@ -272,9 +378,9 @@ const SignUp = () => {
 
 
             {/* 비밀번호 입력창 */}
-            <div className="input">
+            <div>
                 <label className='label'><b className='star'>*</b>비밀번호</label>
-                <input className="pwd" value={inputPwd} type="password" onChange={onChangePwd} required></input>
+                <input className="input" value={inputPwd} type="password" onChange={onChangePwd} required></input>
             </div>
 
             {/* 비밀번호 입력 제한 메시지 */}
@@ -283,9 +389,9 @@ const SignUp = () => {
            </div>
                             
             {/* 비밀번호 확인 입력창 */}
-            <div className="input">
+            <div>
                 <label className='label'><b className='star'>*</b>비밀번호 확인</label>
-                <input className="pwdCheck" value={inputPwdCheck} type="password" onChange={onChangePwdCheck} required></input>
+                <input className="input" value={inputPwdCheck} type="password" onChange={onChangePwdCheck} required></input>
             </div>
 
             {/* 비밀번호 확인 입력 제한 메시지 */}
@@ -294,9 +400,9 @@ const SignUp = () => {
            </div>
 
             {/* 이름 입력창 */}
-            <div className="input">
+            <div>
                 <label className='label'><b className='star'>*</b>이름</label>
-                <input className="name" value={inputName} onChange={onChangeName} required></input>
+                <input className="input" value={inputName} onChange={onChangeName} required></input>
             </div>
 
             {/* 이름 입력 제한 메시지 */}
@@ -305,9 +411,26 @@ const SignUp = () => {
             </div>
 
             {/* 이메일 입력창 */}
-            <div className="input">
-                <label className='label'><b className='star'>*</b>이메일</label>
-                <input className="email" value={inputEmail} onChange={onChangeEmail} required></input>
+            
+            <div>
+            <label className='label'><b className='star'>*</b>이메일</label>
+            <input className='input' value={write} onChange={writeName}></input>
+             {/* isSelect && 구문은 isSelect 가 참일경우, {} 안의 input 박스가 화면에 보여집니다 */}
+             {isSelect &&
+                 <span><input className='inputemail' value={wrtieDomain} onChange={domainWrite}></input></span>
+             }
+             <select className='inputemail' value={select} onChange={selectDomain}>
+                 <option >메일을 선택하세요</option>
+                 <option value={"@naver.com"}>naver.com</option>
+                 <option value={"@gmail.com"}>gmail.com</option>
+                 <option value={"@daum.com"}>daum.net</option>
+                 <option value={"@nate.com"}>nate.net</option>
+                 <option value={"@kakao.com"}>kakao.com</option>
+                 <option value={"@"}>직접입력</option>
+             </select>
+             {/* <button onClick={sumit}></button> */}
+                {/* <label className='label'><b className='star'>*</b>이메일</label>
+                <input className="input" value={inputEmail} onChange={onChangeEmail} required></input> */}
             </div>
 
             {/* 이메일 입력 제한 메시지 */}
@@ -316,9 +439,9 @@ const SignUp = () => {
             </div>
 
             {/* 전화번호 입력창 */}
-            <div className="input">
-                <label className='label'><b className='star'>*</b>전화번호</label>
-                <input className="phone" value={inputPhone} onChange={onChangePhone} required></input>
+            <div>
+                <label><b className='star'>*</b>전화번호</label>
+                <input value={inputPhone} onChange={onChangePhone} required></input>
             </div>
 
             {/* 전화번호 입력 제한 메시지 */}
@@ -327,10 +450,15 @@ const SignUp = () => {
            </div>
 
             {/* 주소 입력창 */}
-            <div className="input">
-                <label className='label'>주소</label>
-                <input className="addr" value={inputAddr} onChange={onChangeAddr}></input>
+            <div>
+                <label className="address_search">주소</label>
+                <input className="user_enroll_text" type="text" required={true} name="address" onChange={handleInput} value={enroll_company.address}/>
+                <button onClick={handleComplete}>주소 검색</button>
+                {popup && <Post company={enroll_company} setcompany={setEnroll_company}></Post>}    
             </div>
+                            
+
+            
             </SignUpBlock>
             
             <PageLink>
