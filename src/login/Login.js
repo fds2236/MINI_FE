@@ -124,7 +124,6 @@ const Login = () => {
 
             if(res.data.result === 200) {
                 window.localStorage.setItem("whoLoginNow",inputId); // 로그인 정보 저장
-                window.localStorage.setItem("callEmail", )
                 window.location.replace("/");
 
             } else if(res.data.result === 300) {

@@ -35,12 +35,24 @@ const Profile = () => {
     //     setCastToggle(!CastToggle)
     // }
 
+    const [id, setId] = useState("");
+    const [findEmail, setFindEmail] = useState("");
+
     // API호출(이메일)
-    // const onClickProf = async() => {
-    //     try{
-    //         const res = await MiniApi.userEmail()
-    //     }
-    // }
+    const onClickProfile = async() => {
+        try{
+            const res = await MiniApi.userEmail(id); // 
+            console.log(res.data.result);
+            if(res.data.result === "OK") {
+                setFindEmail(res.data.email); // 찍어주기위해 id값 저장!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                window.localStorage.setItem("callEmail", findEmail)
+            } else {
+                setFindEmail("이메일 없음");
+            }
+        } catch (e) {
+            console.log("이메일 정보 불러오기 실패!")
+        }
+    } 
 
 
     let whoLoginNow = window.localStorage.getItem("whoLoginNow");
@@ -60,7 +72,7 @@ const Profile = () => {
                 </div>
                 <div className="user">
                     <p>이름 : {whoLoginNow}</p>
-                    <p>이메일 : </p>
+                    <p>이메일 : {callEmail}</p>
                 </div>
             </Container>
             
