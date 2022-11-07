@@ -8,7 +8,7 @@ import Modal from "../util/Modal";
 const SignComBlock = styled.div`
     width: 500px;
     margin-left: 500px;
-    background-color : white;
+    padding: 30px;
     border-radius : 5px;
     border: solid #eeeeee;
     &:hover {
