@@ -100,7 +100,7 @@ const Header = () => {
   // }
 
   // 로그인을 표시해주기 위한 현재 ID
-  let whoLogin = window.localStorage.getItem("whoLogin");
+  let whoLogin = window.localStorage.getItem("whoLoginNow");
 
   return (
     <>
