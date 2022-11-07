@@ -141,17 +141,17 @@ const MiniApi =  {
             }
             
             return await axios.post(MINI_DOMAIN + "EditMemServlet", reqcmd, HEADER);
-        },
-        
-        // 관심상품 기능
-        LikeInfo: async function (id, proCode, likeCnt) {
-            const reqcmd = {
-                id : id,
-                proCode : proCode,
-                likeCnt : likeCnt
-            }
-            return await axios.post(MINI_DOMAIN + "LikeServlet", reqcmd, HEADER);
         }
+        
+        // // 관심상품 기능
+        // LikeInfo: async function (id, proCode, likeCnt) {
+        //     const reqcmd = {
+        //         id : id,
+        //         proCode : proCode,
+        //         likeCnt : likeCnt
+        //     }
+        //     return await axios.post(MINI_DOMAIN + "LikeServlet", reqcmd, HEADER);
+        // }
         
 }
 
