@@ -5,9 +5,9 @@ const SortStyleBlock = styled.div`
   display: flex;
   justify-content: center;
   select {
-    width: 120px;
+    width: 150px;
     padding: .8em .5em;
-    border: 1px solid #eee;
+    border: none;
   }
 `;
 
