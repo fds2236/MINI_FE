@@ -127,7 +127,31 @@ const MiniApi =  {
             pwdCheck: pwdCheck
         }
         return await axios.post(MINI_DOMAIN + "RePwdServlet", rePwdObj, HEADER);
-    }
+    },
+        // 회원정보 수정 기능
+        editMem : async function (id, pwd, name, email, addr, phone) {
+            const reqcmd = {
+                cmd : "EditMem",
+                id : id,
+                pwd : pwd,
+                name : name,
+                email : email,
+                addr : addr,
+                phone : phone
+            }
+            
+            return await axios.post(MINI_DOMAIN + "EditMemServlet", reqcmd, HEADER);
+        }
+        
+        // // 관심상품 기능
+        // LikeInfo: async function (id, proCode, likeCnt) {
+        //     const reqcmd = {
+        //         id : id,
+        //         proCode : proCode,
+        //         likeCnt : likeCnt
+        //     }
+        //     return await axios.post(MINI_DOMAIN + "LikeServlet", reqcmd, HEADER);
+        // }
         
 }
 

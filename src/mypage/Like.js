@@ -1,7 +1,8 @@
 import styled from "styled-components";
 import './Mypage.css';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Profile from "./Profile";
+import MiniApi from "../api/MiniApi";
 
 const Container = styled.div`
         
@@ -34,12 +35,27 @@ const Container = styled.div`
     }
 `
 const Like = () => {
-    const [like, setLike] = useState(0);
+    const [like, setLike] = useState('ALL');
+
+    useEffect(() => {
+        console.log("관심상품 보기 컴포넌트!");
+        const likePro = async() => {
+            try {
+            const response = await MiniApi.LikeInfo(like);
+            setLike(response.data);
+            } catch (e) {
+                console.log(e);
+            }
+        };
+        likePro();
+    });
+
+
     return (
         <>
         <Profile/>
         <hr></hr>                    
-        <Container>
+        {/* <Container>
             <br/>
             <h2>관심 상품</h2>
             <div className="grid">
@@ -50,7 +66,7 @@ const Like = () => {
                     <p>아무거나</p>
                 </div>
             </div>
-        </Container>
+        </Container> */}
         </>
     );
 }
