@@ -17,14 +17,17 @@ import axios from "axios";
 const Container = styled.div`
     width: 600px;
     margin: 50px auto;
+    display: flex;
+    flex-direction: column;
 `;
 
 // 상단의 버튼들을 감싸는 스타일드 컴포넌트
 const ButtonContainer = styled.div`
     display: flex;
     justify-content: space-between;
-    width: 480px;
-    margin: 0 auto;
+    width: 550px;
+    align-items: center;
+    margin: 20px auto;
 `;
 
 
@@ -35,6 +38,11 @@ const Button = styled.button`
     border-radius: 10px;
     width: 100px;
     height: 30px;
+
+    &:hover{
+        background-color: rgba(0,173,181,0.5);
+        color: black;
+    }
 `;
 
 // 링크 스타일드 컴포넌트
@@ -47,26 +55,37 @@ const StyledLink = styled(Link)`
 
 // 게시물 목록을 감싸는 스타일드 컴포넌트
 const Contents = styled.div`
-    width: 600px;
-    margin: 30px auto;
+    width: 580px;
+    margin: 0 auto;
     background-color: #EEEEEE;
+    
 `;
 
 const StyledContent = styled.div`
-    background-color: white;
+    width: 550px;
+    border-radius: 10px;
+    box-sizing: border-box;
     border-radius: 14px;
     border-style: none;
-    width: 100%;
     display: flex;
-    justify-content:flex-start;
+    align-items: center;
+    justify-content: center;
+    margin: 10px 16px;
+
+   
+
+
+
+   
+
 `;
 
 
 // 사진 스타일드 컴포넌트
 const StyledPicture = styled.img`
     float: left;
-    width: 90px;
-    height: 90px;
+    width: 70px;
+    height: 70px;
     margin: 8px 8px;
     border-radius: 5px;
 `;
@@ -81,11 +100,12 @@ const OrangeRedStyledButton = styled.button`
     height: 30px;
     color: #EEEEEE;
     cursor: pointer;
+
+    &:hover{
+        background-color: rgba(253,44,8,0.5);
+     
+    }
 `;
-
-
-
-
 
 
 
@@ -94,14 +114,46 @@ const OrangeRedStyledButton = styled.button`
    
 
 const MarginContent = styled.div`
-    margin: 4px 16px;  
+display: flex;
+flex-direction: column;
+padding-top: 10px;
+
+
 `;
 
 // const StyledTitleContent = 
 
+const CategoryDiv = styled.div`
+    border: 1px solid #EEEEEE;
+    width: 300px;
+    display: flex;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: #EEEEEE;
+    justify-content: space-between;
 
+`;
 
+const DetailDiv = styled.div `
+    width: 550px;
 
+    background-color: white;
+    align-items: center;
+    display: grid;
+    grid-template-columns: 60px 75px 300px;
+    grid-template-rows: 80px ;
+    border-radius:10px;
+    &:hover {
+        background-color: rgb(250,250,250);
+    }
+
+`;
+
+const TitleAndContent = styled.div`
+    text-align: left;
+    margin-left: 20px;
+
+`;
 
 
 
@@ -155,6 +207,7 @@ const Boards = () => {
 
     const [boardInfo, setBoardInfo] = useState('');
     const [loading, setLoading] = useState(false);
+    const [category, setCategory] = useState("전체게시판");
 
     // const isLogin = window.localStorage.getItem("isLogin");
     // if(isLogin === "FALSE") window.location.replace("/");
@@ -164,7 +217,11 @@ const Boards = () => {
         const BoardData = async () => {
             setLoading(true);
             try {
-                const response = await MiniApi.boardInfo('ALL'); // 전부다 조회할때는 인자값으로 ALL
+                let response = null;
+                if(category === "전체게시판") {response = await MiniApi.boardInfo('ALL');} // 전부다 조회할때는 인자값으로 ALL
+                else if(category === "자유게시판") {response = await MiniApi.boardInfo('자유게시판');}
+                else {response = await MiniApi.boardInfo('후기게시판');}
+                
                 setBoardInfo(response.data);
                 console.log(response.data);
             } catch (e) {  
@@ -174,12 +231,18 @@ const Boards = () => {
         };
         BoardData(); // 첫 페이지 로딩시 글 목록을 다 끌어옴
 
-    }, []);
+    }, [category]);
 
 
     if(loading) {
         return <Container><h1>Loading .... </h1></Container>
     }
+
+    // 카테고리 값을 바꾸어 주는 컴포넌트 
+    const handleCategorySelect = (e) => {
+        console.log(e.target.value); // 카테고리 값이 잘 바뀌었는지 확인
+        setCategory(e.target.value);
+      };
   
 
     return (
@@ -187,36 +250,76 @@ const Boards = () => {
         <Container>  
             <ButtonContainer>
                 <Button><StyledLink to ='/' >돌아가기</StyledLink></Button>
-                <Button><StyledLink to ='/' >자유게시판</StyledLink></Button>
-                <Button><StyledLink to ='/' >후기게시판</StyledLink></Button>
+                {/* 카테고리 선택 화면 */}
+                
+                
+                <CategoryDiv>
+                <div>
+                <input
+                    type="radio"
+                    value="전체게시판"
+                    checked = {category === "전체게시판"}
+                    onChange = {handleCategorySelect}
+                />
+                <label>
+                    전체게시판
+                </label>
+                </div>
+                <div>
+                <input
+                    type="radio"
+                    value="자유게시판"
+                    checked = {category === "자유게시판"}
+                    onChange = {handleCategorySelect}
+                />
+                <label>
+                    자유게시판
+                </label>
+                </div>
+                <div>
+                <input
+                    type="radio"
+                    value="후기게시판"
+                    checked = {category === "후기게시판"}
+                    onChange = {handleCategorySelect}
+                />
+                <label>
+                    후기게시판
+                </label>
+                </div>
+                </CategoryDiv>
+
                 <OrangeRedButton text="글쓰기"></OrangeRedButton>
+                
             </ButtonContainer>
             
 
-            {/* &nbsp;를 사용하여 의도적으로 공백을 넣음. 글이 아무것도 없을때 대비 */}
             <Contents>
-                &nbsp;
+               
+            <MarginContent>
                 
                 {boardInfo && boardInfo.map(board => (
                    
                     
-                    <MarginContent>
+                    
                     <StyledContent onClick={() => OnclickBoard(board.boardNum)} >
+                        <DetailDiv>
                         <p>{board.boardNum}</p>
                         <StyledPicture src="https://media.bunjang.co.kr/product/198502427_1_1662395621_w856.jpg"></StyledPicture>
-                        <div >
-                            <h2>{board.title}</h2>
+                        <TitleAndContent >
+                            <h4>{board.title}</h4>
                             {/* <p>{board.id}</p> */}
                             <p>{board.boardContent}</p>
-                        </div>
+                        </TitleAndContent>
+                        </DetailDiv>
                         
                         
                     </StyledContent>
-                    </MarginContent>
+                    
                 ))}
-                
-                
                 &nbsp;
+            </MarginContent>
+        
             </Contents> 
                 
         </Container>

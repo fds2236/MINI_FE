@@ -40,6 +40,7 @@ const MarginContent = styled.div`
 const ButtonContainer = styled.div`
     display: flex;
     justify-content: space-between;
+    align-items: center;
     width: 400px;
     margin: 0 auto;
 `;
@@ -64,17 +65,27 @@ const OrangeRedStyledButton = styled.button`
     width: 100px;
     height: 30px;
     color: #EEEEEE;
+
+    &:hover{
+        background-color: rgba(253,44,8,0.5);
+
+    }
 `;
 
 // 리턴 버튼 스타일드 컴포넌트
 const ReturnStyledButton = styled.button`
-    background-color: #EEEEEE;
+    background-color: orangered;
     border-style: none;
     border-radius: 10px;
     width: 130px;
     height: 30px;
-    color: gray;
+    color: #EEEEEE;
     cursor: pointer;
+
+    &:hover{
+        background-color: rgba(253,44,8,0.5);
+
+    }
     
 `;
 
@@ -106,7 +117,16 @@ const StyledTitleArea = styled.textarea`
     font-size: 20px;
 `;
 
+const CategoryDiv = styled.div`
+    border: 1px solid #EEEEEE;
+    width: 200px;
+    display: flex;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: #EEEEEE;
+    justify-content: space-between;
 
+`;
 
 
 
@@ -150,7 +170,7 @@ const OnClickToList = () => {
 const WriteBoard = () => {
     const [id, setId] = useState('');
     const [boardNum, setBoardNum] = useState('');
-    const [category, setCategory] = useState('');
+    const [category, setCategory] = useState("0");
     const [title, setTitle] = useState('');
     const [boardContent, setBoardContent] = useState('');
     const [submit, setSubmit] = useState(false); // 서버로 전송할 수 있는 조건 체크
@@ -184,7 +204,7 @@ const WriteBoard = () => {
     
     // 서버에게 회원 가입 정보를 전송할지에 대한 여부 판단 ( 다 있으면 submit이 true);
     const isSubmit = () => {
-        if(boardContent && title) setSubmit(true);
+        if(boardContent && title && category) setSubmit(true);
     }
 
     // 전송 버튼이 눌려지면 동작하는 함수, 함수가 비동기 통신을 해야 하므로 async 키워드 추가
@@ -203,6 +223,7 @@ const WriteBoard = () => {
     const handleCategorySelect = (e) => {
         console.log(e.target.value); // 카테고리 값이 잘 바뀌었는지 확인
         setCategory(e.target.value);
+        isSubmit();
       };
 
     return (
@@ -211,12 +232,14 @@ const WriteBoard = () => {
                 <ReturnButton text={"목록으로 돌아가기"}></ReturnButton>
 
                 {/* 카테고리 선택 화면 */}
+                <CategoryDiv>
                 <div>
                 <input
                     type="radio"
                     value="0"
                     checked = {category === "0"}
                     onChange = {handleCategorySelect}
+                
                 />
                 <label>
                     자유게시판
@@ -233,6 +256,7 @@ const WriteBoard = () => {
                     후기게시판
                 </label>
                 </div>
+                </CategoryDiv>
                 
             </ButtonContainer>
 
