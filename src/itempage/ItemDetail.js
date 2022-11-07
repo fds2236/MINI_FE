@@ -1,15 +1,31 @@
 import MiniApi from "../api/MiniApi";
 import { useState, useEffect } from "react";
 import styled from "styled-components";
+import Board from "../board/board";
 
 const ImageBlock = styled.div`
-
+    img {
+        width: 450px;
+        margin: 30px auto;
+    }
 `;
 
 const ItemDetailBlock = styled.div`
+    display: flex;
+    justify-content: center;
+    text-align: left;
     .brand-name {
         cursor: pointer;
+        font-size: 1.6em;
+        font-weight: 700;
+        color: rgb(0,173,181);
     }
+    .item-name {
+        font-size: 1.3em;
+        font-weight: 600;
+    }
+
+
 `;
 
 
@@ -53,18 +69,23 @@ const ItemDetail = () => {
     }
 
 return(
-    <ItemDetailBlock>  
-        {itemDetail && itemDetail.map(item => (
-        <div key={item.PRO_CODE}>
-            <img src={item.IMG} />
-            <p className="brand-name" onClick={() => onClickBrand}>{item.BRAND}</p>
-            <p>{item.PRO_NAME}</p>
-            <p>{item.PRO_CODE}</p>
-            <p>{item.LAUN_DATE}</p>
-            <p>발매가 : {item.PRICE}원</p>
-        </div>
-        ))}
-    </ItemDetailBlock>
+    <>
+        <ItemDetailBlock>  
+            {itemDetail && itemDetail.map(item => (
+            <div key={item.PRO_CODE}>
+                <ImageBlock>
+                    <img src={item.IMG}/>
+                </ImageBlock>
+                <p className="brand-name" onClick={() => onClickBrand}>{item.BRAND}</p>
+                <p className="item-name">{item.BRAND} {item.PRO_NAME}</p>
+                <p className="pro-code">{item.PRO_CODE}</p>
+                <p className="laun-date">{item.LAUN_DATE}</p>
+                <p>발매가 : {item.PRICE}원</p>
+            </div>
+            ))}
+        </ItemDetailBlock>
+        {/* <Board/> */}
+    </>
 )
 }
 

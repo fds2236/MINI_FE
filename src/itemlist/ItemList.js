@@ -3,16 +3,19 @@ import styled from "styled-components"
 import CategoryFilter from "./BrandCategory";
 import MiniApi from '../api/MiniApi';
 import SortItem from "./SortItem";
+import notlikeIcon from "../images/NOTLike-icon-00AD85.png"
+import likeIcon from "../images/Like-icon-00AD85.png"
 
 // 스타일
 const ItemBlock = styled.div`
   border: 1px solid #eeeeee;
-  margin: 10px;
+  margin: 10px 0px 10px 30px;
   padding: 10px;
-  width: 250px;
+  width: 260px;
   height: 350px;
   display: block;
   float: left;
+  
 `;
 
 const ItemDescBlock = styled.div`
@@ -33,7 +36,7 @@ const ItemDescBlock = styled.div`
     cursor: pointer;
     text-decoration: underline;
   }
-  .price {
+  .laun-date {
     font-size: 0.8em;
   }
   .like {
@@ -44,13 +47,24 @@ const ItemDescBlock = styled.div`
 const ItemImage = styled.div`
   img {
     width: 230px;
+    cursor: pointer;
   }
+  .likeIcon {
+    width: 23px;
+    position: absolute;
+    transform: translate(465%, -325%);
+    cursor: pointer;
+  }
+  .likeIcon:hover {
+    background-image: ${likeIcon};
+  }
+  display: flex;
   justify-content: center;
-  align-content: center;
-  background-color: #eeeeee;
+  align-items: center;
+  margin: 15px auto;
   width: 230px;
   height: 140px;
-  margin-bottom: 30px;  
+  margin-bottom: 20px;  
 `;
 
 // 브랜드 카테고리 배열
@@ -105,15 +119,21 @@ const ItemList = () => {
     setCategory(val);
   }
 
-
   // 상품명 클릭 시 해당 상품 상세페이지로 이동
-  const onClickDetail = (code,tmp) => {
+  const onClickDetail = (code) => {
     console.log("상세페이지로 이동 : " + code);
-    //alert(tmp);
+    // alert(tmp);
     window.localStorage.setItem("Detail", code);
     window.location.replace("/ItemDetail");
   }
   
+  // 관심상품 클릭 시 채워진 하트로 아이콘 변경 + 관심상품 횟수 카운트
+  const onClickLike = () => {
+      console.log("관심상품 등록 call?");
+  
+  }
+  
+
   return(
     <div>
       <CategoryFilter 
@@ -129,15 +149,15 @@ const ItemList = () => {
         {itemInfo && itemInfo.map(item => (        
           <ItemBlock key={item.PRO_CODE}>
             <ItemImage>
-              <img className="item-img" src={item.IMG}/>
+              <img className="item-img" alt="productImage" src={item.IMG} key={item.PRO_CODE} onClick={()=> onClickDetail(item.PRO_CODE)}/>
+              <img className="likeIcon" alt="likeIcon" src={notlikeIcon} onClick={() => onClickLike()}></img>
             </ItemImage>
             <ItemDescBlock>
-              <image src={item.IMG} />
               <p className="brand-name" onClick={()=>onClickBrand(item.BRAND)}>{item.BRAND}</p>
-              <p className="item-name" key={item.PRO_CODE} onClick={()=>onClickDetail(item.PRO_CODE,item.IMG)}>{item.PRO_NAME}</p>
-              <p className="laun-date">{item.LAUN_DATE}</p>
+              <p className="item-name" key={item.PRO_CODE} onClick={()=>onClickDetail(item.PRO_CODE)}>{item.PRO_NAME}</p>
+              <p className="laun-date">발매일 : {item.LAUN_DATE}</p>
               <p className="price">발매가 : {item.PRICE}원</p>
-              <p className="like">♡ 관심상품 </p>
+              <p className="like"><img src={likeIcon} alt={likeIcon} width="15px"></img> x 3,201</p>
             </ItemDescBlock>
           </ItemBlock>
         ))}
