@@ -251,28 +251,31 @@ const SignUp = () => {
     const [popup, setPopup] = useState(false);
 
     const handleInput = (e) => {
-        
-        setAddr(Post.address);
+        console.log(e.target.value);
+        setAddr(e.target.value);
         setEnroll_company({
             ...enroll_company,
             [e.target.name]:e.target.value,
         })
+        console.log(e.target.name);
     }
 
     const handleComplete = (data) => {
         setPopup(!popup);
     }
-
-        // 이메일 아이디 작성
+    
+    // 이메일 아이디 작성
     const writeName = (e) =>{
-        setWrite(e.target.value);
+        const writename = e.target.value;
+        setWrite(writename);
+        console.log(write);
     }
     // 선택한 도메인 
     const  selectDomain = (e) =>{
         //선택한 도메인을 sel 변수에 담음
         const sel = e.target.value
-        // sel 변수가 "aa"(직접인경우)
-        if(sel == "@"){
+        // sel 변수가 "@"(직접인경우)
+        if(sel === "@"){
             setSelect(sel);
             // IsSelect 는 숨겨져있는 창을 보여주기 위한 용도입니다.
             // IsSelect 의 기본값은 false 이고, true 가되면 입력창이 화면에 출력됩니다.
@@ -284,13 +287,26 @@ const SignUp = () => {
             setIsSelect(false);
             setSelect(sel);
         }
-    }
+        if(isSelect===false){
+            const email2 = write + select
+            setEmail(email2);
+            console.log(inputEmail)
+        }else{
+            const email3 = write + "@" + wrtieDomain
+            setEmail(email3);
+            console.log(inputEmail)
+        }
+        
+    }    
     // 작성한 도메인
     const domainWrite = (e) =>{
         // 직접입력되는 값을 받아주는 input 창 입니다.
         // isSelect 가 false 일경우 화면에 보이지 않습니다.
         setWriteDomain(e.target.value);
-    }
+    }    
+    
+
+    console.log(inputEmail);
     // 최종 확인
     // const sumit = () =>{
     //     if(isSelect==false){
@@ -316,14 +332,17 @@ const SignUp = () => {
     
     // API 호출
     const onClickSignUp = async() => {  // 회원가입 
+        let tranMail ='';
         if(isSelect===false){
+            tranMail = write + select;
             setEmail(write + select);
-            // console.log(inputEmail)
+            
         }else{
+            tranMail = write + "@" + wrtieDomain;
             setEmail(write + "@" + wrtieDomain);
         }
         try {
-            const res = await MiniApi.signUp(inputId, inputPwd, inputName, inputEmail, inputPhone, inputAddr);
+            const res = await MiniApi.signUp(inputId, inputPwd, inputName, tranMail, inputPhone, enroll_company.address);
             
             console.log(res.data.result);
             
@@ -430,7 +449,7 @@ const SignUp = () => {
                  <option value={"@naver.com"}>naver.com</option>
                  <option value={"@gmail.com"}>gmail.com</option>
                  <option value={"@daum.com"}>daum.net</option>
-                 <option value={"@nate.com"}>nate.net</option>
+                 <option value={"@nate.com"}>nate.com</option>
                  <option value={"@kakao.com"}>kakao.com</option>
                  <option value={"@"}>직접입력</option>
              </select>

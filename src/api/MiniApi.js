@@ -6,6 +6,9 @@ const MiniApi =  {
 
     // 회원가입
     signUp: async function(id, pwd, name, email, phone, addr) {
+        console.log("이메일 : " + email);
+        console.log("주소 : " + addr);
+
         const signUpObj = {
             id: id,
             pwd: pwd,
