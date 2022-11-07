@@ -15,6 +15,12 @@ function Mypage() {
     //     setModToggle(!ModToggle)
     // }
 
+
+    //MemberServlet
+
+    // API 호출
+ 
+
     return (
         <Profile/>
         // <div>

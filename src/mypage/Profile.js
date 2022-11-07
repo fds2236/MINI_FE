@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { Link} from "react-router-dom";
 import './Mypage.css';
 import { useState } from "react";
+import MiniApi from "../api/MiniApi";
 
 const Box = styled.div`
     /* display: flex; 
@@ -32,6 +33,13 @@ const Profile = () => {
 
     // const toggleCastView = () => {
     //     setCastToggle(!CastToggle)
+    // }
+
+    // API호출(이메일)
+    // const onClickProf = async() => {
+    //     try{
+    //         const res = await MiniApi.userEmail()
+    //     }
     // }
 
 
