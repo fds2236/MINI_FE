@@ -10,8 +10,9 @@ const ItemBlock = styled.div`
   margin: 10px;
   padding: 10px;
   width: 250px;
-  height: 200px;
-  display: inline-flex;
+  height: 350px;
+  display: block;
+  float: left;
 `;
 
 const ItemDescBlock = styled.div`
@@ -40,6 +41,17 @@ const ItemDescBlock = styled.div`
   }
 `;
 
+const ItemImage = styled.div`
+  img {
+    width: 230px;
+  }
+  justify-content: center;
+  align-content: center;
+  background-color: #eeeeee;
+  width: 230px;
+  height: 140px;
+  margin-bottom: 30px;  
+`;
 
 // 브랜드 카테고리 배열
 const brandCategories = [
@@ -78,10 +90,10 @@ const ItemList = () => {
     console.log("상품 목록 보기 컴포넌트 useEffect Call !!!!!!!");
     const itemData = async () => {
       try {
-        const response = await MiniApi.itemInfo(category, sortCondition);
+        const response = await MiniApi.itemFilterInfo(category, sortCondition);
         setItemInfo(response.data);
       } catch (e) {
-        console.log(e);
+        console.log("홈화면 아이템리스트 오류 : " + e);
       }
     };
     itemData();
@@ -95,8 +107,9 @@ const ItemList = () => {
 
 
   // 상품명 클릭 시 해당 상품 상세페이지로 이동
-  const onClickDetail = (code) => {
+  const onClickDetail = (code,tmp) => {
     console.log("상세페이지로 이동 : " + code);
+    //alert(tmp);
     window.localStorage.setItem("Detail", code);
     window.location.replace("/ItemDetail");
   }
@@ -113,11 +126,15 @@ const ItemList = () => {
         setSortCondition={setSortCondition}
       />
       <div>
-        {itemInfo && itemInfo.map(item => (
+        {itemInfo && itemInfo.map(item => (        
           <ItemBlock key={item.PRO_CODE}>
+            <ItemImage>
+              <img className="item-img" src={item.IMG}/>
+            </ItemImage>
             <ItemDescBlock>
+              <image src={item.IMG} />
               <p className="brand-name" onClick={()=>onClickBrand(item.BRAND)}>{item.BRAND}</p>
-              <p className="item-name" key={item.PRO_CODE} onClick={()=>onClickDetail(item.PRO_CODE)}>{item.PRO_NAME}</p>
+              <p className="item-name" key={item.PRO_CODE} onClick={()=>onClickDetail(item.PRO_CODE,item.IMG)}>{item.PRO_NAME}</p>
               <p className="laun-date">{item.LAUN_DATE}</p>
               <p className="price">발매가 : {item.PRICE}원</p>
               <p className="like">♡ 관심상품 </p>

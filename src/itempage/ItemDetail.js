@@ -18,7 +18,6 @@ const ItemDetail = () => {
     const [itemDetail, setItemDetail] = useState('');
     const getDetail = window.localStorage.getItem("Detail");
     
-
     useEffect(() => {
         console.log("상품 상세보기 컴포넌트 useEffect Call !!!");
         const itemDetailData = async () => {
@@ -46,18 +45,19 @@ const ItemDetail = () => {
     //     itemData();
     // }, [category]);
 
-    // // 브랜드명 클릭 시 해당 브랜드 상품만 보여줌
-    // const onClickBrand = (val) => {
-    //     console.log("브랜드카테고리로 이동 : " + val);
-    //     window.localStorage.setItem("brand", val);
-    //     window.location.replace("/ItemList");
-    // }
+    // 브랜드명 클릭 시 해당 브랜드 상품만 보여줌
+    const onClickBrand = (val) => {
+        console.log("브랜드카테고리로 이동 : " + val);
+        window.localStorage.setItem("brand", val);
+        window.location.replace("/ItemList");
+    }
 
 return(
-    <ItemDetailBlock>
+    <ItemDetailBlock>  
         {itemDetail && itemDetail.map(item => (
         <div key={item.PRO_CODE}>
-            <p className="brand-name">{item.BRAND}</p>
+            <img src={item.IMG} />
+            <p className="brand-name" onClick={() => onClickBrand}>{item.BRAND}</p>
             <p>{item.PRO_NAME}</p>
             <p>{item.PRO_CODE}</p>
             <p>{item.LAUN_DATE}</p>

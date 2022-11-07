@@ -6,7 +6,7 @@ const StyledFooter = styled.footer`
     /* bottom: 0;
     margin-bottom: 0; */
     background-color: #222831;
-    position: absolute;
+    /* position: absolute; */
     /* height: 20vh; */
     width: 100%;
     padding: 10px 0px 15px 0px;
