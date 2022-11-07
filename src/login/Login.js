@@ -122,7 +122,7 @@ const Login = () => {
             console.log(res.data.result);
 
             if(res.data.result === 200) {
-                window.localStorage.setItem("whoLoginNow",inputId+"님"); // 로그인 정보 저장
+                window.localStorage.setItem("whoLoginNow",inputId); // 로그인 정보 저장
                 window.location.replace("/");
             } else if(res.data.result === 300) {
                 setModelText("존재하지 않는 아이디입니다.");
