@@ -17,12 +17,15 @@ const Header = styled.div`
 `;
 
 const AgreeBox = styled.div`
-    width: 970px;
-    height: 555px;
-    margin-left: 300px;
+    width: 780px;
+    height: 500px;
+    position: relative;
+    margin: 0 auto;
     background-color : white;
     border-radius : 5px;
     border: solid #eeeeee;
+    display: flex;
+    flex-direction: column;
     .check {
         width : 850px;
         height : 200px;
