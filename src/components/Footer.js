@@ -45,7 +45,7 @@ const Footer = () => {
                 </div> <br/>
             <div className="sashoe">
                 대표:정경수 | 소재지: 서울시 강남구 테헤란로 14길 6 남도빌딩 3층 | 사업자등록번호: 101-50-41461<br/>
-                개인정보관리책임자:이수빈 | e-mail: ‘SASHOE' '123@sashoe.co.kr' | FAX: 02-514-2236
+                개인정보관리책임자 : 김도연 | e-mail: support@sashoe.com | FAX: 02-514-2236
             </div>
             </StyledFooter>
         </>

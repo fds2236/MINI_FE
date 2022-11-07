@@ -144,14 +144,14 @@ const MiniApi =  {
     },
         
     // 관심상품 기능
-    // likeInfo: async function (id, proCode, Like_cnt) {
-    //     const reqcmd = {
-    //         id : id,
-    //         proCode : proCode,
-    //         Like_cnt : Like_cnt
-    //     }
-    //     return await axios.post(MINI_DOMAIN + "LikeServlet", reqcmd, HEADER);
-    // }
+    likeInfo: async function (id, proCode, Like_cnt) {
+        const reqcmd = {
+            id : id,
+            proCode : proCode,
+            Like_cnt : Like_cnt
+        }
+        return await axios.post(MINI_DOMAIN + "LikeServlet", reqcmd, HEADER);
+    },
 
     // 내가 쓴 게시글
     mypostInfo: async function(id, category, title, content) {

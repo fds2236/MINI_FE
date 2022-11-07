@@ -1,3 +1,4 @@
+import React from "react";
 import styled from "styled-components";
 import './Mypage.css';
 import { useState, useEffect } from "react";
@@ -37,20 +38,27 @@ const Container = styled.div`
 
 // API 통신
 const Like = () => {
-    const [like, setLike] = useState('');
 
-    useEffect(() => {
-        console.log("관심상품 보기 컴포넌트!");
-        const likePro = async() => {
-            try {
-            const response = await MiniApi.likeInfo(like);
-            setLike(response.data);
-            } catch (e) {
-                console.log(e);
-            }
-        };
-        likePro();
-    });
+    let whoLoginNow = window.localStorage.getItem("whoLoginNow");
+
+    const [like, setLike] = useState('');
+    const [proCode, setProCode] = useState('');
+    const [Like_cnt, setLike_cnt] = useState('');
+
+
+    // useEffect(() => {
+    //     console.log("관심상품 보기 컴포넌트!");
+    //     const likePro = async() => {
+    //         try {
+    //         const response = await MiniApi.likeInfo(whoLoginNow, proCode, Like_cnt);
+    //          setLike(response.data);
+    //          //console.log('성공')
+    //         } catch (e) {
+    //             console.log(e);
+    //         }
+    //     };
+    //     likePro();
+    // });
 
 
     return (
