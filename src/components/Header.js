@@ -15,13 +15,17 @@ const StyledHeaderTop = styled.header`
   justify-content: right;
   .nav-top {
     margin-right: 30px;
-    .mypage-link, .mypage-like, .cs-link, .login, .login-info, .loginout {
+    .mypage-link, .mypage-like, .cs-link, .login, .loginout, .login-info {
       text-decoration: none;
       font-size: 13px;  
       color: #ffffff;
       background-color:#222831;
       border: none;
       cursor: pointer;
+    }
+    .login-info{
+      margin-top: 3px;
+
     }
   }
 `;
@@ -118,12 +122,14 @@ const Header = () => {
         <div className="nav-top">
         <div className="login-info">{whoLoginNow}</div>
         </div>
-        <div className="nav-top">
+
+        {!whoLoginNow ?
+        (<div className="nav-top">
           <Link to = {"/Login"} className="login">로그인</Link>
-        </div>
-        <div className="nav-top">
+        </div>) :
+        (<div className="nav-top">
           <button className="loginout" onClick={onClickLogout}>로그아웃</button>
-        </div>
+        </div>)}
 
         <div className="nav-top">
           <Link to = {"/Mypage"} className="mypage-link">마이페이지</Link>

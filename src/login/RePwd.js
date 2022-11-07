@@ -100,9 +100,9 @@ const RePwd = () => {
 
     // API호출
     // 입력받은 ID에 대한 PWD변경
-    const onClickRePwd = async() => {
+    const onClickRePwd = async(rePwdId) => {
         try{
-            const res = await MiniApi.resetPwd(inputId, inputPwd);
+            const res = await MiniApi.resetPwd(rePwdId, inputPwd);
             console.log(res.data.result);
             
             if(res.data.result === true) {
@@ -112,6 +112,20 @@ const RePwd = () => {
         } catch (e) {
         }
     } 
+
+const onClick3 = (e) => {
+
+    console.log(e);
+
+}
+
+onClick3(3);
+
+
+
+
+
+
     
     return(
         <div className="container">
@@ -120,8 +134,8 @@ const RePwd = () => {
         {/* 아이디 불러오기 */}
         <div>{rePwdId}</div>
         {/* 아이디 입력창 */}
-        <input className="input" type="text" placeholder="아이디" value={inputId} onChange={onChangeId}></input>
-        <br />
+        {/* <input className="input" type="text" placeholder="아이디" value={inputId} onChange={onChangeId}></input>
+        <br /> */}
 
         {/* 패스워드 입력창 */}
         <input className="input" type="password" placeholder="비밀번호" value={inputPwd} onChange={onChangePwd}></input>
@@ -142,7 +156,7 @@ const RePwd = () => {
         </div>
 
         {/* 확인 버튼 클릭 */}
-        <button className="rePwdButton" onClick={onClickRePwd}>확인</button>
+        <button className="rePwdButton" onClick={()=>onClickRePwd(rePwdId)}>확인</button>
         </RePwdBlock>
         {modalOpen && <Modal open={modalOpen} close={closeModal} header="확인">비밀번호가 변경되었습니다.</Modal>}
         </div>
