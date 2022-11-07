@@ -8,6 +8,7 @@ import Modal from "../util/Modal";
 const SignComBlock = styled.div`
     width: 500px;
     margin-left: 500px;
+    margin-top: 80px;
     padding: 30px;
     border-radius : 5px;
     border: solid #eeeeee;

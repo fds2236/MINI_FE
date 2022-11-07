@@ -27,7 +27,7 @@ const Header = styled.div`
 
 const SignUpBlock = styled.div`
     width: 780px;
-    height: 500px;
+    height: 440px;
     position: relative;
     margin: 0 auto;
     background-color : white;
