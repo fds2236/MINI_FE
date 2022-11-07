@@ -52,6 +52,8 @@ const Modify = () => {
             const res =  await MiniApi.editMem(id, pwd, name, email, addr, phone);
             alert("전송했습니다");
 
+            // window.localStorage.setItem()
+
         } catch (e) {
             alert("오류 : " + e);
         }
