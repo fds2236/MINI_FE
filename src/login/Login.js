@@ -19,6 +19,7 @@ const LoginBlock = styled.div`
         border-radius : 5px;
         border: solid 1.5px #eeeeee;
         margin : 5px;
+        font-size: 12px;
         &:hover {
             border : solid rgb(0,173,181) 1px;
             font-weight: 600;
@@ -31,7 +32,7 @@ const LoginBlock = styled.div`
     }
 
     .hint {
-        font-size : 14px;
+        font-size : 12px;
         color:green;
     }
 
@@ -64,7 +65,7 @@ const PageLink = styled.div`
     }
 `;
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 const Login = () => {
        // 아이디, 비밀번호 입력
        const [inputId, setInputId] = useState("");
@@ -140,7 +141,7 @@ const Login = () => {
        return(
         <div className="container">
             <LoginBlock>
-                <h3>로그인</h3>
+                <h5>로그인</h5>
                 {/* 아이디 입력창 */}
                 <input className="input" value={inputId} placeholder="아이디" onChange={onChangeId}></input>   
 

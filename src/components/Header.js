@@ -25,7 +25,6 @@ const StyledHeaderTop = styled.header`
     }
     .login-info{
       margin-top: 3px;
-
     }
   }
 `;
@@ -108,7 +107,7 @@ const Header = () => {
   //   })
   // }
 
-  // 로그인을 표시해주기 위한 현재 ID 표시
+  // 로그인했을 경우 현재 ID 표시
   let whoLoginNow = window.localStorage.getItem("whoLoginNow");
 
   // 현재 ID에서 로그아웃하기
@@ -120,9 +119,14 @@ const Header = () => {
   return (
     <>
       <StyledHeaderTop>
-        <div className="nav-top">
-        <div className="login-info">{whoLoginNow}</div>
-        </div>
+        {!whoLoginNow ? 
+          (<div className="nav-top">
+          <div className="login-info">{whoLoginNow}</div>
+          </div>):
+          (<div className="nav-top">
+              <div className="login-info">{whoLoginNow}님</div>
+              </div>)
+        }  
 
         {!whoLoginNow ?
         (<div className="nav-top">
@@ -139,8 +143,6 @@ const Header = () => {
         (<div className="nav-top">
         <Link to = {"/SignUp"} className="signup-link">회원가입</Link>
          </div>)}
-
-
 
         <div className="nav-top">
           <Link to = {"/Like"} className="mypage-like">관심상품</Link>

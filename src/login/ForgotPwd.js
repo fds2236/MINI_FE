@@ -12,6 +12,7 @@ const ForgotPwdBlock = styled.div`
         border-radius : 5px;
         border: solid 1.5px #eeeeee;
         margin : 5px;
+        font-size: 12px;
         &:hover {
             border : solid rgb(0,173,181) 1px;
             color: rgb(0,173,181);
@@ -96,7 +97,7 @@ const ForgotPwd = () => {
     return(
         <div className="container">
             <ForgotPwdBlock>
-                <h3>비밀번호 찾기</h3>
+                <h5>비밀번호 찾기</h5>
                 {/* 아이디 입력창 */}
                 <input className="input" placeholder="아이디" value={inputId} onChange={onChangeId}></input>
                 <br/>

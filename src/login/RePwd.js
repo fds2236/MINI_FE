@@ -13,6 +13,7 @@ const RePwdBlock = styled.div`
         border-radius : 5px;
         border: solid 1.5px #eeeeee;
         margin : 5px;
+        font-size: 12px;
         &:hover {
             border : solid rgb(0,173,181) 1px;
             color: rgb(0,173,181);
@@ -113,24 +114,11 @@ const RePwd = () => {
         }
     } 
 
-const onClick3 = (e) => {
-
-    console.log(e);
-
-}
-
-onClick3(3);
-
-
-
-
-
-
     
     return(
         <div className="container">
         <RePwdBlock>
-        <h3>비밀번호 재설정</h3>
+        <h5>비밀번호 재설정</h5>
         {/* 아이디 불러오기 */}
         <div>{rePwdId}</div>
         {/* 아이디 입력창 */}
