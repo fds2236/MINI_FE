@@ -11,7 +11,7 @@ const RePwdBlock = styled.div`
         height : 35px;
         background-color : white;
         border-radius : 5px;
-        border: solid #eeeeee;
+        border: solid 1.5px #eeeeee;
         margin : 5px;
         &:hover {
             border : solid rgb(0,173,181) 1px;
@@ -29,7 +29,7 @@ const RePwdBlock = styled.div`
         height : 40px;
         background-color : white;
         border-radius : 5px;
-        border: solid #eeeeee;
+        border: solid 1.5px #eeeeee;
         margin : 5px;
         &:hover {
             border : none;
@@ -40,7 +40,11 @@ const RePwdBlock = styled.div`
     }
 `;
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 const RePwd = () => {
+    // 로그인된 아이디 불러오기
+    let rePwdId = window.localStorage.getItem("rePwdId"); 
+
     // 아이디, 패스워드 및 패스워드 체크 입력
     const [inputId, setInputId] = useState("");
     const [inputPwd, setInputPwd] = useState("");
@@ -113,6 +117,8 @@ const RePwd = () => {
         <div className="container">
         <RePwdBlock>
         <h3>비밀번호 재설정</h3>
+        {/* 아이디 불러오기 */}
+        <div>{rePwdId}</div>
         {/* 아이디 입력창 */}
         <input className="input" type="text" placeholder="아이디" value={inputId} onChange={onChangeId}></input>
         <br />

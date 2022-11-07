@@ -17,7 +17,7 @@ const LoginBlock = styled.div`
         height : 35px;
         background-color : white;
         border-radius : 5px;
-        border: solid #eeeeee;
+        border: solid 1.5px #eeeeee;
         margin : 5px;
         &:hover {
             border : solid rgb(0,173,181) 1px;
@@ -41,11 +41,11 @@ const LoginBlock = styled.div`
         margin: 10px;
         background-color: white;
         border-radius: 5px;
-        border: solid #eeeeee;
+        border: solid 1.5px #eeeeee;
         &:hover {
             color: white;
             border: none;
-            font-weight: 600;
+            font-weight: 700;
             background-color: rgb(0,173,181);      
         }  
     }
@@ -64,6 +64,7 @@ const PageLink = styled.div`
     }
 `;
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
 const Login = () => {
        // 아이디, 비밀번호 입력
        const [inputId, setInputId] = useState("");
@@ -121,6 +122,7 @@ const Login = () => {
             console.log(res.data.result);
 
             if(res.data.result === 200) {
+                window.localStorage.setItem("whoLogin",inputId); // 로그인 정보 저장
                 window.location.replace("/");
             } else if(res.data.result === 300) {
                 setModelText("존재하지 않는 아이디입니다.");

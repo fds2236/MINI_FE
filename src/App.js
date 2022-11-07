@@ -25,7 +25,7 @@ import Post from './signup/Post';
 import Mypost from './mypage/Mypost';
 
 function App() {
-  window.localStorage.setItem("whoLoginNow","guest");
+  // window.localStorage.setItem("whoLoginNow","guest");
   return (
     <Router>
       <div className='App'>

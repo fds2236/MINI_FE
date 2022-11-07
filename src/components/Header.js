@@ -14,7 +14,7 @@ const StyledHeaderTop = styled.header`
   justify-content: right;
   .nav-top {
     margin-right: 30px;
-    .mypage-link, .mypage-like, .cs-link, .login {
+    .mypage-link, .mypage-like, .cs-link, .login, .login-info {
       text-decoration: none;
       font-size: 13px;
       color: #ffffff;
@@ -99,10 +99,15 @@ const Header = () => {
   //   })
   // }
 
+  // 로그인을 표시해주기 위한 현재 ID
+  let whoLogin = window.localStorage.getItem("whoLogin");
 
   return (
     <>
       <StyledHeaderTop>
+        <div className="nav-top">
+        <div className="login-info">{whoLogin}</div>
+        </div>
         <div className="nav-top">
           <Link to = {"/Login"} className="login">로그인</Link>
         </div>

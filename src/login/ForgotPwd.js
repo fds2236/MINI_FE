@@ -10,7 +10,7 @@ const ForgotPwdBlock = styled.div`
         height : 35px;
         background-color : white;
         border-radius : 5px;
-        border: solid #eeeeee;
+        border: solid 1.5px #eeeeee;
         margin : 5px;
         &:hover {
             border : solid rgb(0,173,181) 1px;
@@ -28,7 +28,7 @@ const ForgotPwdBlock = styled.div`
         height : 40px;
         background-color : white;
         border-radius : 5px;
-        border: solid #eeeeee;
+        border: solid 1.5px #eeeeee;
         margin : 10px;
         &:hover {
             border : none;
@@ -80,6 +80,7 @@ const ForgotPwd = () => {
 
             if(res.data.result === "OK") {
                 // 비밀번호 재설정하는 RePwd로 이동
+                window.localStorage.setItem("rePwdId",inputId); 
                 window.location.replace("/RePwd");
 
             } else {
@@ -101,7 +102,7 @@ const ForgotPwd = () => {
                 <br/>
 
                 {/* 이메일 입력창 */}
-                <input className="input" placeholder="비밀번호" value={inputEmail} onChange={onChangeEmail}></input>
+                <input className="input" placeholder="이메일" value={inputEmail} onChange={onChangeEmail}></input>
                 <br/>
 
                 {/* 비밀번호 찾기 버튼 활성화 */}

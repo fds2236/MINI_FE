@@ -10,7 +10,7 @@ const ForgotIdBlock = styled.div`
         height : 35px;
         background-color : white;
         border-radius : 5px;
-        border: solid #eeeeee;
+        border: solid  1.5px #eeeeee;
         margin : 5px;
         &:hover {
             border : solid rgb(0,173,181) 1px;
@@ -28,7 +28,7 @@ const ForgotIdBlock = styled.div`
         height : 40px;
         background-color : white;
         border-radius : 5px;
-        border: solid #eeeeee;
+        border: solid 1.5px #eeeeee;
         margin : 10px;
         &:hover {
             border : none;
