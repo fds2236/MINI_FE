@@ -147,7 +147,7 @@ const Login = () => {
 
                 {/* 아이디 입력 제한 메시지 */}
                 <div className="hint">
-                {inputId.length > 0 && <span className={`message ${isPwd ? 'success' : 'error'}`}>{idMessage}</span>}
+                {inputId.length > 0 && <span className={`message ${isId ? 'success' : 'error'}`}>{idMessage}</span>}
                 </div>
 
                 {/* 패스워드 입력창 */}
