@@ -25,7 +25,7 @@ const Container = styled.div`
 const ButtonContainer = styled.div`
     display: flex;
     justify-content: space-between;
-    width: 550px;
+    width: 580px;
     align-items: center;
     margin: 20px auto;
 `;
@@ -125,7 +125,7 @@ padding-top: 10px;
 
 const CategoryDiv = styled.div`
     border: 1px solid #EEEEEE;
-    width: 300px;
+    width: 340px;
     display: flex;
     padding: 10px;
     border-radius: 10px;
