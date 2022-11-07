@@ -19,34 +19,33 @@ const Header = styled.div`
 const AgreeBox = styled.div`
     width: 780px;
     height: 500px;
-    position: relative;
+    /* position: relative; */
     margin: 0 auto;
-    background-color : white;
     border-radius : 5px;
     border: solid #eeeeee;
-    display: flex;
-    flex-direction: column;
+    /* display: flex; */
+    /* flex-direction: column; */
     .check {
-        width : 850px;
+        width : 760px;
         height : 200px;
         margin : 10px;
         padding-left: 50px;
         border-radius : 5px;
         &:hover {
             border : solid rgb(0,173,181) 0.5px;
-            font-weight: 600;
             color: rgb(0,173,181);
         } 
         &:focus {
             outline : solid rgb(0,173,181) 1px;
-            font-weight: 600;
         }
         .text_box {
-            width: 800px;
-            height: 180px;
+            width: 700px;
+            height: 140px;
         }
     }
 `;
+
+
 
 
 const Agree = () => {
@@ -149,9 +148,10 @@ const Agree = () => {
             <Header><h1 className='title'>JOIN US</h1>
             <p className='comment'>👟 슈즈의 기준, Sa shoe 회원가입하고 인싸되기</p></Header>
 
+            <legend><input type="checkbox" checked={allCheck} onClick={allBtnEvent}/>전체 약관에 동의합니다.</legend>
+
             <AgreeBox>
             <fieldset>
-                <legend><input type="checkbox" checked={allCheck} onClick={allBtnEvent}/>전체 약관에 동의합니다.</legend>
                 <fieldset className='check'>
                     <legend><input type="checkbox" checked={serviceCheck} onClick={serviceBtnEvent}/>서비스 이용 약관에 동의합니다.(필수)</legend>
                     <textarea className='text_box'>Sa shoe 서비스 이용 약관동의 
