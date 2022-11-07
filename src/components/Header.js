@@ -4,6 +4,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import logo from "../images/SASHOE_LOGO-00ADB5.png";
 import searchIcon from "../images/Search-00AD85.png"
+import s from "react-aws-s3";
 
 // 헤더 TOP 스타일
 const StyledHeaderTop = styled.header`
@@ -27,7 +28,7 @@ const StyledHeader = styled.header`
   background-color: #ffffff;
   width: 100%;
   /* padding: 40px; */
-  margin-bottom: 30px;
+  /* margin-bottom: 30px; */
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -99,18 +100,26 @@ const Header = () => {
   //   })
   // }
 
-  // 로그인을 표시해주기 위한 현재 ID
-  let whoLogin = window.localStorage.getItem("whoLoginNow");
+  // 로그인을 표시해주기 위한 현재 ID 표시
+  let whoLoginNow = window.localStorage.getItem("whoLoginNow");
+
+  // 현재 ID에서 로그아웃하기
+  // const onClickLogout = window.localStorage.removeItem("whoLoginNow");
 
   return (
     <>
       <StyledHeaderTop>
         <div className="nav-top">
-        <div className="login-info">{whoLogin}</div>
+        <div className="login-info">{whoLoginNow}</div>
         </div>
         <div className="nav-top">
           <Link to = {"/Login"} className="login">로그인</Link>
         </div>
+
+        {/* <div className="nav-top">
+          <button className="loginout" onClick={onClickLogout}>로그아웃</button>
+        </div> */}
+
         <div className="nav-top">
           <Link to = {"/Mypage"} className="mypage-link">마이페이지</Link>
         </div>
