@@ -124,7 +124,9 @@ const Login = () => {
 
             if(res.data.result === 200) {
                 window.localStorage.setItem("whoLoginNow",inputId); // 로그인 정보 저장
+                window.localStorage.setItem("callEmail", )
                 window.location.replace("/");
+
             } else if(res.data.result === 300) {
                 setModelText("존재하지 않는 아이디입니다.");
                 setModalOpen(true);

@@ -9,14 +9,17 @@ const ModiContain = styled.div`
 `
 const Modify = () => {
 
-    const [id, setId] = useState('');
+
+    // const [id, setId] = useState('');
+    const [inputId, setInputId] = useState("");
     const [pwd, setPwd] = useState('');
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [addr, setAddr] = useState('');
     const [phone, setPhone] = useState('');
 
-    const onChangeId = (e) => setId(e.target.value);
+    // const onChangeId = (e) => setId(e.target.value);
+    const onChangeId = (e) => setInputId(e.target.value);
     const onChangePwd = (e) => setPwd(e.target.value);
     const onChangeName = (e) => setName(e.target.value);
     const onChangeEmail = (e) => setEmail(e.target.value);
@@ -47,12 +50,15 @@ const Modify = () => {
     // }
 
 
-    const onSubmit = async () => {
-        try {
-            const res =  await MiniApi.editMem(id, pwd, name, email, addr, phone);
-            alert("전송했습니다");
+    let whoLoginNow = window.localStorage.getItem("whoLoginNow");
 
-            // window.localStorage.setItem()
+
+    // API호출
+    const onSubmit = async (whoLoginNow) => {
+        try {
+            const res =  await MiniApi.editMem(whoLoginNow, pwd, name, email, addr, phone);
+            alert("전송했습니다");
+            //  window.localStorage.setItem("callEmail", email);
 
         } catch (e) {
             alert("오류 : " + e);
@@ -60,17 +66,18 @@ const Modify = () => {
     }
 
 
-
-
     return(
         <>
         <Profile/>
-
-        <input
+        {/* 로그인한 id, 이메일 회원정보 띄워줘야 함 */}
+        {/* <input
             placeholder="id 입력 하세요 ....."
             value={id}
             onChange={onChangeId}
-        ></input> 
+        ></input>  */}
+
+        <div>{whoLoginNow}</div>
+
         <input
             placeholder="pwd 입력 하세요 ....."
             value={pwd}
@@ -97,7 +104,7 @@ const Modify = () => {
             onChange={onChangePhone}
         ></input> 
 
-        <button onClick={onSubmit} >제출</button>
+        <button onClick={()=>onSubmit(whoLoginNow)} >제출</button>
 
 
 

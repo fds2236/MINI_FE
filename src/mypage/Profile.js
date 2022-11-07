@@ -35,6 +35,9 @@ const Profile = () => {
     // }
 
 
+    let whoLoginNow = window.localStorage.getItem("whoLoginNow");
+    let callEmail = window.localStorage.getItem("callEmail");
+    
     return (
 
         <Box>
@@ -48,10 +51,8 @@ const Profile = () => {
                 <div className="user-img">😂
                 </div>
                 <div className="user">
-                    <p>이름</p>
-                    <p>이메일</p>
-                    <button className="bt">프로필수정</button>
-                    <button className="bt">작성한 글</button>
+                    <p>이름 : {whoLoginNow}</p>
+                    <p>이메일 : </p>
                 </div>
             </Container>
             
