@@ -128,30 +128,53 @@ const MiniApi =  {
         }
         return await axios.post(MINI_DOMAIN + "RePwdServlet", rePwdObj, HEADER);
     },
-        // 회원정보 수정 기능
-        editMem : async function (id, pwd, name, email, addr, phone) {
-            const reqcmd = {
-                cmd : "EditMem",
-                id : id,
-                pwd : pwd,
-                name : name,
-                email : email,
-                addr : addr,
-                phone : phone
-            }
-            
-            return await axios.post(MINI_DOMAIN + "EditMemServlet", reqcmd, HEADER);
+    // 회원정보 수정 기능
+    editMem : async function (id, pwd, name, email, addr, phone) {
+        const reqcmd = {
+            cmd : "EditMem",
+            id : id,
+            pwd : pwd,
+            name : name,
+            email : email,
+            addr : addr,
+            phone : phone
         }
         
-        // // 관심상품 기능
-        // LikeInfo: async function (id, proCode, likeCnt) {
-        //     const reqcmd = {
-        //         id : id,
-        //         proCode : proCode,
-        //         likeCnt : likeCnt
-        //     }
-        //     return await axios.post(MINI_DOMAIN + "LikeServlet", reqcmd, HEADER);
-        // }
+        return await axios.post(MINI_DOMAIN + "EditMemServlet", reqcmd, HEADER);
+    },
+        
+    // 관심상품 기능
+    // likeInfo: async function (id, proCode, Like_cnt) {
+    //     const reqcmd = {
+    //         id : id,
+    //         proCode : proCode,
+    //         Like_cnt : Like_cnt
+    //     }
+    //     return await axios.post(MINI_DOMAIN + "LikeServlet", reqcmd, HEADER);
+    // }
+
+    // 내가 쓴 게시글
+    mypostInfo: async function(id, category, title, content) {
+        const mypostCmd = {
+            cmd: "mypostInfo",
+            category: category,
+            title: title,
+            content: content,
+            id: id
+
+        }
+        return await axios.post(MINI_DOMAIN + "MypostServlet", mypostCmd, HEADER);
+    },
+
+
+    // 회원 이메일 정보
+    userEmail: async function(id) {
+    const findEmail = {
+        id : id,
+    }
+    
+    return await axios.post(MINI_DOMAIN + "MemberServlet", findEmail, HEADER);
+}
         
 }
 

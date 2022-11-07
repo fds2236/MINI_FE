@@ -1,13 +1,20 @@
 import Profile from "./Profile";
 import React from "react";
 import styled from "styled-components";
+import MiniApi from "../api/MiniApi";
 
 const StylePost = styled.div`
 
 `;
 
 // 내 게시글 보기
-const Mypost = () => {
+const Mypost = async() => {
+    try {
+        const res = await MiniApi.mypostInfo();
+        alert("불러오기 완료")
+    } catch (e) {
+        alert("오류 : " + e);
+    }
     return(
         <>
         <Profile/>

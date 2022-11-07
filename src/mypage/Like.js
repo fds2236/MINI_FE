@@ -34,14 +34,16 @@ const Container = styled.div`
         object-fit: contain;
     }
 `
+
+// API 통신
 const Like = () => {
-    const [like, setLike] = useState('ALL');
+    const [like, setLike] = useState('');
 
     useEffect(() => {
         console.log("관심상품 보기 컴포넌트!");
         const likePro = async() => {
             try {
-            const response = await MiniApi.LikeInfo(like);
+            const response = await MiniApi.likeInfo(like);
             setLike(response.data);
             } catch (e) {
                 console.log(e);
