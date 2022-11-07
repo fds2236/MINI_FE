@@ -41,7 +41,7 @@ const ButtonContainer = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 400px;
+    width: 450px;
     margin: 0 auto;
 `;
 
@@ -119,7 +119,7 @@ const StyledTitleArea = styled.textarea`
 
 const CategoryDiv = styled.div`
     border: 1px solid #EEEEEE;
-    width: 200px;
+    width: 230px;
     display: flex;
     padding: 10px;
     border-radius: 10px;
