@@ -193,6 +193,7 @@ const Board = () => {
             try {
                 console.log(nowBoardNum);
                 const response = await MiniApi.boardInfo(nowBoardNum);
+                
                 setBoardDetail(response.data);
                 console.log(response.data)
             } catch (e) {
@@ -246,13 +247,6 @@ const Board = () => {
             <OrangeRedStyledButton onClick={() => OnClickDelete(board.boardNum, whoLoginNow)} >삭제하기</OrangeRedStyledButton>
             
             
-
-
-
-
-
-
-
 
             </Container>
 
