@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-// import Modal from "../util/Modal";
+import Modal from "../util/Modal";
 
 // 도연 - 회원가입 페이지 작업중 
 
@@ -50,12 +50,12 @@ const Agree = () => {
 
     // 약관동의 체크박스 기능 구현
     const [allCheck, setAllCheck] = useState(false); // 모두 체크, 기본값은 체크안된상태
-    const [serviceCheck, setServiceCheck] = useState(false); // 서비스 이용약관 체크
-    const [userCheck, setUserCheck] = useState(false); // 개인정보 처리방침 체크
+    const [serviceCheck, setServiceCheck] = useState(false); // 서비스 이용약관 체크 // 필수
+    const [userCheck, setUserCheck] = useState(false); // 개인정보 처리방침 체크// 필수
     const [marketingCheck, setMarketingCheck] = useState(false); // 마케팅 체크
     const [marketingEmailCheck, setMarketingEmailCheck] = useState(false); // 이메일
     const [marketingSMSCheck, setMarketingSMSCheck] = useState(false); // SMS
-    const [ageCheck, setAgeCheck] = useState(false); // 나이 체크
+    const [ageCheck, setAgeCheck] = useState(false); // 나이 체크// 필수
 
     // const [Link, setLink] = useState(false); // 다음 페이지 넘어가는 링크
 
@@ -125,11 +125,18 @@ const Agree = () => {
 
     // // 필수 항목 모두 체크했을 때만 회원가입 버튼 눌리게
     // // 필수 항목 중 하나라도 체크 안하면 모달창 띄우기
-    // const [modalOpenSignUp, setModalOpenSignUp] = useState(false); // 회원가입 버튼 눌렀을 때
-    // const closeModalSignUp = () => { // 모달 창 닫기
-    //     setModalOpenSignUp(false); 
-    // }
+    const [modalOpenSignUp, setModalOpenSignUp] = useState(false); // 회원가입 버튼 눌렀을 때
+    const closeModalSignUp = () => { // 모달 창 닫기
+        setModalOpenSignUp(false); 
+    }
 
+    const istrue = () =>{
+        if(serviceCheck === true && userCheck === true && ageCheck === true){
+            window.location.replace("./Signup");
+        }else{
+            setModalOpenSignUp(true);
+        }
+    }
     
 
 
@@ -570,10 +577,10 @@ const Agree = () => {
                 <label><input type="checkbox" checked={ageCheck} onClick={ageBtnEvent}/>만 14세 이상입니다.(필수)</label>
             </fieldset> </AgreeBox>
             <button><Link to="/">취소하기</Link></button>
-            <button><Link to="/SignUp" >다음단계</Link></button>
+            <button onClick={istrue}><>다음단계</></button>
 
             {/* 모달 */}
-            {/* {modalOpenSignUp && <Modal open={modalOpenSignUp} close={closeModalSignUp} header="확인">필수 항목을 모두 체크해주세요.</Modal>} */}
+            {modalOpenSignUp && <Modal open={modalOpenSignUp} close={closeModalSignUp} header="확인">필수 항목을 모두 체크해주세요.</Modal>}
         </div>
         
     )

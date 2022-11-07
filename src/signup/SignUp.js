@@ -58,20 +58,16 @@ const SignUpBlock = styled.div`
         text-align: left;
         width: 150px;
         margin-left: 30px;
-        /* margin : 10px */
     }
     button{
         position: relative;
         float: left;
         margin: 8px;
     }
-    input , .inputemail  {
+    input, .inputemail  {
         float: left;
-        /* display: flex; */
         width : 200px;
-        /* height : 35px; */
         margin : 10px;
-        /* padding-left: 50px; */
         border-radius : 5px;
         &:hover {
             border : solid rgb(0,173,181) 0.5px;
@@ -84,10 +80,10 @@ const SignUpBlock = styled.div`
         }
     }
     .inputemail{
-        width: 150px;  
+        width: 155px;  
     }
     .user_enroll_text{
-        margin-left: 3px;
+        margin-left: 10px;
     }
     .star {
             color: red;
@@ -149,7 +145,7 @@ const SignUp = () => {
     const [write, setWrite] = useState('');
     const [wrtieDomain, setWriteDomain] = useState('');
     const [select, setSelect] = useState('');
-    const [final, setFinal] = useState('');
+    // const [final, setFinal] = useState('');
     const[isSelect,setIsSelect] = useState(false);
 
     // 오류 메세지
@@ -221,18 +217,18 @@ const SignUp = () => {
         }
     }
 
-    // 이메일 힌트
-    const onChangeEmail = (e) => { 
-        const emailRegex = /^([a-z]+\d*)+(\.?\w+)+@\w+(\.\w{2,3})+$/;
-        const emailCurrent = e.target.value;
-        setEmail(emailCurrent);
-        if (!emailRegex.test(emailCurrent)) {
-            setEmailMsg("이메일을 다시 입력해주세요. '@'를 포함해야 합니다.")
-            setIsEmail(false)
-        } else {
-            setIsEmail(true);
-        }
-    }
+    // // 이메일 힌트
+    // const onChangeEmail = (e) => { 
+    //     const emailRegex = /^([a-z]+\d*)+(\.?\w+)+@\w+(\.\w{2,3})+$/;
+    //     const emailCurrent = e.target.value;
+    //     setEmail(emailCurrent);
+    //     if (!emailRegex.test(emailCurrent)) {
+    //         setEmailMsg("이메일을 다시 입력해주세요. '@'를 포함해야 합니다.")
+    //         setIsEmail(false)
+    //     } else {
+    //         setIsEmail(true);
+    //     }
+    // }
 
     // 전화번호 힌트
     const onChangePhone = (e) => { 
@@ -255,6 +251,8 @@ const SignUp = () => {
     const [popup, setPopup] = useState(false);
 
     const handleInput = (e) => {
+        
+        setAddr(Post.address);
         setEnroll_company({
             ...enroll_company,
             [e.target.name]:e.target.value,
@@ -294,14 +292,14 @@ const SignUp = () => {
         setWriteDomain(e.target.value);
     }
     // 최종 확인
-    const sumit = () =>{
-        if(isSelect==false){
-            setFinal(write + select);
-        }else{
-            setFinal(write + "@" + wrtieDomain);
-        }
-    }
-    console.log(final);
+    // const sumit = () =>{
+    //     if(isSelect==false){
+    //         setFinal(write + select);
+    //     }else{
+    //         setFinal(write + "@" + wrtieDomain);
+    //     }
+    // }
+    // console.log(final);
          
 
     // 모달
@@ -318,22 +316,30 @@ const SignUp = () => {
     
     // API 호출
     const onClickSignUp = async() => {  // 회원가입 
+        if(isSelect===false){
+            setEmail(write + select);
+            // console.log(inputEmail)
+        }else{
+            setEmail(write + "@" + wrtieDomain);
+        }
         try {
             const res = await MiniApi.signUp(inputId, inputPwd, inputName, inputEmail, inputPhone, inputAddr);
-
+            
             console.log(res.data.result);
-
+            
             if(res.data.result === "OK") {
                 window.location.replace("/SignCom");
             } else {
-                    console.log("회원가입에 실패했습니다. 다시 확인해주세요.");
-                    setModalOpenSignUp(true);
-                }
-            } catch (e) {
+                console.log("회원가입에 실패했습니다. 다시 확인해주세요.");
+                setModalOpenSignUp(true);
+            }
+        } catch (e) {
+    
         }
     }
 
-
+    
+    
     const onClickIdCheck = async() => { // 아이디 중복확인
         try {
             const res = await MiniApi.idCheck(inputId);
@@ -367,7 +373,7 @@ const SignUp = () => {
             {/* 아이디 입력창 */}
             <div className='divv'>
                 <label className='label'><b className='star'>*</b>아이디</label>
-                <input className="input" value={inputId} onChange={onChangeId}></input>
+                <input className="id" value={inputId} onChange={onChangeId}></input>
                 <button onClick={onClickIdCheck}>중복 확인</button>
             </div>
 
@@ -380,7 +386,7 @@ const SignUp = () => {
             {/* 비밀번호 입력창 */}
             <div>
                 <label className='label'><b className='star'>*</b>비밀번호</label>
-                <input className="input" value={inputPwd} type="password" onChange={onChangePwd} required></input>
+                <input className="pwd" value={inputPwd} type="password" onChange={onChangePwd} required></input>
             </div>
 
             {/* 비밀번호 입력 제한 메시지 */}
@@ -391,7 +397,7 @@ const SignUp = () => {
             {/* 비밀번호 확인 입력창 */}
             <div>
                 <label className='label'><b className='star'>*</b>비밀번호 확인</label>
-                <input className="input" value={inputPwdCheck} type="password" onChange={onChangePwdCheck} required></input>
+                <input className="pwdCheck" value={inputPwdCheck} type="password" onChange={onChangePwdCheck} required></input>
             </div>
 
             {/* 비밀번호 확인 입력 제한 메시지 */}
@@ -402,7 +408,7 @@ const SignUp = () => {
             {/* 이름 입력창 */}
             <div>
                 <label className='label'><b className='star'>*</b>이름</label>
-                <input className="input" value={inputName} onChange={onChangeName} required></input>
+                <input className="name" value={inputName} onChange={onChangeName} required></input>
             </div>
 
             {/* 이름 입력 제한 메시지 */}
@@ -414,7 +420,7 @@ const SignUp = () => {
             
             <div>
             <label className='label'><b className='star'>*</b>이메일</label>
-            <input className='input' value={write} onChange={writeName}></input>
+            <input className='email' value={write} onChange={writeName}></input>
              {/* isSelect && 구문은 isSelect 가 참일경우, {} 안의 input 박스가 화면에 보여집니다 */}
              {isSelect &&
                  <span><input className='inputemail' value={wrtieDomain} onChange={domainWrite}></input></span>
@@ -441,7 +447,7 @@ const SignUp = () => {
             {/* 전화번호 입력창 */}
             <div>
                 <label><b className='star'>*</b>전화번호</label>
-                <input value={inputPhone} onChange={onChangePhone} required></input>
+                <input className='phone' value={inputPhone} onChange={onChangePhone} required></input>
             </div>
 
             {/* 전화번호 입력 제한 메시지 */}
@@ -452,7 +458,7 @@ const SignUp = () => {
             {/* 주소 입력창 */}
             <div>
                 <label className="address_search">주소</label>
-                <input className="user_enroll_text" type="text" required={true} name="address" onChange={handleInput} value={enroll_company.address}/>
+                <input className="addr" type="text" required={true} name="address" onChange={handleInput} value={enroll_company.address}/>
                 <button onClick={handleComplete}>주소 검색</button>
                 {popup && <Post company={enroll_company} setcompany={setEnroll_company}></Post>}    
             </div>

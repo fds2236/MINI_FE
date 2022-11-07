@@ -63,8 +63,7 @@ const Hasungwoon = styled.img`
 const Itzy = styled.img`
     width: 300px;
     height: 300px;
-    padding-bottom: 900px;
-    
+    padding-bottom: 900px;  
 `;
 
 
@@ -103,7 +102,7 @@ const SiteInfo = () => {
          <div className="container">
             <Header><Shoes className="shoes" alt="shoes" src={shoes} />슈즈의 기준, Sa Shoe</Header>
             <Banner>Sa Shoe Show Room<br/> 12월 24일 OPEN<br/><Artist>초대 손님: 가수 하성운 님, 가수 있지 님<Comment>하성운 - Sneakers MV / ITZY - Sneakers MV 中 (Sa Shoe 협찬 상품)</Comment></Artist><br/>
-            <Hasungwoon className="hasungwoon" alt="hasungwoon" src={hasungwoon} /><Itzy className="itzy" alt="itzy" src={itzy} /><br/></Banner>
+            <Hasungwoon alt="hasungwoon" src={hasungwoon} /><Itzy alt="itzy" src={itzy} /><br/></Banner>
             <Footer><B>오시는 길</B><Map className="map" alt="map" src={map} /><br/>장소: 서울시 강남구 테헤란로 14길 6 남도빌딩 3층<br/>담당자: 김도연 / 전화: 02-123-4567</Footer>
         
         </div>
