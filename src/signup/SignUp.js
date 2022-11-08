@@ -27,7 +27,7 @@ const Header = styled.div`
 
 const SignUpBlock = styled.div`
     width: 780px;
-    height: 440px;
+    height: 450px;
     position: relative;
     margin: 0 auto;
     background-color : white;
@@ -90,11 +90,17 @@ const SignUpBlock = styled.div`
 
     }
     .hint {
-        font-size : 14px;
+        font-size : 10px;
         color:green;
+        display: flex;
+        margin-left: 190px;
+        
     }
     .address_search {
         padding-left: 7px;
+    }
+    .comment2 {
+        font-size: 13px;
     }
 
 `;
@@ -174,6 +180,7 @@ const SignUp = () => {
             setIdMsg("아이디는 영문자로 시작해야하며 4자 이상 영문자, 숫자 조합입니다.");
             setIsId(false);    
         } else {
+            setIdMsg(false);
             setIsId(true);
         }
     }
@@ -187,6 +194,7 @@ const SignUp = () => {
             setPwdMsg("비밀번호는 8자 이상, 영문자, 숫자, 특수문자를 모두 포함해야 합니다.");
             setIsPwd(false)
         } else {
+            setPwdMsg(false);
             setIsPwd(true);
         }        
     }
@@ -213,6 +221,7 @@ const SignUp = () => {
             setNameMsg("이름을 확인해주세요.")
             setIsName(false)
         } else {
+            setNameMsg(false);
             setIsName(true)
         }
     }
@@ -239,6 +248,7 @@ const SignUp = () => {
             setPhoneMsg("전화번호를 다시 입력해주세요. '-'을 포함해야 합니다.")
             setIsPhone(false)
         } else {
+            setPhoneMsg(false);
             setIsPhone(true);
         }
     }
@@ -274,16 +284,16 @@ const SignUp = () => {
     const  selectDomain = (e) =>{
         //선택한 도메인을 sel 변수에 담음
         const sel = e.target.value
-        // sel 변수가 "@"(직접인경우)
+        // sel 변수가 "@"(직접인 경우)
         if(sel === "@"){
             setSelect(sel);
-            // IsSelect 는 숨겨져있는 창을 보여주기 위한 용도입니다.
-            // IsSelect 의 기본값은 false 이고, true 가되면 입력창이 화면에 출력됩니다.
-            // 화면출력로직은 아래 있습니다
+            // IsSelect 는 숨겨져있는 창을 보여주기 위한 용도
+            // IsSelect 의 기본값은 false 이고, true 가되면 입력창이 화면에 출력됨
+            // 화면출력로직은 아래에 있음
             setIsSelect(true);
         }else{
-            // 선택한 도메인이 직접입력이 아닌경우 , (isselect = false)입력창을 보여주지않고
-            // setSelect 를 이용하여 선택한 이메일을 select 에 담아줍니다.
+            // 선택한 도메인이 직접입력이 아닌 경우 , (isselect = false)입력창을 보여주지 않고
+            // setSelect를 이용하여 선택한 이메일을 select에 담아줌
             setIsSelect(false);
             setSelect(sel);
         }
@@ -300,8 +310,8 @@ const SignUp = () => {
     }    
     // 작성한 도메인
     const domainWrite = (e) =>{
-        // 직접입력되는 값을 받아주는 input 창 입니다.
-        // isSelect 가 false 일경우 화면에 보이지 않습니다.
+        // 직접입력되는 값을 받아주는 input 창 
+        // isSelect 가 false 일경우 화면에 보이지 않음
         setWriteDomain(e.target.value);
     }    
     
@@ -319,15 +329,22 @@ const SignUp = () => {
          
 
     // 모달
+    const [modalOpenIdCheck, setModalOpenIdCheck] = useState(false); // 아이디 중복일 때
+    const closeModalIdCheck = () => {
+        setModalOpenIdCheck(false); 
+    }
+
+    const [modalOpenIdOK, setModalOpenIdOK] = useState(false); // 아이디 중복 아닐 때
+    const closeModalIdOK = () => {
+        setModalOpenIdOK(false); 
+    }
+
     const [modalOpenSignUp, setModalOpenSignUp] = useState(false); // 회원가입 버튼 눌렀을 때
     const closeModalSignUp = () => { // 모달 창 닫기
         setModalOpenSignUp(false); 
     }
     
-    const [modalOpenIdCheck, setModalOpenIdCheck] = useState(false); // 아이디 중복확인 버튼 눌렀을 때
-    const closeModalIdCheck = () => {
-        setModalOpenIdCheck(false); 
-    }
+
 
     
     // API 호출
@@ -366,6 +383,9 @@ const SignUp = () => {
             console.log(res.data.result);
 
             if(res.data.result === "OK") {
+                console.log("사용 가능한 아이디 입니다.");
+                setModalOpenIdOK(true);
+                
             } else {
                 console.log("이미 존재하는 아이디 입니다.");
                 setModalOpenIdCheck(true);
@@ -374,10 +394,6 @@ const SignUp = () => {
          } catch (e) {
          } 
        } 
-
-       
-
-
     
     return(
         <div className='container'>
@@ -387,7 +403,7 @@ const SignUp = () => {
             {/* 회원가입 */}
 
             <SignUpBlock>
-            <p><b className='star'>* </b> 필수 입력</p>
+            <p className='comment2'><b className='star'>* </b> 필수 입력</p>
 
             {/* 아이디 입력창 */}
             <div className='divv'>
@@ -489,12 +505,12 @@ const SignUp = () => {
             <PageLink>
             {/* <button><Link to="/" className="link_item">취소하기</Link></button> */}
             <button onClick={onClickSignUp} className="SignUpButton">회원가입</button></PageLink>
-            
+      
 
-            <div>이미 아이디가 있으신가요?</div><PageLink><button><Link to="/Login" className="link_item"> ＞ 로그인</Link></button></PageLink>
-
+            <div>이미 아이디가 있으신가요? <button><PageLink><Link to="/Login" className="link_item">＞ 로그인</Link></PageLink></button></div>
             {/* 모달 */}
             {modalOpenIdCheck && <Modal open={modalOpenIdCheck} close={closeModalIdCheck} header="확인">이미 가입된 아이디입니다.</Modal>}
+            {modalOpenIdOK && <Modal open={modalOpenIdOK} close={closeModalIdOK} header="확인">사용 가능한 아이디입니다.</Modal>}
             {modalOpenSignUp && <Modal open={modalOpenSignUp} close={closeModalSignUp} header="확인">회원가입에 실패했습니다. 다시 확인해주세요.</Modal>}
         </div>
         
