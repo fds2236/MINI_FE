@@ -29,6 +29,14 @@ const MiniApi =  {
         return await axios.post(MINI_DOMAIN + "IdCheckServlet", idCheckObj, HEADER);
     },
 
+    // 회원탈퇴
+    Delete: async function(id) {
+        const deleteObj = {
+            id: id
+        }
+        return await axios.post(MINI_DOMAIN + "DeleteServlet", deleteObj, HEADER);
+    },
+
     // 로그인 기능
     userLogin: async function(id, pw) {
         const loginObj = {
@@ -178,6 +186,8 @@ const MiniApi =  {
 }
         
 }
+
+
 
     
 export default MiniApi;
