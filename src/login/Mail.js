@@ -18,7 +18,7 @@ const Mail = () => {
 
     const onClickMail = async() => {
         try{
-            const res = await MailApi.mailSave(mail1+mail2)
+            const res = await MailApi.userEmail(mail1+mail2)
         } catch(e) {
         }
     }

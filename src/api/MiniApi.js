@@ -170,7 +170,8 @@ const MiniApi =  {
     // 회원 이메일 정보
     userEmail: async function(id) {
     const findEmail = {
-        id : id,
+        cmd : "userEmail",
+        id : id
     }
     
     return await axios.post(MINI_DOMAIN + "MemberServlet", findEmail, HEADER);

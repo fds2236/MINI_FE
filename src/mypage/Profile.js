@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { Link} from "react-router-dom";
 import './Mypage.css';
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import MiniApi from "../api/MiniApi";
 
 const Box = styled.div`
@@ -36,27 +36,51 @@ const Profile = () => {
     // }
 
     const [id, setId] = useState("");
-    const [findEmail, setFindEmail] = useState("");
+    const [email, setEmail] = useState("");
+    const [name, setName] = useState("");
+    const [memberInfo, setMemberInfo] = useState("");
+    
+    let whoLoginNow = window.localStorage.getItem("whoLoginNow");
+    // let callEmail = window.localStorage.getItem("callEmail");
 
     // API호출(이메일)
-    const onClickProfile = async() => {
-        try{
-            const res = await MiniApi.userEmail(id); // 
-            console.log(res.data.result);
-            if(res.data.result === "OK") {
-                setFindEmail(res.data.email); // 찍어주기위해 id값 저장!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                window.localStorage.setItem("callEmail", findEmail)
-            } else {
-                setFindEmail("이메일 없음");
+    // const onClickProfile = async() => {
+    //     try{
+    //         const res = await MiniApi.userEmail(id); // 
+    //         console.log(res.data.result);
+    //         if(res.data.result === "OK") {
+    //             setFindEmail(res.data.email); // 찍어주기위해 id값 저장!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    //             window.localStorage.setItem("callEmail", findEmail)
+    //         } else {
+    //             setFindEmail("이메일 없음");
+    //         }
+    //     } catch (e) {
+    //         console.log("이메일 정보 불러오기 실패!")
+    //     }
+    // } 
+
+    useEffect(() => {
+        const MemberData = async () => {
+          
+            try {
+            
+                let response = await MiniApi.userEmail(whoLoginNow); // 전부다 조회할때는 인자값으로 ALL
+                console.log(response.data);
+                setMemberInfo(response.data);
+            } catch (e) {  
+                console.log(e + "실패 입니다");
             }
-        } catch (e) {
-            console.log("이메일 정보 불러오기 실패!")
-        }
-    } 
+           
+        };
+        MemberData(); // 첫 페이지 로딩시 글 목록을 다 끌어옴
+
+    }, []);
 
 
-    let whoLoginNow = window.localStorage.getItem("whoLoginNow");
-    let callEmail = window.localStorage.getItem("callEmail");
+
+
+    
+   
     
     return (
 
@@ -67,14 +91,17 @@ const Profile = () => {
                 <Link to={"/Like"}><li className="li">관심 상품</li></Link><br />
                 <Link to={"/Mypost"}><li className="li">내 게시글 보기</li></Link><br />
             </div>
-            <Container>
+            {memberInfo&&memberInfo.map(member=>(
+                <Container>
                 <div className="user-img">😂
                 </div>
                 <div className="user">
                     <p>이름 : {whoLoginNow}</p>
-                    <p>이메일 : {callEmail}</p>
+                    <p>아이디 : {member.name}</p>
+                    <p>이메일 : {member.email}</p>
                 </div>
             </Container>
+            ))}
             
         </Box>
     )
