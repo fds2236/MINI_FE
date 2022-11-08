@@ -65,10 +65,10 @@ const Mypost = () => {
                         <div className="post">
                     
                         <div key={e.id}>
-                            <p>1{whoLoginNow}</p>
-                            <p>2{e.CATEGORY}</p>
-                            <p>3{e.TITLE}</p>
-                            <p>4{e.CONTENT}</p>
+                            <p>{whoLoginNow}</p>
+                            <p>{e.CATEGORY}</p>
+                            <p>{e.TITLE}</p>
+                            <p>{e.CONTENT}</p>
                         </div>
                         </div>
                     ))}
