@@ -95,7 +95,6 @@ const OnClickCategory = (cmd) => {
 const Home = () => {
 
     window.localStorage.setItem('category','ALL');
-
     return(
         <>
 
