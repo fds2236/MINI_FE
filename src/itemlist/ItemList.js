@@ -96,7 +96,7 @@ const brandCategories = [
 ]
 
 const ItemList = () => {
-  const [category, setCategory] = useState("ALL");
+  const [category, setCategory] = useState(window.localStorage.getItem('category'));
   const [sortCondition, setSortCondition] = useState("NEW_DATE");
   const [itemInfo, setItemInfo] = useState('');
   
@@ -104,6 +104,7 @@ const ItemList = () => {
     console.log("상품 목록 보기 컴포넌트 useEffect Call !!!!!!!");
     const itemData = async () => {
       try {
+        
         const response = await MiniApi.itemFilterInfo(category, sortCondition);
         setItemInfo(response.data);
       } catch (e) {

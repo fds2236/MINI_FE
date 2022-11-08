@@ -3,6 +3,8 @@ import { Carousel } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import styled from "styled-components";
 import ItemList from "../itemlist/ItemList";
+import { useEffect } from "react";
+import CategoryFilter from "../itemlist/BrandCategory";
 
 
 /**
@@ -24,6 +26,7 @@ const ImageText = styled.div`
         color: white;
         cursor: pointer;
     }
+
 `;
 
 const ImageText2 = styled.div`
@@ -67,7 +70,32 @@ const Caption = styled.div`
  *  ------------------------- 컴포넌트 -----------------------
  */
 
+const OnClickCategory = (cmd) => {
+
+    if(cmd ==="NIKE") window.localStorage.setItem("category","NIKE");
+    else if(cmd === "NEW BALANCE") window.localStorage.setItem("category","NEW BALANCE");
+    else window.localStorage.setItem("category","VANS");
+
+
+    window.location.replace('/ItemList');
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
 const Home = () => {
+
+    window.localStorage.setItem('category','ALL');
+
     return(
         <>
 
@@ -82,7 +110,9 @@ const Home = () => {
                 alt="First slide"
                 />
 
-                <ImageText>
+                <ImageText
+                    onClick={()=>OnClickCategory("NIKE")}
+                >
                     <BrandName>NIKE</BrandName>
                     <Caption>click here to Category</Caption>
                 </ImageText>
@@ -99,7 +129,9 @@ const Home = () => {
                 alt="Second slide"
                 />
 
-                <ImageText2>
+                <ImageText2
+                    onClick={()=>OnClickCategory("NEW BALANCE")}
+                >
                     <BrandName>NEW BALANCE</BrandName>
                     <Caption>click here to Category</Caption>
                 </ImageText2>
@@ -115,7 +147,9 @@ const Home = () => {
                 alt="Second slide"
                 />
 
-                <ImageText3>
+                <ImageText3
+                    onClick={()=>OnClickCategory("VANS")}
+                >
                     <BrandName>VANS</BrandName>
                     <Caption>click here to Category</Caption>
                 </ImageText3>
