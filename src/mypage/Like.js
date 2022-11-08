@@ -58,7 +58,7 @@ const Like = () => {
             }
         };
         likePro();
-    });
+    }, []);
 
 
     return (
