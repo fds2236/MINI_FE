@@ -14,15 +14,15 @@ import Modal from "../util/Modal";
 
 // 전체를 감싸는 컨테이너 스타일드 컴포넌트
 const Container = styled.div`
-    width: 600px;
+    width: 1000px;
     margin: 50px auto;
+
 `;
 
 // 글쓰기 목록을 감싸는 스타일드 컴포넌트
 const Contents = styled.div`
     width: 600px;
     margin: 30px auto;
-    background-color: #EEEEEE;
     display: flex;
     flex-direction: column;
 `;
@@ -42,8 +42,10 @@ const ButtonContainer = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 450px;
+    width: 700px;
+    height: 100px;
     margin: 0 auto;
+    border-bottom: 2px solid rgb(23,158,166) ;
 `;
 
 
@@ -60,7 +62,7 @@ const StyledButton = styled.button`
 
 // 레드버튼 스타일드 컴포넌트
 const OrangeRedStyledButton = styled.button`
-    background-color: orangered;
+    background-color: rgb(23,158,166);
     border-style: none;
     border-radius: 10px;
     width: 100px;
@@ -68,26 +70,27 @@ const OrangeRedStyledButton = styled.button`
     color: #EEEEEE;
 
     &:hover{
-        background-color: rgba(253,44,8,0.5);
+        opacity: 0.5;
 
     }
 `;
 
 // 리턴 버튼 스타일드 컴포넌트
 const ReturnStyledButton = styled.button`
-    background-color: orangered;
+
+
+    background-color: #eeeeee;
+    font-weight: 600;
     border-style: none;
     border-radius: 10px;
-    width: 130px;
+    width: 150px;
     height: 30px;
-    color: #EEEEEE;
-    cursor: pointer;
+    color: black;
+   
 
     &:hover{
-        background-color: rgba(253,44,8,0.5);
-
+        opacity: 0.5;
     }
-    
 `;
 
 
@@ -104,6 +107,7 @@ const StyledTextArea = styled.textarea`
     margin: 22px auto;
     border-style: none;
     font-size: 20px;
+    border: 1px solid black;
 
     
 `;
@@ -116,17 +120,66 @@ const StyledTitleArea = styled.textarea`
     margin-top: 20px;
     border-style: none;
     font-size: 20px;
+   
+    border: 1px solid black;
+
 `;
 
 const CategoryDiv = styled.div`
-    border: 1px solid #EEEEEE;
+    //border: 1px solid #EEEEEE;
     width: 230px;
     display: flex;
     padding: 10px;
-    border-radius: 10px;
-    background-color: #EEEEEE;
+    //border-radius: 10px;
+    //background-color: #EEEEEE;
     justify-content: space-between;
 
+`;
+
+
+const BoardButton = styled.div`
+
+    //background-color: rgb(26,30,37);
+    color: rgb(26,30,37);
+    padding: 2px;
+    width: 130px;
+    height: 30px;
+    font-weight: 700;
+
+    &:hover{
+        opacity: 0.5;
+        cursor: pointer;
+    }
+    
+`;
+
+const SelectedBoardButton = styled.div`
+    
+    //background-color: rgb(26,30,37);
+    color: rgb(26,30,37);
+    padding: 2px;
+    width: 130px;
+    height: 30px;
+    font-weight: 700;
+
+    opacity: 0.5;
+    &:hover{
+        cursor: pointer;
+
+    }
+    
+`;
+
+const StyledMyId = styled.div`
+    
+    width: 550px;
+    font-size: 20px;
+    font-weight: 700;
+    margin-left: 27px;
+    text-align: left;
+    margin-top: 28px;
+
+  
 `;
 
 
@@ -178,6 +231,8 @@ const WriteBoard = () => {
     const [resData, setResData] = useState(''); // 서버에서 받는 결과 데이터
     const [modalOpen, setModalOpen] = useState(false);
 
+    
+
     // 이벤트 체크 함수 만들기
     const onChangeId = (e) => setId(e.target.value); // 현재 이벤트가 발생한 입력창의 값을 useState에 세팅
     const onChangeBoardNum = (e) => setBoardNum(e.target.value);
@@ -193,10 +248,13 @@ const WriteBoard = () => {
         setId(window.localStorage.getItem("whoLoginNow"));
         isSubmit();
     }
+
+
+    let whoLoginNow = window.localStorage.getItem('whoLoginNow');
     
     // 레드버튼 컴포넌트
     const SubmitButton = (props) => {
-        
+
         return (
             <>
                 <OrangeRedStyledButton onClick={onSubmit} >{props.text}</OrangeRedStyledButton>
@@ -222,13 +280,6 @@ const WriteBoard = () => {
         }
     }
 
-    // 카테고리 값을 바꾸어 주는 컴포넌트 
-    const handleCategorySelect = (e) => {
-        console.log(e.target.value); // 카테고리 값이 잘 바뀌었는지 확인
-        setCategory(e.target.value);
-        isSubmit();
-      };
-
 
 
       const closeModal = () => {
@@ -236,29 +287,7 @@ const WriteBoard = () => {
         window.location.replace('/Boards');
         };
 
-    //   useEffect(() => {
-    //     const boardData = async () => {
-
-    //         try {
-    //             console.log(nowBoardNum);
-    //             const response = await MiniApi.boardInfo(nowBoardNum);
-                
-    //             setBoardDetail(response.data);
-    //             console.log(response.data)
-    //         } catch (e) {
-    //             console.log(e);
-    //         }
-    //     };
-    //     boardData();
-    // }, []);
-
-    //   setId(window.localStorage.getItem("whoLoginNow"));
-    // console.log("now ID : "+id);
-    // if(id === '') {
-    //     alert("로그인이 필요합니다");
-    //     window.location.replace("/Login");
-    // }
-
+        
     
     return (
         <Container>  
@@ -267,44 +296,40 @@ const WriteBoard = () => {
 
                 {/* 카테고리 선택 화면 */}
                 <CategoryDiv>
-                <div>
-                <input
-                    type="radio"
-                    value="0"
-                    checked = {category === "0"}
-                    onChange = {handleCategorySelect}
-                
-                />
-                <label>
-                    자유게시판
-                </label>
-                </div>
-                <div>
-                <input
-                    type="radio"
-                    value="1"
-                    checked = {category === "1"}
-                    onChange = {handleCategorySelect}
-                />
-                <label>
-                    후기게시판
-                </label>
-                </div>
+
+                    {
+                        (category === "0") ?
+                        <SelectedBoardButton onClick={()=>setCategory("0")} style={{
+                            borderRight: "2px solid rgb(23,158,166)"
+                        }} >자유게시판</SelectedBoardButton> : 
+                        <BoardButton onClick={()=>setCategory("0")} style={{
+                            borderRight: "2px solid rgb(23,158,166)"
+                        }} >자유게시판</BoardButton>
+                    }
+                    
+                    {
+                        (category === "1") ? 
+                        <SelectedBoardButton onClick={()=>setCategory("1")} >후기게시판</SelectedBoardButton> : 
+                        <BoardButton onClick={()=>setCategory("1")} >후기게시판</BoardButton>
+                    }
+                    
                 </CategoryDiv>
                 
             </ButtonContainer>
 
             <Contents>
+
+                    <StyledMyId>{whoLoginNow}</StyledMyId>
                     {/* 제목 입력 칸 */}
                     <StyledTitleArea 
-                        placeholder="제목을 입력 하세요 ....."
+                        placeholder="제목을 입력 하세요"
                         value={title}
                         onChange={onChangeTitle}
                     >
                     </StyledTitleArea>
                     {/* 본문 입력 칸 */}
                     <StyledTextArea 
-                        placeholder="본문 내용을 입력 하세요 ....."
+                        placeholder="본문 내용을 입력 하세요"
                         value={boardContent}
                         onChange={onChangeBoardContent}
                     ></StyledTextArea>

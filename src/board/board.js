@@ -14,9 +14,8 @@ import Modal from "../util/Modal";
 // 전체를 감싸는 컨테이너 스타일드 컴포넌트
 const Container = styled.div`
     width: 600px;
-    margin: 50px auto;
-    background-color: #EEEEEE;
-    border: 1px solid #EEEEEE;
+    margin: 0 auto;
+    border: 3px solid #EEEEEE;
     
 `;
 // 더 큰 전체를 감싸는 컨테이너 스타일드 컴포넌트
@@ -30,7 +29,7 @@ const BigContainer = styled.div`
 
 // 글 목록을 감싸는 스타일드 컴포넌트
 const Contents = styled.div`
-    display: flex;
+    /* display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -38,7 +37,7 @@ const Contents = styled.div`
     height: fit-content;
     margin: 30px auto;
     margin-bottom: 0;
-    background-color: white;
+    background-color: white; */
     
 
 `;
@@ -46,10 +45,11 @@ const Contents = styled.div`
 // 제목 버튼 틀 스타일드 컴포넌트
 const TitleAndBtn = styled.div`
     margin: 0 auto;
-    display: flex;
+    margin-top: 70px ;
+
     width: 600px;
     height: 50px;
-    align-items: flex-end;
+    text-align: right;
 `;
 
 // 리턴 버튼 스타일드 컴포넌트
@@ -59,27 +59,31 @@ const ReturnStyledButton = styled.button`
     border-radius: 10px;
     color: black;
     cursor: pointer;
-    width: 138px;
+    width: 150px;
     height: 30px;
+    font-weight: 600;
+
+
 
     &:hover{
-        background-color: rgba(0,0,0,0.2);
-        color: black;
+        opacity: 0.5;
     }
 `;
 
 // 버튼 스타일드 컴포넌트
 const Button = styled.button`
-    background-color: rgb(0,173,181);
+    background-color: #eeeeee;
     border: 2px solid white;
     border-radius: 10px;
-    width: 80px;
+    width: 100px;
     height: 30px;
-    color: white;
+    color: black;
+    font-weight: 500;
     margin: 10px auto;
 
     &:hover{
-        background-color: rgba(0,173,181,0.5);
+        background-color: rgb(0,173,181);
+        color: white;
     }
 
     
@@ -87,7 +91,7 @@ const Button = styled.button`
 
 // 오렌지 버튼 스타일드 컴포넌트
 const OrangeRedStyledButton = styled.button`
-    background-color: orangered;
+    background-color: rgb(23,158,166);
     border-style: none;
     border-radius: 10px;
     width: 100px;
@@ -97,7 +101,7 @@ const OrangeRedStyledButton = styled.button`
     float: right;
 
     &:hover{
-        background-color: rgba(252,44,8,0.5);
+        opacity: 0.5;
     }
     
 
@@ -108,17 +112,17 @@ const StyledPicture = styled.img`
 
     width: 300px;
     height: 300px;
-    margin: 8px 8px;
+    margin: 30px;
     border-radius: 3px;
 `;
 
 // 타이틀 에어리어 스타일 컴포넌트
 const StyledTextArea = styled.textarea`
-    width: 500px;
+    width: 600px;
     height: 50px;
     border-style: none;
-    border: 3px solid rgb(0,173,181);
-    border-radius:10px;
+    border: 3px solid #eeeeee;
+   
     font-size: 18px;
 `;
 
@@ -136,9 +140,9 @@ const StyledReplyArea = styled.div`
 
 const StyledMyId = styled.div`
     
-    width: 500px;
+    width: 600px;
 
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 700;
     margin: 10px;
     
@@ -147,6 +151,68 @@ const StyledMyId = styled.div`
 
   
 `;
+
+const Category = styled.div`
+
+    width: max-content;
+    box-sizing: border-box;
+    text-align: left;
+    font-size: 18px;
+    color: rgb(23,158,166);
+    font-weight: 700;
+`;
+
+
+
+const Title = styled.div`
+
+    text-align: left;
+    width: max-content;
+    font-size: 40px;
+    font-weight: 700;
+
+`;
+
+const Id = styled.div`
+    font-weight: 600;
+    text-align: right;
+`;
+
+const WriteDate = styled.div`
+    
+    font-weight: 600;
+    text-align: right;
+`;
+
+const InfoBoard = styled.div`
+    padding : 15px;
+    margin: 15px;
+    border-bottom: 2px solid #eeeeee;
+    display: flex;
+`;
+
+const SubInfo = styled.div`
+    text-align: end;
+    width: 580px;
+    margin: auto 0 auto;
+`;
+
+
+const BoardContent = styled.div`
+
+    font-weight: 600;
+    font-size: 20px;
+    margin-bottom: 40px ;
+`;
+
+const Info = styled.div`
+  
+   
+
+`;
+
+
+
 
 
 /**
@@ -244,21 +310,31 @@ const Board = () => {
             </TitleAndBtn>
 
         {boardDetail && boardDetail.map(board => (
-            <BigContainer>
+            <>
             <Container>   
-            <Contents>
-                &nbsp;
+                    <Info>
+                    {/* 게시판 이름 */}
+                        <InfoBoard>
+                            <div>
+                            {(board.category === 0)? <Category>자유게시판 &gt; </Category> : <Category>후기게시판 &gt;</Category>}
+                            <Title>{board.title}</Title>
+                            </div>
+                            <SubInfo>
+                                <Id>{board.id}</Id>
+                                <WriteDate>{board.boardDate}</WriteDate>
+                            </SubInfo>
+                        </InfoBoard>
+                        </Info>
                     
-                    <h1>{board.title}</h1>
                     <StyledPicture src="https://media.bunjang.co.kr/product/198502427_1_1662395621_w856.jpg"></StyledPicture>
                          
-                    <h3>{board.boardContent}</h3>
+                    <BoardContent>{board.boardContent}</BoardContent>
                     
                    
                     
-                &nbsp;
-            </Contents>
-            <p>작성일 : {board.boardDate} <br></br> 작성자 : {board.id}</p>
+             
+           
+            
             <OrangeRedStyledButton onClick={() => OnClickDelete(board.boardNum, whoLoginNow)} >삭제하기</OrangeRedStyledButton>
             
             
@@ -268,7 +344,7 @@ const Board = () => {
             <StyledReplyArea>
                 <StyledMyId>{whoLoginNow}</StyledMyId>
                 <StyledTextArea 
-                            placeholder="댓글을 입력 하세요 ....."
+                            placeholder="댓글을 입력 하세요"
                             value={reply}
                             onChange={onChangeReply}
                         >
@@ -277,7 +353,7 @@ const Board = () => {
             </StyledReplyArea>
             
             
-            </BigContainer>
+            </>
             
         ))}    
 

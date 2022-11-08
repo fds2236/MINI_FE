@@ -16,68 +16,60 @@ import Modal from "../util/Modal";
 
 // 전체를 감싸는 컨테이너 스타일드 컴포넌트
 const Container = styled.div`
-    width: 600px;
+    width: 1000px;
     margin: 50px auto;
     display: flex;
     flex-direction: column;
+   
 `;
 
 // 상단의 버튼들을 감싸는 스타일드 컴포넌트
 const ButtonContainer = styled.div`
     display: flex;
     justify-content: space-between;
-    width: 580px;
+    width: 800px;
     align-items: center;
     margin: 20px auto;
+    border-bottom: 2px solid rgb(23,158,166);
+    padding-bottom: 20px;
 `;
 
 
 // 버튼 스타일드 컴포넌트
 const Button = styled.button`
-    background-color: rgb(0,173,181);
+    
+    background-color: #eeeeee;
+    font-weight: 600;
     border-style: none;
     border-radius: 10px;
     width: 100px;
     height: 30px;
+    color: rgb(26,30,37);
 
     &:hover{
-        background-color: rgba(0,173,181,0.5);
-        color: black;
+        opacity: 0.5;
     }
 `;
 
 // 링크 스타일드 컴포넌트
 const StyledLink = styled(Link)`
-    color: rgb(238,238,238);
-    text-decoration: none;
+    
 
 `;
 
 
 // 게시물 목록을 감싸는 스타일드 컴포넌트
 const Contents = styled.div`
-    width: 580px;
-    margin: 0 auto;
-    background-color: #EEEEEE;
+    width: 800px;
+    margin: 20px auto;
     
 `;
 
 const StyledContent = styled.div`
-    width: 550px;
-    border-radius: 10px;
-    box-sizing: border-box;
-    border-radius: 14px;
-    border-style: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 10px 16px;
-
-   
-
-
-
-   
+    width: 800px;
+    &:hover{
+        cursor: pointer;
+    }
 
 `;
 
@@ -85,27 +77,63 @@ const StyledContent = styled.div`
 // 사진 스타일드 컴포넌트
 const StyledPicture = styled.img`
     float: left;
-    width: 70px;
-    height: 70px;
-    margin: 8px 8px;
-    border-radius: 5px;
+    width: 80px;
+    height: 80px;
+    margin: 10px 15px;
+    border-radius: 2px;
 `;
 
 
 // 레드버튼 스타일드 컴포넌트
 const OrangeRedStyledButton = styled.button`
-    background-color: orangered;
+
+    background-color: rgb(0,173,181); 
     border-style: none;
     border-radius: 10px;
     width: 100px;
     height: 30px;
-    color: #EEEEEE;
+    color: #eeeeee;
     cursor: pointer;
 
     &:hover{
-        background-color: rgba(253,44,8,0.5);
+        opacity: 0.5;
+        cursor: pointer;
      
     }
+`;
+
+
+const BoardButton = styled.div`
+
+    //background-color: rgb(26,30,37);
+    color: rgb(26,30,37);
+    padding: 2px;
+    width: 130px;
+    height: 30px;
+    font-weight: 700;
+
+    &:hover{
+        opacity: 0.5;
+        cursor: pointer;
+    }
+    
+`;
+
+const SelectedBoardButton = styled.div`
+
+    //background-color: rgb(26,30,37);
+    color: rgb(26,30,37);
+    padding: 2px;
+    width: 130px;
+    height: 30px;
+    font-weight: 700;
+
+    opacity: 0.5;
+    &:hover{
+        cursor: pointer;
+
+    }
+    
 `;
 
 
@@ -115,10 +143,13 @@ const OrangeRedStyledButton = styled.button`
    
 
 const MarginContent = styled.div`
-display: flex;
-flex-direction: column;
-padding-top: 10px;
-padding-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    border-bottom: 2px solid #EEEEEE;
+    /* padding-top: 10px;
+    padding-bottom: 10px; */
+
+
 
 
 `;
@@ -126,35 +157,82 @@ padding-bottom: 10px;
 // const StyledTitleContent = 
 
 const CategoryDiv = styled.div`
-    border: 1px solid #EEEEEE;
+    //border: 1px solid #EEEEEE;
     width: 340px;
+    height: min-content;
     display: flex;
     padding: 10px;
-    border-radius: 10px;
-    background-color: #EEEEEE;
-    justify-content: space-between;
+    border-radius: 5px;
+    //background-color: rgba(234,234,234,0.5);
+
+    justify-content: center;
+
+
 
 `;
 
 const DetailDiv = styled.div `
-    width: 550px;
+    width:800px;
 
-    background-color: white;
+    box-sizing: border-box;
+    border-top: 2px solid #EEEEEE;
+    border-collapse: collapse;
+
+    margin: 0 auto;
+    
+    
     align-items: center;
+    text-align: left;
     display: grid;
-    grid-template-columns: 60px 75px 300px;
-    grid-template-rows: 80px ;
-    border-radius:10px;
+    grid-template-columns: 2fr 5fr 2fr 1fr;
+    grid-template-rows: 50px;
+    
     &:hover {
-        background-color: rgb(250,250,250);
+        background-color: rgba(23,158,166,0.05);
     }
 
 `;
 
 const TitleAndContent = styled.div`
-    text-align: left;
-    margin-left: 20px;
+    text-align: right;
+    margin-left: 30px;
+    display: flex;
+ 
+`;
 
+const StyledBoardNum = styled.div`
+    margin: 0 10px;
+    color: rgb(21,158,166);
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+`;
+
+const BigContainer = styled.div`
+    display: flex;
+    justify-content: center;
+`;
+
+const NowCategory = styled.div`
+    font-size: 40px;
+    font-weight: 700;
+    color: rgb(23,158,166);
+
+`;
+
+const Title = styled.div`
+    font-size: 20px;
+    font-weight: 700;
+`;
+
+const Id = styled.div`
+    font-size: 17px;
+    font-weight: 400;
+`;
+
+const WriteDate = styled.div`
+    font-size: 17px;
+    font-weight: 400;
 `;
 
 
@@ -188,6 +266,10 @@ const Picture = ({pic}) => {
 const OnclickBoard = (boardNum) =>{
     window.localStorage.setItem('boardNum',boardNum);
     window.location.replace('/Board');
+}
+
+const OnClickReturn = () => {
+    window.location.replace('/');
 }
 
 
@@ -264,91 +346,83 @@ const Boards = () => {
   
 
     return (
-        <div>
+        <BigContainer>  
         
-        <Container>  
-            
-            <ButtonContainer>
-                <Button><StyledLink to ='/' >돌아가기</StyledLink></Button>
-                {/* 카테고리 선택 화면 */}
+            <Container>  
+                <NowCategory>{category}</NowCategory>
                 
-                
-                <CategoryDiv>
-                <div>
-                <input
-                    type="radio"
-                    value="전체게시판"
-                    checked = {category === "전체게시판"}
-                    onChange = {handleCategorySelect}
-                />
-                <label>
-                    전체게시판
-                </label>
-                </div>
-                <div>
-                <input
-                    type="radio"
-                    value="자유게시판"
-                    checked = {category === "자유게시판"}
-                    onChange = {handleCategorySelect}
-                />
-                <label>
-                    자유게시판
-                </label>
-                </div>
-                <div>
-                <input
-                    type="radio"
-                    value="후기게시판"
-                    checked = {category === "후기게시판"}
-                    onChange = {handleCategorySelect}
-                />
-                <label>
-                    후기게시판
-                </label>
-                </div>
-                </CategoryDiv>
+                <ButtonContainer>
+                    <Button onClick={OnClickReturn}>돌아가기</Button>
 
-                <OrangeRedButton text="글쓰기"></OrangeRedButton>
-                
-                
-            </ButtonContainer>
-            
-
-            <Contents>
-               
-            <MarginContent>
-                
-                {boardInfo && boardInfo.map(board => (
-                   
+                    {/* 카테고리 선택 화면 */}
                     
                     
-                    <StyledContent onClick={() => OnclickBoard(board.boardNum)} >
-                        <DetailDiv>
-                        <p>{board.boardNum}</p>
-                        <StyledPicture src="https://media.bunjang.co.kr/product/198502427_1_1662395621_w856.jpg"></StyledPicture>
-                        <TitleAndContent >
-                            <h4>{board.title}</h4>
-                            {/* <p>{board.id}</p> */}
-                            <p>{board.boardContent}</p>
-                        </TitleAndContent>
-                        </DetailDiv>
+                    <CategoryDiv>
+                    {
+                        (category === "전체게시판") ? 
+                        <SelectedBoardButton onClick={()=>setCategory("전체게시판")} >전체게시판</SelectedBoardButton> : 
+                        <BoardButton onClick={()=>setCategory("전체게시판")} >전체게시판</BoardButton>
+                    }
+                    {
+                        (category === "자유게시판") ?
+                        <SelectedBoardButton onClick={()=>setCategory("자유게시판")} style={{
+                            borderLeft: "2px solid rgb(23,158,166)",
+                            borderRight: "2px solid rgb(23,158,166)"
+                        }} >자유게시판</SelectedBoardButton> : 
+                        <BoardButton onClick={()=>setCategory("자유게시판")} style={{
+                            borderLeft: "2px solid rgb(23,158,166)",
+                            borderRight: "2px solid rgb(23,158,166)"
+                        }} >자유게시판</BoardButton>
+                    }
+                    
+                    {
+                        (category === "후기게시판") ? 
+                        <SelectedBoardButton onClick={()=>setCategory("후기게시판")} >후기게시판</SelectedBoardButton> : 
+                        <BoardButton onClick={()=>setCategory("후기게시판")} >후기게시판</BoardButton>
+                    }
+
+                    </CategoryDiv>
+
+                    <OrangeRedButton text="글쓰기"></OrangeRedButton>
+                    
+                    
+                </ButtonContainer>
+                
+
+                <Contents>
+                
+                <MarginContent>
+                    
+                    {boardInfo && boardInfo.map(board => (
+                    
                         
                         
-                    </StyledContent>
-                    
-                ))}
+                        <StyledContent onClick={() => OnclickBoard(board.boardNum)} >
+                            <DetailDiv>
+                                <StyledBoardNum>{board.category ? "자유게시판" : "후기게시판"} &gt; {board.boardNum}</StyledBoardNum>
+                                {/* <StyledPicture src="https://media.bunjang.co.kr/product/198502427_1_1662395621_w856.jpg"></StyledPicture> */}
+                                <Title>{board.title}</Title>
+                           
+                                <Id>{board.id}</Id>
+                                <WriteDate>{board.boardDate}</WriteDate>
 
-            </MarginContent>
-        
-            </Contents> 
+                           
+                            </DetailDiv>
+                            
+                        </StyledContent>
+                        
+                    ))}
+
+                </MarginContent>
             
+                </Contents> 
                 
-        </Container>
+                    
+            </Container>
 
 
         {modalOpen && <Modal open={modalOpen} close={closeModal} header="확인">로그인이 필요한 서비스 입니다</Modal>}
-        </div>
+        </BigContainer>
         
         
     );
