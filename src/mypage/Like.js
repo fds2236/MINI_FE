@@ -46,37 +46,39 @@ const Like = () => {
     const [Like_cnt, setLike_cnt] = useState('');
 
 
-    // useEffect(() => {
-    //     console.log("관심상품 보기 컴포넌트!");
-    //     const likePro = async() => {
-    //         try {
-    //         const response = await MiniApi.likeInfo(whoLoginNow, proCode, Like_cnt);
-    //          setLike(response.data);
-    //          //console.log('성공')
-    //         } catch (e) {
-    //             console.log(e);
-    //         }
-    //     };
-    //     likePro();
-    // });
+    useEffect(() => {
+        console.log("관심상품 보기 컴포넌트!");
+        const likePro = async() => {
+            try {
+            const response = await MiniApi.likeInfo(whoLoginNow, proCode, Like_cnt);
+             setLike(response.data);
+             //console.log('성공')
+            } catch (e) {
+                console.log(e);
+            }
+        };
+        likePro();
+    });
 
 
     return (
         <>
         <Profile/>
         <hr></hr>                    
-        {/* <Container>
+        <Container>
             <br/>
-            <h2>관심 상품</h2>
-            <div className="grid">
-                <div className="grid-item">
-                    <img class = "dataimg" src ="/img/NB_574.png" alt="이미지"/>
-                    <p>상품명 : </p>
-                    <p>가격 : </p>
-                    <p>아무거나</p>
+            <h2>관심 상품
+            {like && like.map(e => (
+                <div key={e.id}>
+                    <p>{whoLoginNow}</p>
+                    <p>{e.proCode}</p>
+                    <p>{e.Like_cnt}</p>
                 </div>
-            </div>
-        </Container> */}
+            ))}  
+            </h2>
+
+           
+        </Container>
         </>
     );
 }
