@@ -19,7 +19,7 @@ const SignComBlock = styled.div`
 const PageLink = styled.div`
     .link_item {
         margin: 10px;
-        color: rgb(57,62,70);
+        color: white;
         font-size : 14px;
         text-decoration-line: none;
     }
