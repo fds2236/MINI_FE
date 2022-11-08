@@ -51,7 +51,8 @@ const ItemDetail = () => {
     // 브랜드명 클릭 시 해당 브랜드 상품만 보여줌
     const onClickBrand = (val) => {
         console.log("브랜드카테고리로 이동 : " + val);
-        window.localStorage.setItem("brand", val);
+        // window.localStorage.setItem("brand", val);
+        window.localStorage.setItem('category', val);
         window.location.replace("/ItemList");
         //setCategory(val)
     }
