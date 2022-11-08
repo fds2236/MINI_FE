@@ -3,6 +3,7 @@ import styled from "styled-components";
 import {BrowserRouter as Router, Routes, Route} from "react-router-dom";
 import { useState, useEffect } from "react";
 import MiniApi from "../api/MiniApi";
+import Modal from "../util/Modal";
 
 
 /**
@@ -175,6 +176,7 @@ const WriteBoard = () => {
     const [boardContent, setBoardContent] = useState('');
     const [submit, setSubmit] = useState(false); // 서버로 전송할 수 있는 조건 체크
     const [resData, setResData] = useState(''); // 서버에서 받는 결과 데이터
+    const [modalOpen, setModalOpen] = useState(false);
 
     // 이벤트 체크 함수 만들기
     const onChangeId = (e) => setId(e.target.value); // 현재 이벤트가 발생한 입력창의 값을 useState에 세팅
@@ -188,6 +190,7 @@ const WriteBoard = () => {
     const onChangeBoardContent = (e) => {
         console.log("boardContent : " + e.target.value);
         setBoardContent(e.target.value);
+        setId(window.localStorage.getItem("whoLoginNow"));
         isSubmit();
     }
     
@@ -209,9 +212,10 @@ const WriteBoard = () => {
     // 전송 버튼이 눌려지면 동작하는 함수, 함수가 비동기 통신을 해야 하므로 async 키워드 추가
     const onSubmit = async () => {
         try {
+            setModalOpen(true);
             const res =  await MiniApi.boardReg(category, title, boardContent,id);
             setResData(res.data);
-            window.location.replace("/Boards");
+            
 
         } catch (e) {
             alert("오류 : " + e);
@@ -224,6 +228,13 @@ const WriteBoard = () => {
         setCategory(e.target.value);
         isSubmit();
       };
+
+
+
+      const closeModal = () => {
+        setModalOpen(false);
+        window.location.replace('/Boards');
+        };
 
     //   useEffect(() => {
     //     const boardData = async () => {
@@ -299,6 +310,7 @@ const WriteBoard = () => {
                     ></StyledTextArea>
             </Contents>            
             {submit && <SubmitButton text={"글쓰기"}></SubmitButton>}
+            {modalOpen && <Modal open={modalOpen} close={closeModal} header="확인">작성이 완료되었습니다. 목록으로 되돌아 갑니다</Modal>}
         </Container>
     );
 };

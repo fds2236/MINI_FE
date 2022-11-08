@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { isLabelWithInternallyDisabledControl } from "@testing-library/user-event/dist/utils";
 import MiniApi from "../api/MiniApi";
+import Modal from "../util/Modal";
 
 /**
  * ------------------------------스타일드 컴포넌트 ---------------------------
@@ -182,9 +183,16 @@ const Board = () => {
     const nowBoardNum = window.localStorage.getItem("boardNum");
     const [boardDetail, setBoardDetail] = useState("");
     const [reply,setReply] = useState("");
+    const [modalOpen, setModalOpen] = useState("");
+    const [modalText, setModalText] = useState("");
 
     const onChangeReply = (e) => {
         setReply(e.target.value);
+    }
+
+    const closeModal = () => {
+        setModalOpen(false);
+        window.location.replace('/Boards');
     }
 
     useEffect(() => {
@@ -212,9 +220,16 @@ const Board = () => {
             const response = await MiniApi.boardDelete(stringBoardNum,id);
             console.log(response.data);
 
-            if(response.data.includes("NOK")) alert("작성자가 아닙니다. 목록으로 되돌아갑니다");
-            else alert("삭제가 완료 되었습니다. 목록으로 되돌아 갑니다");
-            window.location.replace('/Boards');
+            if(response.data.includes("NOK")) {
+                
+                setModalText("작성자가 아닙니다. 목록으로 되돌아 갑니다")
+                setModalOpen(true);
+            }
+            else {
+                setModalText("삭제가 완료되었습니다. 목록으로 되돌아 갑니다");
+                setModalOpen(true);
+            }
+            
         } catch (e) {
             console.log("오류" + e);
             alert("오류" + e);
@@ -267,7 +282,7 @@ const Board = () => {
         ))}    
 
         
-
+        {modalOpen && <Modal open={modalOpen} close={closeModal} header="확인">{modalText}</Modal>}
         </>
     );
 }
