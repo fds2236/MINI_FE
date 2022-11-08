@@ -13,7 +13,7 @@ const StyledFooter = styled.footer`
     line-height: 25px;
     display:flex;
     flex-direction: column;
-    height: 120px;
+    height: 100px;
     margin-top: auto;
     .nav-bottom {
     margin-right: 30px;

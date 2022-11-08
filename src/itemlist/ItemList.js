@@ -109,6 +109,7 @@ const ItemList = () => {
   const [category, setCategory] = useState(window.localStorage.getItem('category'));
   const [sortCondition, setSortCondition] = useState("NEW_DATE");
   const [itemInfo, setItemInfo] = useState('');
+  const [like,setLike] = useState(0);
 
   // 관심상품 등록 모달
   const [modalOpenLike, setModalOpenLike] = useState(false);
@@ -123,6 +124,7 @@ const ItemList = () => {
         
         const response = await MiniApi.itemFilterInfo(category, sortCondition);
         setItemInfo(response.data);
+        window.localStorage.setItem("PRO_CODE",response.data.value[0]);
       } catch (e) {
         console.log("홈화면 아이템리스트 오류 : " + e);
       }
@@ -145,10 +147,16 @@ const ItemList = () => {
   }
   
   // 관심상품 클릭 시 채워진 하트로 아이콘 변경 + 관심상품 횟수 카운트
-  const onClickLike = () => {
+  const onClickLike = async() => {
     //console.log("관심상품 등록 call?");
     let checkLogin = window.localStorage.getItem("whoLoginNow");
-
+    const productCode = window.localStorage.getItem("PRO_CODE");
+    try{
+      const response = await MiniApi.itemInfo(productCode);
+      setLike(response.data);
+    }catch(e){
+      console.log(e)
+    }
     if(checkLogin) setModalOpenLike(true);
     else {
       alert("로그인이 필요한 서비스입니다");

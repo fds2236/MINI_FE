@@ -12,7 +12,7 @@ const StyledCs = styled.div`
     margin: 0 auto;
     // 전체 크기 잡기용 width height
     width: 1000px;
-    height: 1000px;
+    height: 700px;
 
     div{
         // 글자를 div로 묶어서 하나의 덩어리로 만들기
@@ -51,7 +51,7 @@ const StyledCstime = styled.div`
         font-size: 50px;
         font-weight: bold;
         text-align: center;
-        margin-bottom: 35.5px;
+        margin-bottom: 18px;
     }
 `;
 
