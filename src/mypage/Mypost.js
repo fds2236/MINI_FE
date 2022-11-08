@@ -17,7 +17,7 @@ const StylePost = styled.div`
 const Mypost = () => {
 
     //const [id, setID] = useState("");
-    const [mypost, setMypost] = useState();
+    const [mypost, setMypost] = useState("");
     const [category, setCategory] = useState("");
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
@@ -30,9 +30,8 @@ const Mypost = () => {
         const postData = async () => {
           
             try {
-            
-                let response = await MiniApi.mypostInfo(whoLoginNow); // 전부다 조회할때는 인자값으로 ALL
-                console.log(response.data);
+                const response = await MiniApi.mypostInfo(whoLoginNow); // 전부다 조회할때는 인자값으로 ALL
+                console.log("수신 : ", response.data);
                 setMypost(response.data);
             } catch (e) {  
                 console.log(e + "실패 입니다");
@@ -67,14 +66,12 @@ const Mypost = () => {
                     
                         <div key={e.id}>
                             <p>1{whoLoginNow}</p>
-                            <p>2{e.category}</p>
-                            <p>3{e.title}</p>
-                            <p>4{e.content}</p>
+                            <p>2{e.CATEGORY}</p>
+                            <p>3{e.TITLE}</p>
+                            <p>4{e.CONTENT}</p>
                         </div>
-
                         </div>
                     ))}
-                
                     </h2>
                 </div>
             </StylePost>
