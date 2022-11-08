@@ -116,8 +116,6 @@ const ItemList = () => {
     setModalOpenLike(false); 
   }
 
-  
-  
   useEffect(() => {
     console.log("상품 목록 보기 컴포넌트 useEffect Call !!!!!!!");
     const itemData = async () => {
