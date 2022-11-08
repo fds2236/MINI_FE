@@ -7,16 +7,13 @@ import Modal from "../util/Modal";
 
 const SignComBlock = styled.div`
     width: 500px;
+    height: 200px;
     margin-left: 500px;
-    margin-top: 80px;
-    padding: 30px;
+    margin-top: 100px;
+    margin-bottom: 250px;
+    padding: 50px;
     border-radius : 5px;
     border: solid #eeeeee;
-    &:hover {
-        border : solid rgb(0,173,181) 1px;
-        font-weight: 600;
-        color: rgb(0,173,181);
-    } 
 `;
 
 const PageLink = styled.div`
@@ -25,11 +22,19 @@ const PageLink = styled.div`
         color: rgb(57,62,70);
         font-size : 14px;
         text-decoration-line: none;
-        &:hover {
-            color: rgb(0,173,181);
-            font-weight: 600;
-        }
     }
+`;
+
+const Button = styled.button`
+    text-decoration: none;
+    border: none;
+    background-color: rgb(0,173,181);
+    text-decoration: none;
+    color: white;
+    width: 250px;
+    height: 40px;
+    margin: 10px;
+    border-radius: 5px;
 `;
 
 const SignCom = () => {
@@ -37,7 +42,7 @@ const SignCom = () => {
     return(
         <SignComBlock>
             <p>Sa Shoe 회원가입이 완료되었습니다.</p>
-            <PageLink><button><Link to="/Login" className="link_item">로그인</Link></button></PageLink>
+            <PageLink><Button><Link to="/Login" className="link_item">로그인</Link></Button></PageLink>
         </SignComBlock>
         
         

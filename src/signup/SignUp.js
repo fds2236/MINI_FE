@@ -5,12 +5,14 @@ import Modal from "../util/Modal";
 import MiniApi from '../api/MiniApi';
 import Post from './Post';
 
+// 도연 - 회원가입 페이지 작업 완료
 
-
-// 도연 - 회원가입 페이지 작업중 
-
+const Container1 = styled.div`
+    margin-bottom: 50px;
+`;
 
 const Header = styled.div`
+    margin-top: 50px;
     .title {
         color: rgb(0,173,181);
         font-weight: bold;
@@ -36,12 +38,6 @@ const SignUpBlock = styled.div`
     display: flex;
     flex-direction: column;
 
-
-    &:hover {
-        border : solid rgb(0,173,181) 1px;
-        font-weight: 600;
-        color: rgb(0,173,181);
-    } 
     p{
         text-align: right;
         margin-right: 30px;
@@ -69,15 +65,6 @@ const SignUpBlock = styled.div`
         width : 200px;
         margin : 10px;
         border-radius : 5px;
-        &:hover {
-            border : solid rgb(0,173,181) 0.5px;
-            font-weight: 600;
-            color: rgb(0,173,181);
-        } 
-        &:focus {
-            outline : solid rgb(0,173,181) 1px;
-            font-weight: 600;
-        }
     }
     .inputemail{
         width: 155px;  
@@ -112,28 +99,24 @@ const PageLink = styled.div`
         color: rgb(57,62,70);
         font-size : 14px;
         text-decoration-line: none;
-        &:hover {
-            color: rgb(0,173,181);
-            font-weight: 600;
-        }
     }
 
     .SignUpButton {
         width: 280px;
         height: 40px;
         margin: 10px;
-        background-color: white;
+        background-color: rgb(0,173,181);
+        border: none;
         border-radius: 5px;
-        border: solid #eeeeee;
-        &:hover {
-            color: white;
-            border: none;
-            font-weight: 600;
-            background-color: rgb(0,173,181);      
-        }  
-    
+        color: white;
+
     }
 `;
+
+const Button = styled.button`
+    border: none;
+`;
+
 
 
 
@@ -397,12 +380,11 @@ const SignUp = () => {
        } 
     
     return(
-        <div className='container'>
+        <Container1>
     
-            <Header><h1 className='title'>JOIN US</h1>
-            <p className='comment'>👟 슈즈의 기준, Sa shoe 회원가입하고 인싸되기</p></Header>
             {/* 회원가입 */}
-
+            <Header><h1 className='title'>JOIN US</h1></Header>
+            
             <SignUpBlock>
             <p className='comment2'><b className='star'>* </b> 필수 입력</p>
 
@@ -410,7 +392,7 @@ const SignUp = () => {
             <div className='divv'>
                 <label className='label'><b className='star'>*</b>아이디</label>
                 <input className="id" value={inputId} onChange={onChangeId}></input>
-                <button onClick={onClickIdCheck}>중복 확인</button>
+                <Button onClick={onClickIdCheck}>중복 확인</Button>
             </div>
 
             {/* 아이디 입력 제한 메시지 */}
@@ -495,25 +477,23 @@ const SignUp = () => {
             <div>
                 <label className="address_search">주소</label>
                 <input className="addr" type="text" required={true} name="address" onChange={handleInput} value={enroll_company.address}/>
-                <button onClick={handleComplete}>주소 검색</button>
+                <Button onClick={handleComplete}>주소 검색</Button>
                 {popup && <Post company={enroll_company} setcompany={setEnroll_company}></Post>}    
             </div>
                             
-
-            
             </SignUpBlock>
             
             <PageLink>
             {/* <button><Link to="/" className="link_item">취소하기</Link></button> */}
-            <button onClick={onClickSignUp} className="SignUpButton">회원가입</button></PageLink>
+            <Button onClick={onClickSignUp} className="SignUpButton">회원가입</Button></PageLink>
       
 
-            <div>이미 아이디가 있으신가요? <button><PageLink><Link to="/Login" className="link_item">＞ 로그인</Link></PageLink></button></div>
+            <div className='footer'>이미 아이디가 있으신가요? <Button><PageLink><Link to="/Login" className="link_item">＞ 로그인</Link></PageLink></Button></div>
             {/* 모달 */}
             {modalOpenIdCheck && <Modal open={modalOpenIdCheck} close={closeModalIdCheck} header="확인">이미 가입된 아이디입니다.</Modal>}
             {modalOpenIdOK && <Modal open={modalOpenIdOK} close={closeModalIdOK} header="확인">사용 가능한 아이디입니다.</Modal>}
             {modalOpenSignUp && <Modal open={modalOpenSignUp} close={closeModalSignUp} header="확인">회원가입에 실패했습니다. 다시 확인해주세요.</Modal>}
-        </div>
+        </Container1>
         
     )
 

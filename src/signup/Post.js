@@ -1,9 +1,6 @@
 import DaumPostcode from "react-daum-postcode";
 
-// 도연 작업중..
-
-
-
+// 도연 - 주소 API
 
 // api를 실행할 컴포넌트 
 const Post = (props) => {
