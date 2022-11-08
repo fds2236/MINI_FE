@@ -187,7 +187,17 @@ const OrangeRedButton = (props) => {
 }
 
 const OnClickOrangeRed = () => {
-    window.location.replace('/WriteBoard')
+    let checkLogin = window.localStorage.getItem("whoLoginNow");
+
+    if(checkLogin) window.location.replace('/WriteBoard');
+    else {
+        alert("로그인이 필요한 서비스 입니다");
+        window.location.replace('/Login');
+    }
+
+
+
+    
 }
 
 

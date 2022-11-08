@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import {BrowserRouter as Router, Routes, Route} from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import MiniApi from "../api/MiniApi";
 
 
@@ -193,8 +193,7 @@ const WriteBoard = () => {
     
     // 레드버튼 컴포넌트
     const SubmitButton = (props) => {
-        setId(window.localStorage.getItem("whoLoginNow"));
-        console.log("now ID : "+id);
+        
         return (
             <>
                 <OrangeRedStyledButton onClick={onSubmit} >{props.text}</OrangeRedStyledButton>
@@ -226,6 +225,30 @@ const WriteBoard = () => {
         isSubmit();
       };
 
+    //   useEffect(() => {
+    //     const boardData = async () => {
+
+    //         try {
+    //             console.log(nowBoardNum);
+    //             const response = await MiniApi.boardInfo(nowBoardNum);
+                
+    //             setBoardDetail(response.data);
+    //             console.log(response.data)
+    //         } catch (e) {
+    //             console.log(e);
+    //         }
+    //     };
+    //     boardData();
+    // }, []);
+
+    //   setId(window.localStorage.getItem("whoLoginNow"));
+    // console.log("now ID : "+id);
+    // if(id === '') {
+    //     alert("로그인이 필요합니다");
+    //     window.location.replace("/Login");
+    // }
+
+    
     return (
         <Container>  
             <ButtonContainer>
