@@ -5,6 +5,7 @@ const SortStyleBlock = styled.div`
   display: flex;
   justify-content: center;
   select {
+    margin-top: 5px;
     width: 150px;
     padding: .8em .5em;
     border: none;

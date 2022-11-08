@@ -8,15 +8,22 @@ import notlikeIcon from "../images/NOTLike-icon-00AD85.png"
 import likeIcon from "../images/Like-icon-00AD85.png"
 
 // 스타일
+const ItemContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-wrap: wrap;
+  margin-right: auto;
+`;
+
 const ItemBlock = styled.div`
   border: 1px solid #eeeeee;
-  margin: 10px 0px 10px 30px;
+  margin: 10px;
   padding: 10px;
   width: 260px;
   height: 350px;
-  display: block;
-  float: left;
-  
+  /* display: block; */
+  /* float: left; */
 `;
 
 const ItemDescBlock = styled.div`
@@ -40,6 +47,7 @@ const ItemDescBlock = styled.div`
     text-decoration: underline;
   }
 `;
+
 const DescBlock = styled.div`
   display: table;
   align-content: flex-start;
@@ -117,11 +125,17 @@ const ItemList = () => {
     setModalOpenLike(false); 
   }
 
+  // 로그인 필요 서비스 모달 -> 모달창 close 후 로그인화면으로 이동
+  const [modalOpenLogin, setModalOpenLogin] = useState(false);
+  const closeModalLoginOK = () => {
+    setModalOpenLogin(false);
+    window.location.replace('/Login')
+  }
+
   useEffect(() => {
     console.log("상품 목록 보기 컴포넌트 useEffect Call !!!!!!!");
     const itemData = async () => {
       try {
-        
         const response = await MiniApi.itemFilterInfo(category, sortCondition);
         setItemInfo(response.data);
         window.localStorage.setItem("PRO_CODE",response.data.value[0]);
@@ -141,7 +155,6 @@ const ItemList = () => {
   // 상품명 클릭 시 해당 상품 상세페이지로 이동
   const onClickDetail = (code) => {
     console.log("상세페이지로 이동 : " + code);
-    // alert(tmp);
     window.localStorage.setItem("Detail", code);
     window.location.replace("/ItemDetail");
   }
@@ -159,8 +172,7 @@ const ItemList = () => {
     }
     if(checkLogin) setModalOpenLike(true);
     else {
-      alert("로그인이 필요한 서비스입니다");
-      window.location.replace('/Login');
+      setModalOpenLogin(true);
     }
   }
 
@@ -175,7 +187,7 @@ const ItemList = () => {
         sortCondition={sortCondition}
         setSortCondition={setSortCondition}
       />
-      <div>
+      <ItemContainer>
         {itemInfo && itemInfo.map(item => (        
           <ItemBlock key={item.PRO_CODE}>
             <ItemImage>
@@ -195,8 +207,9 @@ const ItemList = () => {
             </ItemDescBlock>
           </ItemBlock>
         ))}
-      </div>
+      </ItemContainer>
       {modalOpenLike && <Modal open={modalOpenLike} close={closeModalLikeOK} type={true} header="확인">관심상품 등록 완료!</Modal>}
+      {modalOpenLogin && <Modal open={modalOpenLogin} close={closeModalLoginOK} type={true} header="확인">로그인이 필요한 서비스입니다</Modal>}
   </div>
   )
 }
