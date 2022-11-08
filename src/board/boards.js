@@ -6,6 +6,7 @@ import Board from "./writeBoard";
 import { isLabelWithInternallyDisabledControl } from "@testing-library/user-event/dist/utils";
 import MiniApi from "../api/MiniApi";
 import axios from "axios";
+import Modal from "../util/Modal";
 
 /**
  * ------------------------------스타일드 컴포넌트 ---------------------------
@@ -117,6 +118,7 @@ const MarginContent = styled.div`
 display: flex;
 flex-direction: column;
 padding-top: 10px;
+padding-bottom: 10px;
 
 
 `;
@@ -178,27 +180,8 @@ const Picture = ({pic}) => {
     );
 }
 
-const OrangeRedButton = (props) => {
-    return (
-        <>
-            <OrangeRedStyledButton onClick={OnClickOrangeRed}>{props.text}</OrangeRedStyledButton>
-        </>
-    );
-}
-
-const OnClickOrangeRed = () => {
-    let checkLogin = window.localStorage.getItem("whoLoginNow");
-
-    if(checkLogin) window.location.replace('/WriteBoard');
-    else {
-        alert("로그인이 필요한 서비스 입니다");
-        window.location.replace('/Login');
-    }
 
 
-
-    
-}
 
 
 // 온클릭 컨텐트 (상세페이지로 이동)
@@ -218,10 +201,35 @@ const Boards = () => {
     const [boardInfo, setBoardInfo] = useState('');
     const [loading, setLoading] = useState(false);
     const [category, setCategory] = useState("전체게시판");
+    const [modalOpen, setModalOpen] = useState(false);
 
     // const isLogin = window.localStorage.getItem("isLogin");
     // if(isLogin === "FALSE") window.location.replace("/");
     // 로그인 페이지로 접속하게 하기
+
+
+    const closeModal = () => {
+        setModalOpen(false);
+        window.location.replace('/Login');
+    }
+
+
+    const OnClickOrangeRed = () => {
+        let checkLogin = window.localStorage.getItem("whoLoginNow");
+
+        if(checkLogin) window.location.replace('/WriteBoard');
+        else {
+            setModalOpen(true);
+        } 
+    }
+
+    const OrangeRedButton = (props) => {
+        return (
+            <>
+                <OrangeRedStyledButton onClick={OnClickOrangeRed}>{props.text}</OrangeRedStyledButton>
+            </>
+        );
+    }
 
     useEffect(() => {
         const BoardData = async () => {
@@ -256,8 +264,10 @@ const Boards = () => {
   
 
     return (
+        <div>
         
         <Container>  
+            
             <ButtonContainer>
                 <Button><StyledLink to ='/' >돌아가기</StyledLink></Button>
                 {/* 카테고리 선택 화면 */}
@@ -301,6 +311,7 @@ const Boards = () => {
 
                 <OrangeRedButton text="글쓰기"></OrangeRedButton>
                 
+                
             </ButtonContainer>
             
 
@@ -327,12 +338,18 @@ const Boards = () => {
                     </StyledContent>
                     
                 ))}
-                &nbsp;
+
             </MarginContent>
         
             </Contents> 
+            
                 
         </Container>
+
+
+        {modalOpen && <Modal open={modalOpen} close={closeModal} header="확인">로그인이 필요한 서비스 입니다</Modal>}
+        </div>
+        
         
     );
 }
