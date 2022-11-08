@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import styled from "styled-components"
 import CategoryFilter from "./BrandCategory";
 import MiniApi from '../api/MiniApi';
+import Modal from "../util/Modal";
 import SortItem from "./SortItem";
 import notlikeIcon from "../images/NOTLike-icon-00AD85.png"
 import likeIcon from "../images/Like-icon-00AD85.png"
@@ -21,6 +22,7 @@ const ItemBlock = styled.div`
 const ItemDescBlock = styled.div`
   text-align: left;
   line-height: 0.5em;
+  padding: 10px;
   .brand-name {
     cursor: pointer;
     font-size: 1.2em;
@@ -29,15 +31,24 @@ const ItemDescBlock = styled.div`
   .brand-name:hover {
     color: rgb(0,173,181);
   }
-  .item-name {
+  .pro-name {
     line-height: 1.1em;
+    font-size: 0.95em;
   }
-  .item-name:hover {
+  .pro-name:hover {
     cursor: pointer;
     text-decoration: underline;
   }
+`;
+const DescBlock = styled.div`
+  display: table;
+  align-content: flex-start;
   .laun-date {
     font-size: 0.8em;
+  }
+  .price {
+    font-weight: 600;
+    font-size: 1.05em;
   }
   .like {
     font-size: 0.8em;
@@ -52,19 +63,18 @@ const ItemImage = styled.div`
   .likeIcon {
     width: 23px;
     position: absolute;
-    transform: translate(465%, -325%);
+    transform: translate(490%, -260%);
     cursor: pointer;
   }
   .likeIcon:hover {
-    background-image: ${likeIcon};
+    u: ${likeIcon};
   }
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 15px auto;
   width: 230px;
   height: 140px;
-  margin-bottom: 20px;  
+  margin-bottom: 30px;  
 `;
 
 // 브랜드 카테고리 배열
@@ -99,6 +109,14 @@ const ItemList = () => {
   const [category, setCategory] = useState("ALL");
   const [sortCondition, setSortCondition] = useState("NEW_DATE");
   const [itemInfo, setItemInfo] = useState('');
+
+  // 관심상품 등록 모달
+  const [modalOpenLike, setModalOpenLike] = useState(false);
+  const closeModalLikeOK = () => {
+    setModalOpenLike(false); 
+  }
+
+  
   
   useEffect(() => {
     console.log("상품 목록 보기 컴포넌트 useEffect Call !!!!!!!");
@@ -129,10 +147,15 @@ const ItemList = () => {
   
   // 관심상품 클릭 시 채워진 하트로 아이콘 변경 + 관심상품 횟수 카운트
   const onClickLike = () => {
-      console.log("관심상품 등록 call?");
-  
+    //console.log("관심상품 등록 call?");
+    let checkLogin = window.localStorage.getItem("whoLoginNow");
+
+    if(checkLogin) setModalOpenLike(true);
+    else {
+      alert("로그인이 필요한 서비스입니다");
+      window.location.replace('/Login');
+    }
   }
-  
 
   return(
     <div>
@@ -149,19 +172,24 @@ const ItemList = () => {
         {itemInfo && itemInfo.map(item => (        
           <ItemBlock key={item.PRO_CODE}>
             <ItemImage>
-              <img className="item-img" alt="productImage" src={item.IMG} key={item.PRO_CODE} onClick={()=> onClickDetail(item.PRO_CODE)}/>
+              <img className="item-img" alt="productImage" src={item.IMG1} key={item.PRO_CODE} onClick={()=> onClickDetail(item.PRO_CODE)}/>
               <img className="likeIcon" alt="likeIcon" src={notlikeIcon} onClick={() => onClickLike()}></img>
             </ItemImage>
             <ItemDescBlock>
-              <p className="brand-name" onClick={()=>onClickBrand(item.BRAND)}>{item.BRAND}</p>
-              <p className="item-name" key={item.PRO_CODE} onClick={()=>onClickDetail(item.PRO_CODE)}>{item.PRO_NAME}</p>
-              <p className="laun-date">발매일 : {item.LAUN_DATE}</p>
-              <p className="price">발매가 : {item.PRICE}원</p>
-              <p className="like"><img src={likeIcon} alt={likeIcon} width="15px"></img> x 3,201</p>
+              <div className="name">
+                <p className="brand-name" onClick={()=>onClickBrand(item.BRAND)}>{item.BRAND}</p>
+                <p className="pro-name" key={item.PRO_CODE} onClick={()=>onClickDetail(item.PRO_CODE)}>{item.PRO_NAME}</p>
+              </div>
+              <DescBlock>
+                <p className="laun-date">발매일 : {item.LAUN_DATE}</p>
+                <p className="price">{item.PRICE}원</p>
+                <p className="like"><img src={likeIcon} alt={likeIcon} width="15px"></img> x 3,201</p>
+              </DescBlock>
             </ItemDescBlock>
           </ItemBlock>
         ))}
       </div>
+      {modalOpenLike && <Modal open={modalOpenLike} close={closeModalLikeOK} type={true} header="확인">관심상품 등록 완료!</Modal>}
   </div>
   )
 }

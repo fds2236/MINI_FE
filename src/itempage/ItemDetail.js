@@ -30,7 +30,7 @@ const ItemDetailBlock = styled.div`
 
 
 const ItemDetail = () => {
-    //const [category, setCategory] = useState("");
+    const [category, setCategory] = useState("");
     const [itemDetail, setItemDetail] = useState('');
     const getDetail = window.localStorage.getItem("Detail");
     
@@ -48,24 +48,12 @@ const ItemDetail = () => {
         itemDetailData();
     }, [getDetail]);
 
-    // useEffect(() => {
-    //     console.log("브랜드로 이동");
-    //     const itemData = async () => {
-    //         try {
-    //             const rsp = await MiniApi.itemInfo(category);
-    //             setCategory(rsp.data);
-    //         } catch (e) {
-    //             console.log(e)
-    //         }
-    //     };
-    //     itemData();
-    // }, [category]);
-
     // 브랜드명 클릭 시 해당 브랜드 상품만 보여줌
     const onClickBrand = (val) => {
         console.log("브랜드카테고리로 이동 : " + val);
         window.localStorage.setItem("brand", val);
         window.location.replace("/ItemList");
+        //setCategory(val)
     }
 
 return(
@@ -74,10 +62,11 @@ return(
             {itemDetail && itemDetail.map(item => (
             <div key={item.PRO_CODE}>
                 <ImageBlock>
-                    <img src={item.IMG}/>
+                    <img src={item.IMG1}/><img src={item.IMG2}/><img src={item.IMG3}/>
                 </ImageBlock>
-                <p className="brand-name" onClick={() => onClickBrand}>{item.BRAND}</p>
+                <p className="brand-name" onClick={() => onClickBrand(item.BRAND)}>{item.BRAND}</p>
                 <p className="item-name">{item.BRAND} {item.PRO_NAME}</p>
+                <p className="item-Kname">{item.PRO_KORNAME}</p>
                 <p className="pro-code">{item.PRO_CODE}</p>
                 <p className="laun-date">{item.LAUN_DATE}</p>
                 <p>발매가 : {item.PRICE}원</p>
