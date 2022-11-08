@@ -1,11 +1,12 @@
 import MiniApi from "../api/MiniApi";
 import { useState, useEffect } from "react";
 import styled from "styled-components";
-import Board from "../board/board";
+import notlikeIcon from "../images/NOTLike-icon-00AD85.png"
+import likeIcon from "../images/Like-icon-00AD85.png"
 
 const ImageBlock = styled.div`
     img {
-        width: 450px;
+        width: 350px;
         margin: 30px auto;
     }
 `;
@@ -19,18 +20,41 @@ const ItemDetailBlock = styled.div`
         font-size: 1.6em;
         font-weight: 700;
         color: rgb(0,173,181);
+        padding-left: 10px;
     }
     .item-name {
-        font-size: 1.3em;
+        font-size: 1.4em;
         font-weight: 600;
+        padding-left: 10px;
+    }
+    .item-Kname {
+        font-size: 1.2em;
+        padding-left: 10px;
+        line-height: 10px;
     }
 
+`;
 
+const TableDescBlock = styled.table`
+    border-top: 2px solid rgb(0,173,181);
+    width: 1000px;
+    margin-top: 30px;
+    margin-bottom: 100px;
+    font-size: 1.1em;
+    color: rgb(57,62,70);
+    th {
+        padding-left: 10px;
+        padding-top: 20px;
+    }
+    td {
+        padding-left: 10px;
+        width: 200px;
+        
+    }
 `;
 
 
 const ItemDetail = () => {
-    const [category, setCategory] = useState("");
     const [itemDetail, setItemDetail] = useState('');
     const getDetail = window.localStorage.getItem("Detail");
     
@@ -65,12 +89,28 @@ return(
                 <ImageBlock>
                     <img src={item.IMG1}/><img src={item.IMG2}/><img src={item.IMG3}/>
                 </ImageBlock>
-                <p className="brand-name" onClick={() => onClickBrand(item.BRAND)}>{item.BRAND}</p>
-                <p className="item-name">{item.BRAND} {item.PRO_NAME}</p>
-                <p className="item-Kname">{item.PRO_KORNAME}</p>
-                <p className="pro-code">{item.PRO_CODE}</p>
-                <p className="laun-date">{item.LAUN_DATE}</p>
-                <p>발매가 : {item.PRICE}원</p>
+                <div>
+                    <p className="brand-name" onClick={() => onClickBrand(item.BRAND)}>{item.BRAND}</p>
+                    <p className="item-name">{item.BRAND} {item.PRO_NAME}</p>
+                    <p className="item-Kname">{item.PRO_KORNAME}</p>
+                </div>
+                <div>
+                    
+                    <p>관심상품</p>
+                    <p className="like"><img src={likeIcon} alt={likeIcon} width="15px"></img> x 3,201</p>
+                </div>
+                <TableDescBlock>
+                    <tr>
+                        <th>상품 코드</th>
+                        <th>발매일</th>
+                        <th>발매가</th>
+                    </tr>
+                    <tr>
+                        <td className="pro-code">{item.PRO_CODE}</td>
+                        <td className="laun-date">{item.LAUN_DATE}</td>
+                        <td>{item.PRICE}원</td>
+                    </tr>
+                </TableDescBlock>
             </div>
             ))}
         </ItemDetailBlock>
