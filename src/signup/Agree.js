@@ -13,6 +13,9 @@ const Container = styled.div`
         color: black;
         text-decoration: none;
     }
+    .linkBtn {
+        margin-right: 5px;
+    }
 `;
 
 
@@ -590,7 +593,7 @@ const Agree = () => {
                 
                 <label className='text'><input type="checkbox" checked={ageCheck} onClick={ageBtnEvent}/>만 14세 이상입니다.(필수)</label>
             </fieldset> </AgreeBox>
-            <button><Link to='/' className='link'>취소하기</Link></button>
+            <button className='linkBtn'><Link to='/' className='link'>취소하기</Link></button>
             <button onClick={istrue}><>다음단계</></button>
 
             {/* 모달 */}

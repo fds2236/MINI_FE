@@ -100,7 +100,8 @@ const SignUpBlock = styled.div`
         padding-left: 7px;
     }
     .comment2 {
-        font-size: 13px;
+        font-size: 14px;
+        margin-top: 5px;
     }
 
 `;
