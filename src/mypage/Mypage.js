@@ -2,7 +2,21 @@ import Profile from "./Profile";
 import React from "react";
 import Like from "./Like";
 import Modify from "./Modify";
-import { useState } from "react";
+import MiniApi from '../api/MiniApi';
+import styled from "styled-components";
+import DelModal from "../delete/DelModal";
+import { useState, useEffect  } from "react";
+
+
+//------------------------------
+// 도연 - 회원탈퇴 버튼 
+const Button = styled.button`
+    border: none;
+    margin-bottom: 50px;
+    width: 150px;
+    height: 40px;
+`;
+//-------------------------------
 
 function Mypage() {
     // const [LikeToggle, setLikeToggle] = useState(false)
@@ -19,20 +33,66 @@ function Mypage() {
     //MemberServlet
 
     // API 호출
+
+    //-------------------------------------------
+    // 도연 - 회원 탈퇴 
+    const localId = window.localStorage.getItem("userId");
+    const localPw = window.localStorage.getItem("userPw");
+    const isLogin = window.localStorage.getItem("isLogin");
+    if(isLogin === "FALSE") window.location.replace("/");
+
+    const [memberInfo, setMemberInfo] = useState(""); // 현재 로그인 되어 있는 회원의 정보 저장용
+
+    useEffect(() => {
+        
+        const memberData = async () => {
+            try {
+                const response = await MiniApi.memberInfo(localId, localPw); 
+                setMemberInfo(response.data);
+                console.log(response.data)
+            } catch (e) {
+                console.log(e);
+            }
+        };
+        memberData();
+    }, []);
+
+
+    const [modalOpen, setModalOpen] = useState(false);
+
+    const closeModal = () => {
+        setModalOpen(false);
+    };
+
+    const confirmModal = async() => {
+        setModalOpen(false);
+        const memberReg = await MiniApi.memberDelete(localId);
+        console.log(memberReg.data.result);
+        if(memberReg.data.result === "OK") {
+            window.location.replace("/");
+        } else {
+
+        }
+    };
+
+    const onClickMemberDelete = () => {
+        setModalOpen(true);
+    }
+    //--------------------------------------------------------------------------
  
 
-    return (
-        <Profile/>
-        // <div>
-        // <Profile/>
-        // <button style={{color: 'black'}} onClick={toggleLikeView}>관심상품</button>
-        // <button style={{color: 'black'}} onClick={toggleModView}>개인정보수정</button>
-        // <hr></hr>
-        // {LikeToggle && <Like/> }
-        // {ModToggle && <Modify/> }
-            
-        // </div>
-  );
+    return(
+      <div>
+        {/* -------------------------------------------------------------------------------
+        도연 회원 탈퇴 */}
+      <div onClick={onClickMemberDelete}>
+                  <Button>회원 탈퇴</Button>
+              </div>
+      {modalOpen && <DelModal open={modalOpen} confirm={confirmModal} close={closeModal} type={true} header="확인">정말로 탈퇴하시겠습니까?</DelModal>}
+      {/* ----------------------------------------------------------------------------------- */}
+      </div>
+
+)
 }
 
 export default Mypage;
