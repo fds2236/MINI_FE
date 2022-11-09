@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { Link} from "react-router-dom";
-import './Mypage.css';
+// import './Mypage.css';
 import { useState,useEffect } from "react";
 import MiniApi from "../api/MiniApi";
 
@@ -9,23 +9,90 @@ const Box = styled.div`
     text-align: center; // 가운데 정렬
     justify-content: center; // 가운데 정렬 */
 
+    margin: 30px auto;
+    display: flex;
+    justify-content: center;
+
+
     .side{
-        margin-left: 30px;
-        list-style: none;
-        float: left;
+
+        margin-right: 40px;
+
     }
+
+
+/* 
+    .myPage{
+
+
+    }
+    .editInfo{
+
+    }
+    .likeProduct{
+
+    }
+    .myBoard{
+
+    } */
+
 `;
+
+
+const MyPage = () => {
+    window.location.replace('/Mypage');
+}
+const EditInfo = () => {
+    window.location.replace('/Modify');
+}
+const LikeProduct = () => {
+    window.location.replace('/Like');
+}
+const MyBoard = () => {
+    window.location.replace('/Mypost');
+}
+
+
+const Img = styled.img`
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    padding: 10px ;
+    margin: 20px;
+`;
+
+
+
 const Container = styled.div`
-    border: 1px solid black;
-    border-radius:10px;
-    width :50%;
-    height: 150px;
-    background: #fff;
-    margin: 0 0 10px 30px;
-    display: flex;    
-    margin-left: 200px;
-justify-content: center; // 가운데 정렬
-text-align: center; // 가운데 정렬
+    border: 2px solid #eeeeee;
+    display: flex; 
+    align-items: center ;
+    width: 500px;
+    
+    
+    .Info{
+        margin: 20px;
+
+    }
+
+`;
+
+const CategoryDiv = styled.div`
+
+    margin: 10px;
+    background-color: rgb(23,158,166);
+    color : #eeeeee;
+    height: 30px;
+    width: 130px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover{
+        opacity: 0.5;
+    }
+
 `;
 
 const Profile = () => {
@@ -86,21 +153,28 @@ const Profile = () => {
 
         <Box>
             <div className="side">
-                <Link to={"/Mypage"}><li className="li"><b>마이페이지</b></li></Link><br />
+                {/* <Link to={"/Mypage"}><li className="li"><b>마이페이지</b></li></Link><br />
                 <Link to={"/Modify"}><li className="li">개인 정보 수정</li></Link><br />
                 <Link to={"/Like"}><li className="li">관심 상품</li></Link><br />
-                <Link to={"/Mypost"}><li className="li">내 게시글 보기</li></Link><br />
+                <Link to={"/Mypost"}><li className="li">내 게시글 보기</li></Link><br /> */}
+                
+                <CategoryDiv onClick={MyPage} >마이페이지</CategoryDiv>
+                <CategoryDiv onClick={EditInfo} >개인 정보 수정</CategoryDiv>
+                <CategoryDiv onClick={LikeProduct} >관심 상품</CategoryDiv>
+                <CategoryDiv onClick={MyBoard} >내 게시글 보기</CategoryDiv>
+
+
+
             </div>
             {memberInfo&&memberInfo.map(member=>(
                 <Container>
-                <div className="user-img">😂
-                </div>
-                <div className="user">
-                    <p>이름 : {whoLoginNow}</p>
-                    <p>아이디 : {member.name}</p>
-                    <p>이메일 : {member.email}</p>
-                </div>
-            </Container>
+                    <Img src="/img/프로필.jpg"></Img>
+                    <div className="Info">
+                        <p>아이디 : {whoLoginNow}</p>
+                        <p>이름 : {member.name}</p>
+                        <p>이메일 : {member.email}</p>
+                    </div>
+                </Container>
             ))}
             
         </Box>
