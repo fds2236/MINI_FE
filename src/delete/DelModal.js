@@ -4,7 +4,6 @@ import './DelModal.css';
 
 // 도연 - 회원 탈퇴 모달
 
-
 const DelModal = (props) => {
     const { open, confirm, close, type, header } = props;
     return (
