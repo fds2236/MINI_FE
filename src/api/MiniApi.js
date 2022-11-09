@@ -184,8 +184,15 @@ const MiniApi =  {
     }
     
     return await axios.post(MINI_DOMAIN + "MemberServlet", findEmail, HEADER);
-}
-        
+},
+
+    // 검색창 기능(result는 입력값)
+    keyWord: async function(result) {
+        const researchKey = {
+            result : result
+        }
+    return await axios.post(MINI_DOMAIN + "ResultServlet", researchKey, HEADER);
+    }
 }
 
 

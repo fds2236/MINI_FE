@@ -71,8 +71,11 @@ const HeaderMenu = styled.div`
     display: flex;
     box-sizing: border-box;
     .search {
-      border: 1px solid rgb(0,173,181);
+      width: 210px;
+      height: 35px;
+      border: 1.5px solid rgb(0,173,181);
       padding: 8px;
+      font-size: 16px;
     }
     button {
       cursor: pointer;
@@ -81,8 +84,8 @@ const HeaderMenu = styled.div`
     }
     img {
       display: flex;
-      width: 25px;
-      height: 25px;
+      width: 20px;
+      height: 20px;
     }
   }
 `;
@@ -92,12 +95,20 @@ const HeaderMenu = styled.div`
 // 헤더 : 로고(home이동), SNEAKERS(상품목록), 검색창
 const Header = () => {
 
-  // 검색창(구현중💬)
+  // 검색창
   const [word, setWord] = useState("");
+
+  // 검색창 단어 입력받기
+  const onChangeWord = (e) => {
+    setWord(e.target.value)
+  };
   
-  const onSubmit = async () => {
+  // 검색창 API호출
+  const onClickWord = async () => {
     //setSearch(e.target.value)
-    window.location.href = "itemlist/" + word;
+    // window.location.href = "itemlist/" + word;
+    window.localStorage.setItem("word", word);
+    window.location.replace("/Search");
   }
 
   // const onClick = () => {
@@ -113,6 +124,7 @@ const Header = () => {
   // 현재 ID에서 로그아웃하기
   const onClickLogout = () => {
     window.localStorage.removeItem("whoLoginNow");
+    window.localStorage.removeItem("whoPwdNow");
     window.location.replace("/");
   }
 
@@ -156,8 +168,8 @@ const Header = () => {
             <Link to = {"/Boards"} className="board">COMMUNITY</Link>
           </div>
           <div className="searchBar">
-            <input className="search" onChange={(e) => {setWord(e.target.value); console.log(word);}} placeholder="검색어 입력"/>
-            <button type="button" onClick={() => {onSubmit()}}><img src={searchIcon}/></button>
+            <input className="search" onChange={onChangeWord} placeholder="검색어 입력"/>
+            <button className="searchBtn"type="button" onClick={onClickWord}><img src={searchIcon}/></button>
           </div>
         </HeaderMenu>
       </StyledHeader>
