@@ -4,9 +4,42 @@ import styled from "styled-components";
 import MiniApi from "../api/MiniApi";
 import Profile from "./Profile";
 
-const ModiContain = styled.div`
+const ModiContain = styled.div``;
 
-`
+
+const ModifyBox = styled.div`
+    width: 695px;
+    height: 450px;
+    margin: 0 auto;
+    padding: 50px ;
+    background-color : white;
+    border-radius : 5px;
+    border: solid #eeeeee 0.5px;
+    font-size: 20px;
+
+    .label{
+        width: 80px;
+        margin-right: 80px;
+    }
+    .input{
+        width: 300px;
+    }
+`;
+
+const Button = styled.button`
+    border: none;
+    width: 250px;
+    height: 50px;
+    border-radius: 5px;
+    margin-top: 30px;
+    margin-bottom: 50px;
+    background-color: rgb(0,173,181);
+    color: white;
+    font-size: 17px;
+`;
+
+
+
 const Modify = () => {
 
 
@@ -75,36 +108,48 @@ const Modify = () => {
             value={id}
             onChange={onChangeId}
         ></input>  */}
+        <ModifyBox>
 
-        <div>{whoLoginNow}</div>
+        <div><label className='label'>아이디</label>
+        <input className='input' value={whoLoginNow}></input></div><br/> 
 
-        <input
-            placeholder="pwd 입력 하세요 ....."
+        <div><label className='label'>비밀번호</label>
+        <input className='input'
+            placeholder="변경할 비밀번호"
             value={pwd}
             onChange={onChangePwd}
-        ></input> 
-        <input
-            placeholder="name입력 하세요 ....."
+        ></input></div><br/> 
+
+        <div><label className='label'>이름</label>
+        <input className='input'
+            placeholder="변경할 이름"
             value={name}
             onChange={onChangeName}
-        ></input> 
-        <input
-            placeholder="email 입력 하세요 ....."
+        ></input></div><br/>
+
+        <div><label className='label'>이메일</label>
+        <input className='input'
+            placeholder="변경할 이메일"
             value={email}
             onChange={onChangeEmail}
-        ></input> 
-        <input
-            placeholder="addr 입력 하세요 ....."
+        ></input></div><br/>
+
+        <div><label className='label'>이메일</label>
+        <input className='input'
+            placeholder="변경할 주소"
             value={addr}
             onChange={onChangeAddr}
-        ></input> 
-        <input
-            placeholder="phone 입력 하세요 ....."
+        ></input></div><br/>
+
+        <div><label className='label'>전화번호</label>
+        <input className='input'
+            placeholder="변경할 전화번호"
             value={phone}
             onChange={onChangePhone}
-        ></input> 
+        ></input></div> 
+        </ModifyBox>
 
-        <button onClick={()=>onSubmit(whoLoginNow)} >제출</button>
+        <Button onClick={()=>onSubmit(whoLoginNow)} >변경</Button>
 
 
 
