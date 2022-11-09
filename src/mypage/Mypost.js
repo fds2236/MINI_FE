@@ -131,8 +131,8 @@ const Mypost = () => {
 
     }, []);
     
-    const Onclickpost= (mypost) =>{
-        window.localStorage.setMypost(whoLoginNow);
+    const Onclickpost= (boardNum) =>{
+        window.localStorage.setItem('boardNum',boardNum);
         window.location.replace('/Board');
     }
     
@@ -160,7 +160,7 @@ const Mypost = () => {
                     <Contents ><Div><b>내 게시글 보기</b></Div>
                     {mypost && mypost.map(e => (
                         <DetailDiv>
-                        <DetailDiv onClick={Onclickpost} key={e.id}>
+                        <DetailDiv onClick={() => Onclickpost(e.DOC_NUM)}>
                             <Id>{whoLoginNow}</Id>
                             <Title>{e.TITLE}</Title>
                             <Content>{e.CONTENT}</Content>
