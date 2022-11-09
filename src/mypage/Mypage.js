@@ -68,6 +68,8 @@ function Mypage() {
 
     return(
       <div>
+        <Profile/>
+        
         {/* -------------------------------------------------------------------------------
         도연 회원 탈퇴 */}
       <div onClick={onClickMemberDelete}>
