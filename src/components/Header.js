@@ -76,6 +76,10 @@ const HeaderMenu = styled.div`
       border: 1.5px solid rgb(0,173,181);
       padding: 8px;
       font-size: 16px;
+      &:focus{
+        outline:none;
+        font-weight: 600;
+      }
     }
     button {
       cursor: pointer;

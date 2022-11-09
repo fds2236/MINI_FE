@@ -6,14 +6,14 @@ import Modal from "../util/Modal";
 import styled from "styled-components";
 
 const ItemContainer = styled.div`
+    :hover{opacity: 0.5}
     .item_img{
         width : 250px;
         height : 210px;
         &:hover {
-
+           
         }
     }
-
 
 
 `;
@@ -51,9 +51,14 @@ return (
         {searchInfo && searchInfo.map(word => (
         <>
             <ItemContainer onClick={()=>OnClick(word.proCode)}>
+                <div className="item">
                 <img className="item_img" src = {word.img1Path}/>
-                <div className="item_code">{word.proCode}</div>
-                <div className="item_">{word.brand}</div>
+                <div className="item_brand">{word.brand}</div>
+                <div className="item_EName">{word.proName}</div>
+                <div className="item_KName">{word.proKorName}</div>
+                <div className="item_price">{word.price}원</div>
+                </div>
+                
             </ItemContainer>
         </>
 
