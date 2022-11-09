@@ -12,9 +12,12 @@ const Contents = styled.div`
 
 const StylePost = styled.div`
     width: 1000px;
-    margin: 50px auto;
+    margin-top: 10px;
+    margin-left: 265px;
+    margin-bottom :50px ;
     display: flex;
     flex-direction: column;
+   
 `;
 
 const CategoryDiv = styled.div`
@@ -24,17 +27,29 @@ const CategoryDiv = styled.div`
     display: flex;
     padding: 10px;
     border-radius: 5px;
+    /* border-top: no/ne; */
     //background-color: rgba(234,234,234,0.5);
 
     justify-content: center;
 
 `;
 
+const Div = styled.div`
+    border: none;
+    border-bottom: solid rgb(0,173,181) 2px;
+    margin-left: 60px;
+    width: 680px;
+    font-size: x-large;
+    
+    
+`;
+
+
 const DetailDiv = styled.div `
-    width:800px;
+    width:680px;
 
     box-sizing: border-box;
-    border-top: 2px solid #EEEEEE;
+    border-top: 1px solid #EEEEEE;
     border-collapse: collapse;
 
     margin: 0 auto;
@@ -43,7 +58,7 @@ const DetailDiv = styled.div `
     align-items: center;
     text-align: left;
     display: grid;
-    grid-template-columns: 2fr 5fr 2fr 1fr;
+    grid-template-columns: 2fr 55fr 10fr;
     grid-template-rows: 50px;
     
     &:hover {
@@ -53,26 +68,37 @@ const DetailDiv = styled.div `
 const BigContainer = styled.div`
     display: flex;
     justify-content: center;
+    
 `;
 
 const Title = styled.div`
-    font-size: 20px;
-    font-weight: 700;
+    font-size: 17px;
+    font-weight: 600;
+    width: 220px;
+    
+    
+    
 `;
 const Id = styled.div`
     font-size: 17px;
     font-weight: 400;
+    width: 180px;
 `;
 const NowCategory = styled.div`
-    font-size: 40px;
+    font-size: 30px;
     font-weight: 700;
     color: rgb(23,158,166);
+    width: 100px;
+   
 
 `;
 const Content = styled.div`
     text-align: right;
     margin-left: 30px;
     display: flex;
+    width: 300px;
+    
+    
  
 `;
 
@@ -121,6 +147,8 @@ const Mypost = () => {
 //         // alert("오류 : " + e);
 //     }
 // };
+
+
     
     return(
         <>
@@ -129,12 +157,11 @@ const Mypost = () => {
             <StylePost>
                 <br/>
                 <BigContainer>
-                    <Contents >내 게시글 보기
+                    <Contents ><Div><b>내 게시글 보기</b></Div>
                     {mypost && mypost.map(e => (
                         <DetailDiv>
                         <DetailDiv onClick={Onclickpost} key={e.id}>
                             <Id>{whoLoginNow}</Id>
-                            <NowCategory>{e.CATEGORY}</NowCategory>
                             <Title>{e.TITLE}</Title>
                             <Content>{e.CONTENT}</Content>
                         </DetailDiv>
