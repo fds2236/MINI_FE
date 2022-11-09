@@ -2,7 +2,8 @@ import MiniApi from "../api/MiniApi";
 import { useState, useEffect } from "react";
 import styled from "styled-components";
 import Modal from "../util/Modal";
-import likeIcon from "../images/Like-icon-00AD85.png"
+import likeIcon from "../images/Like-icon-00AD85.png";
+import whiteLikeIcon from "../images/Like-icon-EEEEEE.png";
 
 const ImageBlock = styled.div`
     display: flex;
@@ -44,21 +45,37 @@ const NameAndLike = styled.div`
 `;
 
 
-const LikeBtn = styled.div`
-    cursor: pointer;
-    border-radius: 8px;
-    text-align: center;
-    padding-top: 10px;
-    width: 160px;
-    height: 70px;
-    margin-top: 48px;
-    margin-right: 10px;
-    border: 1px solid #eeeeee;
-    :hover {
+const IsLikeBtn = styled.div`
+    .notLikeBtn {
+        cursor: pointer;
+        border-radius: 8px;
+        text-align: center;
+        padding-top: 10px;
+        width: 160px;
+        height: 70px;
+        margin-top: 48px;
+        margin-right: 10px;
+        border: 1px solid #eeeeee;
+        border: 1px solid #eeeeee;
+    }
+    .notLikeBtn:hover {
         color: rgb(0,173,181);
         border: 1px solid rgb(0,173,181);
     }
+    .likeBtn {
+        cursor: pointer;
+        border-radius: 8px;
+        text-align: center;
+        padding-top: 10px;
+        width: 160px;
+        height: 70px;
+        margin-top: 48px;
+        margin-right: 10px;
+        background-color: rgb(0,173,181);
+        color: #eeeeee;
+    }
 `;
+
 
 const TableDescBlock = styled.table`
     border-top: 2px solid rgb(0,173,181);
@@ -82,7 +99,7 @@ const TableDescBlock = styled.table`
 const ItemDetail = () => {
     const [itemDetail, setItemDetail] = useState('');
     const getDetail = window.localStorage.getItem("Detail");
-    const [like,setLike] = useState('');
+    const [like, setLike] = useState('');
     
     // 좋아요 버튼
     const [likeOk, setLikeOk] = useState(false);
@@ -93,6 +110,12 @@ const ItemDetail = () => {
         setModalOpenLike(false); 
     }
 
+    // 관심상품 취소 모달
+    const [modalOpenNotLike, setModalOpenNotLike] = useState(false);
+    const closeModalNotLikeOK = () => {
+        setModalOpenNotLike(false); 
+    }
+
     // 로그인 필요 서비스 모달 -> 모달창 close 후 로그인화면으로 이동
     const [modalOpenLogin, setModalOpenLogin] = useState(false);
     const closeModalLoginOK = () => {
@@ -100,7 +123,7 @@ const ItemDetail = () => {
         window.location.replace('/Login')
     }
 
-    // 관심상품 클릭 시 채워진 하트로 아이콘 변경 + (관심상품 횟수 카운트)
+    // 관심상품 클릭 시 버튼 스타일 변경 + (관심상품 횟수 카운트)
     const onClickLike = async() => {
         console.log("관심상품 등록 call?");
         let checkLogin = window.localStorage.getItem("whoLoginNow");
@@ -112,8 +135,14 @@ const ItemDetail = () => {
             console.log(e)
         }
         if(checkLogin){
-            setModalOpenLike(true); 
-            setLikeOk(!likeOk);
+            if (likeOk === false) {
+                setModalOpenLike(true); 
+                setLikeOk(!likeOk);
+              }
+              else {
+                setModalOpenNotLike(true);
+                setLikeOk(!likeOk);
+              }
           } 
         else {
             setModalOpenLogin(true);
@@ -156,10 +185,12 @@ return(
                         <p className="item-name">{item.BRAND} {item.PRO_NAME}</p>
                         <p className="item-Kname">{item.PRO_KORNAME}</p>
                     </div>
-                    <LikeBtn onClickLike={() => onClickLike()}>
-                        <b>관심상품</b>
-                        <p className="like"><img src={likeIcon} alt={likeIcon} width="15px"></img> x 3,201</p>
-                    </LikeBtn>
+                    <IsLikeBtn onClick={() => onClickLike()}>
+                        <div className={(likeOk ? "likeBtn" : "notLikeBtn")}>
+                            <b>관심상품</b>
+                            <p className="like"><img src={likeOk ? whiteLikeIcon : likeIcon} alt={likeIcon} width="15px"></img> x 3,201</p>
+                        </div>
+                    </IsLikeBtn>
                 </NameAndLike>
                 <TableDescBlock>
                     <tr>
@@ -176,8 +207,9 @@ return(
             </div>
             ))}
         </ItemDetailBlock>
-        {modalOpenLike && <Modal open={modalOpenLike} close={closeModalLikeOK} type={true} header="확인">관심상품 등록 완료!</Modal>}
-        {modalOpenLogin && <Modal open={modalOpenLogin} close={closeModalLoginOK} type={true} header="확인">로그인이 필요한 서비스입니다</Modal>}
+        {modalOpenLike && <Modal open={modalOpenLike} close={closeModalLikeOK} type={true} header="&nbsp;">관심상품 등록 완료!</Modal>}
+        {modalOpenNotLike && <Modal open={modalOpenNotLike} close={closeModalNotLikeOK} type={false} header="&nbsp;">관심상품 취소 완료</Modal>}
+        {modalOpenLogin && <Modal open={modalOpenLogin} close={closeModalLoginOK} type={true} header="&nbsp;">로그인이 필요한 서비스입니다</Modal>}
     </>
 )
 }
