@@ -6,35 +6,28 @@ import Profile from "./Profile";
 import MiniApi from "../api/MiniApi";
 
 const Container = styled.div`
-        
-        /* text-align: center; // 가운데 정렬 */
-        /* justify-content: center; // 가운데 정렬 */
+    margin-bottom: 100px;
+    b{
+        font-size: 1.6em;
+        text-align: left;
+    }
     div{
-        border-radius:10px;
-        /* width :50%; */
-        height: 150px;
-        background: #fff;
-        margin: 0 0 10px 20px;
-        display: inline-block;
-        margin-bottom: 200px;
+        height: 180px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
-    .grid{
-        /* flex-wrap: wrap; */
-        
+    .imageBox {
+        width: 280px;
+        display: flex;
+        align-items: center;
+        border-right: 2px solid rgb(0,173,181);
     }
-    .grid-item{
-        /* display: inline-grid; */
-        border: 1px solid black;
-        /* grid-template-columns: 200px 200px 200px 200px; */
-        /* grid-template-rows: 200px; */
-        
-    }
-    .dataimg{
-        width: 200px;
-        height: 150px;
-        object-fit: contain;
+    img{
+        width: 250px;
     }
 `
+
 
 // API 통신
 const Like = () => {
@@ -51,7 +44,9 @@ const Like = () => {
         const likePro = async() => {
             try {
             const response = await MiniApi.likeInfo(whoLoginNow, proCode, Like_cnt);
+            
              setLike(response.data);
+             
              //console.log('성공')
             } catch (e) {
                 console.log(e);
@@ -63,22 +58,23 @@ const Like = () => {
 
     return (
         <>
-        <Profile/>
-        <hr></hr>                    
-        <Container>
-            <br/>
-            <h2>관심 상품
-            {like && like.map(e => (
-                <div key={e.id}>
-                    <p>{whoLoginNow}</p>
-                    <p>{e.proCode}</p>
-                    <p>{e.Like_cnt}</p>
-                </div>
-            ))}  
-            </h2>
-
-           
-        </Container>
+            <Profile/>
+            <hr></hr>                    
+            <Container>
+                <br/>
+                <b>관심 상품</b>
+                {like && like.map(e => (
+                    <div key={e.id}>
+                        {/* <p>{whoLoginNow}</p> */}
+                        <div className="imageBox">
+                            <img src={e.img1Path} alt="mainImage"/>
+                        </div>
+                        <p>{e.brand}</p>
+                        <p>{e.proName}</p>
+                        <p>{e.proKorName}</p>
+                    </div>
+                ))}
+            </Container>
         </>
     );
 }
