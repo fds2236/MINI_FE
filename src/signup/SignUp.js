@@ -14,7 +14,7 @@ const Container1 = styled.div`
 const Header = styled.div`
     margin-top: 50px;
     .title {
-        color: rgb(0,173,181);
+        color: black;
         font-weight: bold;
     }
     .star {

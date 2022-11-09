@@ -20,6 +20,7 @@ const Container = styled.div`
         text-align: left;
         width: 780px;
         margin: 0 auto;
+        padding-left: 21px;
         margin-bottom: 10px;
     }
     .link {
@@ -40,7 +41,8 @@ const Container = styled.div`
 
 const Header = styled.div`
     .title {
-        color: rgb(0,173,181);
+        margin-bottom: 30px;
+        color: black;
         font-weight: bold;
     }
     .comment {
