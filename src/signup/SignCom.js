@@ -7,9 +7,9 @@ import styled from "styled-components";
 const SignComBlock = styled.div`
     width: 500px;
     height: 200px;
-    margin-left: 500px;
-    margin-top: 100px;
-    margin-bottom: 250px;
+    margin-left: 700px;
+    margin-top: 150px;
+    margin-bottom: 350px;
     padding: 50px;
     border-radius : 5px;
     border: solid #eeeeee;
