@@ -14,7 +14,6 @@ const Container = styled.div`
         margin-bottom: 10px;
         margin-top: 30px;
         font-size: 15px;
-    
     }
     .totalText{
         text-align: left;
@@ -36,7 +35,6 @@ const Container = styled.div`
             background-color: rgb(0,173,181);
         }
     }
-    
 `;
 
 const Header = styled.div`
@@ -58,7 +56,6 @@ const AgreeBox = styled.div`
     border-radius : 5px;
     border: solid #eeeeee;
     margin-bottom: 30px;
-    
     .check {
         width : 760px;
         height : 200px;
@@ -67,7 +64,6 @@ const AgreeBox = styled.div`
         .text_box {
             width: 700px;
             height: 140px;
-          
         }
     }
 `;
@@ -79,10 +75,7 @@ const Button = styled.button`
     height: 40px;
 `;
 
-
-
 const Agree = () => {
-
     // 약관동의 체크박스 기능 구현
     const [allCheck, setAllCheck] = useState(false); // 모두 체크, 기본값은 체크안된상태
     const [serviceCheck, setServiceCheck] = useState(false); // 서비스 이용약관 체크 // 필수
@@ -91,8 +84,6 @@ const Agree = () => {
     const [marketingEmailCheck, setMarketingEmailCheck] = useState(false); // 이메일
     const [marketingSMSCheck, setMarketingSMSCheck] = useState(false); // SMS
     const [ageCheck, setAgeCheck] = useState(false); // 나이 체크// 필수
-
-    // const [Link, setLink] = useState(false); // 다음 페이지 넘어가는 링크
 
     // 전체동의 체크하면 모든 항목 체크됨
     // 전체동의 체크 해제하면 모든 항목 체크 취소됨
@@ -148,10 +139,15 @@ const Agree = () => {
         setAgeCheck(e.target.checked);
     };
 
-    // const isOk = () => {
-    //     if(ME || MS) setAllCheck(ture);
-    //     else setAllCheck(false)
-    // }
+   // 이메일, SMS가 모두 체크 해제되면 마케팅도 체크 해제
+    useEffect(() => {
+        if(marketingEmailCheck === false && marketingSMSCheck === false) {
+        setMarketingCheck(false)
+        } else {
+        setAllCheck(true)
+        }
+    }, [marketingEmailCheck, marketingSMSCheck]);
+
 
 
     // 모든 세부 항목 체크되면 전체동의가 자동으로 체크됨
@@ -163,10 +159,10 @@ const Agree = () => {
         }
     }, [serviceCheck, userCheck, marketingCheck, marketingEmailCheck, marketingSMSCheck, ageCheck]);
 
-    // 필수 항목 모두 체크했을 때만 회원가입 버튼 눌리게
+    // 필수 항목 모두 체크했을 때만 회원가입 버튼 눌리게 하기
     // 필수 항목 중 하나라도 체크 안하면 모달창 띄우기
     const [modalOpenSignUp, setModalOpenSignUp] = useState(false); // 회원가입 버튼 눌렀을 때
-    const closeModalSignUp = () => { // 모달 창 닫기
+    const closeModalSignUp = () => { 
         setModalOpenSignUp(false); 
     }
 
@@ -177,8 +173,6 @@ const Agree = () => {
             setModalOpenSignUp(true);
         }
     }
-    
-
 
     return(
         <Container>

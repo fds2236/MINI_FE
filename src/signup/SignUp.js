@@ -32,7 +32,6 @@ const SignUpBlock = styled.div`
     border: solid #eeeeee;
     display: flex;
     flex-direction: column;
-
     p{
         text-align: right;
         margin-right: 30px;
@@ -76,7 +75,6 @@ const SignUpBlock = styled.div`
         color:green;
         display: flex;
         margin-left: 190px;
-        
     }
     .address_search {
         padding-left: 7px;
@@ -85,7 +83,6 @@ const SignUpBlock = styled.div`
         font-size: 14px;
         margin-top: 5px;
     }
-
 `;
 
 const PageLink = styled.div`
@@ -95,7 +92,6 @@ const PageLink = styled.div`
         font-size : 14px;
         text-decoration-line: none;
     }
-
     .SignUpButton {
         width: 280px;
         height: 40px;
@@ -104,17 +100,12 @@ const PageLink = styled.div`
         border: none;
         border-radius: 5px;
         color: white;
-
     }
 `;
 
 const Button = styled.button`
     border: none;
 `;
-
-
-
-
 
 const SignUp = () => {
     // 회원정보 입력받는 부분
@@ -205,18 +196,6 @@ const SignUp = () => {
         }
     }
 
-    // // 이메일 힌트
-    // const onChangeEmail = (e) => { 
-    //     const emailRegex = /^([a-z]+\d*)+(\.?\w+)+@\w+(\.\w{2,3})+$/;
-    //     const emailCurrent = e.target.value;
-    //     setEmail(emailCurrent);
-    //     if (!emailRegex.test(emailCurrent)) {
-    //         setEmailMsg("이메일을 다시 입력해주세요. '@'를 포함해야 합니다.")
-    //         setIsEmail(false)
-    //     } else {
-    //         setIsEmail(true);
-    //     }
-    // }
 
     // 전화번호 힌트
     const onChangePhone = (e) => { 
@@ -293,19 +272,8 @@ const SignUp = () => {
         // isSelect 가 false 일경우 화면에 보이지 않음
         setWriteDomain(e.target.value);
     }    
+        console.log(inputEmail);
     
-
-    console.log(inputEmail);
-    // 최종 확인
-    // const sumit = () =>{
-    //     if(isSelect==false){
-    //         setFinal(write + select);
-    //     }else{
-    //         setFinal(write + "@" + wrtieDomain);
-    //     }
-    // }
-    // console.log(final);
-         
 
     // 모달
     const [modalOpenIdCheck, setModalOpenIdCheck] = useState(false); // 아이디 중복일 때
@@ -323,8 +291,6 @@ const SignUp = () => {
         setModalOpenSignUp(false); 
     }
     
-
-
     
     // API 호출
     const onClickSignUp = async() => {  // 회원가입 
@@ -352,9 +318,8 @@ const SignUp = () => {
     
         }
     }
+    
 
-    
-    
     const onClickIdCheck = async() => { // 아이디 중복확인
         try {
             const res = await MiniApi.idCheck(inputId);
@@ -488,9 +453,7 @@ const SignUp = () => {
             {modalOpenIdCheck && <Modal open={modalOpenIdCheck} close={closeModalIdCheck} header="확인">이미 가입된 아이디입니다.</Modal>}
             {modalOpenIdOK && <Modal open={modalOpenIdOK} close={closeModalIdOK} header="확인">사용 가능한 아이디입니다.</Modal>}
             {modalOpenSignUp && <Modal open={modalOpenSignUp} close={closeModalSignUp} header="확인">회원가입에 실패했습니다. 다시 확인해주세요.</Modal>}
-        </Container1>
-        
+        </Container1>   
     )
-
 }
 export default SignUp;
