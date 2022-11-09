@@ -28,14 +28,14 @@ const ModifyBox = styled.div`
 
 const Button = styled.button`
     border: none;
-    width: 250px;
+    width: 200px;
     height: 50px;
     border-radius: 5px;
     margin-top: 30px;
     margin-bottom: 50px;
     background-color: rgb(0,173,181);
     color: white;
-    font-size: 17px;
+    font-size: 20px;
 `;
 
 

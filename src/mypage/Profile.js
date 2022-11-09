@@ -84,7 +84,7 @@ const CategoryDiv = styled.div`
     color : #eeeeee;
     height: 30px;
     width: 130px;
-    border-radius: 10px;
+    border-radius: 5px;
     display: flex;
     align-items: center;
     justify-content: center;
