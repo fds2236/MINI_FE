@@ -7,6 +7,7 @@ import styled from "styled-components";
 import DelModal from "../delete/DelModal";
 import { useState, useEffect  } from "react";
 
+// push push!!!!!!
 
 //------------------------------
 // 도연 - 회원탈퇴 버튼 
@@ -70,9 +71,9 @@ function Mypage() {
 
     //--------------------------------------------------------------------------
  
-
     return(
       <div>
+        
         <Profile/>
         
         {/* -------------------------------------------------------------------------------
