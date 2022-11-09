@@ -3,6 +3,9 @@ import { useState } from "react";
 import styled from "styled-components";
 import MiniApi from "../api/MiniApi";
 import Profile from "./Profile";
+import Like from "./Like";
+import DelModal from "../delete/DelModal";
+
 
 const ModiContain = styled.div``;
 
@@ -26,17 +29,41 @@ const ModifyBox = styled.div`
     }
 `;
 
-const Button = styled.button`
+const Button1 = styled.button`
     border: none;
     width: 200px;
     height: 50px;
     border-radius: 5px;
     margin-top: 30px;
     margin-bottom: 50px;
+    background-color: #eeeeee;
+    color: black;
+    font-size: 20px;
+    margin-left: 550px;
+    margin-right: 10px;
+    &:hover{
     background-color: rgb(0,173,181);
     color: white;
+    }
+`;
+
+const Btn = styled.div`
+    display: flex;
+
+`;
+
+//------------------------------
+// 도연 - 회원탈퇴 버튼 
+const Button = styled.button`
+    border: none;
+    margin-top: 30px;
+    margin-bottom: 50px;
+    width: 200px;
+    height: 50px;
+    border-radius: 5px;
     font-size: 20px;
 `;
+//-------------------------------
 
 
 
@@ -98,6 +125,37 @@ const Modify = () => {
         }
     }
 
+    //-------------------------------------------
+    // 도연 - 회원 탈퇴 
+    const localId = window.localStorage.getItem("userId");
+    const localPw = window.localStorage.getItem("userPw");
+    const isLogin = window.localStorage.getItem("isLogin");
+    if(isLogin === "FALSE") window.location.replace("/");
+
+    // 모달
+    const [modalOpen, setModalOpen] = useState(false);
+
+    const closeModal = () => { // 아니오 눌렀을 때
+        setModalOpen(false);
+    };
+
+    const confirmModal = async() => { // 탈퇴한다고 눌렀을 때
+        setModalOpen(false);
+        const memberReg = await MiniApi.memberDelete(localId, localPw);
+        console.log(memberReg.data.result);
+        if(memberReg.data.result === "OK") {
+            window.location.replace("/");
+        } else {
+
+        }
+    };
+
+    const onClickMemberDelete = () => {
+        setModalOpen(true);
+    }
+
+    //--------------------------------------------------------------------------
+
 
     return(
         <>
@@ -149,9 +207,18 @@ const Modify = () => {
         ></input></div> 
         </ModifyBox>
 
-        <Button onClick={()=>onSubmit(whoLoginNow)} >변경</Button>
+        <Btn>
+        <Button1 onClick={()=>onSubmit(whoLoginNow)} >변경</Button1>
 
-
+        
+        {/* -------------------------------------------------------------------------------
+        도연 회원 탈퇴 */}
+      <div onClick={onClickMemberDelete}>
+                  <Button>회원 탈퇴</Button>
+              </div>
+      {modalOpen && <DelModal open={modalOpen} confirm={confirmModal} close={closeModal} type={true} header="확인">정말로 탈퇴하시겠습니까?</DelModal>}
+      {/* ----------------------------------------------------------------------------------- */}
+      </Btn>
 
 
 
@@ -222,6 +289,6 @@ const Modify = () => {
         </div> */}
         </>
     )
-}
+    }
 
 export default Modify;
