@@ -66,13 +66,15 @@ const Img = styled.img`
 const Container = styled.div`
     border: 2px solid #eeeeee;
     display: flex; 
-    align-items: center ;
+    align-items: center;
     width: 500px;
-    
+    text-align: left;
     
     .Info{
-        margin: 20px;
-
+        margin-left: 20px;
+        margin-top: 15px;
+        justify-content: center;
+        align-items: center;
     }
 
 `;
@@ -170,9 +172,9 @@ const Profile = () => {
                 <Container>
                     <Img src="/img/프로필.jpg"></Img>
                     <div className="Info">
-                        <p>아이디 : {whoLoginNow}</p>
-                        <p>이름 : {member.name}</p>
-                        <p>이메일 : {member.email}</p>
+                        <p><b>아이디 : </b>{whoLoginNow}</p>
+                        <p><b>이름 : </b>{member.name}</p>
+                        <p><b>이메일 : </b>{member.email}</p>
                     </div>
                 </Container>
             ))}

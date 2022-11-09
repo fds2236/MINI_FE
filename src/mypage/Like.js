@@ -12,12 +12,14 @@ const Container = styled.div`
     align-items: center;
     .itemContainer {
         width:680px;
-        margin-bottom: 10px;
+        margin-bottom: 50px;
     }
     .title{
+        margin-top: 20px;
         font-weight: 700;
         font-size: x-large;
         border: none;
+        padding-bottom: 10px;
         border-bottom: solid rgb(0,173,181) 2px;
     }
 `;
@@ -25,16 +27,26 @@ const Container = styled.div`
 const DescBlcok = styled.div`
     text-align: left;
     width: 400px;
-    line-height: 1.2em;
+    line-height: 1.3em;
+    padding-top: 15px;
     .brand {
-        font-size: large;
+        font-size: 1.3em;
         font-weight: 600;
+    }
+    .pro-name {
+        margin-bottom: 5px;
+        font-size: 0.9em;
+    }
+    .price {
+        margin-top: 15px;
     }
 `;
 
 const ImageBox = styled.div`
     width: 280px;
+    height: 300px;
     align-items: center;
+    justify-content: center;
     img {
         width: 250px;
     }
@@ -45,6 +57,11 @@ const LikeItemBox = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 230px;
+    cursor: pointer;
+    &:hover {
+        background-color: rgba(23,158,166,0.05);
+    }
 `;
 
 // API 통신
@@ -73,6 +90,13 @@ const Like = () => {
         likePro();
     }, []);
 
+    // 상품명 클릭 시 해당 상품 상세페이지로 이동
+    const onClickDetail = (code) => {
+        console.log("상세페이지로 이동 : " + code);
+        window.localStorage.setItem("Detail", code);
+        window.location.replace("/ItemDetail");
+    }
+
 
     return (
         <>
@@ -83,16 +107,16 @@ const Like = () => {
                 <div className = "itemContainer" >
                     <p className="title">관심 상품</p>
                     {like && like.map(e => (
-                        <LikeItemBox key={e.id}>
+                        <LikeItemBox key={e.id} onClick={()=> onClickDetail(e.proCode)} >
                             {/* <p>{whoLoginNow}</p> */}
                             <ImageBox>
                                 <img src={e.img1Path} alt="mainImage"/>
                             </ImageBox>
                             <DescBlcok>
                                 <p className="brand">{e.brand}</p>
-                                <p>{e.proName}</p>
-                                <p>{e.proKorName}</p>
-                                <p>{e.price}</p>
+                                <p className="pro-name">{e.proName}</p>
+                                <p className="pro-name">{e.proKorName}</p>
+                                <p className="price">{e.price}</p>
                             </DescBlcok>
                         </LikeItemBox>
                     ))}
