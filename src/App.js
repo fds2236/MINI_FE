@@ -24,6 +24,7 @@ import RePwd from './login/RePwd';
 import Post from './signup/Post';
 import Mypost from './mypage/Mypost';
 import Delete from './delete/Delete';
+import Del from './delete/Del';
 
 function App() {
   // window.localStorage.setItem("whoLoginNow","guest");
@@ -53,7 +54,8 @@ function App() {
           <Route path='/RePwd' element={<RePwd/>} />
           <Route path='/signup' element={<Post />} />
           <Route path='/Mypost' element={<Mypost />} />
-          <Route path='/Mypost' element={<Delete />} />
+          <Route path='/Delete' element={<Delete />} />
+          <Route path='/Del' element={<Del />} />
       </Routes>
       <Footer/>
       </div>

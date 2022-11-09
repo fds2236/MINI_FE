@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
-import Modal from "../util/Modal";
 
-// 도연 - 회원가입 완료 페이지 작업중 
+// 도연 - 회원가입 완료 페이지 
+// 작업 완료
 
 const SignComBlock = styled.div`
     width: 500px;

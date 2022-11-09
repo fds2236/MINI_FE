@@ -30,9 +30,10 @@ const MiniApi =  {
     },
 
     // 회원탈퇴
-    Delete: async function(id) {
+    delete: async function(id, pwd) {
         const deleteObj = {
-            id: id
+            id: id,
+            pwd: pwd
         }
         return await axios.post(MINI_DOMAIN + "DeleteServlet", deleteObj, HEADER);
     },
