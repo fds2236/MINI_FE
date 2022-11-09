@@ -23,6 +23,7 @@ import Mypage from './mypage/Mypage';
 import RePwd from './login/RePwd';
 import Post from './signup/Post';
 import Mypost from './mypage/Mypost';
+import Search from './itemlist/Search'
 
 
 function App() {
@@ -53,6 +54,7 @@ function App() {
           <Route path='/RePwd' element={<RePwd/>} />
           <Route path='/signup' element={<Post />} />
           <Route path='/Mypost' element={<Mypost />} />
+          <Route path='/Search' element={<Search/>} />
       </Routes>
       <Footer/>
       </div>
