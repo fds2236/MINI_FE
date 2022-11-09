@@ -95,10 +95,16 @@ const PageLink = styled.div`
         width: 280px;
         height: 40px;
         margin: 10px;
-        background-color: rgb(0,173,181);
-        border: none;
         border-radius: 5px;
         color: white;
+        opacity: 0.5;
+        background-color: rgb(0,173,181); 
+        border-radius: 5px;
+        border: none;
+        &:hover {
+            border: none;
+            opacity: 1;      
+        }  
     }
 `;
 
