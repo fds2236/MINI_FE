@@ -91,7 +91,6 @@ const TableDescBlock = styled.table`
     td {
         padding-left: 10px;
         width: 200px;
-        
     }
 `;
 

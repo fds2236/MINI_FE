@@ -6,7 +6,6 @@ import Modal from "../util/Modal";
 import SortItem from "./SortItem";
 import notlikeIcon from "../images/NOTLike-icon-00AD85.png"
 import likeIcon from "../images/Like-icon-00AD85.png"
-import Like from "../mypage/Like";
 
 // 스타일
 const ItemContainer = styled.div`
@@ -14,7 +13,7 @@ const ItemContainer = styled.div`
   justify-content: center;
   align-content: center;
   flex-wrap: wrap;
-  margin-right: auto;
+  margin: auto 20px;
 `;
 
 const ItemBlock = styled.div`
@@ -75,9 +74,6 @@ const ItemImage = styled.div`
     transform: translate(490%, -260%);
     cursor: pointer;
   }
-  /* .likeIcon:hover {
-    background-image: ${likeIcon};
-  } */
   display: flex;
   justify-content: center;
   align-items: center;
