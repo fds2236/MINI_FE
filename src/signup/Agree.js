@@ -64,7 +64,6 @@ const Button = styled.button`
     margin-bottom: 50px;
     width: 150px;
     height: 40px;
-    
 `;
 
 

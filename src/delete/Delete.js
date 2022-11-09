@@ -53,11 +53,11 @@
 // //         console.log(res.data.result);
 
 // //         if(res.data.result === "OK") {
-// //             console.log("탈퇴 되었습니다.");
+// //             console.log("그동안 감사했습니다.");
 // //             setModalOpenDelete(true);
             
 // //         } else {
-// //             console.log("이미 존재하는 아이디 입니다.");
+// //             console.log("비밀번호가 일치하지 않습니다.");
 // //             setModalOpenDelete(true);
             
 // //         }

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from "react-router-dom";
 import styled from "styled-components";
 import DelModal from "../delete/DelModal";
 import MiniApi from '../api/MiniApi';
@@ -14,42 +13,66 @@ import MiniApi from '../api/MiniApi';
 //--------------------------------------------------------------
 
 const Button = styled.button`
-    width: 100px;
-    height: 100px;
+    border: none;
+    margin-bottom: 50px;
+    width: 150px;
+    height: 40px;
 `;
 
-
-// // 모달
-// const [modalOpenDelete, setModalOpenDelete] = useState(true); // 회원탈퇴 버튼 눌렀을 때
-// const closeModalDelete = () => {
-//     setModalOpenDelete(false); 
-// }
-// const OKModalDelete = () => {
-//     setModalOpenDelete(true); 
-
-// // 모달 창 띄우기
-// const onClickDelete = () => {  
-//     setModalOpenDelete(true);
-
-//     if(true){
-//         window.location.replace("./Delete");
-//     }else{
-//         setModalOpenDelete(false);
-//     }
-// }
-
 const Del = () => {
-    return(
-        <div>
-            <h1>정말로 탈퇴하시겠습니까? 모달창 띄우고 예 아니오 선택해서 예 선택하면 회원탈퇴 페이지로 이동시키고싶ㅇ,ㅡㄴ데 어케해야해?ㅠㅠ</h1>
+    const localId = window.localStorage.getItem("userId");
+    const localPw = window.localStorage.getItem("userPw");
+    const isLogin = window.localStorage.getItem("isLogin");
+    if(isLogin === "FALSE") window.location.replace("/");
 
-        {/* 회원탈퇴 */}
-        {/* <Button onClick={onClickDelete}>회원 탈퇴</Button>  */}
-        <Button>회원 탈퇴</Button> 
+    const [memberInfo, setMemberInfo] = useState(""); // 현재 로그인 되어 있는 회원의 정보 저장용
 
-        {/* {modalOpenDelete && <modal open={modalOpenDelete} close={closeModalDelete} header="확인">정말로 탈퇴하시겠습니까?</modal>}
-         */}
-        </div>
+    useEffect(() => {
+        
+        const memberData = async () => {
+            try {
+                const response = await MiniApi.memberInfo(localId, localPw); 
+                setMemberInfo(response.data);
+                console.log(response.data)
+            } catch (e) {
+                console.log(e);
+            }
+        };
+        memberData();
+    }, []);
+
+
+    const [modalOpen, setModalOpen] = useState(false);
+
+    const closeModal = () => {
+        setModalOpen(false);
+    };
+
+    const confirmModal = async() => {
+        setModalOpen(false);
+        const memberReg = await MiniApi.memberDelete(localId);
+        console.log(memberReg.data.result);
+        if(memberReg.data.result === "OK") {
+            window.location.replace("/");
+        } else {
+
+        }
+    };
+
+    const onClickMemberDelete = () => {
+        setModalOpen(true);
+    }
+
+
+        return(
+            <div>
+            <div onClick={onClickMemberDelete}>
+                        <Button>회원 탈퇴</Button>
+                    </div>
+
+            {modalOpen && <DelModal open={modalOpen} confirm={confirmModal} close={closeModal} type={true} header="확인">정말로 탈퇴하시겠습니까?</DelModal>}
+            
+            </div>
 
     )
 }
