@@ -125,17 +125,17 @@ const Header = () => {
         <div className="nav-top"><div className="login-info">{whoLoginNow}</div></div>
         <div className="nav-top"><Link to = {"/Login"} className="login">로그인</Link></div>
         <div className="nav-top"><Link to = {"/Agree"} className="signup-link">회원가입</Link></div>
+        <div className="nav-top"><Link to = {"/Login"} className="mypage-like">관심상품</Link></div>
         </>)
         :(<>
         <div className="nav-top"><div className="login-info">{whoLoginNow}님</div></div>
         <div className="nav-top"><button className="loginout" onClick={onClickLogout}>로그아웃</button></div>
         <div className="nav-top"><Link to = {"/Mypage"} className="mypage-link">마이페이지</Link></div>
+        <div className="nav-top"><Link to = {"/Like"} className="mypage-like">관심상품</Link></div>
         </>) 
         }
 
-        <div className="nav-top">
-          <Link to = {"/Like"} className="mypage-like">관심상품</Link>
-        </div>
+      
         <div className="nav-top">
           <Link to = {"/Cs"} className="cs-link">고객센터</Link>
         </div>
