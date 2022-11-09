@@ -6,6 +6,10 @@ import styled from "styled-components";
 import axios from "axios";
 
 const RePwdBlock = styled.div`
+    margin-top:50px;
+    h5 {
+        margin-bottom : 15px;
+    }
     .input {
         width : 270px;
         height : 35px;
@@ -28,15 +32,18 @@ const RePwdBlock = styled.div`
     .rePwdButton {
         width : 280px;
         height : 40px;
-        background-color : white;
+        margin : 10px;
+        opacity: 0.5;
+        color : white;
+        background-color : rgb(0,173,181);
         border-radius : 5px;
+        font-weight: 700;
         border: solid 1.5px #eeeeee;
-        margin : 5px;
+        
+        margin-bottom: 40px;
         &:hover {
             border : none;
-            font-weight: 600;
-            background-color: rgb(0,173,181);
-            color: white;
+            opacity: 1;    
         }
     }
 `;
@@ -120,7 +127,7 @@ const RePwd = () => {
         <RePwdBlock>
         <h5>비밀번호 재설정</h5>
         {/* 아이디 불러오기 */}
-        <div>{rePwdId}</div>
+        <div>{rePwdId}님</div>
         {/* 아이디 입력창 */}
         {/* <input className="input" type="text" placeholder="아이디" value={inputId} onChange={onChangeId}></input>
         <br /> */}

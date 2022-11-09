@@ -12,6 +12,7 @@ import styled from "styled-components";
 // }
 
 const LoginBlock = styled.div`
+    margin-top:50px;
     .input {
         width : 270px;
         height : 35px;
@@ -40,19 +41,21 @@ const LoginBlock = styled.div`
         width: 280px;
         height: 40px;
         margin: 10px;
-        background-color: white;
+        color : white;
+        font-weight: 700;
+        opacity: 0.5;
+        background-color: rgb(0,173,181); 
         border-radius: 5px;
-        border: solid 1.5px #eeeeee;
+        border: none;
         &:hover {
-            color: white;
             border: none;
-            font-weight: 700;
-            background-color: rgb(0,173,181);      
+            opacity: 1;      
         }  
     }
 `;
 
 const PageLink = styled.div`
+    margin-bottom: 40px;
     .link_item {
         margin: 10px;
         color: rgb(57,62,70);

@@ -78,6 +78,7 @@ const HeaderMenu = styled.div`
       font-size: 16px;
       &:focus{
         outline:none;
+        border : 2px solid rgb(0,173,181);
         font-weight: 600;
       }
     }

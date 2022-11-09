@@ -5,6 +5,7 @@ import Modal from "../util/Modal";
 import styled from "styled-components";
 
 const ForgotPwdBlock = styled.div`
+    margin-top:50px;
     .input {
         width : 270px;
         height : 35px;
@@ -25,22 +26,24 @@ const ForgotPwdBlock = styled.div`
     }
 
     .pwdButton {
-        width : 280px;
-        height : 40px;
-        background-color : white;
-        border-radius : 5px;
-        border: solid 1.5px #eeeeee;
-        margin : 10px;
+        width: 280px;
+        height: 40px;
+        margin: 10px;
+        color : white;
+        font-weight: 700;
+        opacity: 0.5;
+        background-color: rgb(0,173,181); 
+        border-radius: 5px;
+        border: none;
         &:hover {
-            border : none;
-            font-weight: 600;
-            background-color: rgb(0,173,181);
-            color: white;
-        }
+            border: none;
+            opacity: 1;      
+        }  
     }
 `;
 
 const PageLink = styled.div`
+    margin-bottom: 40px;
     .link_item {
         margin: 20px;
         color: rgb(57,62,70);
