@@ -9,13 +9,13 @@ const ModiContain = styled.div``;
 
 const ModifyBox = styled.div`
     width: 695px;
-    height: 450px;
+    height: 360px;
     margin: 0 auto;
-    padding: 50px ;
+    padding: 20px ;
     background-color : white;
     border-radius : 5px;
     border: solid #eeeeee 0.5px;
-    font-size: 20px;
+    font-size: 17px;
 
     .label{
         width: 80px;
