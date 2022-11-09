@@ -11,9 +11,9 @@ const Contents = styled.div`
 `;
 
 const StylePost = styled.div`
-    width: 1000px;
+    /* width: 1000px; */
     margin-top: 10px;
-    margin-left: 265px;
+    /* margin-left: 265px; */
     margin-bottom :50px ;
     display: flex;
     flex-direction: column;

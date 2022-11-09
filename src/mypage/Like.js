@@ -6,28 +6,46 @@ import Profile from "./Profile";
 import MiniApi from "../api/MiniApi";
 
 const Container = styled.div`
-    margin-bottom: 100px;
-    b{
-        font-size: 1.6em;
-        text-align: left;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    .itemContainer {
+        width:680px;
+        margin-bottom: 10px;
     }
-    div{
-        height: 180px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+    .title{
+        font-weight: 700;
+        font-size: x-large;
+        border: none;
+        border-bottom: solid rgb(0,173,181) 2px;
     }
-    .imageBox {
-        width: 280px;
-        display: flex;
-        align-items: center;
-        border-right: 2px solid rgb(0,173,181);
+`;
+
+const DescBlcok = styled.div`
+    text-align: left;
+    width: 400px;
+    line-height: 1.2em;
+    .brand {
+        font-size: large;
+        font-weight: 600;
     }
-    img{
+`;
+
+const ImageBox = styled.div`
+    width: 280px;
+    align-items: center;
+    img {
         width: 250px;
     }
-`
+`;
 
+const LikeItemBox = styled.div`
+    border-bottom: 1px solid #eeeeee;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`;
 
 // API 통신
 const Like = () => {
@@ -62,18 +80,23 @@ const Like = () => {
             <hr></hr>                    
             <Container>
                 <br/>
-                <b>관심 상품</b>
-                {like && like.map(e => (
-                    <div key={e.id}>
-                        {/* <p>{whoLoginNow}</p> */}
-                        <div className="imageBox">
-                            <img src={e.img1Path} alt="mainImage"/>
-                        </div>
-                        <p>{e.brand}</p>
-                        <p>{e.proName}</p>
-                        <p>{e.proKorName}</p>
-                    </div>
-                ))}
+                <div className = "itemContainer" >
+                    <p className="title">관심 상품</p>
+                    {like && like.map(e => (
+                        <LikeItemBox key={e.id}>
+                            {/* <p>{whoLoginNow}</p> */}
+                            <ImageBox>
+                                <img src={e.img1Path} alt="mainImage"/>
+                            </ImageBox>
+                            <DescBlcok>
+                                <p className="brand">{e.brand}</p>
+                                <p>{e.proName}</p>
+                                <p>{e.proKorName}</p>
+                                <p>{e.price}</p>
+                            </DescBlcok>
+                        </LikeItemBox>
+                    ))}
+                </div>
             </Container>
         </>
     );
