@@ -37,14 +37,11 @@ const Button = styled.button`
 `;
 
 const SignCom = () => {
-
     return(
         <SignComBlock>
             <p>Sa Shoe 회원가입이 완료되었습니다.</p>
             <PageLink><Button><Link to="/Login" className="link_item">로그인</Link></Button></PageLink>
         </SignComBlock>
-        
-        
     );
 }
 export default SignCom;

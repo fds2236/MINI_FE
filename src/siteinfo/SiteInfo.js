@@ -33,7 +33,7 @@ width: 400px;
     .map {
             width: 335px;
             height: 170px;
-        }
+    }
 `;
 
 const RightBox = styled.div`

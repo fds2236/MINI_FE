@@ -67,8 +67,7 @@ const SignUpBlock = styled.div`
         margin-left: 10px;
     }
     .star {
-            color: red;
-
+        color: red;
     }
     .hint {
         font-size : 10px;
@@ -131,7 +130,6 @@ const SignUp = () => {
     const [nameMsg, setNameMsg] = useState('');
     const [emailMsg, setEmailMsg] = useState('');
     const [phoneMsg, setPhoneMsg] = useState('');
-    
 
     // 유효성 검사
     const [isId, setIsId] = useState('');
@@ -238,6 +236,7 @@ const SignUp = () => {
         setWrite(writename);
         console.log(write);
     }
+
     // 선택한 도메인 
     const  selectDomain = (e) =>{
         //선택한 도메인을 sel 변수에 담음
@@ -264,8 +263,8 @@ const SignUp = () => {
             setEmail(email3);
             console.log(inputEmail)
         }
-        
     }    
+
     // 작성한 도메인
     const domainWrite = (e) =>{
         // 직접입력되는 값을 받아주는 input 창 
@@ -291,19 +290,16 @@ const SignUp = () => {
         setModalOpenSignUp(false); 
     }
     
-    
     // API 호출
     const onClickSignUp = async() => {  // 회원가입 
         let tranMail ='';
         if(isSelect===false){
             tranMail = write + select;
             setEmail(write + select);
-            
-        }else{
+        } else {
             tranMail = write + "@" + wrtieDomain;
             setEmail(write + "@" + wrtieDomain);
-        }
-        try {
+        } try {
             const res = await MiniApi.signUp(inputId, inputPwd, inputName, tranMail, inputPhone, enroll_company.address);
             
             console.log(res.data.result);
@@ -333,7 +329,6 @@ const SignUp = () => {
             } else {
                 console.log("이미 존재하는 아이디 입니다.");
                 setModalOpenIdCheck(true);
-                
             }
          } catch (e) {
          } 
@@ -341,7 +336,6 @@ const SignUp = () => {
     
     return(
         <Container1>
-    
             {/* 회원가입 */}
             <Header><h1 className='title'>JOIN US</h1></Header>
             
@@ -359,7 +353,6 @@ const SignUp = () => {
             <div className="hint">
            {3 < inputId.length < 21 && <span className={`message ${isId ? 'success' : 'error'}`}>{idMsg}</span>}
            </div>
-
 
             {/* 비밀번호 입력창 */}
             <div>
@@ -395,7 +388,6 @@ const SignUp = () => {
             </div>
 
             {/* 이메일 입력창 */}
-            
             <div>
             <label className='label'><b className='star'>*</b>이메일</label>
             <input className='email' value={write} onChange={writeName}></input>
@@ -439,15 +431,13 @@ const SignUp = () => {
                 <input className="addr" type="text" required={true} name="address" onChange={handleInput} value={enroll_company.address}/>
                 <Button onClick={handleComplete}>주소 검색</Button>
                 {popup && <Post company={enroll_company} setcompany={setEnroll_company}></Post>}    
-            </div>
-                            
+            </div>   
             </SignUpBlock>
             
             <PageLink>
             {/* <button><Link to="/" className="link_item">취소하기</Link></button> */}
             <Button onClick={onClickSignUp} className="SignUpButton">회원가입</Button></PageLink>
       
-
             <div className='footer'>이미 아이디가 있으신가요? <Button><PageLink><Link to="/Login" className="link_item">＞ 로그인</Link></PageLink></Button></div>
             {/* 모달 */}
             {modalOpenIdCheck && <Modal open={modalOpenIdCheck} close={closeModalIdCheck} header="확인">이미 가입된 아이디입니다.</Modal>}
