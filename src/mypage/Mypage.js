@@ -36,10 +36,8 @@ function Mypage() {
 
     //-------------------------------------------
     // 도연 - 회원 탈퇴 
-    const localId = window.localStorage.getItem("userId");
-    const localPw = window.localStorage.getItem("userPw");
-    const isLogin = window.localStorage.getItem("isLogin");
-    if(isLogin === "FALSE") window.location.replace("/");
+    const localId = window.localStorage.getItem("whoLoginNow");
+    const localPwd = window.localStorage.getItem("whoPwdNow");
 
     // 모달
     const [modalOpen, setModalOpen] = useState(false);
@@ -50,12 +48,19 @@ function Mypage() {
 
     const confirmModal = async() => {
         setModalOpen(false);
-        const memberReg = await MiniApi.memberDelete(localId, localPw);
-        console.log(memberReg.data.result);
-        if(memberReg.data.result === "OK") {
-            window.location.replace("/");
-        } else {
-
+        try{
+                //alert("아이디 패스워드 : "+ localId + localPwd);
+                const memberReg = await MiniApi.delete(localId, localPwd);
+                console.log(memberReg.data.result);
+                //alert("중간확인 : " + memberReg.data.result);
+                if(memberReg.data.result === "OK") {
+                    window.localStorage.removeItem("whoLoginNow");
+                    window.location.replace("/");
+                } else {
+                    alert("모달실행 / OK가 아님");
+                }
+        } catch(e) {
+            alert("API호출 실패 : " + e);
         }
     };
 
