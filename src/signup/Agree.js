@@ -148,8 +148,6 @@ const Agree = () => {
         }
     }, [marketingEmailCheck, marketingSMSCheck]);
 
-
-
     // 모든 세부 항목 체크되면 전체동의가 자동으로 체크됨
     useEffect(() => {
         if(serviceCheck === true && userCheck === true && marketingCheck === true && marketingEmailCheck === true && marketingSMSCheck === true && ageCheck === true) {
@@ -179,7 +177,6 @@ const Agree = () => {
             {/* 회원가입 */}
             <Header><h1 className='title'>JOIN US</h1></Header>
             <div className='totalText'><input type="checkbox" checked={allCheck} onClick={allBtnEvent}/> 전체 약관에 동의합니다.</div>
-
             <AgreeBox>
             <div>
                 <div className='check'>
@@ -602,25 +599,20 @@ const Agree = () => {
 
                         변경 개인정보처리방침 시행일자 : 2022-06-21</textarea>
                 </div>
-                
                 <div className='check'>
                 <div className='text'>
                     <input type="checkbox" checked={marketingCheck} onClick={marketingBtnEvent}/> 
                         마케팅 활용 약관에 동의합니다.(선택) ( <input type="checkbox" checked={marketingEmailCheck} onClick={marketingEmailBtnEvent}/>
                         <span> 이메일 </span>
                 <input type="checkbox" checked={marketingSMSCheck} onClick={marketingSMSBtnEvent}/><span> SMS )</span><br/> </div>
-                
                 <div className='text'><input type="checkbox" checked={ageCheck} onClick={ageBtnEvent}/> 만 14세 이상입니다.<b>(필수)</b></div>
                 </div>
             </div> </AgreeBox>
             <Button className='linkBtn'><Link to='/' className='link'>취소하기</Link></Button>
             <Button onClick={istrue} className='lastBtn'>다음단계</Button>
-
             {/* 모달 */}
             {modalOpenSignUp && <Modal open={modalOpenSignUp} close={closeModalSignUp} header="확인">필수 항목을 모두 체크해주세요.</Modal>}
-        </Container>
-        
+        </Container>  
     )
-
 }
 export default Agree;
