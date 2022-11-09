@@ -6,6 +6,7 @@ import Modal from "../util/Modal";
 import SortItem from "./SortItem";
 import notlikeIcon from "../images/NOTLike-icon-00AD85.png"
 import likeIcon from "../images/Like-icon-00AD85.png"
+import Like from "../mypage/Like";
 
 // 스타일
 const ItemContainer = styled.div`
@@ -21,7 +22,7 @@ const ItemBlock = styled.div`
   margin: 10px;
   padding: 10px;
   width: 260px;
-  height: 350px;
+  height: 360px;
   /* display: block; */
   /* float: left; */
 `;
@@ -74,9 +75,9 @@ const ItemImage = styled.div`
     transform: translate(490%, -260%);
     cursor: pointer;
   }
-  .likeIcon:hover {
-    u: ${likeIcon};
-  }
+  /* .likeIcon:hover {
+    background-image: ${likeIcon};
+  } */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -119,10 +120,19 @@ const ItemList = () => {
   const [itemInfo, setItemInfo] = useState('');
   const [like,setLike] = useState(0);
 
+  // 좋아요 버튼
+  const [likeOk, setLikeOk] = useState(false);
+
   // 관심상품 등록 모달
   const [modalOpenLike, setModalOpenLike] = useState(false);
   const closeModalLikeOK = () => {
     setModalOpenLike(false); 
+  }
+
+  // 관심상품 취소 모달
+  const [modalOpenNotLike, setModalOpenNotLike] = useState(false);
+  const closeModalNotLikeOK = () => {
+    setModalOpenNotLike(false); 
   }
 
   // 로그인 필요 서비스 모달 -> 모달창 close 후 로그인화면으로 이동
@@ -159,18 +169,31 @@ const ItemList = () => {
     window.location.replace("/ItemDetail");
   }
   
-  // 관심상품 클릭 시 채워진 하트로 아이콘 변경 + 관심상품 횟수 카운트
+  // 관심상품 클릭 시 채워진 하트로 아이콘 변경 + (관심상품 횟수 카운트)
   const onClickLike = async() => {
     //console.log("관심상품 등록 call?");
     let checkLogin = window.localStorage.getItem("whoLoginNow");
     const productCode = window.localStorage.getItem("PRO_CODE");
     try{
       const response = await MiniApi.itemInfo(productCode);
-      setLike(response.data);
+      window.localStorage.setItem(response.data);
     }catch(e){
       console.log(e)
     }
-    if(checkLogin) setModalOpenLike(true);
+    if(checkLogin){
+      //window.localStorage.setItem("id", "");
+      //window.localStorage.setItem(response.data);
+
+      // 빈 하트일 때 (false) 클릭하면 '관심상품 등록 완료' 모달
+      if (likeOk === false) {
+        setModalOpenLike(true); 
+        setLikeOk(!likeOk);
+      }
+      else {
+        setModalOpenNotLike(true);
+        setLikeOk(!likeOk);
+      }
+    } 
     else {
       setModalOpenLogin(true);
     }
@@ -192,7 +215,7 @@ const ItemList = () => {
           <ItemBlock key={item.PRO_CODE}>
             <ItemImage>
               <img className="item-img" alt="productImage" src={item.IMG1} key={item.PRO_CODE} onClick={()=> onClickDetail(item.PRO_CODE)}/>
-              <img className="likeIcon" alt="likeIcon" src={notlikeIcon} onClick={() => onClickLike()}></img>
+              <img className="likeIcon" alt="likeIcon" src={likeOk ? likeIcon : notlikeIcon} onClick={()=> onClickLike()}></img>
             </ItemImage>
             <ItemDescBlock>
               <div className="name">
@@ -208,8 +231,9 @@ const ItemList = () => {
           </ItemBlock>
         ))}
       </ItemContainer>
-      {modalOpenLike && <Modal open={modalOpenLike} close={closeModalLikeOK} type={true} header="확인">관심상품 등록 완료!</Modal>}
-      {modalOpenLogin && <Modal open={modalOpenLogin} close={closeModalLoginOK} type={true} header="확인">로그인이 필요한 서비스입니다</Modal>}
+      {modalOpenLike && <Modal open={modalOpenLike} close={closeModalLikeOK} type={true} header="&nbsp;">관심상품 등록 완료!</Modal>}
+      {modalOpenNotLike && <Modal open={modalOpenNotLike} close={closeModalNotLikeOK} type={false} header="&nbsp;">관심상품 취소 완료</Modal>}
+      {modalOpenLogin && <Modal open={modalOpenLogin} close={closeModalLoginOK} type={true} header="&nbsp;">로그인이 필요한 서비스입니다</Modal>}
   </div>
   )
 }

@@ -2,7 +2,6 @@ import MiniApi from "../api/MiniApi";
 import { useState, useEffect } from "react";
 import styled from "styled-components";
 import Modal from "../util/Modal";
-import notlikeIcon from "../images/NOTLike-icon-00AD85.png"
 import likeIcon from "../images/Like-icon-00AD85.png"
 
 const ImageBlock = styled.div`
@@ -83,8 +82,11 @@ const TableDescBlock = styled.table`
 const ItemDetail = () => {
     const [itemDetail, setItemDetail] = useState('');
     const getDetail = window.localStorage.getItem("Detail");
-    const [like,setLike] = useState(0);
+    const [like,setLike] = useState('');
     
+    // 좋아요 버튼
+    const [likeOk, setLikeOk] = useState(false);
+
     // 관심상품 등록 모달
     const [modalOpenLike, setModalOpenLike] = useState(false);
     const closeModalLikeOK = () => {
@@ -98,20 +100,23 @@ const ItemDetail = () => {
         window.location.replace('/Login')
     }
 
-    // 관심상품 클릭 시 채워진 하트로 아이콘 변경 + 관심상품 횟수 카운트
+    // 관심상품 클릭 시 채워진 하트로 아이콘 변경 + (관심상품 횟수 카운트)
     const onClickLike = async() => {
         console.log("관심상품 등록 call?");
         let checkLogin = window.localStorage.getItem("whoLoginNow");
         const productCode = window.localStorage.getItem("PRO_CODE");
         try{
-        const response = await MiniApi.itemInfo(productCode);
-        setLike(response.data);
+            const response = await MiniApi.itemInfo(productCode);
+            setLike(response.data);
         }catch(e){
-        console.log(e)
+            console.log(e)
         }
-        if(checkLogin) setModalOpenLike(true);
+        if(checkLogin){
+            setModalOpenLike(true); 
+            setLikeOk(!likeOk);
+          } 
         else {
-        setModalOpenLogin(true);
+            setModalOpenLogin(true);
         }
     }
 
@@ -133,10 +138,8 @@ const ItemDetail = () => {
     // 브랜드명 클릭 시 해당 브랜드 상품만 보여줌
     const onClickBrand = (val) => {
         console.log("브랜드카테고리로 이동 : " + val);
-        // window.localStorage.setItem("brand", val);
         window.localStorage.setItem('category', val);
         window.location.replace("/ItemList");
-        //setCategory(val)
     }
 
 return(
@@ -145,7 +148,7 @@ return(
             {itemDetail && itemDetail.map(item => (
             <div key={item.PRO_CODE}>
                 <ImageBlock>
-                    <img src={item.IMG1} alt="mainImage"/><img src={item.IMG2}/><img src={item.IMG3}/>
+                    <img src={item.IMG1} alt="mainImage"/><img src={item.IMG2} alt="subImage"/><img src={item.IMG3} alt="subImage"/>
                 </ImageBlock>
                 <NameAndLike>
                     <div>
