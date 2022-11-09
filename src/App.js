@@ -23,7 +23,7 @@ import Mypage from './mypage/Mypage';
 import RePwd from './login/RePwd';
 import Post from './signup/Post';
 import Mypost from './mypage/Mypost';
-import Search from './itemList/Search';
+import Search from './itemlist/Search'
 
 
 function App() {
