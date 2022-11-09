@@ -17,11 +17,6 @@ const Header = styled.div`
         color: rgb(0,173,181);
         font-weight: bold;
     }
-    .comment {
-        color: rgb(0,155,171);
-        font-style: italic;
-    }
-
     .star {
         color: red;
     }
@@ -86,7 +81,7 @@ const SignUpBlock = styled.div`
     .address_search {
         padding-left: 7px;
     }
-    .comment2 {
+    .comment {
         font-size: 14px;
         margin-top: 5px;
     }
@@ -386,7 +381,7 @@ const SignUp = () => {
             <Header><h1 className='title'>JOIN US</h1></Header>
             
             <SignUpBlock>
-            <p className='comment2'><b className='star'>* </b> 필수 입력</p>
+            <p className='comment'><b className='star'>* </b> 필수 입력</p>
 
             {/* 아이디 입력창 */}
             <div className='divv'>

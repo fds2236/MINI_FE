@@ -41,23 +41,7 @@ function Mypage() {
     const isLogin = window.localStorage.getItem("isLogin");
     if(isLogin === "FALSE") window.location.replace("/");
 
-    const [memberInfo, setMemberInfo] = useState(""); // 현재 로그인 되어 있는 회원의 정보 저장용
-
-    useEffect(() => {
-        
-        const memberData = async () => {
-            try {
-                const response = await MiniApi.memberInfo(localId, localPw); 
-                setMemberInfo(response.data);
-                console.log(response.data)
-            } catch (e) {
-                console.log(e);
-            }
-        };
-        memberData();
-    }, []);
-
-
+    // 모달
     const [modalOpen, setModalOpen] = useState(false);
 
     const closeModal = () => {
@@ -66,7 +50,7 @@ function Mypage() {
 
     const confirmModal = async() => {
         setModalOpen(false);
-        const memberReg = await MiniApi.memberDelete(localId);
+        const memberReg = await MiniApi.memberDelete(localId, localPw);
         console.log(memberReg.data.result);
         if(memberReg.data.result === "OK") {
             window.location.replace("/");
@@ -78,6 +62,7 @@ function Mypage() {
     const onClickMemberDelete = () => {
         setModalOpen(true);
     }
+
     //--------------------------------------------------------------------------
  
 
