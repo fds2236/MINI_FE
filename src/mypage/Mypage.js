@@ -44,11 +44,11 @@ function Mypage() {
     // 모달
     const [modalOpen, setModalOpen] = useState(false);
 
-    const closeModal = () => {
+    const closeModal = () => { // 아니오 눌렀을 때
         setModalOpen(false);
     };
 
-    const confirmModal = async() => {
+    const confirmModal = async() => { // 탈퇴한다고 눌렀을 때
         setModalOpen(false);
         const memberReg = await MiniApi.memberDelete(localId, localPw);
         console.log(memberReg.data.result);
@@ -68,6 +68,7 @@ function Mypage() {
 
     return(
       <div>
+        <Profile/>
         {/* -------------------------------------------------------------------------------
         도연 회원 탈퇴 */}
       <div onClick={onClickMemberDelete}>

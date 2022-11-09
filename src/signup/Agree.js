@@ -8,8 +8,19 @@ import Modal from "../util/Modal";
 const Container = styled.div`
     margin-top: 50px;
     .text {
+        text-align: left;
+        width: 780px;
+        margin: 0 auto;
+        margin-bottom: 10px;
         margin-top: 30px;
         font-size: 15px;
+    
+    }
+    .totalText{
+        text-align: left;
+        width: 780px;
+        margin: 0 auto;
+        margin-bottom: 10px;
     }
     .link {
         color: black;
@@ -135,6 +146,11 @@ const Agree = () => {
         setAgeCheck(e.target.checked);
     };
 
+    // const isOk = () => {
+    //     if(ME || MS) setAllCheck(ture);
+    //     else setAllCheck(false)
+    // }
+
 
     // 모든 세부 항목 체크되면 전체동의가 자동으로 체크됨
     useEffect(() => {
@@ -166,7 +182,7 @@ const Agree = () => {
         <Container>
             {/* 회원가입 */}
             <Header><h1 className='title'>JOIN US</h1></Header>
-            <div className='text'><input type="checkbox" checked={allCheck} onClick={allBtnEvent}/> 전체 약관에 동의합니다.</div>
+            <div className='totalText'><input type="checkbox" checked={allCheck} onClick={allBtnEvent}/> 전체 약관에 동의합니다.</div>
 
             <AgreeBox>
             <div>
@@ -590,11 +606,16 @@ const Agree = () => {
 
                         변경 개인정보처리방침 시행일자 : 2022-06-21</textarea>
                 </div>
-               
-                <span className='text'><input type="checkbox" checked={marketingCheck} onClick={marketingBtnEvent}/> 마케팅 활용 약관에 동의합니다.(선택) ( </span>
-                <input type="checkbox" checked={marketingEmailCheck} onClick={marketingEmailBtnEvent}/><span> 이메일 </span>
-                <input type="checkbox" checked={marketingSMSCheck} onClick={marketingSMSBtnEvent}/><span> SMS )</span><br/>
+                
+                <div className='check'>
+                <div className='text'>
+                    <input type="checkbox" checked={marketingCheck} onClick={marketingBtnEvent}/> 
+                        마케팅 활용 약관에 동의합니다.(선택) ( <input type="checkbox" checked={marketingEmailCheck} onClick={marketingEmailBtnEvent}/>
+                        <span> 이메일 </span>
+                <input type="checkbox" checked={marketingSMSCheck} onClick={marketingSMSBtnEvent}/><span> SMS )</span><br/> </div>
+                
                 <div className='text'><input type="checkbox" checked={ageCheck} onClick={ageBtnEvent}/> 만 14세 이상입니다.<b>(필수)</b></div>
+                </div>
             </div> </AgreeBox>
             <Button className='linkBtn'><Link to='/' className='link'>취소하기</Link></Button>
             <Button onClick={istrue} className='lastBtn'>다음단계</Button>
