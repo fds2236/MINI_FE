@@ -1,6 +1,6 @@
 import axios from "axios";
 const HEADER = "application/json";
-const MINI_DOMAIN = "http://192.168.110.14:8111/";
+const MINI_DOMAIN = "http://192.168.10.216:8450/";
 
 
 const MiniApi =  {
