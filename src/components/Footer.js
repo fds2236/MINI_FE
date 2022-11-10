@@ -33,7 +33,7 @@ const Footer = () => {
         <>
             <StyledFooter>
                 <div className='nav-bottom'>
-                    <Link to={"/SiteInfo"} className="about">사이트 소개</Link>
+                    <Link to={"/SiteInfo"} className="about">공지사항</Link>
                 </div>
                 {/* <div className='nav-bottom'>
                     <Link to={"/Agree"} className="agree">이용약관</Link>
