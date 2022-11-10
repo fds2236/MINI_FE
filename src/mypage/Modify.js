@@ -78,10 +78,11 @@ const Modify = () => {
     const [email, setEmail] = useState('');
     const [addr, setAddr] = useState('');
     const [phone, setPhone] = useState('');
+    const [pwdMessage,setPwdMessage]=useState('');
 
     // const onChangeId = (e) => setId(e.target.value);
     const onChangeId = (e) => setInputId(e.target.value);
-    const onChangePwd = (e) => setPwd(e.target.value);
+    //const onChangePwd = (e) => setPwd(e.target.value);
     const onChangeName = (e) => setName(e.target.value);
     const onChangeEmail = (e) => setEmail(e.target.value);
     const onChangeAddr = (e) => setAddr(e.target.value);
@@ -155,6 +156,19 @@ const Modify = () => {
         setModalOpen(true);
     }
 
+    // 비밀번호 제한(힌트)
+    const onChangePwd = (e) => {
+        const pwdRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,20}$/
+        const pwdCurrent = e.target.value;
+        setPwd(pwdCurrent)
+        if(!pwdRegex.test(pwdCurrent)) {
+            setPwdMessage("숫자+영문자+특수문자 조합으로 8자리 이상 입력하세요.");
+            
+        } else {
+            setPwdMessage("올바른 형식입니다.");
+            
+        }
+    }
     //--------------------------------------------------------------------------
 
 
@@ -193,7 +207,7 @@ const Modify = () => {
             onChange={onChangeEmail}
         ></input></div><br/>
 
-        <div><label className='label'>이메일</label>
+        <div><label className='label'>주소</label>
         <input className='input'
             placeholder="변경할 주소"
             value={addr}

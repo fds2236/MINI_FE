@@ -1,7 +1,11 @@
 import Profile from "./Profile";
 import React from "react";
+import styled from "styled-components";
 
-
+const MypageBox = styled.div`
+  width: 100%;
+  height: 400px;
+`;
 
 
 function Mypage() {
@@ -23,10 +27,10 @@ function Mypage() {
 
 
     return(
-      <div>
+      <MypageBox>
         <Profile/>
        
-      </div>
+      </MypageBox>
 
 )
 }
