@@ -6,7 +6,9 @@ import Modal from "../util/Modal";
 import styled from "styled-components";
 
 const ItemContainer = styled.div`
-    :hover{opacity: 0.5}
+    margin: 10px;
+    :hover{opacity: 0.5;
+    cursor: pointer;}
     .item_img{
         width : 250px;
         height : 210px;
