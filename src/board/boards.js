@@ -399,7 +399,7 @@ const Boards = () => {
                         
                         <StyledContent onClick={() => OnclickBoard(board.boardNum)} >
                             <DetailDiv>
-                                <StyledBoardNum>{board.category ? "자유게시판" : "후기게시판"} &gt; {board.boardNum}</StyledBoardNum>
+                                <StyledBoardNum>{board.category ? "후기게시판" : "자유게시판"} &gt; {board.boardNum}</StyledBoardNum>
                                 {/* <StyledPicture src="https://media.bunjang.co.kr/product/198502427_1_1662395621_w856.jpg"></StyledPicture> */}
                                 <Title>{board.title}</Title>
                            
