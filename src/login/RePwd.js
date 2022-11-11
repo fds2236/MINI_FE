@@ -29,6 +29,11 @@ const RePwdBlock = styled.div`
         }
     }
 
+    .hint {
+        font-size : 12px;
+        color:green;
+    }
+
     .rePwdButton {
         width : 280px;
         height : 40px;
