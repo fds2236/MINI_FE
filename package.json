@@ -16,6 +16,7 @@
     "react-calendar": "^4.0.0",
     "react-daum-postcode": "^3.1.1",
     "react-dom": "^18.2.0",
+    "react-router-app": "^0.1.6",
     "react-router-dom": "^6.4.3",
     "react-scripts": "5.0.1",
     "react-styled-components": "^0.1.11",
