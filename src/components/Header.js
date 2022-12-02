@@ -116,13 +116,6 @@ const Header = () => {
     window.location.replace("/Search");
   }
 
-  // const onClick = () => {
-  //   axios.get()
-  //   .then(response => {
-  //     setSearch(response.data);
-  //   })
-  // }
-
   // 로그인했을 경우 현재 ID 표시
   let whoLoginNow = window.localStorage.getItem("whoLoginNow");
 
